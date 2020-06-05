@@ -1,0 +1,481 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pre-header {
+    height: 3rem;
+    padding: 0.4rem 5%;
+    font-size: 1.4rem;
+    background: #ececec;
+}
+
+#phone-number {
+    display: flex;
+    justify-content: space-between;
+    width: 28rem;
+}
+
+    #phone-number i {
+        padding-top: 0.3rem;
+        font-size: 1rem;
+    }
+
+#phone-number-text {
+    font-weight: 100;
+}
+
+#phone-number-num {
+    font-weight: 500;
+}
+
+.pre-header-toolbar {
+    display: flex;
+    justify-content: space-between;
+    width: 55%;
+}
+
+    .pre-header-toolbar a {
+        font-weight: 300;
+        text-decoration: none;
+        color: black;
+    }
+
+        .pre-header-toolbar a:hover {
+            color: #fcb71e;
+        }
+
+.language {
+    display: flex;
+    justify-content: space-between;
+    width: 6.5rem;
+}
+
+    .language img {
+        width: 3rem;
+        height: 2rem;
+    }
+
+.pre-header-toolbar form {
+    width: 17rem;
+    display: flex;
+    justify-content: center;
+}
+
+.pre-header-toolbar span,
+.pre-header-toolbar input {
+    background: white;
+}
+
+.pre-header-toolbar i {
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+.pre-header-toolbar span {
+    height: 2.2rem;
+    border: solid white;
+    border-width: 0.3rem 0.3rem 1rem 0.5rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+
+.pre-header-toolbar input {
+    width: 14rem;
+    border: 0.2rem solid white;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+
+.main-header {
+    padding: 2rem 5%;
+}
+
+.logo {
+    width: 42rem;
+}
+
+.main-header ul {
+    height: 6.7rem;
+    width: 45%;
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.main-header li {
+    display: grid;
+    grid-template-areas: "left right-top" "left right-bottom" "left right2" "left right1";
+}
+
+    .main-header li a {
+        width: 5rem;
+        height: 5rem;
+        grid-area: left;
+        padding: 1rem 0 0 1rem;
+        border: 0.2rem solid #fcb71e;
+        border-radius: 5rem;
+    }
+
+        .main-header li a:hover {
+            opacity: 0.8;
+        }
+
+        .main-header li a img {
+            width: 2.5rem;
+        }
+
+    .main-header li p,
+    .main-header li span {
+        font-size: 1.5rem;
+        font-family: "Roboto-Medium";
+        padding-top: 2px;
+        padding-left: 4px;
+    }
+
+    .main-header li p {
+        padding-top: 5px;
+        padding-left: 5px;
+        font-weight: 600;
+        grid-area: right-top;
+    }
+
+    .main-header li span {
+        font-weight: 100;
+        grid-area: right-bottom;
+    }
+
+.bottom-header {
+    width: 100%;
+    padding: 0 5%;
+    background: #fcb71e;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+}
+
+    .bottom-header ul {
+        height: 4rem;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .bottom-header li {
+        line-height: 4rem;
+        height: 4rem;
+    }
+
+#menu-bar-accessory {
+    padding: 1.2rem 0;
+}
+
+.bottom-header,
+.bottom-header ul,
+.bottom-header li {
+    height: 4rem;
+}
+
+    .bottom-header li:hover {
+        background: #005290;
+    }
+
+    .bottom-header a {
+        padding: 1rem 0.8rem 1.5rem 0.8rem;
+        color: white;
+        text-decoration: none;
+    }
+
+    #menu-bar-accessory,
+    .bottom-header li {
+        padding-top: 1rem 0;
+    }
+
+#menu-bar-accessory {
+    display: flex;
+    justify-content: space-between;
+    width: 24rem;
+}
+
+#link-bar {
+    width: 70%;
+}
+
+#menu-bar {
+    display: none;
+    position: fixed;
+    width: 24rem;
+    height: 30rem;
+    background: #f6f6f6;
+    left: 5%;
+    top: 177px;
+    font-size: 1.5rem;
+    padding-top: 2rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.4);
+}
+
+    #menu-bar ul {
+        width: 100%;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+        #menu-bar ul li div,
+        #menu-bar ul li form {
+            width: 80%;
+            margin: 0 auto;
+            height: 4rem;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        #menu-bar ul li form {
+            display: flex;
+            margin: 0 auto;
+        }
+
+            #menu-bar ul li form input {
+                height: 3.5rem;
+                width: 16rem;
+                margin-right: 0.1rem;
+            }
+
+            #menu-bar ul li form button {
+                height: 3.5rem;
+                width: 3.5rem;
+                color: white;
+                border: 3px solid #fcb71e;
+                background: #fcb71e;
+                border-radius: 0.2rem;
+            }
+
+        #menu-bar ul li div a:hover {
+            color: #fcb71e;
+        }
+
+        #menu-bar ul li div a i {
+            width: 2rem;
+            margin-right: 2rem;
+        }
+
+            #menu-bar ul li div a i::after {
+                content: "|";
+                padding: 0 1rem;
+            }
+
+        #menu-bar ul li div a {
+            color: #21427f;
+            text-decoration: none;
+        }
+
+.hamburger {
+    padding-top: 1rem;
+    display: none;
+}
+
+.hamburger-member-top {
+    width: 35px;
+    height: 4px;
+    background-color: white;
+    margin: 0;
+}
+
+.hamburger-member {
+    width: 35px;
+    height: 4px;
+    background-color: white;
+    margin: 4px 0;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .pre-header {
+        padding: 0.4rem 3%;
+    }
+
+    #phone-number {
+        display: flex;
+        justify-content: space-between;
+        width: 12rem;
+    }
+
+    #phone-number-text {
+        display: none;
+    }
+
+    .pre-header-toolbar {
+        width: 75%;
+    }
+
+    .logo {
+        width: 40rem;
+    }
+
+    .main-header li p,
+    .main-header li span {
+        display: none;
+    }
+
+    #link-bar {
+        width: 75%;
+    }
+
+    .bottom-header {
+        font-size: 1.2rem;
+    }
+
+        .bottom-header a {
+            padding: 1rem 0.4rem 1.8rem 0.4rem;
+            color: white;
+            text-decoration: none;
+        }
+
+    #menu-bar-accessory,
+    #menu-bar {
+        width: 18rem;
+    }
+
+    #menu-bar {
+        left: 5%;
+        top: 177px;
+        font-size: 1.2rem;
+        padding-top: 2rem;
+    }
+
+        #menu-bar ul li div a i {
+            width: 1rem;
+            margin-right: 1rem;
+        }
+
+            #menu-bar ul li div a i::after {
+                padding: 0 0.5rem;
+            }
+
+        #menu-bar ul li form input {
+            height: 3rem;
+            width: 10rem;
+        }
+
+        #menu-bar ul li form button {
+            height: 3rem;
+            width: 3rem;
+        }
+}
+
+@media (max-width: 860px) {
+    .hamburger {
+        display: block;
+    }
+
+    #link-bar {
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 30rem;
+        background: #fcb71e;
+        right: 0;
+        top: 177px;
+        font-size: 1.5rem;
+        padding-top: 2rem;
+        text-align: end;
+    }
+
+        #link-bar ul {
+            height: auto;
+            width: 100%;
+            list-style: none;
+            display: flex;
+            margin-right: 5%;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+    .bottom-header li {
+        padding-top: 1rem 0;
+    }
+
+    .bottom-header a {
+        padding: 0;
+        padding-left: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .logo {
+        width: 24rem;
+    }
+
+    .main-header li p,
+    .main-header li span {
+        display: none;
+    }
+
+    .pre-header {
+        font-size: 1.2rem;
+        padding: 0.4rem 2%;
+    }
+
+    #phone-number {
+        display: none;
+        width: 0rem;
+    }
+
+    .pre-header-toolbar {
+        width: 100%;
+    }
+
+        .pre-header-toolbar form {
+            width: 10rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pre-header-toolbar input {
+            width: 7rem;
+        }
+
+    .language {
+        width: 3rem;
+    }
+
+    #flag2 {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .logo {
+        width: 90%;
+    }
+
+    .main-header li p,
+    .main-header li span,
+    .main-header li a {
+        display: none;
+    }
+}
