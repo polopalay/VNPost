@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
 
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200606012236_AddDB")]
+    partial class AddDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,7 +221,7 @@ namespace VNPost.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("VNPost.Models.Entity.MenuItem", b =>
+            modelBuilder.Entity("VNPost.Models.ClassModels.MenuItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -234,7 +236,7 @@ namespace VNPost.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MenuItems");
+                    b.ToTable("MenuItem");
 
                     b.HasData(
                         new
@@ -287,117 +289,6 @@ namespace VNPost.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("VNPost.Models.Entity.MenuLink", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Key")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Link")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("MenuLinks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Key = "Description",
-                            Link = "#",
-                            LocationId = 1,
-                            Value = "Giới thiệu"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Key = "QAndA",
-                            Link = "#",
-                            LocationId = 1,
-                            Value = "Hỏi đáp"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Key = "Contact",
-                            Link = "#",
-                            LocationId = 1,
-                            Value = "Liên hệ"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Key = "Login",
-                            Link = "#",
-                            LocationId = 1,
-                            Value = "Login"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Key = "Search-price",
-                            Link = "#",
-                            LocationId = 2,
-                            Value = "<p>Tra cước</p><span>DỊCH VỤ</span>"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Key = "Mess",
-                            Link = "#",
-                            LocationId = 2,
-                            Value = "<p>Đánh giá &</p><span>KHIẾU NẠI</span>"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Key = "Recruitment",
-                            Link = "#",
-                            LocationId = 2,
-                            Value = "<p>Tin</p><span>TUYỂN DỤNG</span>"
-                        });
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.MenuLocation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MenuLocations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "TopMenu"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "MainMenu"
-                        });
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -445,15 +336,6 @@ namespace VNPost.DataAccess.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.MenuLink", b =>
-                {
-                    b.HasOne("VNPost.Models.Entity.MenuLocation", "MenuLocation")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

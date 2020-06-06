@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using VNPost.Models.ClassModels;
+using VNPost.Models.Entity;
 using VNPost.Utility;
 
 namespace VNPost.DataAccess.Data
@@ -18,9 +18,13 @@ namespace VNPost.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            SeedData.AddSeedDataToDescription(builder);
+            SeedData.AddSeedDataToMenuItem(builder);
+            SeedData.AddSeedDataToMenuLocation(builder);
+            SeedData.AddSeedDataToMenuLink(builder);
         }
 
-        public DbSet<Description> Descriptions { get; set; }
+        public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<MenuLink> MenuLinks { get; set; }
+        public DbSet<MenuLocation> MenuLocations { get; set; }
     }
 }

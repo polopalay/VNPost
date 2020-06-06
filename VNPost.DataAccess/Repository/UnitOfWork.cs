@@ -9,11 +9,15 @@ namespace VNPost.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _db;
-        public IDescriptionRepository Description { get; }
+        public IMenuItemRepository MenuItem { get; }
+        public IMenuLocationRepository MenuLocation { get; }
+        public IMenuLinkRepository MenuLink { get; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            Description = new DescriptionRepository(_db);
+            MenuItem = new MenuItemRepository(_db);
+            MenuLocation = new MenuLocationRepository(_db);
+            MenuLink = new MenuLinkRepository(_db);
         }
 
         public void Dispose()

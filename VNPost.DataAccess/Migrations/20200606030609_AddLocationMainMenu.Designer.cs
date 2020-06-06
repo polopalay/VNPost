@@ -10,8 +10,8 @@ using VNPost.DataAccess.Data;
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200605120257_AddDB")]
-    partial class AddDB
+    [Migration("20200606030609_AddLocationMainMenu")]
+    partial class AddLocationMainMenu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,7 +221,7 @@ namespace VNPost.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("VNPost.Models.ClassModels.Description", b =>
+            modelBuilder.Entity("VNPost.Models.Entity.MenuItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -236,7 +236,7 @@ namespace VNPost.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Descriptions");
+                    b.ToTable("MenuItems");
 
                     b.HasData(
                         new
@@ -274,6 +274,129 @@ namespace VNPost.DataAccess.Migrations
                             Id = 6,
                             Key = "Recruitment",
                             Value = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAApAAAAKQAG8o4lVAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAADGElEQVR42mL8//8/A0lgJqM4kEwD4mAgFgXiX0D8CogPA/E8hvT/10gxDiCAGElywExGOyC5FIhlcKh4B8SZQEesItZIgAAi3gEzGS2B5Eaor/GB/+AQSv8/hxhjAQKIOAfMZFQGknuBWJ5Ij/0CR1H6/y2EFAIEEBORBmaQYDkIsAFxKdDhBM0HCCAmInzPCSS9GEgHpkCsSUgRQAAREwJiJPoeBkAO1yOkCCCAiHEAMyitMJAHWAgpAAggYhzwFojfk2H5PyC+T0gRQAARdkD6/49AcjsZDrgIxGcJKQIIIGJzwTQg/kyiAyYDHf+dkCKAACLOAen/zwPJBhIsXwzUM58YhQABxES0ken/+4BkAhB/xKPqGxBXQusKogBAADGSURlpQi1wBWI5qCdAldFxIJ4OdOgRUowDCCDSHYBwCChr8kAd8AVo8V9yjAEIIMIOgBSnxkCshlTZ/Idms79IUYleXnwAh0r6f7xZGCCA8DtgJiPI0JlAnExmQXQCiH2AjniLSwFAABFKhE4UWA4CFkCci08BQAAR4wBcYBsQg3LGBCBeAsQ/cagLAYYkNy5DAAKIBU/wgzQF4JAFxX0zMGhPQNUKAEl7IJbFolYbiJ2BeBM2gwACCF8IgFpAGnhaPX/RHPQTj1neuCQAAgifA/zwyL1EqWjS/4OK6et41HsAQ0kEmwRAADHhCH5hIOmPx8BzQEvfoImdxKNeDuwILAAggHCFgB1UEy5wiUgxZOCLTRAggHA5IIiAYedwVL/4Ch1HYMhieAoggJiwBD8oJXviMegTEJ/CIv4EiK/g0SeKLVoBAogJR+ITxmPQIyB+jaW2BBXNNwmEnC26AEAAYXPAd2jthgvIQ/M1eshpQEs+XOAuEK9DFwQIICYsPpkHbc1OBOKvWAziBRcqMxmLkCx3h/YNdXB01+qA2BBo9gp0SYAAIlQZgWrBGiB2hzaz0UED1GfToVUzelpZCcQdQIvv4bICIICI7ZppQh0Bq5ZBCUoA2gMCgd9ADCoXXgDxLWiZsBNo8UNCRgMEEPkNEioBgAADAKfduBnHVSiPAAAAAElFTkSuQmCC"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Key = "PhoneText",
+                            Value = "Đường dây nóng hỗ trợ"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Key = "PhoneNumber",
+                            Value = "1900 54 54 81"
+                        });
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.MenuLink", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("MenuLinks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Key = "Description",
+                            Link = "#",
+                            LocationId = 1,
+                            Value = "Giới thiệu"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Key = "QAndA",
+                            Link = "#",
+                            LocationId = 1,
+                            Value = "Hỏi đáp"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Key = "Contact",
+                            Link = "#",
+                            LocationId = 1,
+                            Value = "Liên hệ"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Key = "Login",
+                            Link = "#",
+                            LocationId = 1,
+                            Value = "Login"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Key = "Search-price",
+                            Link = "#",
+                            LocationId = 2,
+                            Value = "<p>Tra cước</p><span>DỊCH VỤ</span>"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Key = "Mess",
+                            Link = "#",
+                            LocationId = 2,
+                            Value = "<p>Đánh giá &</p><span>KHIẾU NẠI</span>"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Key = "Recruitment",
+                            Link = "#",
+                            LocationId = 2,
+                            Value = "<p>Tin</p><span>TUYỂN DỤNG</span>"
+                        });
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.MenuLocation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MenuLocations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "TopMenu"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "MainMenu"
                         });
                 });
 
@@ -324,6 +447,15 @@ namespace VNPost.DataAccess.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.MenuLink", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.MenuLocation", "MenuLocation")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

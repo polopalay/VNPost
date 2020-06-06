@@ -6,7 +6,9 @@ namespace VNPost.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork : IDisposable
     {
-        IDescriptionRepository Description { get; }
+        IMenuItemRepository MenuItem { get; }
+        IMenuLocationRepository MenuLocation { get; }
+        IMenuLinkRepository MenuLink { get; }
         void Save();
     }
 }

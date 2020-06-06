@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using VNPost.DataAccess.Data;
 using VNPost.DataAccess.Repository.IRepository;
-using VNPost.Models.ClassModels;
+using VNPost.Models.Entity;
 
 namespace VNPost.DataAccess.Repository
 {
-    public class DescriptionRepository: Repository<Description>, IDescriptionRepository
+    class MenuLocationRepository : Repository<MenuLocation>, IMenuLocationRepository
     {
         private readonly ApplicationDbContext _db;
 
-        public DescriptionRepository(ApplicationDbContext db) : base(db)
+        public MenuLocationRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }

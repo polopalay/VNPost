@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
 
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200606022436_AddSeedToMenuLinkAndLocation")]
+    partial class AddSeedToMenuLinkAndLocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,7 +221,7 @@ namespace VNPost.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("VNPost.Models.Entity.MenuItem", b =>
+            modelBuilder.Entity("VNPost.Models.ClassModels.MenuItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -297,9 +299,6 @@ namespace VNPost.DataAccess.Migrations
                     b.Property<string>("Key")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Link")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
 
@@ -317,7 +316,6 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 1,
                             Key = "Description",
-                            Link = "#",
                             LocationId = 1,
                             Value = "Giới thiệu"
                         },
@@ -325,7 +323,6 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 2,
                             Key = "QAndA",
-                            Link = "#",
                             LocationId = 1,
                             Value = "Hỏi đáp"
                         },
@@ -333,7 +330,6 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 3,
                             Key = "Contact",
-                            Link = "#",
                             LocationId = 1,
                             Value = "Liên hệ"
                         },
@@ -341,33 +337,8 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 4,
                             Key = "Login",
-                            Link = "#",
                             LocationId = 1,
                             Value = "Login"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Key = "Search-price",
-                            Link = "#",
-                            LocationId = 2,
-                            Value = "<p>Tra cước</p><span>DỊCH VỤ</span>"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Key = "Mess",
-                            Link = "#",
-                            LocationId = 2,
-                            Value = "<p>Đánh giá &</p><span>KHIẾU NẠI</span>"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Key = "Recruitment",
-                            Link = "#",
-                            LocationId = 2,
-                            Value = "<p>Tin</p><span>TUYỂN DỤNG</span>"
                         });
                 });
 
@@ -390,11 +361,6 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 1,
                             Name = "TopMenu"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "MainMenu"
                         });
                 });
 

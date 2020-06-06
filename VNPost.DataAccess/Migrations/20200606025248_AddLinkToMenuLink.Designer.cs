@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
 
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200606025248_AddLinkToMenuLink")]
+    partial class AddLinkToMenuLink
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -344,30 +346,6 @@ namespace VNPost.DataAccess.Migrations
                             Link = "#",
                             LocationId = 1,
                             Value = "Login"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Key = "Search-price",
-                            Link = "#",
-                            LocationId = 2,
-                            Value = "<p>Tra cước</p><span>DỊCH VỤ</span>"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Key = "Mess",
-                            Link = "#",
-                            LocationId = 2,
-                            Value = "<p>Đánh giá &</p><span>KHIẾU NẠI</span>"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Key = "Recruitment",
-                            Link = "#",
-                            LocationId = 2,
-                            Value = "<p>Tin</p><span>TUYỂN DỤNG</span>"
                         });
                 });
 
@@ -390,11 +368,6 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 1,
                             Name = "TopMenu"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "MainMenu"
                         });
                 });
 

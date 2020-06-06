@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using VNPost.Models.ClassModels;
+using VNPost.Models.Entity;
 
 namespace VNPost.DataAccess.Repository.IRepository
 {
-    public interface IDescriptionRepository:IRepository<Description>
+    public interface IMenuLinkRepository:IRepository<MenuLink>
     {
     }
 }

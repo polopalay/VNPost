@@ -1,20 +1,22 @@
-﻿@model Dictionary<string, string>
+﻿@using VNPost.Models.ViewModels
+@using VNPost.Models.Entity;
+@model HeaderVM
 <link rel="stylesheet" href="~/css/component/header.css" />
 <header>
     <div class="pre-header header-container">
         <div id="phone-number">
             <i class="fas fa-phone-alt"></i>
-            <p id="phone-number-text">@Model["PhoneText"]</p>
-            <p id="phone-number-num">@Model["PhoneNumber"]</p>
+            <p id="phone-number-text">@Model.ListMenuItem["PhoneText"]</p>
+            <p id="phone-number-num">@Model.ListMenuItem["PhoneNumber"]</p>
         </div>
         <div class="pre-header-toolbar">
-            <a href="">Giới thiệu</a>
-            <a href="">Hỏi đáp</a>
-            <a href="">Liên hệ</a>
-            <a href="">Login</a>
+            @foreach (MenuLink linkItem in Model.ListMenuLink[1])
+            {
+                <a href="@linkItem.Link">@linkItem.Value</a>
+            }
             <div class="language">
-                <a href=""><img src="@Model["VN"]" id="flag1" alt="" /></a>
-                <a href=""><img src="@Model["US"]" id="flag2" alt="" /></a>
+                <a href=""><img src="@Model.ListMenuItem["VN"]" id="flag1" alt="" /></a>
+                <a href=""><img src="@Model.ListMenuItem["US"]" id="flag2" alt="" /></a>
             </div>
             <form>
                 <span class="todo-button">
@@ -25,23 +27,15 @@
         </div>
     </div>
     <div class="main-header header-container">
-        <a href=""><img src="@Model["Logo"]" class="logo" alt="" /></a>
+        <a href=""><img src="@Model.ListMenuItem["Logo"]" class="logo" alt="" /></a>
         <ul>
+            @foreach (MenuLink linkItem in Model.ListMenuLink[2])
+            {
             <li>
-                <a href=""><img src="@Model["Search-price"]" alt="" /></a>
-                <p>Tra cước</p>
-                <span>DỊCH VỤ</span>
+                <a href="@linkItem.Link"><img src="@Model.ListMenuItem[linkItem.Key]" alt="" /></a>
+                @Html.Raw(@linkItem.Value.ToString())
             </li>
-            <li>
-                <a href=""><img src="@Model["Mess"]" alt="" /></a>
-                <p>Đánh giá &</p>
-                <span>KHIẾU NẠI</span>
-            </li>
-            <li>
-                <a href=""><img src="@Model["Recruitment"]" alt="" /></a>
-                <p>Tin</p>
-                <span>TUYỂN DỤNG</span>
-            </li>
+            }
         </ul>
     </div>
     <div class="bottom-header">

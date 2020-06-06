@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
 
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200606033743_ChangeLocationpSpan")]
+    partial class ChangeLocationpSpan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -351,7 +353,7 @@ namespace VNPost.DataAccess.Migrations
                             Key = "Search-price",
                             Link = "#",
                             LocationId = 2,
-                            Value = "<p>Tra cước</p><span>DỊCH VỤ</span>"
+                            Value = "<p>Tra cước<span>DỊCH VỤ</span></p>"
                         },
                         new
                         {
@@ -359,7 +361,7 @@ namespace VNPost.DataAccess.Migrations
                             Key = "Mess",
                             Link = "#",
                             LocationId = 2,
-                            Value = "<p>Đánh giá &</p><span>KHIẾU NẠI</span>"
+                            Value = "<p>Đánh giá &<span>KHIẾU NẠI</span></p>"
                         },
                         new
                         {
@@ -367,7 +369,7 @@ namespace VNPost.DataAccess.Migrations
                             Key = "Recruitment",
                             Link = "#",
                             LocationId = 2,
-                            Value = "<p>Tin</p><span>TUYỂN DỤNG</span>"
+                            Value = "<p>Tin<span>TUYỂN DỤNG</span></p>"
                         });
                 });
 

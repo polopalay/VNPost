@@ -10,8 +10,8 @@ using VNPost.DataAccess.Data;
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200605121153_AddPhone")]
-    partial class AddPhone
+    [Migration("20200606021003_AddMoreTableToDB")]
+    partial class AddMoreTableToDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,7 +221,7 @@ namespace VNPost.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("VNPost.Models.ClassModels.Description", b =>
+            modelBuilder.Entity("VNPost.Models.ClassModels.MenuItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -236,7 +236,7 @@ namespace VNPost.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Descriptions");
+                    b.ToTable("MenuItems");
 
                     b.HasData(
                         new
@@ -289,6 +289,47 @@ namespace VNPost.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("VNPost.Models.Entity.MenuLink", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("MenuLinks");
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.MenuLocation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MenuLocations");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -336,6 +377,15 @@ namespace VNPost.DataAccess.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.MenuLink", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.MenuLocation", "MenuLocation")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
