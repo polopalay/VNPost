@@ -1,1 +1,1 @@
-﻿$("#header").load("/Component/Header/Index");
+﻿

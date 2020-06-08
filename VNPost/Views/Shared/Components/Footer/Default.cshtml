@@ -1,0 +1,21 @@
+﻿@using VNPost.Models.ViewModels;
+@using VNPost.Models.Entity;
+@model FooterVM
+<link rel="stylesheet" href="~/css/component/footer.css" />
+<div class="footer-top">
+    @foreach (MenuLocation location in Model.Locations)
+    {
+        <div>
+            <p>@location.Name</p>
+            <ul>
+                @foreach (MenuLink link in Model.ListMenuLink[location])
+                {
+                    <li class="fas fa-caret-right"><a href="@link.Link">@link.Value</a></li>
+                }
+            </ul>
+        </div>
+    }
+</div>
+<div class="footer-bottom">
+    <div></div>
+</div>

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
 
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200608095830_AddDataToBottom")]
+    partial class AddDataToBottom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -461,7 +463,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 19,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 5,
                             Value = "Bưu chính chuyển phát Trong nước"
                         },
@@ -469,7 +471,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 20,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 5,
                             Value = "Bưu chính chuyển phát Quốc tế"
                         },
@@ -477,7 +479,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 21,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 6,
                             Value = "Bảo hiểm phi nhân thọ PTI"
                         },
@@ -493,7 +495,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 23,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 6,
                             Value = "Đại lý Bảo hiểm nhân thọ (Dai-ichi)"
                         },
@@ -501,7 +503,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 24,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 6,
                             Value = "Đại lý ngân hàng"
                         },
@@ -509,7 +511,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 25,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 6,
                             Value = "Dịch vụ Chuyển tiền trong nước"
                         },
@@ -517,7 +519,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 26,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 7,
                             Value = "Sàn thương mại điện tử POSTMART"
                         },
@@ -525,7 +527,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 27,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 7,
                             Value = "Truyền thông, quảng cáo"
                         },
@@ -533,7 +535,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 28,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 7,
                             Value = "Phân phối xuất bản ấn phẩm"
                         },
@@ -541,7 +543,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 29,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 7,
                             Value = "Dịch vụ Viễn thông - CNTT"
                         },
@@ -549,7 +551,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 30,
                             Key = "#",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 7,
                             Value = "Dịch vụ phân phối hàng hoá"
                         });

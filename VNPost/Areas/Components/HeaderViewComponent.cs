@@ -1,25 +1,22 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using VNPost.DataAccess.Data;
 using VNPost.DataAccess.Repository.IRepository;
 using VNPost.Models.Entity;
 using VNPost.Models.ViewModels;
 
-namespace VNPost.Areas.Component.Controllers
+namespace VNPost.Areas.Components
 {
-    [Area("Component")]
-    public class HeaderController : Controller
+    public class HeaderViewComponent : ViewComponent
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public HeaderController(IUnitOfWork unitOfWork)
+        public HeaderViewComponent(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public IActionResult Index()
+        public IViewComponentResult Invoke()
         {
             Dictionary<string, string> listMenuItem = new Dictionary<string, string>();
             foreach (MenuItem menuItem in _unitOfWork.MenuItem.GetAll())
@@ -27,16 +24,9 @@ namespace VNPost.Areas.Component.Controllers
                 listMenuItem.Add(menuItem.Key, menuItem.Value);
             }
             Dictionary<int, List<MenuLink>> listMenuLink = new Dictionary<int, List<MenuLink>>();
-            foreach(MenuLocation menuLocation in _unitOfWork.MenuLocation.GetAll())
+            foreach (MenuLocation menuLocation in _unitOfWork.MenuLocation.GetAll())
             {
-                List<MenuLink> links = new List<MenuLink>();
-                foreach(MenuLink link in _unitOfWork.MenuLink.GetAll())
-                {
-                    if(link.LocationId==menuLocation.Id)
-                    {
-                        links.Add(link);
-                    }
-                }
+                List<MenuLink> links = _unitOfWork.MenuLink.GetAll(link => link.LocationId == menuLocation.Id).ToList();
                 listMenuLink.Add(menuLocation.Id, links);
             }
 
