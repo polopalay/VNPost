@@ -24,8 +24,8 @@ namespace VNPost.Utility
         {
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 1, Name = "TopMenu" });
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 2, Name = "MainMenu" });
-            builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 3, Name = "MenuToolBar" });
-            builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 4, Name = "MainMenu" });
+            builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 3, Name = "Tra cứu - Định vị" });
+            builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 4, Name = "BottomMenu" });
         }
 
         public static void AddSeedDataToMenuLink(ModelBuilder builder)
@@ -37,6 +37,17 @@ namespace VNPost.Utility
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 5, Key = "Search-price", Value = "<p>Tra cước</p><span>DỊCH VỤ</span>", LocationId = 2, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 6, Key = "Mess", Value = "<p>Đánh giá &</p><span>KHIẾU NẠI</span>", LocationId = 2, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 7, Key = "Recruitment", Value = "<p>Tin</p><span>TUYỂN DỤNG</span>", LocationId = 2, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 8, Key = "PostAndD", Value = "Bưu chính chuyển phát", LocationId = 4, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 9, Key = "Money", Value = "Tài chính bưu chính", LocationId = 4, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 10, Key = "Comunity", Value = "Phân phối -Truyền thông", LocationId = 4, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 11, Key = "News", Value = "Tin tức", LocationId = 4, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 12, Key = "Email", Value = "Email", LocationId = 4, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 13, Key = "fas fa-map-marker-alt", Value = "Định Vị Bưu Gửi", LocationId = 3, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 14, Key = "fas fa-money-bill-alt", Value = "Định vị chuyển tiền", LocationId = 3, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 15, Key = "fas fa-map", Value = "Mạng lưới bưu cục", LocationId = 3, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 16, Key = "fas fa-ban", Value = "Tra cứu hàng cấm gửi", LocationId = 3, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 17, Key = "fas fa-search-plus", Value = "Tra cứu kỳ cước KHL", LocationId = 3, Link = "#" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 18, Key = "fas fa-qrcode", Value = "Mã địa chỉ bưu chính", LocationId = 3, Link = "#" });
         }
     }
 }

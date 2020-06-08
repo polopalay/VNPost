@@ -1,15 +1,4 @@
-﻿* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
-
-html {
-    font-size: 62.5%;
-}
-
-.header-container {
+﻿.header-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -100,6 +89,7 @@ html {
 }
 
 .main-header {
+    height:10.7rem;
     padding: 2rem 5%;
 }
 
@@ -139,8 +129,8 @@ html {
 
     .main-header li p,
     .main-header li span {
-        padding:0;
-        margin:0;
+        padding: 0;
+        margin: 0;
         font-size: 1.5rem;
         font-family: "Roboto-Medium";
         padding-top: 2px;
@@ -185,6 +175,7 @@ html {
 
 #menu-bar-accessory {
     padding: 1.2rem 0;
+    cursor: pointer;
 }
 
 .bottom-header,
@@ -225,8 +216,8 @@ html {
     height: 30rem;
     background: #f6f6f6;
     left: 5%;
-    top: 187px;
-    font-size: 1.5rem;
+    top: 177px;
+    font-size: 1.4rem;
     padding-top: 2rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
@@ -251,6 +242,15 @@ html {
             display: flex;
             justify-content: flex-start;
         }
+
+            #menu-bar ul li div:nth-child(1) {
+                height: 2rem;
+                margin-bottom:1rem;
+            }
+
+            #menu-bar ul li div a:nth-child(1) {
+                line-height: 2rem;
+            }
 
         #menu-bar ul li form {
             display: flex;
@@ -289,6 +289,7 @@ html {
         #menu-bar ul li div a {
             color: #21427f;
             text-decoration: none;
+            line-height: 4rem
         }
 
 .hamburger {
@@ -351,35 +352,6 @@ html {
             color: white;
             text-decoration: none;
         }
-
-    #menu-bar-accessory,
-    #menu-bar {
-        width: 18rem;
-    }
-
-    #menu-bar {
-        font-size: 1.2rem;
-        padding-top: 2rem;
-    }
-
-        #menu-bar ul li div a i {
-            width: 1rem;
-            margin-right: 1rem;
-        }
-
-            #menu-bar ul li div a i::after {
-                padding: 0 0.5rem;
-            }
-
-        #menu-bar ul li form input {
-            height: 3rem;
-            width: 10rem;
-        }
-
-        #menu-bar ul li form button {
-            height: 3rem;
-            width: 3rem;
-        }
 }
 
 @media (max-width: 860px) {
@@ -418,6 +390,35 @@ html {
         padding: 0;
         padding-left: 2rem;
     }
+
+    #menu-bar-accessory,
+    #menu-bar {
+        width: 18rem;
+    }
+
+    #menu-bar {
+        font-size: 1.2rem;
+        padding-top: 2rem;
+    }
+
+        #menu-bar ul li div a i {
+            width: 1rem;
+            margin-right: 1rem;
+        }
+
+            #menu-bar ul li div a i::after {
+                padding: 0 0.5rem;
+            }
+
+        #menu-bar ul li form input {
+            height: 3rem;
+            width: 10rem;
+        }
+
+        #menu-bar ul li form button {
+            height: 3rem;
+            width: 3rem;
+        }
 }
 
 @media (max-width: 768px) {
@@ -425,7 +426,9 @@ html {
         text-align: center;
         justify-content: center;
     }
-
+    .main-header ul {
+        display:none;
+    }
     .logo {
         width: 24rem;
     }

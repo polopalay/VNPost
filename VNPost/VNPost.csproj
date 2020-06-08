@@ -24,12 +24,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\img\favicon.ico" />
-    <None Include="wwwroot\img\logo.png" />
-    <None Include="wwwroot\img\mess.png" />
-    <None Include="wwwroot\img\recruitment.png" />
-    <None Include="wwwroot\img\search-price.png" />
-    <None Include="wwwroot\img\US.gif" />
-    <None Include="wwwroot\img\VN.gif" />
   </ItemGroup>
 
 </Project>

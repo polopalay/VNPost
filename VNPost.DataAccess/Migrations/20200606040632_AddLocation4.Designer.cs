@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
 
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200606040632_AddLocation4")]
+    partial class AddLocation4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -408,54 +410,6 @@ namespace VNPost.DataAccess.Migrations
                             Link = "#",
                             LocationId = 4,
                             Value = "Email"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Key = "fas fa-map-marker-alt",
-                            Link = "#",
-                            LocationId = 3,
-                            Value = "Định Vị Bưu Gửi"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Key = "fas fa-money-bill-alt",
-                            Link = "#",
-                            LocationId = 3,
-                            Value = "Định vị chuyển tiền"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Key = "fas fa-map",
-                            Link = "#",
-                            LocationId = 3,
-                            Value = "Mạng lưới bưu cục"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Key = "fas fa-ban",
-                            Link = "#",
-                            LocationId = 3,
-                            Value = "Tra cứu hàng cấm gửi"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Key = "fas fa-search-plus",
-                            Link = "#",
-                            LocationId = 3,
-                            Value = "Tra cứu kỳ cước KHL"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Key = "fas fa-qrcode",
-                            Link = "#",
-                            LocationId = 3,
-                            Value = "Mã địa chỉ bưu chính"
                         });
                 });
 
