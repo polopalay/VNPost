@@ -13,12 +13,9 @@
     <header id="header">
         @await Component.InvokeAsync("Header")
     </header>
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <main>
+        @RenderBody()
+    </main>
     <footer>
         @await Component.InvokeAsync("Footer")
     </footer>
