@@ -18,6 +18,9 @@ namespace VNPost.Utility
             builder.Entity<MenuItem>().HasData(new MenuItem { Id = 6, Key = "Recruitment", Value = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAApAAAAKQAG8o4lVAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAADGElEQVR42mL8//8/A0lgJqM4kEwD4mAgFgXiX0D8CogPA/E8hvT/10gxDiCAGElywExGOyC5FIhlcKh4B8SZQEesItZIgAAi3gEzGS2B5Eaor/GB/+AQSv8/hxhjAQKIOAfMZFQGknuBWJ5Ij/0CR1H6/y2EFAIEEBORBmaQYDkIsAFxKdDhBM0HCCAmInzPCSS9GEgHpkCsSUgRQAAREwJiJPoeBkAO1yOkCCCAiHEAMyitMJAHWAgpAAggYhzwFojfk2H5PyC+T0gRQAARdkD6/49AcjsZDrgIxGcJKQIIIGJzwTQg/kyiAyYDHf+dkCKAACLOAen/zwPJBhIsXwzUM58YhQABxES0ken/+4BkAhB/xKPqGxBXQusKogBAADGSURlpQi1wBWI5qCdAldFxIJ4OdOgRUowDCCDSHYBwCChr8kAd8AVo8V9yjAEIIMIOgBSnxkCshlTZ/Idms79IUYleXnwAh0r6f7xZGCCA8DtgJiPI0JlAnExmQXQCiH2AjniLSwFAABFKhE4UWA4CFkCci08BQAAR4wBcYBsQg3LGBCBeAsQ/cagLAYYkNy5DAAKIBU/wgzQF4JAFxX0zMGhPQNUKAEl7IJbFolYbiJ2BeBM2gwACCF8IgFpAGnhaPX/RHPQTj1neuCQAAgifA/zwyL1EqWjS/4OK6et41HsAQ0kEmwRAADHhCH5hIOmPx8BzQEvfoImdxKNeDuwILAAggHCFgB1UEy5wiUgxZOCLTRAggHA5IIiAYedwVL/4Ch1HYMhieAoggJiwBD8oJXviMegTEJ/CIv4EiK/g0SeKLVoBAogJR+ITxmPQIyB+jaW2BBXNNwmEnC26AEAAYXPAd2jthgvIQ/M1eshpQEs+XOAuEK9DFwQIICYsPpkHbc1OBOKvWAziBRcqMxmLkCx3h/YNdXB01+qA2BBo9gp0SYAAIlQZgWrBGiB2hzaz0UED1GfToVUzelpZCcQdQIvv4bICIICI7ZppQh0Bq5ZBCUoA2gMCgd9ADCoXXgDxLWiZsBNo8UNCRgMEEPkNEioBgAADAKfduBnHVSiPAAAAAElFTkSuQmCC" });
             builder.Entity<MenuItem>().HasData(new MenuItem { Id = 7, Key = "PhoneText", Value = "Đường dây nóng hỗ trợ" });
             builder.Entity<MenuItem>().HasData(new MenuItem { Id = 8, Key = "PhoneNumber", Value = "1900 54 54 81" });
+            builder.Entity<MenuItem>().HasData(new MenuItem { Id = 9, Key = "Company", Value = "TỔNG CÔNG TY BƯU ĐIỆN VIỆT NAM - VIETNAM POST" });
+            builder.Entity<MenuItem>().HasData(new MenuItem { Id = 10, Key = "Location", Value = "Địa chỉ: Số 05 đường Phạm Hùng - Mỹ Đình 2 - Nam Từ Liêm - Hà Nội - Việt Nam" });
+            builder.Entity<MenuItem>().HasData(new MenuItem { Id = 11, Key = "Policy", Value = "Ghi rõ nguồn \"www.vnpost.vn\" khi phát hành lại thông tin từ website này" });
         }
 
         public static void AddSeedDataToMenuLocation(ModelBuilder builder)
@@ -29,6 +32,7 @@ namespace VNPost.Utility
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 5, Name = "Bưu chính chuyển phát" });
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 6, Name = "Tài chính bưu chính" });
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 7, Name = "Phân phối - Truyền thông" });
+            builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 8, Name = "Mạng xã hội" });
         }
 
         public static void AddSeedDataToMenuLink(ModelBuilder builder)
@@ -63,6 +67,10 @@ namespace VNPost.Utility
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 28, Key = "#", Value = "Phân phối xuất bản ấn phẩm", LocationId = 7, Link = "/" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 29, Key = "#", Value = "Dịch vụ Viễn thông - CNTT", LocationId = 7, Link = "/" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 30, Key = "#", Value = "Dịch vụ phân phối hàng hoá", LocationId = 7, Link = "/" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 31, Key = "", Value = "fab fa-facebook-f", LocationId = 8, Link = "https://www.facebook.com/vnpost.vn" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 32, Key = "", Value = "fab fa-twitter", LocationId = 8, Link = "https://twitter.com/buudienvietnam" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 33, Key = "", Value = "fab fa-linkedin", LocationId = 8, Link = "https://www.linkedin.com/authwall?trk=gf&trkInfo=AQEcHBePbUPbnwAAAXKW4SzYfqas88PMwWIydrQUKt7vRdlRm_Thesf7HIcEsfHSkUXiZuX_nMjyj4IfViiABffUTA0XRALzYNn5xU6ph_mz0P_XK4651j2JANKqojtkFw3fRAk=&originalReferer=http://www.vnpost.vn/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Ftt-dvkh-529b25197%2F" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 34, Key = "", Value = "fab fa-instagram", LocationId = 8, Link = "http://www.vnpost.vn/desktopmodules/vnp_webapi/rssfeed.aspx" });
         }
     }
 }

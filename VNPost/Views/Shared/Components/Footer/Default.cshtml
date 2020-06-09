@@ -3,12 +3,12 @@
 @model FooterVM
 <link rel="stylesheet" href="~/css/component/footer.css" />
 <div class="footer-top">
-    @foreach (MenuLocation location in Model.Locations)
+    @for (int i = 0; i < 3; i++)
     {
         <div>
-            <p>@location.Name</p>
+            <p>@Model.Locations[i].Name</p>
             <ul>
-                @foreach (MenuLink link in Model.ListMenuLink[location])
+                @foreach (MenuLink link in Model.ListMenuLink[Model.Locations[i]])
                 {
                     <li class="fas fa-caret-right"><a href="@link.Link">@link.Value</a></li>
                 }
@@ -17,5 +17,21 @@
     }
 </div>
 <div class="footer-bottom">
-    <div></div>
+    <div>
+        <h4>@Model.ListMenuItem["Company"]</h4>
+        <p>@Model.ListMenuItem["Location"]</p>
+        <p>@Model.ListMenuItem["Policy"]</p>
+    </div>
+    <div>
+        <ul>
+            @foreach (MenuLink link in Model.ListMenuLink[Model.Locations[3]])
+            {
+                <li><a href="@link.Link"><i class="@link.Value"></i></a></li>
+            }
+        </ul>
+    </div>
 </div>
+<a href="" class="contact">
+    <i class="fas fa-comment-dots"></i>
+    <p>Hỗ trợ trực tuyến</p>
+</a>
