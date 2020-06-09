@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
@@ -10,40 +9,37 @@ using VNPost.DataAccess.Data;
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200606021003_AddMoreTableToDB")]
-    partial class AddMoreTableToDB
+    [Migration("20200609145454_AddDB")]
+    partial class AddDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "3.1.5");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -52,18 +48,17 @@ namespace VNPost.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -75,53 +70,53 @@ namespace VNPost.DataAccess.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -131,8 +126,7 @@ namespace VNPost.DataAccess.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -141,18 +135,17 @@ namespace VNPost.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -164,19 +157,19 @@ namespace VNPost.DataAccess.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -188,10 +181,10 @@ namespace VNPost.DataAccess.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -203,36 +196,35 @@ namespace VNPost.DataAccess.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(128);
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("VNPost.Models.ClassModels.MenuItem", b =>
+            modelBuilder.Entity("VNPost.Models.Entity.MenuItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Key")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -286,6 +278,24 @@ namespace VNPost.DataAccess.Migrations
                             Id = 8,
                             Key = "PhoneNumber",
                             Value = "1900 54 54 81"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Key = "Company",
+                            Value = "TỔNG CÔNG TY BƯU ĐIỆN VIỆT NAM - VIETNAM POST"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Key = "Location",
+                            Value = "Địa chỉ: Số 05 đường Phạm Hùng - Mỹ Đình 2 - Nam Từ Liêm - Hà Nội - Việt Nam"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Key = "Policy",
+                            Value = "Ghi rõ nguồn \"www.vnpost.vn\" khi phát hành lại thông tin từ website này"
                         });
                 });
 
@@ -293,41 +303,355 @@ namespace VNPost.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Key")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("LocationId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LocationId");
 
                     b.ToTable("MenuLinks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Key = "Description",
+                            Link = "#",
+                            LocationId = 1,
+                            Value = "Giới thiệu"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Key = "QAndA",
+                            Link = "#",
+                            LocationId = 1,
+                            Value = "Hỏi đáp"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Key = "Contact",
+                            Link = "#",
+                            LocationId = 1,
+                            Value = "Liên hệ"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Key = "Login",
+                            Link = "#",
+                            LocationId = 1,
+                            Value = "Login"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Key = "Search-price",
+                            Link = "#",
+                            LocationId = 2,
+                            Value = "<p>Tra cước</p><span>DỊCH VỤ</span>"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Key = "Mess",
+                            Link = "#",
+                            LocationId = 2,
+                            Value = "<p>Đánh giá &</p><span>KHIẾU NẠI</span>"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Key = "Recruitment",
+                            Link = "#",
+                            LocationId = 2,
+                            Value = "<p>Tin</p><span>TUYỂN DỤNG</span>"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Key = "PostAndD",
+                            Link = "#",
+                            LocationId = 4,
+                            Value = "Bưu chính chuyển phát"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Key = "Money",
+                            Link = "#",
+                            LocationId = 4,
+                            Value = "Tài chính bưu chính"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Key = "Comunity",
+                            Link = "#",
+                            LocationId = 4,
+                            Value = "Phân phối -Truyền thông"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Key = "News",
+                            Link = "#",
+                            LocationId = 4,
+                            Value = "Tin tức"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Key = "Email",
+                            Link = "#",
+                            LocationId = 4,
+                            Value = "Email"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Key = "fas fa-map-marker-alt",
+                            Link = "#",
+                            LocationId = 3,
+                            Value = "Định Vị Bưu Gửi"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Key = "fas fa-money-bill-alt",
+                            Link = "#",
+                            LocationId = 3,
+                            Value = "Định vị chuyển tiền"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Key = "fas fa-map",
+                            Link = "#",
+                            LocationId = 3,
+                            Value = "Mạng lưới bưu cục"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Key = "fas fa-ban",
+                            Link = "#",
+                            LocationId = 3,
+                            Value = "Tra cứu hàng cấm gửi"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Key = "fas fa-search-plus",
+                            Link = "#",
+                            LocationId = 3,
+                            Value = "Tra cứu kỳ cước KHL"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Key = "fas fa-qrcode",
+                            Link = "#",
+                            LocationId = 3,
+                            Value = "Mã địa chỉ bưu chính"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 5,
+                            Value = "Bưu chính chuyển phát Trong nước"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 5,
+                            Value = "Bưu chính chuyển phát Quốc tế"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 6,
+                            Value = "Bảo hiểm phi nhân thọ PTI"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Key = "#",
+                            Link = "#",
+                            LocationId = 6,
+                            Value = "Thu hộ - Chi hộ"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 6,
+                            Value = "Đại lý Bảo hiểm nhân thọ (Dai-ichi)"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 6,
+                            Value = "Đại lý ngân hàng"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 6,
+                            Value = "Dịch vụ Chuyển tiền trong nước"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 7,
+                            Value = "Sàn thương mại điện tử POSTMART"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 7,
+                            Value = "Truyền thông, quảng cáo"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 7,
+                            Value = "Phân phối xuất bản ấn phẩm"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 7,
+                            Value = "Dịch vụ Viễn thông - CNTT"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Key = "#",
+                            Link = "/",
+                            LocationId = 7,
+                            Value = "Dịch vụ phân phối hàng hoá"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Key = "",
+                            Link = "https://www.facebook.com/vnpost.vn",
+                            LocationId = 8,
+                            Value = "fab fa-facebook-f"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Key = "",
+                            Link = "https://twitter.com/buudienvietnam",
+                            LocationId = 8,
+                            Value = "fab fa-twitter"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Key = "",
+                            Link = "https://www.linkedin.com/authwall?trk=gf&trkInfo=AQEcHBePbUPbnwAAAXKW4SzYfqas88PMwWIydrQUKt7vRdlRm_Thesf7HIcEsfHSkUXiZuX_nMjyj4IfViiABffUTA0XRALzYNn5xU6ph_mz0P_XK4651j2JANKqojtkFw3fRAk=&originalReferer=http://www.vnpost.vn/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Ftt-dvkh-529b25197%2F",
+                            LocationId = 8,
+                            Value = "fab fa-linkedin"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Key = "",
+                            Link = "http://www.vnpost.vn/desktopmodules/vnp_webapi/rssfeed.aspx",
+                            LocationId = 8,
+                            Value = "fab fa-instagram"
+                        });
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.MenuLocation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("Key")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("MenuLocations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "TopMenu"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "MainMenu"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Tra cứu - Định vị"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "BottomMenu"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Bưu chính chuyển phát"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Tài chính bưu chính"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Phân phối - Truyền thông"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Mạng xã hội"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
