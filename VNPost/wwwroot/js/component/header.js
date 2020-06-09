@@ -1,29 +1,26 @@
-﻿const menuBarAccessory = document.getElementById("menu-bar-accessory");
-const menuBar = document.getElementById("menu-bar");
-const hamburgerBar = document.getElementById("hamburger");
-const LinkBar = document.getElementById("link-bar");
+﻿const menuBarAccessory = $("#menu-bar-accessory");
+const menuBar = $("#menu-bar");
+const hamburgerBar = $("#hamburger");
+const LinkBar = $("#link-bar");
 
-menuBarAccessory.addEventListener("click", () => {
-    console.log(menuBar.style.display);
-    if (menuBar.style.display === "none" || menuBar.style.display === "") {
-        menuBar.style.display = "flex";
+menuBarAccessory.click(function () {
+    if (menuBar.css("display") === "none" || menuBar.css("display") === undefined) {
+        menuBar.css("display", "flex")
     } else {
-        menuBar.style.display = "none";
+        menuBar.css("display", "none")
     }
 });
-hamburgerBar.addEventListener("click", () => {
-    console.log(LinkBar.style.display);
-    if (LinkBar.style.display === "none" || LinkBar.style.display === "") {
-        LinkBar.style.display = "flex";
+hamburgerBar.click(function () {
+    if (LinkBar.css("display") === "none" || LinkBar.css("display") === undefined) {
+        LinkBar.css("display", "flex")
     } else {
-        LinkBar.style.display = "none";
+        LinkBar.css("display", "none")
     }
 });
-window.onresize = function (event) {
-    console.log(window.innerWidth);
+window.onresize = function () {
     if (window.innerWidth >= 860) {
-        LinkBar.style.display = "flex";
+        LinkBar.css("display", "flex")
     } else {
-        LinkBar.style.display = "none";
+        LinkBar.css("display", "none")
     }
 };

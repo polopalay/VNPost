@@ -41,7 +41,6 @@
 
             .footer-top ul li a {
                 font-weight: 500;
-                font-family: Roboto;
                 color: black;
                 text-decoration: none;
             }
@@ -95,7 +94,7 @@
 .contact {
     background: #144e8c;
     position: fixed;
-    right: 5%;
+    right: 25%;
     bottom: 0;
     width: 14rem;
     height: 5rem;
@@ -118,7 +117,7 @@
     }
 
     .contact:hover {
-        background: #343a40;
+        background: #053466;
     }
 
 @media (max-width: 830px) {
