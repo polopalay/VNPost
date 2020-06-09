@@ -6,7 +6,7 @@
 
 .footer-top {
     padding-top: 1.5rem;
-    background: #FCB71E;
+    background: #fcb71e;
     display: flex;
     justify-content: space-between;
 }
@@ -120,6 +120,109 @@
         background: #053466;
     }
 
+#mss {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    right: 25%;
+    bottom: 0;
+    background: white;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    -webkit-box-shadow: 0px -5px 20px -6px rgba(0,0,0,0.71);
+    -moz-box-shadow: 0px -5px 20px -6px rgba(0,0,0,0.71);
+    box-shadow: 0px -5px 20px -6px rgba(0,0,0,0.71);
+}
+
+    #mss #mss-tool-bar {
+        width: 28rem;
+        height: 4rem;
+        color: white;
+        display: flex;
+        padding: 1rem;
+        font-size: 1.5rem;
+        justify-content: space-between;
+        background: #fcb71e;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+
+        #mss #mss-tool-bar svg {
+            width: 1.5rem;
+            fill: rgb(255, 255, 255);
+        }
+
+    #mss form {
+        display: grid;
+        width: 28rem;
+        height: 37rem;
+        padding: 1rem;
+        grid-template-areas: "firstname lastname" "gender gender" "phone phone" "email email" "theme theme" "button button";
+    }
+
+        #mss form div {
+            display: flex;
+            flex-direction: column;
+            justify-self: center;
+        }
+
+            #mss form div input,
+            #mss form div select,
+            #mss form div button {
+                height: 4rem;
+                width: 100%;
+                border: 1px solid;
+                border-radius: 0.3rem;
+                padding: 0.5rem;
+            }
+
+            #mss form div button {
+                background: #144e8c;
+                color: white;
+            }
+
+.require:before {
+    color: #c23934;
+    content: "*";
+}
+
+#firstname {
+    width: 95%;
+    grid-area: firstname;
+    justify-self: start;
+}
+
+#lastname {
+    width: 95%;
+    grid-area: lastname;
+    justify-self: end;
+}
+
+#gender {
+    width: 100%;
+    grid-area: gender;
+}
+
+#phone {
+    width: 100%;
+    grid-area: phone;
+}
+
+#email {
+    width: 100%;
+    grid-area: email;
+}
+
+#theme {
+    width: 100%;
+    grid-area: theme;
+}
+
+#grid-btn {
+    width: 100%;
+    grid-area: button;
+}
+
 @media (max-width: 830px) {
     .footer-top {
         flex-direction: column;
@@ -129,5 +232,26 @@
 
     .footer-bottom {
         flex-direction: column;
+    }
+
+    .contact {
+        right: 5%;
+        bottom: 5%;
+        width: 10rem;
+        height: 4rem;
+        line-height: 4rem;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        font-size: 0.8rem;
+    }
+
+        .contact i {
+            line-height: 4rem;
+            margin-right: 0.5rem;
+        }
+
+    #mss {
+        right: 3%;
+        bottom: 0;
     }
 }

@@ -1,14 +1,9 @@
-﻿//const contact = $("#contact");
-//contact.addEventListener("click", (event) => {
-//    event.preventDefault();
-//    alert("hello");
-//    //if (LinkBar.style.display === "none" || LinkBar.style.display === "") {
-//    //    LinkBar.style.display = "flex";
-//    //} else {
-//    //    LinkBar.style.display = "none";
-//    //}
-//});
-$("#contact").click(function (event) {
+﻿$("#contact").click(function (event) {
     event.preventDefault();
-    alert("hello")
+    $("#mss").css("display", "flex");
+    $("#contact").css("display", "none");
+})
+$("#mss-close").click(function () {
+    $("#mss").css("display", "none");
+    $("#contact").css("display", "flex");
 })
