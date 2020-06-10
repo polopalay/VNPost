@@ -58,18 +58,10 @@
     .footer-bottom div {
         display: flex;
         color: white;
-        height: 8rem;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .footer-bottom div {
-        display: flex;
-        color: white;
         height: 5rem;
         flex-direction: column;
         justify-content: space-around;
-        margin: 1rem 0;
+        margin: 2rem 0;
     }
 
         .footer-bottom div ul {
@@ -97,8 +89,8 @@
     right: 25%;
     bottom: 0;
     width: 14rem;
-    height: 5rem;
-    line-height: 5rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     color: white;

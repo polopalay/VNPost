@@ -16,18 +16,12 @@
             }
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item contain-img active">
-                <img tyle="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/Banner%20Chao%20mung%20DH%20Dang.jpg" alt="">
-            </div>
-            <div class="carousel-item contain-img">
-                <img tyle="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/IT-Banner-02.jpg" alt="">
-            </div>
-            <div class="carousel-item contain-img ">
-                <img tyle="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/Tem-COVID.jpg" alt="">
-            </div>
-            <div class="carousel-item contain-img ">
-                <img style="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/Banner%20Cong%20PostGreen.jpg" alt="">
-            </div>
+            @for (int i = 0; i < Model.Links.Count(); i++)
+            {
+                <div class="carousel-item contain-img @(i == 0? "active" : "")">
+                    <img tyle="width:100%;" class="d-block" src="@Model.Links[i].Value" alt="">
+                </div>
+            }
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -41,9 +35,5 @@
     <p id="slider-link">Xem chi tiết</p>
 </section>
 
-@foreach (MenuLink link in Model.Links)
-{
-    <img src="@link.Value" />
-}
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/js/main/index.js"></script>
