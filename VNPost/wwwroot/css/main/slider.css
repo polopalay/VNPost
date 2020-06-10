@@ -1,0 +1,21 @@
+﻿#slider {
+    height: 40rem;
+}
+
+.contain-img {
+    width: 100%;
+}
+
+    .contain-img img {
+        width: 100%;
+        overflow: hidden;
+    }
+
+.carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+

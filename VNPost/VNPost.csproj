@@ -11,6 +11,7 @@
     <Content Remove="wwwroot\img\**" />
     <EmbeddedResource Remove="wwwroot\img\**" />
     <None Remove="wwwroot\img\**" />
+    <Content Remove="wwwroot\favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>
