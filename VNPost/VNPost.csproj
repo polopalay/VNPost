@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\img\**" />
+    <Content Remove="wwwroot\img\**" />
+    <EmbeddedResource Remove="wwwroot\img\**" />
+    <None Remove="wwwroot\img\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
@@ -23,10 +30,6 @@
     <ProjectReference Include="..\VNPost.DataAccess\VNPost.DataAccess.csproj" />
     <ProjectReference Include="..\VNPost.Models\VNPost.Models.csproj" />
     <ProjectReference Include="..\VNPost.Utility\VNPost.Utility.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\img\favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>

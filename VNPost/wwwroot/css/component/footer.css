@@ -53,6 +53,7 @@
     background: #144e8c;
     display: flex;
     justify-content: space-between;
+    padding-bottom: 4rem;
 }
 
     .footer-bottom div {
@@ -86,7 +87,7 @@
 .contact {
     background: #144e8c;
     position: fixed;
-    right: 25%;
+    right: 5%;
     bottom: 0;
     width: 14rem;
     height: 4.5rem;
@@ -109,6 +110,8 @@
     }
 
     .contact:hover {
+        text-decoration: none;
+        color: white;
         background: #053466;
     }
 
@@ -116,7 +119,7 @@
     display: none;
     flex-direction: column;
     position: fixed;
-    right: 25%;
+    right: 5%;
     bottom: 0;
     background: white;
     border-top-left-radius: 0.5rem;
@@ -224,11 +227,15 @@
 
     .footer-bottom {
         flex-direction: column;
+        padding-bottom: 3rem;
     }
 
+        .footer-bottom h4 {
+            font-size: 1.2rem;
+        }
+
     .contact {
-        right: 5%;
-        bottom: 5%;
+        bottom: 2%;
         width: 10rem;
         height: 4rem;
         line-height: 4rem;
