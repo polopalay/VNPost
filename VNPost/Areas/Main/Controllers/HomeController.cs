@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using VNPost.DataAccess.Repository.IRepository;
+using VNPost.Models.Entity;
 using VNPost.Models.ViewModels;
 
 namespace VNPost.Controllers
@@ -12,16 +14,18 @@ namespace VNPost.Controllers
     [Area("Main")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<MenuLink> links = _unitOfWork.MenuLink.GetAll().Where(link => link.LocationId == 9).ToList();
+            HomeVM homeVM = new HomeVM(links);
+            return View(homeVM);
         }
 
         public IActionResult Privacy()
