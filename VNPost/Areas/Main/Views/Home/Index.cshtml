@@ -1,28 +1,36 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using VNPost.Models.ViewModels;
+@using VNPost.Models.Entity;
+@model HomeVM
+
 <link rel="stylesheet" href="~/css/main/index.css" />
 
 <section id="slider">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            @for (int i = 0; i < Model.Links.Count(); i++)
+            {
+                <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="@(i == 0? "active" : "")"></li>
+            }
         </ol>
         <div class="carousel-inner">
+            @foreach (MenuLink link in Model.Links)
+            {
+
+            }
             <div class="carousel-item contain-img active">
-                <img tyle="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/Banner%20Chao%20mung%20DH%20Dang.jpg" alt="First slide">
+                <img tyle="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/Banner%20Chao%20mung%20DH%20Dang.jpg" alt="">
             </div>
             <div class="carousel-item contain-img">
-                <img tyle="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/IT-Banner-02.jpg" alt="First slide">
+                <img tyle="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/IT-Banner-02.jpg" alt="">
             </div>
             <div class="carousel-item contain-img ">
-                <img tyle="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/Tem-COVID.jpg" alt="Second slide">
+                <img tyle="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/Tem-COVID.jpg" alt="">
             </div>
             <div class="carousel-item contain-img ">
-                <img style="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/Banner%20Cong%20PostGreen.jpg" alt="Third slide">
+                <img style="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/Banner%20Cong%20PostGreen.jpg" alt="">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
