@@ -16,10 +16,6 @@
             }
         </ol>
         <div class="carousel-inner">
-            @foreach (MenuLink link in Model.Links)
-            {
-
-            }
             <div class="carousel-item contain-img active">
                 <img tyle="width:100%;" class="d-block" src="http://www.vnpost.vn/Portals/0/banner/Banner%20Chao%20mung%20DH%20Dang.jpg" alt="">
             </div>
@@ -45,5 +41,9 @@
     <p id="slider-link">Xem chi tiết</p>
 </section>
 
+@foreach (MenuLink link in Model.Links)
+{
+    <img src="@link.Value" />
+}
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/js/main/index.js"></script>
