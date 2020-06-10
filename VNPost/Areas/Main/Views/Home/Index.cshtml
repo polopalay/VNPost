@@ -2,7 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 <link rel="stylesheet" href="~/css/main/index.css" />
-<section class="slider" id="slider">
+
+<section id="slider">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -33,5 +34,8 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <p>Xem chi tiết</p>
+    <p id="slider-link">Xem chi tiết</p>
 </section>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/main/index.js"></script>

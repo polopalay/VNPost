@@ -31,5 +31,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\css\main\" />
+    <Folder Include="wwwroot\js\main\" />
   </ItemGroup>
 </Project>

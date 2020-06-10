@@ -1,5 +1,5 @@
 ﻿
-#slider p {
+#slider #slider-link {
     position: absolute;
     top: 25rem;
     left: 100rem;
@@ -9,21 +9,21 @@
     font-size: 1.2rem;
     border-radius: 0.5rem;
     cursor: pointer;
+    display: none;
 }
 
-
-#slider .contain-img {
+.contain-img {
     width: 100%;
     height: 40rem;
 }
 
-    #slider .contain-img img {
+    .contain-img img {
         height: 100%;
         width: auto;
         overflow: hidden;
     }
 
-#slider.carousel-indicators li {
+.carousel-indicators li {
     width: 10px;
     height: 10px;
     border-radius: 100%;
