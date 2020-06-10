@@ -29,4 +29,7 @@
     <None Include="wwwroot\img\favicon.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\main\" />
+  </ItemGroup>
 </Project>
