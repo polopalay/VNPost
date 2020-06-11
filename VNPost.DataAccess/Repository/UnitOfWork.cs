@@ -12,12 +12,14 @@ namespace VNPost.DataAccess.Repository
         public IMenuItemRepository MenuItem { get; }
         public IMenuLocationRepository MenuLocation { get; }
         public IMenuLinkRepository MenuLink { get; }
+        public IGalleryRepository Gallery { get; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             MenuItem = new MenuItemRepository(_db);
             MenuLocation = new MenuLocationRepository(_db);
             MenuLink = new MenuLinkRepository(_db);
+            Gallery = new GalleryRepository(_db);
         }
 
         public void Dispose()

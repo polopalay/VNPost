@@ -9,6 +9,7 @@ namespace VNPost.DataAccess.Repository.IRepository
         IMenuItemRepository MenuItem { get; }
         IMenuLocationRepository MenuLocation { get; }
         IMenuLinkRepository MenuLink { get; }
+        IGalleryRepository Gallery { get; }
         void Save();
     }
 }
