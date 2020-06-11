@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
 
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200611152325_AddSeedDataToCategoryAndPost")]
+    partial class AddSeedDataToCategoryAndPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,7 +248,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2020, 6, 11, 22, 35, 6, 544, DateTimeKind.Local).AddTicks(5890),
+                            CreateDate = new DateTime(2020, 6, 11, 22, 23, 23, 881, DateTimeKind.Local).AddTicks(4180),
                             Description = "",
                             DescriptionImg = "http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd//img/vnpost-logo.png",
                             Title = "Bưu điện tỉnh Nghệ An tuyển dụng lao động"
@@ -254,7 +256,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2020, 6, 11, 22, 35, 6, 560, DateTimeKind.Local).AddTicks(5790),
+                            CreateDate = new DateTime(2020, 6, 11, 22, 23, 23, 893, DateTimeKind.Local).AddTicks(220),
                             Description = "Chiều ngày 8/6/2020, tại Hà Nội, Bộ TT&TT đã tổ chức Hội nghị triển khai quyết định về công tác cán bộ. Đồng chí Nguyễn Mạnh Hùng, Ủy viên Trung ương Đảng, Bí thư Ban cán sự Đảng,...",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2f20200608-m07.jpg&size=3&ver=6",
                             Title = "Bộ TT&TT kéo dài thời gian giữ chức Thành viên Hội đồng thành viên với ông Nguyễn Quốc Vinh"
@@ -262,53 +264,10 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2020, 6, 11, 22, 35, 6, 560, DateTimeKind.Local).AddTicks(5950),
+                            CreateDate = new DateTime(2020, 6, 11, 22, 23, 23, 893, DateTimeKind.Local).AddTicks(290),
                             Description = "Bưu điện tỉnh Nghệ An xác định hướng đi mới đúng đắn cho Bưu điện Văn hóa xã (BĐ-VHX) qua việc triển khai cung cấp các sản phẩm hàng tiêu dùng đến tay người dân, đặc biệt là người...",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2fbuu_dien_2_cfzr.jpg&size=3&ver=2",
                             Title = "Nghệ An: Bán hàng tiêu dùng qua hệ thống bưu điện văn hóa xã - “nhiều lợi ích thiết thực”"
-                        });
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Img")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Img = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fDichVu%2f02+-+Buu+dien+Viet+Nam+-+Product.png&size=3&ver=5",
-                            Name = "Bưu chính chuyển phát"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Img = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fDichVu%2fA022_C056_0106MU.0000339-edit.png&size=3&ver=5",
-                            Name = "Tài chính bưu chính"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Img = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fDichVu%2f02+-+Buu+dien+Viet+Nam+(5)-+Product.png&size=3&ver=6",
-                            Name = "Phân phối - Truyền thông"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Tin Tức"
                         });
                 });
 
@@ -875,62 +834,6 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 9,
                             Name = "Slider"
-                        });
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Posts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ServiceId = 1,
-                            Title = "Chuyển phát nhanh EMS"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ServiceId = 1,
-                            Title = "Bưu phẩm đảm bảo"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ServiceId = 2,
-                            Title = "Bảo hiểm phi nhân thọ PTI"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ServiceId = 2,
-                            Title = "Thu hộ - Chi hộ"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ServiceId = 3,
-                            Title = "Sàn thương mại điện tử POSTMART"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ServiceId = 3,
-                            Title = "Truyền thông, quảng cáo"
                         });
                 });
 

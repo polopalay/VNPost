@@ -106,14 +106,14 @@ namespace VNPost.Utility
             builder.Entity<Category>().HasData(new Category { Id = 4, Name = "Tin Tức" });
         }
 
-        public static void AddToPost(ModelBuilder builder)
+        public static void AddSeedToPost(ModelBuilder builder)
         {
             builder.Entity<Post>().HasData(new Post { Id = 1, Title = "Chuyển phát nhanh EMS", ServiceId = 1 });
-            builder.Entity<Post>().HasData(new Post { Id = 2, Title = "Chuyển phát nhanh EMS", ServiceId = 1 });
-            builder.Entity<Post>().HasData(new Post { Id = 3, Title = "Chuyển phát nhanh EMS", ServiceId = 2 });
-            builder.Entity<Post>().HasData(new Post { Id = 4, Title = "Chuyển phát nhanh EMS", ServiceId = 2 });
-            builder.Entity<Post>().HasData(new Post { Id = 5, Title = "Chuyển phát nhanh EMS", ServiceId = 3 });
-            builder.Entity<Post>().HasData(new Post { Id = 6, Title = "Chuyển phát nhanh EMS", ServiceId = 3 });
+            builder.Entity<Post>().HasData(new Post { Id = 2, Title = "Bưu phẩm đảm bảo", ServiceId = 1 });
+            builder.Entity<Post>().HasData(new Post { Id = 3, Title = "Bảo hiểm phi nhân thọ PTI", ServiceId = 2 });
+            builder.Entity<Post>().HasData(new Post { Id = 4, Title = "Thu hộ - Chi hộ", ServiceId = 2 });
+            builder.Entity<Post>().HasData(new Post { Id = 5, Title = "Sàn thương mại điện tử POSTMART", ServiceId = 3 });
+            builder.Entity<Post>().HasData(new Post { Id = 6, Title = "Truyền thông, quảng cáo", ServiceId = 3 });
         }
     }
 }

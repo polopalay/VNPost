@@ -11,6 +11,8 @@ namespace VNPost.DataAccess.Repository.IRepository
         IMenuLinkRepository MenuLink { get; }
         IGalleryRepository Gallery { get; }
         IArticleRepository Article { get; }
+        ICategoryRepository Category { get; }
+        IPostRepository Post { get; }
         void Save();
     }
 }

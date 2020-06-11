@@ -1,0 +1,137 @@
+﻿
+#category {
+    width: 100%;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-around;
+}
+
+    #category a {
+        text-align: center;
+        align-items: center;
+        text-decoration: none;
+        color: #f6821f;
+        width: 30rem;
+    }
+
+        #category a img:first-of-type {
+            width: 30rem;
+            height: 30rem;
+            border: 10px solid #f0eceb;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        #category a img:nth-child(3) {
+            margin: 2rem 0;
+        }
+
+        #category a p,
+        #category a h2 {
+            width: 30rem;
+            text-align: left;
+        }
+
+        #category a h2 {
+            padding-left: 4rem;
+        }
+
+        #category a p {
+            padding-left: 2rem;
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+            #category a p:before {
+                content: '\f0da';
+                padding: 0 1rem;
+                font-weight: 900;
+            }
+
+            #category a p:hover {
+                opacity: 0.7;
+            }
+
+@media (max-width: 1024px) {
+    #category a,
+    #category a img:first-of-type,
+    #category a p,
+    #category a h2 {
+        width: 20rem;
+    }
+
+        #category a img:first-of-type {
+            height: 20rem;
+        }
+
+        #category a h2 {
+            font-size: 1.6rem;
+        }
+
+        #category a p {
+            font-size: 1rem;
+        }
+}
+
+@media (max-width: 736px) {
+    #category {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+        #category a {
+            margin-bottom: 2rem
+        }
+
+            #category a,
+            #category a img:first-of-type,
+            #category a p,
+            #category a h2 {
+                width: 40rem;
+            }
+
+                #category a img:first-of-type {
+                    height: 40rem;
+                }
+
+                #category a h2 {
+                    padding-left: 10rem;
+                }
+
+                #category a p {
+                    padding-left: 10rem;
+                }
+}
+
+@media (max-width: 414px) {
+    #category {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+        #category a {
+            margin-bottom: 2rem
+        }
+
+            #category a,
+            #category a img:first-of-type,
+            #category a p,
+            #category a h2 {
+                width: 30rem;
+            }
+
+                #category a img:first-of-type {
+                    height: 30rem;
+                }
+
+                #category a h2 {
+                    padding-left: 4rem;
+                }
+
+                #category a p {
+                    padding-left: 2rem;
+                }
+}

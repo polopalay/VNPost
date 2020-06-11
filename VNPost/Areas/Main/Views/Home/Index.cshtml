@@ -7,6 +7,7 @@
 
 <link rel="stylesheet" href="~/css/main/slider.css" />
 <link rel="stylesheet" href="~/css/main/gallery.css" />
+<link rel="stylesheet" href="~/css/main/category.css" />
 
 <section id="slider">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -82,6 +83,23 @@
             </div>
         </div>
     </div>
+</section>
+
+
+<section id="category">
+
+    @foreach (Category category in Model.Categories)
+    {
+        <a href="">
+            <img src="@category.Img" />
+            <h2>@category.Name</h2>
+            <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/line-service.png" />
+            @foreach (Post post in Model.Posts.Where(p => p.ServiceId == category.Id))
+            {
+                <p class="fas fa-caret-right">@post.Title</p>
+            }
+        </a>
+    }
 </section>
 
 <script src="~/lib/jquery/dist/jquery.js"></script>

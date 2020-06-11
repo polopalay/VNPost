@@ -23,6 +23,9 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedDataToMenuLink(builder);
             SeedData.AddSeedToGallery(builder);
             SeedData.AddSeedToArticle(builder);
+            SeedData.AddSeedToCategory(builder);
+            SeedData.AddSeedToPost(builder);
+
         }
 
         public DbSet<MenuItem> MenuItems { get; set; }
@@ -30,5 +33,7 @@ namespace VNPost.DataAccess.Data
         public DbSet<MenuLocation> MenuLocations { get; set; }
         public DbSet<Gallery> Galleries { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Post> Posts { get; set; }
     }
 }

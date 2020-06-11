@@ -26,8 +26,10 @@ namespace VNPost.Controllers
             List<MenuLink> links = _unitOfWork.MenuLink.GetAll().Where(link => link.LocationId == 9).ToList();
             List<Gallery> galleries = _unitOfWork.Gallery.GetAll().ToList();
             List<Article> articles = _unitOfWork.Article.GetAll().ToList();
+            List<Category> categories = _unitOfWork.Category.GetAll().Where(c => c.Id == 1 || c.Id == 2 || c.Id == 3).ToList();
+            List<Post> posts = _unitOfWork.Post.GetAll().ToList();
 
-            HomeVM homeVM = new HomeVM(links, galleries, articles);
+            HomeVM homeVM = new HomeVM(links, galleries, articles, categories, posts);
             return View(homeVM);
         }
 
