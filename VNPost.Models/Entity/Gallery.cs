@@ -6,6 +6,6 @@ namespace VNPost.Models.Entity
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime DateWrite { get; set; }
+        public string ImgDescription { get; set; }
     }
 }

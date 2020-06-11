@@ -24,7 +24,8 @@ namespace VNPost.Controllers
         public IActionResult Index()
         {
             List<MenuLink> links = _unitOfWork.MenuLink.GetAll().Where(link => link.LocationId == 9).ToList();
-            HomeVM homeVM = new HomeVM(links);
+            List<Gallery> galleries = _unitOfWork.Gallery.GetAll().ToList();
+            HomeVM homeVM = new HomeVM(links, galleries);
             return View(homeVM);
         }
 

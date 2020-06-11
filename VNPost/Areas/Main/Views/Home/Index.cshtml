@@ -39,36 +39,19 @@
     <div class="gallery">
         <h3>Chuyên trang</h3>
         <ul class="list-group">
-            <li class="list-group-item">
-                <a href="">
-                    <img src="http://www.vnpost.vn/Portals/0/banner%20logo/Recycle.png" />
-                    <div>
-                        <h5>Nói không với rác thải nhựa</h5>
-                        <p>Bưu điện Việt Nam vì một cuộc sống xanh</p>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="">
-                    <img src="http://www.vnpost.vn/Portals/0/banner%20logo/Recycle.png" />
-                    <div>
-                        <h5>Nói không với rác thải nhựa</h5>
-                        <p>Bưu điện Việt Nam vì một cuộc sống xanh</p>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="">
-                    <img src="http://www.vnpost.vn/Portals/0/banner%20logo/Recycle.png" />
-                    <div>
-                        <h5>Nói không với rác thải nhựa</h5>
-                        <p>Bưu điện Việt Nam vì một cuộc sống xanh</p>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-            </li>
+            @foreach (Gallery gallery in Model.Galleries)
+            {
+                <li class="list-group-item">
+                    <a href="">
+                        <img src="@gallery.ImgDescription" />
+                        <div>
+                            <h5>@gallery.Title</h5>
+                            <p>@gallery.Description</p>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            }
         </ul>
     </div>
     <div class="list-article">

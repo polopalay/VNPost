@@ -19,3 +19,20 @@
     margin-left: 3px;
 }
 
+@media (max-width: 1023px) {
+    #slider {
+        height: 30rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #slider {
+        height: 20rem;
+    }
+}
+
+@media (max-width: 400px) {
+    #slider {
+        height: 15rem;
+    }
+}

@@ -14,7 +14,6 @@
 }
 
     .gallery ul li {
-        height: 6rem;
         padding-top: 1rem;
         background: #f7f7f7;
     }
@@ -23,6 +22,7 @@
             display: flex;
             justify-content: space-between;
             text-decoration: none;
+            width: 100%;
         }
 
             .gallery ul li a:hover {
@@ -36,22 +36,28 @@
                 border-radius: 100%;
             }
 
-            .gallery ul li a div h5 {
-                color: black;
-                font-weight: 900;
-                font-size: 1.6rem;
+            .gallery ul li a div {
+                width: 80%;
+                padding-left: 1rem;
             }
 
-            .gallery ul li a div p {
-                color: #868686;
-                font-weight: 400;
-                font-size: 1.2rem;
-            }
+                .gallery ul li a div h5 {
+                    color: black;
+                    font-weight: 900;
+                    font-size: 1.6rem;
+                }
+
+                .gallery ul li a div p {
+                    color: #868686;
+                    font-weight: 400;
+                    font-size: 1.2rem;
+                }
 
             .gallery ul li a i {
                 color: #868686;
                 font-size: 2rem;
                 margin-top: 1rem;
+                width: 5%;
             }
 
 .list-article {
@@ -118,3 +124,47 @@
                 .article .link-to-articles .link-article div a:hover {
                     color: #faa61a;
                 }
+
+
+
+@media (max-width: 1023px) {
+    .gallery {
+        width: 24rem;
+    }
+
+    .article {
+        width: 48rem;
+    }
+
+    .gallery ul li a i {
+        margin-top: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        display: none;
+    }
+
+    .list-article {
+        width: 100%;
+    }
+
+    .article {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .article {
+        flex-direction: column;
+    }
+
+        .article .description-article {
+            width: 100%;
+        }
+
+        .article .link-to-articles {
+            width: 100%;
+        }
+}

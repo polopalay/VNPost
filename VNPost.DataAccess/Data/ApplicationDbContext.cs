@@ -21,6 +21,7 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedDataToMenuItem(builder);
             SeedData.AddSeedDataToMenuLocation(builder);
             SeedData.AddSeedDataToMenuLink(builder);
+            SeedData.AddSeedToGallery(builder);
         }
 
         public DbSet<MenuItem> MenuItems { get; set; }
