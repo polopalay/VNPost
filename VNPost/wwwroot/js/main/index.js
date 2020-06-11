@@ -4,4 +4,3 @@
 //$("#slider").mouseout(function () {
 //    $("#slider-link").css("display", "none");
 //});
-
