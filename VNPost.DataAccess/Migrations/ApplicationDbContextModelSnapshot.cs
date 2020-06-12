@@ -246,7 +246,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2020, 6, 12, 10, 44, 57, 717, DateTimeKind.Local).AddTicks(5300),
+                            CreateDate = new DateTime(2020, 6, 12, 14, 9, 5, 742, DateTimeKind.Local).AddTicks(1040),
                             Description = "",
                             DescriptionImg = "http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd//img/vnpost-logo.png",
                             Title = "Bưu điện tỉnh Nghệ An tuyển dụng lao động"
@@ -254,7 +254,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2020, 6, 12, 10, 44, 57, 730, DateTimeKind.Local).AddTicks(5650),
+                            CreateDate = new DateTime(2020, 6, 12, 14, 9, 5, 760, DateTimeKind.Local).AddTicks(1410),
                             Description = "Chiều ngày 8/6/2020, tại Hà Nội, Bộ TT&TT đã tổ chức Hội nghị triển khai quyết định về công tác cán bộ. Đồng chí Nguyễn Mạnh Hùng, Ủy viên Trung ương Đảng, Bí thư Ban cán sự Đảng,...",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2f20200608-m07.jpg&size=3&ver=6",
                             Title = "Bộ TT&TT kéo dài thời gian giữ chức Thành viên Hội đồng thành viên với ông Nguyễn Quốc Vinh"
@@ -262,7 +262,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2020, 6, 12, 10, 44, 57, 730, DateTimeKind.Local).AddTicks(5710),
+                            CreateDate = new DateTime(2020, 6, 12, 14, 9, 5, 760, DateTimeKind.Local).AddTicks(1470),
                             Description = "Bưu điện tỉnh Nghệ An xác định hướng đi mới đúng đắn cho Bưu điện Văn hóa xã (BĐ-VHX) qua việc triển khai cung cấp các sản phẩm hàng tiêu dùng đến tay người dân, đặc biệt là người...",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2fbuu_dien_2_cfzr.jpg&size=3&ver=2",
                             Title = "Nghệ An: Bán hàng tiêu dùng qua hệ thống bưu điện văn hóa xã - “nhiều lợi ích thiết thực”"
@@ -924,8 +924,17 @@ namespace VNPost.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ServiceId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionImg")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -938,37 +947,82 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ServiceId = 1,
-                            Title = "Chuyển phát nhanh EMS"
+                            CategoryId = 4,
+                            CreateDate = new DateTime(2020, 6, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            DescriptionImg = "http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd//img/vnpost-logo.png",
+                            Title = "Bưu điện tỉnh Nghệ An tuyển dụng lao động"
                         },
                         new
                         {
                             Id = 2,
-                            ServiceId = 1,
-                            Title = "Bưu phẩm đảm bảo"
+                            CategoryId = 4,
+                            CreateDate = new DateTime(2020, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chiều ngày 8/6/2020, tại Hà Nội, Bộ TT&TT đã tổ chức Hội nghị triển khai quyết định về công tác cán bộ. Đồng chí Nguyễn Mạnh Hùng, Ủy viên Trung ương Đảng, Bí thư Ban cán sự Đảng,...",
+                            DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2f20200608-m07.jpg&size=3&ver=6",
+                            Title = "Bộ TT&TT kéo dài thời gian giữ chức Thành viên Hội đồng thành viên với ông Nguyễn Quốc Vinh"
                         },
                         new
                         {
                             Id = 3,
-                            ServiceId = 2,
-                            Title = "Bảo hiểm phi nhân thọ PTI"
+                            CategoryId = 4,
+                            CreateDate = new DateTime(2020, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bưu điện tỉnh Nghệ An xác định hướng đi mới đúng đắn cho Bưu điện Văn hóa xã (BĐ-VHX) qua việc triển khai cung cấp các sản phẩm hàng tiêu dùng đến tay người dân, đặc biệt là người...",
+                            DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2fbuu_dien_2_cfzr.jpg&size=3&ver=2",
+                            Title = "Nghệ An: Bán hàng tiêu dùng qua hệ thống bưu điện văn hóa xã - “nhiều lợi ích thiết thực”"
                         },
                         new
                         {
                             Id = 4,
-                            ServiceId = 2,
-                            Title = "Thu hộ - Chi hộ"
+                            CategoryId = 1,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Là dịch vụ chuyển phát nhanh thư, tài liệu, vật phẩm, hàng hóa từ người gửi đến người nhận giữa Việt Nam trong nước và các nước trên thế giới trong...",
+                            DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fEMS-2.jpg&size=3&ver=7",
+                            Title = "Chuyển phát nhanh EMS"
                         },
                         new
                         {
                             Id = 5,
-                            ServiceId = 3,
-                            Title = "Sàn thương mại điện tử POSTMART"
+                            CategoryId = 1,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bưu phẩm bảo đảm là dịch vụ chấp nhận, vận chuyển và phát bưu phẩm đến địa chỉ nhận trong nước và quốc tế; bưu phẩm được gắn số hiệu để theo dõi, định...",
+                            DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fDichVu%2fbuu-pham-dam-bao.jpg&size=3&ver=7",
+                            Title = "Bưu phẩm đảm bảo"
                         },
                         new
                         {
                             Id = 6,
-                            ServiceId = 3,
+                            CategoryId = 2,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Là dịch vụ giới thiệu, chào bán bảo hiểm, thu xếp việc giao kết hợp đồng bảo hiểm thông qua mạng lưới bưu cục, điểm cung cấp dịch vụ của Tổng Công ty...",
+                            DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fbh-phi-nhan-tho-pti.jpg&size=3&ver=5",
+                            Title = "Bảo hiểm phi nhân thọ PTI"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 2,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Là dịch vụ cho phép khách hàng nộp tiền phí bảo hiểm, vay trả góp, tiền điện, nước, cước điện thoại, tiền đặt chỗ, mua hàng qua mạng, tiền phí phạt vi...",
+                            DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fthu-ho-chi-ho.jpg&size=3&ver=4",
+                            Title = "Thu hộ - Chi hộ"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 3,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "POSTMART là sàn giao dịch thương mại điện tử được sáng lập bởi Tổng Công ty Bưu Điện Việt Nam (VNPost) và vận hành bởi Công ty Phát hành báo chí TW.",
+                            DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fviber_image_2019-06-06_14-38-15.jpg&size=3&ver=8",
+                            Title = "Sàn thương mại điện tử POSTMART"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 3,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Truyền thông quảng cáo qua các xuất bản phẩm, hệ thống truyền thông quảng cáo ngoài trời, tại các bưu cục, trên các phương tiện vận tải, phong bì...",
+                            DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2ftruyen-thong-quang-cao.jpg&size=3&ver=8",
                             Title = "Truyền thông, quảng cáo"
                         });
                 });

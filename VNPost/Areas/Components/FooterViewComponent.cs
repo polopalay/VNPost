@@ -34,7 +34,9 @@ namespace VNPost.Areas.Components
                     locations.Add(menuLocation);
                 }
             }
-            FooterVM footerVM = new FooterVM(listMenuLink, locations, listMenuItem);
+            List<Category> categories = _unitOfWork.Category.GetAll().Where(c => c.Id == 1 || c.Id == 2 || c.Id == 3).ToList();
+            List<Post> posts = _unitOfWork.Post.GetAll().ToList();
+            FooterVM footerVM = new FooterVM(listMenuLink, locations, listMenuItem, categories, posts);
             return View(footerVM);
         }
     }

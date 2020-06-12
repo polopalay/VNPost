@@ -30,7 +30,9 @@ namespace VNPost.Areas.Components
                 listMenuLink.Add(menuLocation.Id, links);
             }
 
-            HeaderVM headerVM = new HeaderVM(listMenuItem, listMenuLink);
+            List<Category> categories = _unitOfWork.Category.GetAll().ToList();
+
+            HeaderVM headerVM = new HeaderVM(listMenuItem, listMenuLink, categories);
             return View(headerVM);
         }
     }

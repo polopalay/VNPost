@@ -29,10 +29,6 @@ namespace VNPost.Utility
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 1, Name = "TopMenu" });
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 2, Name = "MainMenu" });
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 3, Name = "Tra cứu - Định vị" });
-            builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 4, Name = "BottomMenu" });
-            builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 5, Name = "Bưu chính chuyển phát" });
-            builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 6, Name = "Tài chính bưu chính" });
-            builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 7, Name = "Phân phối - Truyền thông" });
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 8, Name = "Mạng xã hội" });
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 9, Name = "Slider" });
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 10, Name = "Mua sắm trực tuyến", Descrtiption = "Hiện tại chúng tôi có những gian hàng mua sắm online với đầy đủ những sản phẩm tiện ích, đa dạng. Hy vọng sẽ đem đến cho quý khách hàng những trải nghiệm mua sắm mới mẻ nhất. Hãy đến với hệ thống mua sắm trực tuyến của chúng tôi để tìm cho mình những sản phẩm thiết thực nhất." });
@@ -47,29 +43,12 @@ namespace VNPost.Utility
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 5, Key = "Search-price", Value = "<p>Tra cước</p><span>DỊCH VỤ</span>", LocationId = 2, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 6, Key = "Mess", Value = "<p>Đánh giá &</p><span>KHIẾU NẠI</span>", LocationId = 2, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 7, Key = "Recruitment", Value = "<p>Tin</p><span>TUYỂN DỤNG</span>", LocationId = 2, Link = "#" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 8, Key = "PostAndD", Value = "Bưu chính chuyển phát", LocationId = 4, Link = "#" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 9, Key = "Money", Value = "Tài chính bưu chính", LocationId = 4, Link = "#" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 10, Key = "Comunity", Value = "Phân phối -Truyền thông", LocationId = 4, Link = "#" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 11, Key = "News", Value = "Tin tức", LocationId = 4, Link = "#" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 12, Key = "Email", Value = "Email", LocationId = 4, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 13, Key = "fas fa-map-marker-alt", Value = "Định Vị Bưu Gửi", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 14, Key = "fas fa-money-bill-alt", Value = "Định vị chuyển tiền", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 15, Key = "fas fa-map", Value = "Mạng lưới bưu cục", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 16, Key = "fas fa-ban", Value = "Tra cứu hàng cấm gửi", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 17, Key = "fas fa-search-plus", Value = "Tra cứu kỳ cước KHL", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 18, Key = "fas fa-qrcode", Value = "Mã địa chỉ bưu chính", LocationId = 3, Link = "#" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 19, Key = "#", Value = "Bưu chính chuyển phát Trong nước", LocationId = 5, Link = "/" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 20, Key = "#", Value = "Bưu chính chuyển phát Quốc tế", LocationId = 5, Link = "/" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 21, Key = "#", Value = "Bảo hiểm phi nhân thọ PTI", LocationId = 6, Link = "/" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 22, Key = "#", Value = "Thu hộ - Chi hộ", LocationId = 6, Link = "#" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 23, Key = "#", Value = "Đại lý Bảo hiểm nhân thọ (Dai-ichi)", LocationId = 6, Link = "/" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 24, Key = "#", Value = "Đại lý ngân hàng", LocationId = 6, Link = "/" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 25, Key = "#", Value = "Dịch vụ Chuyển tiền trong nước", LocationId = 6, Link = "/" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 26, Key = "#", Value = "Sàn thương mại điện tử POSTMART", LocationId = 7, Link = "/" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 27, Key = "#", Value = "Truyền thông, quảng cáo", LocationId = 7, Link = "/" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 28, Key = "#", Value = "Phân phối xuất bản ấn phẩm", LocationId = 7, Link = "/" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 29, Key = "#", Value = "Dịch vụ Viễn thông - CNTT", LocationId = 7, Link = "/" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 30, Key = "#", Value = "Dịch vụ phân phối hàng hoá", LocationId = 7, Link = "/" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 31, Key = "", Value = "fab fa-facebook-f", LocationId = 8, Link = "https://www.facebook.com/vnpost.vn" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 32, Key = "", Value = "fab fa-twitter", LocationId = 8, Link = "https://twitter.com/buudienvietnam" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 33, Key = "", Value = "fab fa-linkedin", LocationId = 8, Link = "https://www.linkedin.com/authwall?trk=gf&trkInfo=AQEcHBePbUPbnwAAAXKW4SzYfqas88PMwWIydrQUKt7vRdlRm_Thesf7HIcEsfHSkUXiZuX_nMjyj4IfViiABffUTA0XRALzYNn5xU6ph_mz0P_XK4651j2JANKqojtkFw3fRAk=&originalReferer=http://www.vnpost.vn/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Ftt-dvkh-529b25197%2F" });
@@ -98,9 +77,6 @@ namespace VNPost.Utility
 
         public static void AddSeedToArticle(ModelBuilder builder)
         {
-            builder.Entity<Article>().HasData(new Article { Id = 1, Title = "Bưu điện tỉnh Nghệ An tuyển dụng lao động", DescriptionImg = "http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd//img/vnpost-logo.png", Description = "", CreateDate = DateTime.Now });
-            builder.Entity<Article>().HasData(new Article { Id = 2, Title = "Bộ TT&TT kéo dài thời gian giữ chức Thành viên Hội đồng thành viên với ông Nguyễn Quốc Vinh", Description = "Chiều ngày 8/6/2020, tại Hà Nội, Bộ TT&TT đã tổ chức Hội nghị triển khai quyết định về công tác cán bộ. Đồng chí Nguyễn Mạnh Hùng, Ủy viên Trung ương Đảng, Bí thư Ban cán sự Đảng,...", DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2f20200608-m07.jpg&size=3&ver=6", CreateDate = DateTime.Now });
-            builder.Entity<Article>().HasData(new Article { Id = 3, Title = "Nghệ An: Bán hàng tiêu dùng qua hệ thống bưu điện văn hóa xã - “nhiều lợi ích thiết thực”", Description = "Bưu điện tỉnh Nghệ An xác định hướng đi mới đúng đắn cho Bưu điện Văn hóa xã (BĐ-VHX) qua việc triển khai cung cấp các sản phẩm hàng tiêu dùng đến tay người dân, đặc biệt là người...", DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2fbuu_dien_2_cfzr.jpg&size=3&ver=2", CreateDate = DateTime.Now });
         }
 
         public static void AddSeedToCategory(ModelBuilder builder)
@@ -113,13 +89,19 @@ namespace VNPost.Utility
 
         public static void AddSeedToPost(ModelBuilder builder)
         {
-            builder.Entity<Post>().HasData(new Post { Id = 1, Title = "Chuyển phát nhanh EMS", ServiceId = 1 });
-            builder.Entity<Post>().HasData(new Post { Id = 2, Title = "Bưu phẩm đảm bảo", ServiceId = 1 });
-            builder.Entity<Post>().HasData(new Post { Id = 3, Title = "Bảo hiểm phi nhân thọ PTI", ServiceId = 2 });
-            builder.Entity<Post>().HasData(new Post { Id = 4, Title = "Thu hộ - Chi hộ", ServiceId = 2 });
-            builder.Entity<Post>().HasData(new Post { Id = 5, Title = "Sàn thương mại điện tử POSTMART", ServiceId = 3 });
-            builder.Entity<Post>().HasData(new Post { Id = 6, Title = "Truyền thông, quảng cáo", ServiceId = 3 });
+
+            builder.Entity<Post>().HasData(new Post { Id = 1, Title = "Bưu điện tỉnh Nghệ An tuyển dụng lao động", DescriptionImg = "http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd//img/vnpost-logo.png", Description = "", CreateDate = new DateTime(2020, 06, 09), CategoryId = 4 });
+            builder.Entity<Post>().HasData(new Post { Id = 2, Title = "Bộ TT&TT kéo dài thời gian giữ chức Thành viên Hội đồng thành viên với ông Nguyễn Quốc Vinh", Description = "Chiều ngày 8/6/2020, tại Hà Nội, Bộ TT&TT đã tổ chức Hội nghị triển khai quyết định về công tác cán bộ. Đồng chí Nguyễn Mạnh Hùng, Ủy viên Trung ương Đảng, Bí thư Ban cán sự Đảng,...", DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2f20200608-m07.jpg&size=3&ver=6", CreateDate = new DateTime(2020, 06, 10), CategoryId = 4 });
+            builder.Entity<Post>().HasData(new Post { Id = 3, Title = "Nghệ An: Bán hàng tiêu dùng qua hệ thống bưu điện văn hóa xã - “nhiều lợi ích thiết thực”", Description = "Bưu điện tỉnh Nghệ An xác định hướng đi mới đúng đắn cho Bưu điện Văn hóa xã (BĐ-VHX) qua việc triển khai cung cấp các sản phẩm hàng tiêu dùng đến tay người dân, đặc biệt là người...", DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2fbuu_dien_2_cfzr.jpg&size=3&ver=2", CreateDate = new DateTime(2020, 06, 11), CategoryId = 4 });
+            builder.Entity<Post>().HasData(new Post { Id = 4, Title = "Chuyển phát nhanh EMS", Description = "Là dịch vụ chuyển phát nhanh thư, tài liệu, vật phẩm, hàng hóa từ người gửi đến người nhận giữa Việt Nam trong nước và các nước trên thế giới trong...", DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fEMS-2.jpg&size=3&ver=7", CategoryId = 1 });
+            builder.Entity<Post>().HasData(new Post { Id = 5, Title = "Bưu phẩm đảm bảo", Description = "Bưu phẩm bảo đảm là dịch vụ chấp nhận, vận chuyển và phát bưu phẩm đến địa chỉ nhận trong nước và quốc tế; bưu phẩm được gắn số hiệu để theo dõi, định...", DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fDichVu%2fbuu-pham-dam-bao.jpg&size=3&ver=7", CategoryId = 1 });
+            builder.Entity<Post>().HasData(new Post { Id = 6, Title = "Bảo hiểm phi nhân thọ PTI", Description = "Là dịch vụ giới thiệu, chào bán bảo hiểm, thu xếp việc giao kết hợp đồng bảo hiểm thông qua mạng lưới bưu cục, điểm cung cấp dịch vụ của Tổng Công ty...", DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fbh-phi-nhan-tho-pti.jpg&size=3&ver=5", CategoryId = 2 });
+            builder.Entity<Post>().HasData(new Post { Id = 7, Title = "Thu hộ - Chi hộ", Description = "Là dịch vụ cho phép khách hàng nộp tiền phí bảo hiểm, vay trả góp, tiền điện, nước, cước điện thoại, tiền đặt chỗ, mua hàng qua mạng, tiền phí phạt vi...", DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fthu-ho-chi-ho.jpg&size=3&ver=4", CategoryId = 2 });
+            builder.Entity<Post>().HasData(new Post { Id = 8, Title = "Sàn thương mại điện tử POSTMART", Description = "POSTMART là sàn giao dịch thương mại điện tử được sáng lập bởi Tổng Công ty Bưu Điện Việt Nam (VNPost) và vận hành bởi Công ty Phát hành báo chí TW.", DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fviber_image_2019-06-06_14-38-15.jpg&size=3&ver=8", CategoryId = 3 });
+            builder.Entity<Post>().HasData(new Post { Id = 9, Title = "Truyền thông, quảng cáo", Description = "Truyền thông quảng cáo qua các xuất bản phẩm, hệ thống truyền thông quảng cáo ngoài trời, tại các bưu cục, trên các phương tiện vận tải, phong bì...", DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2ftruyen-thong-quang-cao.jpg&size=3&ver=8", CategoryId = 3 });
         }
+
+
     }
 }
 

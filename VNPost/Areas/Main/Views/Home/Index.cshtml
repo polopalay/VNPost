@@ -95,7 +95,7 @@
             <img src="@category.Img" />
             <h2>@category.Name</h2>
             <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/line-service.png" />
-            @foreach (Post post in Model.Posts.Where(p => p.ServiceId == category.Id))
+            @foreach (Post post in Model.Posts.Where(p => p.CategoryId == category.Id))
             {
                 <p class="fas fa-caret-right">@post.Title</p>
             }
