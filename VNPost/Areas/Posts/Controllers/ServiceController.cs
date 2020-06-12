@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VNPost.DataAccess.Repository.IRepository;
 using VNPost.Models.Entity;
+using VNPost.Models.ViewModels;
 
 namespace VNPost.Areas.Posts.Controllers
 {
@@ -20,7 +21,8 @@ namespace VNPost.Areas.Posts.Controllers
         public IActionResult List(int id)
         {
             List<Post> posts = _unitOfWork.Post.GetAll().Where(p => p.CategoryId == id).ToList();
-            return View(posts);
+            ListSerivceVM listSerivce = new ListSerivceVM(posts);
+            return View(listSerivce);
         }
     }
 }

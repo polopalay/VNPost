@@ -1,15 +1,18 @@
-﻿@using VNPost.Models.Entity;
-
-@{
+﻿@{
     ViewData["Title"] = "Dịch vụ";
 }
+
+@using VNPost.Models.ViewModels;
+@using VNPost.Models.Entity;
+@Model ListSerivceVM;
+
 <link rel="stylesheet" href="~/css/post/service/list.css" />
 
 <section id="list-service">
     <h1>TÀI CHÍNH BƯU CHÍNH</h1>
     <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/p-border.png" alt="none">
     <div>
-        @foreach (Post post in Model)
+        @foreach (Post post in Model.Posts)
         {
             <a href="">
                 <img src="@post.DescriptionImg" />
