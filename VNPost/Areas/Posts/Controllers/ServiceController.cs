@@ -25,12 +25,13 @@ namespace VNPost.Areas.Posts.Controllers
             {
                 index = 1;
             }
+            Category category = _unitOfWork.Category.Get(id);
             List<Post> posts = _unitOfWork.Post.GetAll()
                 .Where(p => p.CategoryId == id)
                 .ToList();
             int numberPostInPage = 1;
             Pagination<Post> pagination = new Pagination<Post>(posts, index, numberPostInPage);
-            ListSerivceVM listSerivce = new ListSerivceVM(pagination.ListT, pagination.Begin, pagination.End, index, id);
+            ListSerivceVM listSerivce = new ListSerivceVM(pagination.ListT, pagination.Begin, pagination.End, index, category);
             return View(listSerivce);
         }
     }

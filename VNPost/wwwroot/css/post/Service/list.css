@@ -16,52 +16,75 @@
         width: 12rem;
     }
 
-    #list-service > div {
+    #list-service > article {
         display: grid;
         grid-template-columns: 33.33% 33.33% 33.33%;
         justify-items: center;
         grid-row-gap: 2rem;
+        padding-bottom: 4rem;
     }
 
-    #list-service div a {
+    #list-service article a {
         width: 90%;
         text-decoration: none;
     }
 
-        #list-service div a img {
+        #list-service article a img {
             width: 100%;
         }
 
-        #list-service div a > div {
+        #list-service article a > div {
             width: 100%;
             background: #fffad5;
             padding: 1rem 1rem 3rem 1rem;
         }
 
-            #list-service div a > div h2,
-            #list-service div a > div p {
+            #list-service article a > div h2,
+            #list-service article a > div p {
                 text-align: left;
             }
 
-            #list-service div a > div h2 {
+            #list-service article a > div h2 {
                 font-weight: 600;
                 text-align: left;
                 color: #f58220;
                 padding-bottom: 1rem;
             }
 
-            #list-service div a > div p {
+            #list-service article a > div p {
                 color: black;
                 font-size: 1.4rem;
             }
 
-@media (max-width: 768px) {
     #list-service > div {
+        display: flex;
+        width: 100%;
+        padding-left: 1%;
+    }
+
+        #list-service > div a {
+            text-decoration: none;
+            width: 2.4rem;
+            height: 2.4rem;
+            font-size: 1.6rem;
+            border: 1px solid #ddd;
+            color: #868c93;
+            border-radius: 50%;
+            margin: 0 0.2rem;
+        }
+
+.current-page {
+    background: #f6f6f6;
+}
+
+@media (max-width: 768px) {
+    #list-service > article {
         grid-template-columns: 48% 48%;
     }
 }
+
 @media (max-width: 568px) {
-    #list-service > div {
+    #list-service > article {
         grid-template-columns: 100%;
     }
 }

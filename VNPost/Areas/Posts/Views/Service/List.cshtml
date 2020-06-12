@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="~/css/post/service/list.css" />
 
 <section id="list-service">
-    <h1>TÀI CHÍNH BƯU CHÍNH</h1>
+    <h1>@Model.Category.Name.ToUpper()</h1>
     <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/p-border.png" alt="none">
-    <div>
+    <article>
         @foreach (Post post in Model.Posts)
         {
             <a href="">
@@ -22,11 +22,11 @@
                 </div>
             </a>
         }
-    </div>
+    </article>
     <div>
         @for (int i = Model.Begin; i < Model.End; i++)
         {
-            <a href="/Posts/Service/List/+@(Model.Id+"?index="+i)">@i</a>
+            <a href="/Posts/Service/List/+@(Model.Category.Id+"?index="+i)" class="@(i==Model.Index?"current-page":"")">@i</a>
         }
     </div>
 </section>
