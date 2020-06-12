@@ -21,6 +21,7 @@ namespace VNPost.Utility
             builder.Entity<MenuItem>().HasData(new MenuItem { Id = 9, Key = "Company", Value = "TỔNG CÔNG TY BƯU ĐIỆN VIỆT NAM - VIETNAM POST" });
             builder.Entity<MenuItem>().HasData(new MenuItem { Id = 10, Key = "Location", Value = "Địa chỉ: Số 05 đường Phạm Hùng - Mỹ Đình 2 - Nam Từ Liêm - Hà Nội - Việt Nam" });
             builder.Entity<MenuItem>().HasData(new MenuItem { Id = 11, Key = "Policy", Value = "Ghi rõ nguồn \"www.vnpost.vn\" khi phát hành lại thông tin từ website này" });
+            builder.Entity<MenuItem>().HasData(new MenuItem { Id = 12, Key = "Ra mắt nền tảng mã địa chỉ bưu chính - Vpostcode", Value = "https://www.youtube.com/embed/iPEvFyikq-g" });
         }
 
         public static void AddSeedDataToMenuLocation(ModelBuilder builder)
@@ -34,6 +35,7 @@ namespace VNPost.Utility
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 7, Name = "Phân phối - Truyền thông" });
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 8, Name = "Mạng xã hội" });
             builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 9, Name = "Slider" });
+            builder.Entity<MenuLocation>().HasData(new MenuLocation { Id = 10, Name = "Mua sắm trực tuyến", Descrtiption = "Hiện tại chúng tôi có những gian hàng mua sắm online với đầy đủ những sản phẩm tiện ích, đa dạng. Hy vọng sẽ đem đến cho quý khách hàng những trải nghiệm mua sắm mới mẻ nhất. Hãy đến với hệ thống mua sắm trực tuyến của chúng tôi để tìm cho mình những sản phẩm thiết thực nhất." });
         }
 
         public static void AddSeedDataToMenuLink(ModelBuilder builder)
@@ -76,6 +78,9 @@ namespace VNPost.Utility
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 36, Key = "", Value = "http://www.vnpost.vn/Portals/0/banner/IT-Banner-02.jpg", LocationId = 9, Link = "/" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 37, Key = "", Value = "http://www.vnpost.vn/Portals/0/banner/Tem-COVID.jpg", LocationId = 9, Link = "/" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 38, Key = "", Value = "http://www.vnpost.vn/Portals/0/banner/Banner%20Cong%20PostGreen.jpg", LocationId = 9, Link = " /" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 39, Key = "SÀN THƯƠNG MẠI ĐIỆN TỬ POSTMART", Value = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fImages%2fPostmart+thumb.jpg&size=2&ver=28", LocationId = 10, Link = " /" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 40, Key = "LỊCH TẾT", Value = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fLich+2019+(4).png&size=2&ver=31", LocationId = 10, Link = " /" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 41, Key = "DỊCH VỤ DATAPOST", Value = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fDataPost+(2).jpg&size=2&ver=31", LocationId = 10, Link = " /" });
         }
 
         public static void AddSeedToGallery(ModelBuilder builder)

@@ -254,3 +254,11 @@
         bottom: 0;
     }
 }
+@media (max-width: 374px) {
+    .footer-top {
+        padding: 1.5rem;
+    }
+    .footer-bottom div {
+        height: auto;
+    }
+}

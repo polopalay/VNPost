@@ -10,6 +10,7 @@ namespace VNPost.Models.Entity
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Descrtiption { get; set; }
 
         public override bool Equals(object obj)
         {

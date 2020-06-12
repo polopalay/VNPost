@@ -12,5 +12,10 @@ namespace VNPost.Models.Entity
             return obj is Category category &&
                    Id == category.Id;
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
     }
 }

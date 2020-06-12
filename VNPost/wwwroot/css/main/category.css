@@ -1,9 +1,11 @@
 ﻿
 #category {
     width: 100%;
-    padding: 0 5%;
     display: flex;
     justify-content: space-around;
+    background: #f6f6f6;
+    padding: 3rem 5%;
+    margin: 5rem 0;
 }
 
     #category a {

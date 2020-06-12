@@ -1,0 +1,106 @@
+﻿#service {
+    width: 100%;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+    #service .library-video {
+        width: 50rem;
+    }
+
+        #service .library-video a h1 {
+            color: rgb(2,139,255);
+        }
+
+        #service .library-video .description-video {
+            width: 100%;
+            height: 30rem;
+            border: 5px solid #ddd;
+        }
+
+        #service .library-video h3 {
+            color: #f6821f;
+        }
+
+    #service .library-service {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        margin-left: 2rem;
+    }
+
+        #service .library-service div:first-child h2 {
+            color: #f6821f;
+            font-size: 2.4rem;
+            font-weight: 900;
+        }
+
+        #service .library-service div:first-child p {
+            font-size: 1.2rem;
+        }
+
+        #service .library-service .list-service {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+            #service .library-service .list-service a {
+                width: 30%;
+                align-items: center;
+                text-align: center;
+                color: black;
+                text-decoration: none;
+            }
+
+
+                #service .library-service .list-service a img {
+                    width: 95%;
+                    margin-bottom: 1rem;
+                }
+
+                    #service .library-service .list-service a img:hover {
+                        opacity: 0.6;
+                    }
+
+@media (max-width: 1366px) {
+    #service .library-service {
+        width: 40%;
+    }
+
+        #service .library-service .list-service a h3 {
+            font-size: 1.6rem;
+        }
+}
+
+@media (max-width: 736px) {
+    #service {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+        #service .library-video {
+            width: 90%;
+            margin-bottom: 2rem;
+        }
+
+            #service .library-video .description-video {
+                height: calc(100%);
+            }
+
+        #service .library-service {
+            width: 100%;
+        }
+
+            #service .library-service .list-service a h3 {
+                font-size: 1.6rem;
+            }
+}
+
+@media (max-width: 375px) {
+    #service .library-service .list-service a h3 {
+        font-size: 1.2rem;
+    }
+}

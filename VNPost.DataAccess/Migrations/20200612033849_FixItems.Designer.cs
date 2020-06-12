@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
 
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200612033849_FixItems")]
+    partial class FixItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,7 +248,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2020, 6, 12, 10, 44, 57, 717, DateTimeKind.Local).AddTicks(5300),
+                            CreateDate = new DateTime(2020, 6, 12, 10, 38, 48, 480, DateTimeKind.Local).AddTicks(1300),
                             Description = "",
                             DescriptionImg = "http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd//img/vnpost-logo.png",
                             Title = "Bưu điện tỉnh Nghệ An tuyển dụng lao động"
@@ -254,7 +256,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2020, 6, 12, 10, 44, 57, 730, DateTimeKind.Local).AddTicks(5650),
+                            CreateDate = new DateTime(2020, 6, 12, 10, 38, 48, 495, DateTimeKind.Local).AddTicks(7090),
                             Description = "Chiều ngày 8/6/2020, tại Hà Nội, Bộ TT&TT đã tổ chức Hội nghị triển khai quyết định về công tác cán bộ. Đồng chí Nguyễn Mạnh Hùng, Ủy viên Trung ương Đảng, Bí thư Ban cán sự Đảng,...",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2f20200608-m07.jpg&size=3&ver=6",
                             Title = "Bộ TT&TT kéo dài thời gian giữ chức Thành viên Hội đồng thành viên với ông Nguyễn Quốc Vinh"
@@ -262,7 +264,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2020, 6, 12, 10, 44, 57, 730, DateTimeKind.Local).AddTicks(5710),
+                            CreateDate = new DateTime(2020, 6, 12, 10, 38, 48, 495, DateTimeKind.Local).AddTicks(7150),
                             Description = "Bưu điện tỉnh Nghệ An xác định hướng đi mới đúng đắn cho Bưu điện Văn hóa xã (BĐ-VHX) qua việc triển khai cung cấp các sản phẩm hàng tiêu dùng đến tay người dân, đặc biệt là người...",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2fbuu_dien_2_cfzr.jpg&size=3&ver=2",
                             Title = "Nghệ An: Bán hàng tiêu dùng qua hệ thống bưu điện văn hóa xã - “nhiều lợi ích thiết thực”"
@@ -913,7 +915,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 10,
                             Descrtiption = "Hiện tại chúng tôi có những gian hàng mua sắm online với đầy đủ những sản phẩm tiện ích, đa dạng. Hy vọng sẽ đem đến cho quý khách hàng những trải nghiệm mua sắm mới mẻ nhất. Hãy đến với hệ thống mua sắm trực tuyến của chúng tôi để tìm cho mình những sản phẩm thiết thực nhất.",
-                            Name = "Mua sắm trực tuyến"
+                            Name = "MUA SẮM TRỰC TUYẾN"
                         });
                 });
 
