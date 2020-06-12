@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using VNPost.DataAccess.Repository.IRepository;
 using VNPost.Models.Entity;
 using VNPost.Models.ViewModels;
+using VNPost.Utility;
 
 namespace VNPost.Areas.Posts.Controllers
 {
@@ -18,10 +19,18 @@ namespace VNPost.Areas.Posts.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        public IActionResult List(int id)
+        public object List(int id, [FromQuery] int index)
         {
-            List<Post> posts = _unitOfWork.Post.GetAll().Where(p => p.CategoryId == id).ToList();
-            ListSerivceVM listSerivce = new ListSerivceVM(posts);
+            if (index == 0)
+            {
+                index = 1;
+            }
+            List<Post> posts = _unitOfWork.Post.GetAll()
+                .Where(p => p.CategoryId == id)
+                .ToList();
+            int numberPostInPage = 1;
+            Pagination<Post> pagination = new Pagination<Post>(posts, index, numberPostInPage);
+            ListSerivceVM listSerivce = new ListSerivceVM(pagination.ListT, pagination.Begin, pagination.End, index, id);
             return View(listSerivce);
         }
     }

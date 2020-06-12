@@ -4,7 +4,7 @@
 
 @using VNPost.Models.ViewModels;
 @using VNPost.Models.Entity;
-@Model ListSerivceVM;
+@model ListSerivceVM;
 
 <link rel="stylesheet" href="~/css/post/service/list.css" />
 
@@ -21,6 +21,12 @@
                     <p>@post.Description</p>
                 </div>
             </a>
+        }
+    </div>
+    <div>
+        @for (int i = Model.Begin; i < Model.End; i++)
+        {
+            <a href="/Posts/Service/List/+@(Model.Id+"?index="+i)">@i</a>
         }
     </div>
 </section>

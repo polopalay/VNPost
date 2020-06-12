@@ -41,6 +41,5 @@
     <Folder Include="Areas\Posts\Views\" />
     <Folder Include="Areas\Posts\Views\Service\" />
     <Folder Include="wwwroot\css\post\" />
-    <Folder Include="wwwroot\css\post\service\" />
   </ItemGroup>
 </Project>
