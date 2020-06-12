@@ -1,0 +1,67 @@
+﻿#list-service {
+    width: 100%;
+    padding: 1rem 5%;
+    align-items: center;
+    text-align: center;
+}
+
+    #list-service h1:first-of-type {
+        font-size: 2.4rem;
+        color: #fcb71e;
+        font-weight: 900;
+    }
+
+    #list-service > img {
+        margin: 2rem 0;
+        width: 12rem;
+    }
+
+    #list-service > div {
+        display: grid;
+        grid-template-columns: 33.33% 33.33% 33.33%;
+        justify-items: center;
+        grid-row-gap: 2rem;
+    }
+
+    #list-service div a {
+        width: 90%;
+        text-decoration: none;
+    }
+
+        #list-service div a img {
+            width: 100%;
+        }
+
+        #list-service div a > div {
+            width: 100%;
+            background: #fffad5;
+            padding: 1rem 1rem 3rem 1rem;
+        }
+
+            #list-service div a > div h2,
+            #list-service div a > div p {
+                text-align: left;
+            }
+
+            #list-service div a > div h2 {
+                font-weight: 600;
+                text-align: left;
+                color: #f58220;
+                padding-bottom: 1rem;
+            }
+
+            #list-service div a > div p {
+                color: black;
+                font-size: 1.4rem;
+            }
+
+@media (max-width: 768px) {
+    #list-service > div {
+        grid-template-columns: 48% 48%;
+    }
+}
+@media (max-width: 568px) {
+    #list-service > div {
+        grid-template-columns: 100%;
+    }
+}
