@@ -7,19 +7,16 @@ namespace VNPost.Models.ViewModels
 {
     public class FooterVM
     {
-        public FooterVM(Dictionary<MenuLocation, List<MenuLink>> listMenuLink, List<MenuLocation> locations,
-            Dictionary<string, string> listMenuItem, List<Category> categories, List<Post> posts)
+        public FooterVM(Dictionary<string, string> listMenuItem, List<Category> categories, List<Post> posts, List<MenuLink> links)
         {
             ListMenuItem = listMenuItem;
-            ListMenuLink = listMenuLink;
-            Locations = locations;
             Categories = categories;
+            Links = links;
             Posts = posts;
         }
 
         public Dictionary<string, string> ListMenuItem { get; set; }
-        public List<MenuLocation> Locations { get; set; }
-        public Dictionary<MenuLocation, List<MenuLink>> ListMenuLink { get; set; }
+        public List<MenuLink> Links { get; set; }
         public List<Category> Categories { get; set; }
         public List<Post> Posts { get; set; }
     }

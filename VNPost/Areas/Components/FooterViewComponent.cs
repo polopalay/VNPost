@@ -23,20 +23,10 @@ namespace VNPost.Areas.Components
             {
                 listMenuItem.Add(menuItem.Key, menuItem.Value);
             }
-            Dictionary<MenuLocation, List<MenuLink>> listMenuLink = new Dictionary<MenuLocation, List<MenuLink>>();
-            List<MenuLocation> locations = new List<MenuLocation>();
-            foreach (MenuLocation menuLocation in _unitOfWork.MenuLocation.GetAll())
-            {
-                List<MenuLink> links = _unitOfWork.MenuLink.GetAll(link => link.LocationId == menuLocation.Id).ToList();
-                listMenuLink.Add(menuLocation, links);
-                if (menuLocation.Id == 5 || menuLocation.Id == 6 || menuLocation.Id == 7 || menuLocation.Id == 8)
-                {
-                    locations.Add(menuLocation);
-                }
-            }
+            List<MenuLink> links = _unitOfWork.MenuLink.GetAll().Where(l => l.LocationId == 8).ToList();
             List<Category> categories = _unitOfWork.Category.GetAll().Where(c => c.Id == 1 || c.Id == 2 || c.Id == 3).ToList();
             List<Post> posts = _unitOfWork.Post.GetAll().ToList();
-            FooterVM footerVM = new FooterVM(listMenuLink, locations, listMenuItem, categories, posts);
+            FooterVM footerVM = new FooterVM(listMenuItem, categories, posts, links);
             return View(footerVM);
         }
     }

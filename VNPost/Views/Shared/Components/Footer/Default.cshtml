@@ -24,7 +24,7 @@
     </div>
     <div>
         <ul>
-            @foreach (MenuLink link in Model.ListMenuLink[Model.Locations[3]])
+            @foreach (MenuLink link in Model.Links)
             {
                 <li><a href="@link.Link"><i class="@link.Value"></i></a></li>
             }

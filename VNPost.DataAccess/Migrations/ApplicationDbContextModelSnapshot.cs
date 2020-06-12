@@ -241,32 +241,6 @@ namespace VNPost.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Articles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreateDate = new DateTime(2020, 6, 12, 14, 9, 5, 742, DateTimeKind.Local).AddTicks(1040),
-                            Description = "",
-                            DescriptionImg = "http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd//img/vnpost-logo.png",
-                            Title = "Bưu điện tỉnh Nghệ An tuyển dụng lao động"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreateDate = new DateTime(2020, 6, 12, 14, 9, 5, 760, DateTimeKind.Local).AddTicks(1410),
-                            Description = "Chiều ngày 8/6/2020, tại Hà Nội, Bộ TT&TT đã tổ chức Hội nghị triển khai quyết định về công tác cán bộ. Đồng chí Nguyễn Mạnh Hùng, Ủy viên Trung ương Đảng, Bí thư Ban cán sự Đảng,...",
-                            DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2f20200608-m07.jpg&size=3&ver=6",
-                            Title = "Bộ TT&TT kéo dài thời gian giữ chức Thành viên Hội đồng thành viên với ông Nguyễn Quốc Vinh"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreateDate = new DateTime(2020, 6, 12, 14, 9, 5, 760, DateTimeKind.Local).AddTicks(1470),
-                            Description = "Bưu điện tỉnh Nghệ An xác định hướng đi mới đúng đắn cho Bưu điện Văn hóa xã (BĐ-VHX) qua việc triển khai cung cấp các sản phẩm hàng tiêu dùng đến tay người dân, đặc biệt là người...",
-                            DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fanh+tin+tuc%2f2020-1%2fThang+6%2fbuu_dien_2_cfzr.jpg&size=3&ver=2",
-                            Title = "Nghệ An: Bán hàng tiêu dùng qua hệ thống bưu điện văn hóa xã - “nhiều lợi ích thiết thực”"
-                        });
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.Category", b =>
@@ -574,46 +548,6 @@ namespace VNPost.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = 8,
-                            Key = "PostAndD",
-                            Link = "#",
-                            LocationId = 4,
-                            Value = "Bưu chính chuyển phát"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Key = "Money",
-                            Link = "#",
-                            LocationId = 4,
-                            Value = "Tài chính bưu chính"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Key = "Comunity",
-                            Link = "#",
-                            LocationId = 4,
-                            Value = "Phân phối -Truyền thông"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Key = "News",
-                            Link = "#",
-                            LocationId = 4,
-                            Value = "Tin tức"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Key = "Email",
-                            Link = "#",
-                            LocationId = 4,
-                            Value = "Email"
-                        },
-                        new
-                        {
                             Id = 13,
                             Key = "fas fa-map-marker-alt",
                             Link = "#",
@@ -659,102 +593,6 @@ namespace VNPost.DataAccess.Migrations
                             Link = "#",
                             LocationId = 3,
                             Value = "Mã địa chỉ bưu chính"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 5,
-                            Value = "Bưu chính chuyển phát Trong nước"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 5,
-                            Value = "Bưu chính chuyển phát Quốc tế"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 6,
-                            Value = "Bảo hiểm phi nhân thọ PTI"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            Key = "#",
-                            Link = "#",
-                            LocationId = 6,
-                            Value = "Thu hộ - Chi hộ"
-                        },
-                        new
-                        {
-                            Id = 23,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 6,
-                            Value = "Đại lý Bảo hiểm nhân thọ (Dai-ichi)"
-                        },
-                        new
-                        {
-                            Id = 24,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 6,
-                            Value = "Đại lý ngân hàng"
-                        },
-                        new
-                        {
-                            Id = 25,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 6,
-                            Value = "Dịch vụ Chuyển tiền trong nước"
-                        },
-                        new
-                        {
-                            Id = 26,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 7,
-                            Value = "Sàn thương mại điện tử POSTMART"
-                        },
-                        new
-                        {
-                            Id = 27,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 7,
-                            Value = "Truyền thông, quảng cáo"
-                        },
-                        new
-                        {
-                            Id = 28,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 7,
-                            Value = "Phân phối xuất bản ấn phẩm"
-                        },
-                        new
-                        {
-                            Id = 29,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 7,
-                            Value = "Dịch vụ Viễn thông - CNTT"
-                        },
-                        new
-                        {
-                            Id = 30,
-                            Key = "#",
-                            Link = "/",
-                            LocationId = 7,
-                            Value = "Dịch vụ phân phối hàng hoá"
                         },
                         new
                         {
@@ -878,26 +716,6 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 3,
                             Name = "Tra cứu - Định vị"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "BottomMenu"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Bưu chính chuyển phát"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Tài chính bưu chính"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Phân phối - Truyền thông"
                         },
                         new
                         {
