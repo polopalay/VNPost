@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Dịch vụ";
+}
+@using VNPost.Models.ViewModels;
+@using VNPost.Models.Entity;
+@model ServiceDetailVM;
+
+<link rel="stylesheet" href="~/css/post/service/detail.css" />
+
+<section id="article">
+    <h1>@Model.Post.Title</h1>
+    <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/p-border.png" alt="none">
+    <div>
+        @foreach (Service service in Model.Service)
+        {
+            <a href="@("#"+service.Id)">@service.Name</a>
+        }
+    </div>
+    <p>@Model.Post.Description</p>
+    @foreach (Service service in Model.Service)
+    {
+        <article id="@service.Id">
+            <h3>@service.Name</h3>
+            @Html.Raw(service.Content.ToString())
+        </article>
+    }
+</section>
