@@ -10,7 +10,7 @@
             <ul>
                 @foreach (Post post in Model.Posts.Where(p => p.CategoryId == category.Id))
                 {
-                    <li class="fas fa-caret-right"><a href="">@post.Title</a></li>
+                    <li class="fas fa-caret-right"><a href="/Posts/Service/ServiceDetail/@(post.Id)">@post.Title</a></li>
                 }
             </ul>
         </div>

@@ -226,19 +226,24 @@ namespace VNPost.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
+                    b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DescriptionImg")
+                    b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("View")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PostId");
 
                     b.ToTable("Articles");
                 });
@@ -794,7 +799,7 @@ namespace VNPost.DataAccess.Migrations
                             Id = 4,
                             CategoryId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Là dịch vụ chuyển phát nhanh thư, tài liệu, vật phẩm, hàng hóa từ người gửi đến người nhận giữa Việt Nam trong nước và các nước trên thế giới trong...",
+                            Description = "Là dịch vụ chuyển phát nhanh thư, tài liệu, vật phẩm, hàng hóa từ người gửi đến người nhận giữa Việt Nam trong nước và các nước trên thế giới trong khuôn khổ Liên minh Bưu chính Thế giới (UPU) và Hiệp hội EMS theo chỉ tiêu thời gian được Công ty Cổ phần Chuyển Phát Nhanh Bưu điện công bố trước. Chi tiết xin tham khảo tại website: www.ems.com.vn",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fEMS-2.jpg&size=3&ver=7",
                             Title = "Chuyển phát nhanh EMS"
                         },
@@ -803,7 +808,7 @@ namespace VNPost.DataAccess.Migrations
                             Id = 5,
                             CategoryId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Bưu phẩm bảo đảm là dịch vụ chấp nhận, vận chuyển và phát bưu phẩm đến địa chỉ nhận trong nước và quốc tế; bưu phẩm được gắn số hiệu để theo dõi, định...",
+                            Description = "Bưu phẩm bảo đảm là dịch vụ chấp nhận, vận chuyển và phát bưu phẩm đến địa chỉ nhận trong nước và quốc tế; bưu phẩm được gắn số hiệu để theo dõi, định vị trong quá trình chuyển phát.",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fDichVu%2fbuu-pham-dam-bao.jpg&size=3&ver=7",
                             Title = "Bưu phẩm đảm bảo"
                         },
@@ -812,7 +817,7 @@ namespace VNPost.DataAccess.Migrations
                             Id = 6,
                             CategoryId = 2,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Là dịch vụ giới thiệu, chào bán bảo hiểm, thu xếp việc giao kết hợp đồng bảo hiểm thông qua mạng lưới bưu cục, điểm cung cấp dịch vụ của Tổng Công ty...",
+                            Description = "Là dịch vụ giới thiệu, chào bán bảo hiểm, thu xếp việc giao kết hợp đồng bảo hiểm thông qua mạng lưới bưu cục, điểm cung cấp dịch vụ của Tổng Công ty Bưu điện Việt Nam.",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fbh-phi-nhan-tho-pti.jpg&size=3&ver=5",
                             Title = "Bảo hiểm phi nhân thọ PTI"
                         },
@@ -821,7 +826,7 @@ namespace VNPost.DataAccess.Migrations
                             Id = 7,
                             CategoryId = 2,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Là dịch vụ cho phép khách hàng nộp tiền phí bảo hiểm, vay trả góp, tiền điện, nước, cước điện thoại, tiền đặt chỗ, mua hàng qua mạng, tiền phí phạt vi...",
+                            Description = "Là dịch vụ cho phép khách hàng nộp tiền phí bảo hiểm, vay trả góp, tiền điện, nước, cước điện thoại, tiền đặt chỗ, mua hàng qua mạng, tiền phí phạt vi phạm giao thông, tiền thuế, tiền lệ phí hồ sơ xét tuyển ĐH,CĐ, tiền cấp đổi CMND, Hộ chiếu, tiền đặt vé máy bay…tại bưu cục",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fthu-ho-chi-ho.jpg&size=3&ver=4",
                             Title = "Thu hộ - Chi hộ"
                         },
@@ -842,6 +847,122 @@ namespace VNPost.DataAccess.Migrations
                             Description = "Truyền thông quảng cáo qua các xuất bản phẩm, hệ thống truyền thông quảng cáo ngoài trời, tại các bưu cục, trên các phương tiện vận tải, phong bì...",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2ftruyen-thong-quang-cao.jpg&size=3&ver=8",
                             Title = "Truyền thông, quảng cáo"
+                        });
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Services");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "<p>Toàn quốc và trên 100 quốc gia và vùng lãnh thổ khắp thế giới theo thoả thuận giữa Công ty và Bưu chính các nước thuộc Liên minh Bưu chính Thế giới (UPU) hoặc các đối tác khác.</p>",
+                            Name = "Phạm vi cung cấp",
+                            PostId = 4
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Content = "<h4>Khối lượng:</h4><br/><p>- Khối lượng bưu gửi EMS thông thường: Tối đa 31,5kg/bưu gửi.</p><br /><p>- Đối với bưu gửi là hàng nguyên khối không thể tách rời, vận chuyển bằng đường bộ được nhận gửi tối đa đến 50kg, nhưng phải đảm bảo giới hạn về kích thước theo quy định.</p><br /><p>- Đối với bưu gửi là hàng nhẹ (hàng có khối lượng thực tế nhỏ hơn khối lượng qui đổi), khối lượng tính cước không căn cứ vào khối lượng thực tế mà căn cứ vào khối lượng qui đổi theo cách tính như sau: Khối lượng qui đổi (kg) = Chiều dài x Chiều rộng x Chiều cao (cm) / 6000</p><br /><p>- Đối với bưu gửi quốc tế: Thực hiện theo thông báo của Công ty Cổ phần Chuyển phát nhanh Bưu điện đối với từng nước.</p><br /><h4>Kích thước:</h4><br /><p>- Kích thước tối thiểu:</p><br /><p>+ Ít nhất một mặt bưu gửi có kích thước không nhỏ hơn 90mm x 140mm với sai số 2 mm.</p><br /><p>+ Nếu cuộn tròn: Chiều dài bưu gửi cộng hai lần đường kính tối thiểu 170 mm và kích thước chiều lớn nhất không nhỏ  hơn 100mm.</p><br /><p>- Kích thước tối đa: Bất kỳ chiều nào của bưu gửi không vượt quá 1500mm và tổng chiều dài cộng với chu vi lớn nhất (không đo theo chiều dài đã đo) không vượt quá 3000mm.</p><br /><p>- Bưu gửi có kích thước lớn hơn so với kích thước thông thường được gọi là bưu gửi cồng kềnh và có quy định riêng phụ thuộc vào từng nơi nhận, nơi phát và điều kiện phương tiện vận chuyển.</p><br /><p>- Đối với bưu gửi quốc tế: Kích thước thông thường đối với bưu gửi EMS là bất kỳ chiều nào của bưu gửi cũng không vượt quá 1,5m và tổng chiều dài cộng với chu vi lớn nhất (không đo theo chiều dài đã đo) không vượt quá 3m.</p><br />",
+                            Name = "Khối lượng, kích thước",
+                            PostId = 4
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Content = "<p>Tùy theo từng dịch vụ sẽ có bảng cước giá khác nhau kèm theo phí dịch vụ của các dịch vụ cộng thêm.</p><p>Bảng cước dịch vụ chuyển phát nhanh EMS trong nước</p><p>Bảng cước dịch vụ chuyển phát nhanh EMS quốc tế</p>",
+                            Name = "Cước phí",
+                            PostId = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Content = "<p>Toàn quốc</p>",
+                            Name = "Phạm vi cung cấp dịch vụ",
+                            PostId = 5
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Content = "<h4>a. Giới hạn kích thước của bưu thiếp:</h4><br/><p>- Kích thước tối đa: 165 mm x 245 mm, với sai số 2 mm.</p><br /><p>- Kích thước tối thiểu: 90 mm x 140 mm, với sai số 2 mm. </p><br /><p>- Tỷ lệ tối thiểu giữa chiều dài và chiều rộng: dài = rộng x  (≈ 1,4).</p><br /><h4>b. Giới hạn kích thước của gói nhỏ: </h4><br /><p>- Kích thước tối thiểu: 210 x 148 mm.</p><br /><p>- Kích thước tối đa: Tổng chiều dài, chiều rộng và chiều cao là 900 mm, nhưng kích thước chiều lớn nhất không vượt quá 600 mm, với sai số 2 mm. Nếu cuộn tròn, chiều dài cộng hai lần đường kính là 1040 mm, nhưng kích thước lớn nhất không vượt quá 900 mm.</p><br /><h4>c. Giới hạn kích thước của các loại bưu phẩm khác:</h4><br /><p>- Kích thước tối đa: Tổng chiều dài, chiều rộng và chiều cao là 900 mm, nhưng kích thước chiều lớn nhất không vượt quá 600 mm, với sai số 2 mm. Nếu cuộn tròn, chiều dài cộng hai lần đường kính là 1040 mm, nhưng kích thước lớn nhất không vượt quá 900 mm, với sai số 2 mm.</p><br /><p>- Kích thước tối thiểu: Một mặt kích thước không nhỏ hơn 90 mm x 140 mm với sai số 2 mm. Nếu cuộn tròn: chiều dài cộng hai lần đường kính là 170 mm, nhưng kích thước chiều lớn nhất không nhỏ hơn 100 mm</p><br />",
+                            Name = "Quy định về khối lượng / kích thước",
+                            PostId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Content = "<p>Tất cả các điểm cung cấp dịch vụ của Bưu điện Việt Nam trên toàn quốc</p>",
+                            Name = "Phạm vi cung cấp dịch vụ",
+                            PostId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Content = "<p>Mức phí bảo hiểm cạnh tranh với nhiều chương trình bán hàng hấp dẫn.</p><br/><p>Liên hệ với các điểm bán hàng của Bưu điện trên toàn quốc để biết thông tin phí bảo hiểm chi tiết.</p>",
+                            Name = "Bảng cước dịch vụ",
+                            PostId = 6
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Content = "<p>Tất cả các điểm cung cấp dịch vụ của Bưu điện Việt Nam trên toàn quốc</p>",
+                            Name = "Phạm vi cung cấp dịch vụ",
+                            PostId = 7
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Content = "<p>Giá cước được thỏa thuận tùy theo từng đối tác và theo sản lượng giao dịch.</p>",
+                            Name = "Bảng cước dịch vụ",
+                            PostId = 7
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Content = "<p>Trên toàn Quốc!</p>",
+                            Name = "Phạm vi cung cấp dịch vụ",
+                            PostId = 8
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Content = "<p>Dịch vụ thương mại điện tử hay con gọi là E-commerce là hoạt động kinh doanh, mua bán các loại sản phẩm hàng hóa/ dịch vụ diễn ra trên môi trường internet, đặc biệt là thông qua các website và ứng dụng di động. Các hoạt động diễn ra chủ yếu theo 3 hình thức B2C, B2B và C2C</p>",
+                            Name = "Đặc điểm dịch vụ",
+                            PostId = 8
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Content = "<p>Tất cả các điểm giao dịch trên 63 tỉnh, thành phố</p>",
+                            Name = "Phạm vi cung cấp dịch vụ",
+                            PostId = 9
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Content = "<i>Theo thỏa thuận trên cơ sở đơn giá thị trường</i>",
+                            Name = "Bảng cước dịch vụ",
+                            PostId = 9
                         });
                 });
 
@@ -896,11 +1017,29 @@ namespace VNPost.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("VNPost.Models.Entity.Article", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("VNPost.Models.Entity.MenuLink", b =>
                 {
                     b.HasOne("VNPost.Models.Entity.MenuLocation", "MenuLocation")
                         .WithMany()
                         .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.Service", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

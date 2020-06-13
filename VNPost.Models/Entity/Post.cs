@@ -13,5 +13,9 @@ namespace VNPost.Models.Entity
         public DateTime CreateDate { get; set; }
         [ForeignKey("CategoryId")]
         public Gallery Gallery = new Gallery();
+        public string SoftDescription()
+        {
+            return Description.Length > 150 ? (Description.Substring(0, 150) + "...") : Description;
+        }
     }
 }

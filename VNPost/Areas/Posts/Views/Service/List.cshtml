@@ -14,11 +14,11 @@
     <article>
         @foreach (Post post in Model.Posts)
         {
-            <a href="">
+            <a href="/Posts/Service/ServiceDetail/@(post.Id)">
                 <img src="@post.DescriptionImg" />
                 <div>
                     <h2>@post.Title</h2>
-                    <p>@post.Description</p>
+                    <p>@post.SoftDescription()</p>
                 </div>
             </a>
         }

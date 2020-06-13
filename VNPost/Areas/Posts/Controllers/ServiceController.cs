@@ -19,7 +19,7 @@ namespace VNPost.Areas.Posts.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        public object List(int id, [FromQuery] int index)
+        public IActionResult List(int id, [FromQuery] int index)
         {
             if (index == 0)
             {
@@ -29,10 +29,18 @@ namespace VNPost.Areas.Posts.Controllers
             List<Post> posts = _unitOfWork.Post.GetAll()
                 .Where(p => p.CategoryId == id)
                 .ToList();
-            int numberPostInPage = 1;
+            int numberPostInPage = 6;
             Pagination<Post> pagination = new Pagination<Post>(posts, index, numberPostInPage);
             ListSerivceVM listSerivce = new ListSerivceVM(pagination.ListT, pagination.Begin, pagination.End, index, category);
             return View(listSerivce);
+        }
+
+        public IActionResult ServiceDetail(int id)
+        {
+            Post post = _unitOfWork.Post.Get(id);
+            List<Service> service = _unitOfWork.Service.GetAll().Where(s => s.PostId == post.Id).ToList();
+            ServiceDetailVM serviceDetail = new ServiceDetailVM(post, service);
+            return View(serviceDetail);
         }
     }
 }

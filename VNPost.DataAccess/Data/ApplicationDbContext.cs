@@ -25,6 +25,7 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedToArticle(builder);
             SeedData.AddSeedToCategory(builder);
             SeedData.AddSeedToPost(builder);
+            SeedData.AddSeedToService(builder);
 
         }
 
@@ -35,5 +36,6 @@ namespace VNPost.DataAccess.Data
         public DbSet<Article> Articles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Service> Services { get; set; }
     }
 }

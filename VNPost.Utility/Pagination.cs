@@ -8,8 +8,8 @@ namespace VNPost.Utility
         public Pagination(List<T> list, int index, int numberTInPage)
         {
             ListT = new List<T>();
-            int pageBegin = index * numberTInPage;
-            int pageEnd = pageBegin - numberTInPage + 1;
+            int pageEnd = index * numberTInPage;
+            int pageBegin = pageEnd - numberTInPage + 1;
             for (int i = 0; i < list.Count; i++)
             {
                 if (i + 1 >= pageBegin && i + 1 <= pageEnd)

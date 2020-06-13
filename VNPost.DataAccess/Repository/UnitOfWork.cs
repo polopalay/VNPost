@@ -16,6 +16,7 @@ namespace VNPost.DataAccess.Repository
         public IArticleRepository Article { get; }
         public ICategoryRepository Category { get; }
         public IPostRepository Post { get; }
+        public IServiceRepository Service { get; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -26,6 +27,7 @@ namespace VNPost.DataAccess.Repository
             Article = new ArticleRepository(_db);
             Category = new CategoryRepository(_db);
             Post = new PostRepository(_db);
+            Service = new ServiceRepository(_db);
         }
 
         public void Dispose()

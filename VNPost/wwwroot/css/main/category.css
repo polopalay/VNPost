@@ -8,7 +8,7 @@
     margin: 5rem 0;
 }
 
-    #category a {
+    #category div {
         text-align: center;
         align-items: center;
         text-decoration: none;
@@ -16,7 +16,7 @@
         width: 30rem;
     }
 
-        #category a img:first-of-type {
+        #category div .category-contain > img {
             width: 30rem;
             height: 30rem;
             border: 10px solid #f0eceb;
@@ -24,54 +24,56 @@
             margin-bottom: 1rem;
         }
 
-        #category a img:nth-child(3) {
+        #category div > img {
             margin: 2rem 0;
         }
 
-        #category a p,
-        #category a h2 {
+        #category div > div a,
+        #category div h2 {
+            color: #f6821f;
             width: 30rem;
             text-align: left;
         }
 
-        #category a h2 {
+        #category div h2 {
             padding-left: 4rem;
         }
 
-        #category a p {
+        #category div > div a {
             padding-left: 2rem;
             font-size: 1.4rem;
             font-weight: 300;
             margin-bottom: 1rem;
+            text-decoration:none;
         }
 
-            #category a p:before {
+            #category div > div a:before {
                 content: '\f0da';
                 padding: 0 1rem;
                 font-weight: 900;
             }
 
-            #category a p:hover {
+            #category div > div a:hover {
                 opacity: 0.7;
             }
 
 @media (max-width: 1024px) {
-    #category a,
-    #category a img:first-of-type,
-    #category a p,
-    #category a h2 {
+    #category div,
+    #category div img:first-of-type,
+    #category div p,
+    #category div h2 {
         width: 20rem;
     }
 
-        #category a img:first-of-type {
+        #category div img:first-of-type {
             height: 20rem;
         }
 
-        #category a h2 {
+        #category div h2 {
             font-size: 1.6rem;
         }
 
-        #category a p {
+        #category div p {
             font-size: 1rem;
         }
 }
@@ -83,26 +85,26 @@
         align-items: center;
     }
 
-        #category a {
+        #category div {
             margin-bottom: 2rem
         }
 
-            #category a,
-            #category a img:first-of-type,
-            #category a p,
-            #category a h2 {
+            #category div,
+            #category div img:first-of-type,
+            #category div p,
+            #category div h2 {
                 width: 40rem;
             }
 
-                #category a img:first-of-type {
+                #category div img:first-of-type {
                     height: 40rem;
                 }
 
-                #category a h2 {
+                #category div h2 {
                     padding-left: 10rem;
                 }
 
-                #category a p {
+                #category div p {
                     padding-left: 10rem;
                 }
 }
@@ -114,26 +116,26 @@
         align-items: center;
     }
 
-        #category a {
+        #category div {
             margin-bottom: 2rem
         }
 
-            #category a,
-            #category a img:first-of-type,
-            #category a p,
-            #category a h2 {
+            #category div,
+            #category div img:first-of-type,
+            #category div p,
+            #category div h2 {
                 width: 30rem;
             }
 
-                #category a img:first-of-type {
+                #category div img:first-of-type {
                     height: 30rem;
                 }
 
-                #category a h2 {
+                #category div h2 {
                     padding-left: 4rem;
                 }
 
-                #category a p {
+                #category div p {
                     padding-left: 2rem;
                 }
 }
