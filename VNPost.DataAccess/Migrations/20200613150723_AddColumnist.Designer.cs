@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
 
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200613150723_AddColumnist")]
+    partial class AddColumnist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,29 +310,7 @@ namespace VNPost.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Columnists");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Tin Vietnam Post"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Bưu điện - Văn hóa xã"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Người bưu điện"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Hoạt động Đảng - Đoàn thể"
-                        });
+                    b.ToTable("Columnist");
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.Gallery", b =>

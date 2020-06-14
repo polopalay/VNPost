@@ -75,6 +75,14 @@ namespace VNPost.Utility
             builder.Entity<Gallery>().HasData(new Gallery { Id = 9, Title = "Thông tin Doanh nghiệp", Description = "Chuyên trang thông tin doanh nghiệp", ImgDescription = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAACXBIWXMAAAsTAAALEwEAmpwYAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAEgUlEQVR42mL8//8/w0ADgABiYhgEACCABoUjAAJoUDgCIIBY8Mr++8XAwMQGZ///+5sBSIBwLiO7QDbD/3//GBiZ7Bn+/nz9HyjOyMIN1/r/5xsGhj/fGIDycDFGLhms1gAEEAtpbv4nwcjGa8jw/38N0CFiQGNBRocArbwMxEdBdpMTEgABRMgRhUDMD2W/A1qoD8RJDIyMyDE5jYGJ9T/jf+aFQDc8YIBIgtyzFOjY2wyMhN0FEECMeLPo/3//4cH5/8/////+PGZkYpcEBgAjsiqQOUCSBW4/CPz9eQ6oxxko9QHhZS6s1gAEECOBcuI7EHMgpZGXQIe8BTqMCxH0/4EJhYGZkYlDGcURECAFxM8JhQRAABGKDlQXMrGJMwIxkVH9ndg0AhBARCZMsG9/EjAUJMcOxKwoWYIIABBAhBwBjOt/DP9/fYhiYGR9DjSbHY9DGBn+fX/CyCZowcAISqTEA4AAIiIkgImGkcWNgYlFDxjnQqAkh9sstvnAODtKahYFCCAiHMEICl0NRmZWPaAFnPid+98ISF0g1REAAURMmgAG869ihn8s94Ehwg4OGVxVwL+fTxiY2Z0ZGBhJcgRAABEVHYysPNbAAgmYLRn/MeC2AaiOVw4YamykhgRAABETEsBQ/lvJyMAqRljh35uMDEzlWMoLvAAggIhJE0wMv7/mAAupd8BUz45FHhhdP74xMrH8Auag98BwksGsof8j0hcWABBARIUEMCqACY5JA2iIMFruAJkKDH7GE/9/fallYOH+CkwTchBdf4FV6P/voCzO8O8vkPrJwMgmgNUCgAAiJk0Aw4LVG2i4LsRz/zECguEvo8L/vz8XABmXGP79uQUMtetAdbzAMk6TkZnzBEQP7nIOIICIiQ7G/3+/FzMyMn0C5g5OzNzByALMFU+B3r0BjK44oItDGJmAdQsjiyTDf7YlQPGzQEXt+LIuQAARFxKsPGLAKLkNDIl/WHzE+P/fX2ClxpYCbNRMBzoEWJsywyJLGUgCMZMNw9/v7kD2FWw2AAQQKOnjw9+BQfv3/59v74D1+H/s4C8wut8t+f/n+xns8kB9/4Bqfn/bgMsegAAiJmEyAU2oAVYbr4Exw4KlzfEdGPRaDMwc0ZhywPTx6+M8Rla+emBMmuKyACCAiKpFGZm5HgDj+ggOyV/AxAfLMcCa9h8wfTApgXLH/x9vi4EJ2gFY74Cy9ldc5gMEECFHMIHjl5FhC87k/e/P+f+/v04BNnxBvA/AkOkEJlRjYOgdBIaOLiMbfzHWtgkSAAggvGni399fr/4TAv/+fP7369NupDTz9N+vd6b/f38JR1N5H5c9AAFEoMn/2wWYK3gIFKjANseffwy/v7xkYOUFpQspRhbe7UAJFH3/f77rZ2QXwmoEQAARiA7GS8Q1vIANnz+f3jAyMgszsHB6ABOqMELu729g7prH8PfHbFzaAQKIhYEqAFwn3Pn/50sbsHqRAqYjROP4769zwJZ3FzBnfcelGyCAGAdDrxwggAZFXxQggAaFIwACDADSAiUSdEccxgAAAABJRU5ErkJggg==" });
         }
 
+        public static void AddSeedToColumnist(ModelBuilder builder)
+        {
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 1, Name = "Tin Vietnam Post" });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 2, Name = "Bưu điện - Văn hóa xã" });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 3, Name = "Người bưu điện" });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 4, Name = "Hoạt động Đảng - Đoàn thể" });
+        }
+
         public static void AddSeedToArticle(ModelBuilder builder)
         {
         }

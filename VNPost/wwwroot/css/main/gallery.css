@@ -5,7 +5,6 @@
 }
 
     #article h3 {
-        font-weight: bold;
         padding: 1rem 0;
     }
 
@@ -43,13 +42,12 @@
 
                 .gallery ul li a div h5 {
                     color: black;
-                    font-weight: 900;
                     font-size: 1.6rem;
                 }
 
                 .gallery ul li a div p {
                     color: #868686;
-                    font-weight: 400;
+                    font-weight: 300;
                     font-size: 1.2rem;
                 }
 
@@ -123,9 +121,10 @@
                 color: black;
                 text-decoration: none;
             }
-            .article .link-to-articles .link-article div a h4{
-                font-size: 1.6rem;
-            }
+
+                .article .link-to-articles .link-article div a h4 {
+                    font-size: 1.6rem;
+                }
 
                 .article .link-to-articles .link-article div a:hover {
                     color: #faa61a;
@@ -159,6 +158,9 @@
     .article {
         width: 100%;
     }
+        .article .description-article {
+            height: 45rem;
+        }
 }
 
 @media (max-width: 500px) {

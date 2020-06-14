@@ -49,7 +49,7 @@
         <ul>
             @foreach (Category category in Model.Categories)
             {
-                <li><a href="@(category.Id!=4?("/Posts/Service/List/"+category.Id):"/Posts/")">@category.Name</a></li>
+                <li><a href="@(category.Id!=4?("/Posts/Service/List/"+category.Id):"/Posts/Article/List")">@category.Name</a></li>
             }
             <li><a href="/">Email</a></li>
         </ul>

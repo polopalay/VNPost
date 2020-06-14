@@ -23,7 +23,7 @@
     }
 
 #phone-number-text {
-    font-weight: 100;
+    font-weight: 300;
 }
 
 #phone-number-num {
@@ -69,7 +69,7 @@
 }
 
 .pre-header-toolbar i {
-    font-weight: 900;
+    font-weight: 600;
     font-size: 1.2rem;
 }
 
@@ -139,12 +139,12 @@
     .main-header li p {
         padding-top: 5px;
         padding-left: 5px;
-        font-weight: 600;
+        font-weight: 400;
         grid-area: right-top;
     }
 
     .main-header li span {
-        font-weight: 100;
+        font-weight: 300;
         grid-area: right-bottom;
     }
 
@@ -398,7 +398,7 @@
     }
 
     #menu-bar {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         padding-top: 2rem;
     }
 

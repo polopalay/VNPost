@@ -44,13 +44,13 @@
             font-size: 1.4rem;
             font-weight: 300;
             margin-bottom: 1rem;
-            text-decoration:none;
+            text-decoration: none;
         }
 
             #category div > div a:before {
                 content: '\f0da';
                 padding: 0 1rem;
-                font-weight: 900;
+                font-weight: 700;
             }
 
             #category div > div a:hover {
@@ -59,13 +59,13 @@
 
 @media (max-width: 1024px) {
     #category div,
-    #category div img:first-of-type,
+    #category div .category-contain > img,
     #category div p,
     #category div h2 {
         width: 20rem;
     }
 
-        #category div img:first-of-type {
+        #category div .category-contain > img {
             height: 20rem;
         }
 
@@ -73,7 +73,7 @@
             font-size: 1.6rem;
         }
 
-        #category div p {
+        #category div > div a {
             font-size: 1rem;
         }
 }
@@ -90,13 +90,13 @@
         }
 
             #category div,
-            #category div img:first-of-type,
+            #category div .category-contain > img,
             #category div p,
             #category div h2 {
                 width: 40rem;
             }
 
-                #category div img:first-of-type {
+                #category div .category-contain > img {
                     height: 40rem;
                 }
 
@@ -104,7 +104,7 @@
                     padding-left: 10rem;
                 }
 
-                #category div p {
+                #category div > div a {
                     padding-left: 10rem;
                 }
 }
@@ -121,13 +121,13 @@
         }
 
             #category div,
-            #category div img:first-of-type,
+            #category div .category-contain > img,
             #category div p,
             #category div h2 {
                 width: 30rem;
             }
 
-                #category div img:first-of-type {
+                #category div .category-contain > img {
                     height: 30rem;
                 }
 
@@ -135,7 +135,7 @@
                     padding-left: 4rem;
                 }
 
-                #category div p {
+                #category div > div a {
                     padding-left: 2rem;
                 }
 }

@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Dịch vụ";
+}
+@using VNPost.Models.ViewModels;
+@using VNPost.Models.Entity;
+@model ListArticleVM;
+
+<link rel="stylesheet" href="~/css/post/article/list.css" />
+
+<section id="article">
+    <div class="left">
+        <h2>CHUYÊN MỤC</h2>
+        <ul>
+            @foreach (Columnist columnist in Model.Columnist)
+            {
+                <li class="fas fa-angle-double-right"><a href="">@columnist.Name</a> </li>
+            }
+        </ul>
+        <div>
+            <p>@Model.ListMenuItem["PhoneText"]</p>
+            <h1>@Model.ListMenuItem["PhoneNumber"]</h1>
+        </div>
+    </div>
+    <div class="right">a</div>
+</section>
