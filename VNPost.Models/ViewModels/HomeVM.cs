@@ -8,7 +8,7 @@ namespace VNPost.Models.ViewModels
     public class HomeVM
     {
         public HomeVM(List<MenuLink> links, List<Gallery> galleries, List<Category> categories,
-            List<Post> posts, MenuLocation location, MenuItem item)
+            List<Post> posts, MenuLocation location, MenuItem item, List<Article> articles)
         {
             Links = links;
             Galleries = galleries;
@@ -16,14 +16,14 @@ namespace VNPost.Models.ViewModels
             Posts = posts;
             Location = location;
             Item = item;
-            Articles = posts.Where(p => p.CategoryId == 4).ToList();
+            Articles = articles;
         }
 
         public List<MenuLink> Links { get; set; }
         public List<Gallery> Galleries { get; set; }
         public List<Category> Categories { get; set; }
         public List<Post> Posts { get; set; }
-        public List<Post> Articles { get; set; }
+        public List<Article> Articles { get; set; }
         public MenuLocation Location { get; set; }
         public MenuItem Item { get; set; }
     }

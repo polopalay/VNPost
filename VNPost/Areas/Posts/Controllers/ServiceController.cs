@@ -27,7 +27,7 @@ namespace VNPost.Areas.Posts.Controllers
             }
             Category category = _unitOfWork.Category.Get(id);
             List<Post> posts = _unitOfWork.Post.GetAll()
-                .Where(p => p.CategoryId == id)
+                .Where(p => p.GalleryId == id)
                 .ToList();
             int numberPostInPage = 6;
             Pagination<Post> pagination = new Pagination<Post>(posts, index, numberPostInPage);

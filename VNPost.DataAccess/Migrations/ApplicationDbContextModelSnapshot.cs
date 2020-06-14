@@ -238,8 +238,17 @@ namespace VNPost.DataAccess.Migrations
                     b.Property<DateTime>("DateCreate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PostId")
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionImg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GalleryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("View")
                         .HasColumnType("int");
@@ -247,8 +256,6 @@ namespace VNPost.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ColumnistId");
-
-                    b.HasIndex("PostId");
 
                     b.ToTable("Articles");
 
@@ -260,7 +267,10 @@ namespace VNPost.DataAccess.Migrations
                             ColumnistId = 1,
                             Content = "<p> Nhiều tháng vừa qua là khoảng thời gian đầy thách thức đối với Bưu chính các nước hoạt động trên tuyến đầu chống đại dịch toàn cầu. Nhưng đây cũng là thời điểm thể hiện nỗ lực bền bỉ và đổi mới của Bưu chính các nước bằng việc mở rộng cung ứng các dịch vụ xã hội, tài chính và thương mại để hỗ trợ chính phủ.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/anh%20upu.jpg?ver=2020-06-13-091631-810\" /><i>Bưu chính Costa Rica</i></div><p>Những hoạt động đã tạo ra nhiều mối quan đối tác mới và phát triển nhiều mô hình kinh doanh mới. Điển hình là mô hình Bưu chính Costa Rica hợp tác với các công ty cho thuê xe tư nhân để chuyển phát thuốc; Bưu điện Việt Nam với chuyên môn về bản đồ đã hỗ trợ chính phủ trong việc tra cứu bản đồ dịch về các trường hợp nhiễm COVID-19, và Bưu chính Azerbaijan chuyển phát thực phẩm cho các tổ chức từ thiện.</p><br /><br /><p>Ghi nhận các giải pháp năng động của các nhà khai thác bưu chính trong việc ứng phó với khủng hoảng kinh tế và sức khỏe toàn cầu, UPU đã xây dựng một nền tảng chuyên ngành để tổng hợp và đăng thông tin nổi bật về các giải pháp điển hình thiết thực về đổi mới hoạt động kinh doanh các dịch vụ xã hội, tài chính.</p><br /><br /><p>Bưu chính các nước trên thế giới đã tham gia diễn đàn này của UPU để chia sẻ kiến thức mới, và những kiến thức thông tin này đã được bưu chính các nước đóng góp thông qua những tin, bài và các tham luận chuyên đề. Đây cũng là một nguồn tham khảo hữu ích trong việc thể hiện với chính phủ về vai trò của Bưu chính là một dịch vụ cần thiết.</p><br /><br />",
                             DateCreate = new DateTime(2020, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostId = 1,
+                            Description = "Nhiều tháng vừa qua là khoảng thời gian đầy thách thức đối với Bưu chính các nước hoạt động trên tuyến đầu chống đại dịch toàn cầu. Nhưng đây cũng là thời điểm thể hiện nỗ lực bền bỉ và đổi mới của Bưu chính các nước bằng việc mở rộng cung ứng các dịch vụ xã hội, tài chính và thương mại để hỗ trợ chính phủ.",
+                            DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/anh%20upu.jpg?ver=2020-06-13-091631-810",
+                            GalleryId = 4,
+                            Title = "Bưu chính đẩy mạnh quan hệ đối tác để đột phá thời COVID-19",
                             View = 0
                         },
                         new
@@ -270,7 +280,10 @@ namespace VNPost.DataAccess.Migrations
                             ColumnistId = 1,
                             Content = "<p> Quan hệ hợp tác hiệu quả giữa Bưu chính các nước, các cơ quan quản lý Nhà nước, tổ chức phi chính phủ (NGOs) và tổ chức doanh nghiệp thuộc khu vực kinh tế tư nhân.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/chi%20tra_anh%203.jpg?ver=2020-06-13-094031-953\" /><i>Bưu điện Việt Nam thực hiện chi trả lương hưu tại nhà trong dịch Covid-19</i></div><p><b>Đánh giá chung:</b>Quan hệ đối tác hiệu quả là yếu tố sống còn đối với Bưu chính các nước để đa dạng hóa các loại hình cung cấp dịch vụ xã hội mới. Áp lực khiến Bưu chính các nước có giải pháp ứng phó nhanh với đại dịch COVID-19 nhằm hỗ trợ người dân và Chính phủ càng nhấn mạnh thêm giá trị của sự hợp tác mà trong đó, các bên liên quan cùng nhau chia sẻ mọi nguồn lực vì mục tiêu chung. Trong bài viết này, chúng tôi khai thác vai trò của việc đẩy mạnh hợp tác đối tác để cung cấp các dịch vụ chuyển phát trang thiết bị y tế, giải pháp bản đồ số và cung ứng dịch vụ chuyển phát bưu kiện là thực phẩm của Bưu chính Costa Rica, Bưu điện Việt Nam và Bưu chính Azerbaijan. Việc xác định rõ trách nhiệm, xây dựng các kênh hợp tác và xây dựng quy trình triển khai là chìa khóa của sự thành công trong các dự án này.</p><br /><br /><p><b>Nhiều thách thức lớn gồm:</b>tìm nguồn cung ứng đủ sản phẩm trong vài ngày đầu tiên, đảm bảo quy định giấy phép vận chuyển chất có cồn và tổ chức các địa điểm tiếp nhận và xử lý đơn hàng.</p><br /><br />",
                             DateCreate = new DateTime(2020, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostId = 2,
+                            Description = "Quan hệ hợp tác hiệu quả giữa Bưu chính các nước, các cơ quan quản lý Nhà nước, tổ chức phi chính phủ (NGOs) và tổ chức doanh nghiệp thuộc khu vực kinh tế tư nhân.",
+                            DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/chi%20tra_anh%203.jpg?ver=2020-06-13-094031-953",
+                            GalleryId = 4,
+                            Title = "Đẩy mạnh quan hệ đối tác để cùng ứng phó với đại dịch COVID-19",
                             View = 0
                         },
                         new
@@ -278,9 +291,12 @@ namespace VNPost.DataAccess.Migrations
                             Id = 3,
                             Author = "Trung Kiên",
                             ColumnistId = 4,
-                            Content = "<p> Sáng 12/6/2020, Cụm Công đoàn số 6 gồm công đoàn các đơn vị BĐT Nam Định, Thái Bình, Hà Nam, Ninh Bình, Thanh Hóa tổ chức Hội nghị Cụm Công đoàn theo hình thức trực tuyến nhằm trao đổi kinh nghiệm, giải pháp để hoàn thành kế hoạch sản xuất kinh doanh 2020. Dự hội nghị có Phó Tổng giám đốc Chu Thị Lan Hương, Chủ tịch Công đoàn Tổng công ty Trần Đức Thích.</p><br /><br /><div><img src=/”hhttp://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Chi%20Huong%20phat%20bieu.jpg?ver=2020-06-12-144406-523 /” /><i>Đồng chí Chu Thị Lan Hương chỉ đạo các đơn vị tại Hội nghị</i></div><p>Tại Hội nghị, đồng chí Chu Thị Lan Hương đánh giá cao kết quả hoạt động sản xuất kinh doanh của các đơn vị trong cụm công đoàn số 6 trong 5 tháng đầu năm 2020. Đồng thời chỉ đạo các đơn vị cần tiếp tục phát huy trong thời gian còn lại của năm 2020, đảm bảo hoàn thành các chỉ tiêu kế hoạch mà Tổng công ty đã giao. Đồng chí cũng lưu ý các đơn vị cần đẩy mạnh hoạt động sản xuất kinh doanh để đảm bảo đời sống cho người lao động, đồng thời xây dựng môi trường làm việc thân thiện, vui vẻ, đoàn kết với mục tiêu cùng nhau phát triển.</p><br /><br /><div><img src=/”http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Ca%20don%20vi%20tai%20diem%20cau.jpg?ver=2020-06-12-144523-527 /” /><i>Hội nghị Cụm Công đoàn số 6 được kết nối qua hệ thống hội nghị truyền hình của Tổng công ty </i></div><p>Chủ tịch Công đoàn nhấn mạnh, song song với việc phối hợp cùng chuyên môn triển khai các chương trình thi đua, Công đoàn các đơn vị cần phát huy vai trò của mình trong việc bảo vệ quyền và lợi ích hợp pháp của người lao động, thực hiện đầy đủ chế độ, cơ chế, chính sách chăm sóc người lao động; giám sát việc thực hiện quy chế dân chủ cơ sở trong đó quan tâm đến hoạt động đối thoại định kỳ tại đơn vị nhằm giải quyết những vướng mắc phát sinh kịp thời, tránh để lâu, vượt cấp… để người lao động yên tâm công tác, cống hiến và gắn bó với công việc, đơn vị.</p><br /><br />",
+                            Content = "<p> Sáng 12/6/2020, Cụm Công đoàn số 6 gồm công đoàn các đơn vị BĐT Nam Định, Thái Bình, Hà Nam, Ninh Bình, Thanh Hóa tổ chức Hội nghị Cụm Công đoàn theo hình thức trực tuyến nhằm trao đổi kinh nghiệm, giải pháp để hoàn thành kế hoạch sản xuất kinh doanh 2020. Dự hội nghị có Phó Tổng giám đốc Chu Thị Lan Hương, Chủ tịch Công đoàn Tổng công ty Trần Đức Thích.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Chi%20Huong%20phat%20bieu.jpg?ver=2020-06-12-144406-523\" /><i>Đồng chí Chu Thị Lan Hương chỉ đạo các đơn vị tại Hội nghị</i></div><p>Tại Hội nghị, đồng chí Chu Thị Lan Hương đánh giá cao kết quả hoạt động sản xuất kinh doanh của các đơn vị trong cụm công đoàn số 6 trong 5 tháng đầu năm 2020. Đồng thời chỉ đạo các đơn vị cần tiếp tục phát huy trong thời gian còn lại của năm 2020, đảm bảo hoàn thành các chỉ tiêu kế hoạch mà Tổng công ty đã giao. Đồng chí cũng lưu ý các đơn vị cần đẩy mạnh hoạt động sản xuất kinh doanh để đảm bảo đời sống cho người lao động, đồng thời xây dựng môi trường làm việc thân thiện, vui vẻ, đoàn kết với mục tiêu cùng nhau phát triển.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Ca%20don%20vi%20tai%20diem%20cau.jpg?ver=2020-06-12-144523-527\"/><i>Hội nghị Cụm Công đoàn số 6 được kết nối qua hệ thống hội nghị truyền hình của Tổng công ty </i></div><p>Chủ tịch Công đoàn nhấn mạnh, song song với việc phối hợp cùng chuyên môn triển khai các chương trình thi đua, Công đoàn các đơn vị cần phát huy vai trò của mình trong việc bảo vệ quyền và lợi ích hợp pháp của người lao động, thực hiện đầy đủ chế độ, cơ chế, chính sách chăm sóc người lao động; giám sát việc thực hiện quy chế dân chủ cơ sở trong đó quan tâm đến hoạt động đối thoại định kỳ tại đơn vị nhằm giải quyết những vướng mắc phát sinh kịp thời, tránh để lâu, vượt cấp… để người lao động yên tâm công tác, cống hiến và gắn bó với công việc, đơn vị.</p><br /><br />",
                             DateCreate = new DateTime(2020, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostId = 3,
+                            Description = "Sáng 12/6/2020, Cụm Công đoàn số 6 gồm công đoàn các đơn vị BĐT Nam Định, Thái Bình, Hà Nam, Ninh Bình, Thanh Hóa tổ chức Hội nghị Cụm Công đoàn theo hình thức trực tuyến nhằm trao đổi kinh nghiệm, giải pháp để hoàn thành kế hoạch sản xuất kinh doanh 2020. Dự hội nghị có Phó Tổng giám đốc Chu Thị Lan Hương, Chủ tịch Công đoàn Tổng công ty Trần Đức Thích.",
+                            DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Chi%20Huong%20phat%20bieu.jpg?ver=2020-06-12-144406-523",
+                            GalleryId = 4,
+                            Title = "Hội nghị Cụm Công đoàn số 6: Các giải pháp nhằm hoàn thành kế hoạch sản xuất kinh doanh năm 2020”",
                             View = 0
                         });
                 });
@@ -821,17 +837,14 @@ namespace VNPost.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DescriptionImg")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GalleryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -844,82 +857,49 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CategoryId = 4,
-                            CreateDate = new DateTime(2020, 6, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Nhiều tháng vừa qua là khoảng thời gian đầy thách thức đối với Bưu chính các nước hoạt động trên tuyến đầu chống đại dịch toàn cầu. Nhưng đây cũng là thời điểm thể hiện nỗ lực bền bỉ và đổi mới của Bưu chính các nước bằng việc mở rộng cung ứng các dịch vụ xã hội, tài chính và thương mại để hỗ trợ chính phủ.",
-                            DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/anh%20upu.jpg?ver=2020-06-13-091631-810",
-                            Title = "Bưu chính đẩy mạnh quan hệ đối tác để đột phá thời COVID-19"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 4,
-                            CreateDate = new DateTime(2020, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Quan hệ hợp tác hiệu quả giữa Bưu chính các nước, các cơ quan quản lý Nhà nước, tổ chức phi chính phủ (NGOs) và tổ chức doanh nghiệp thuộc khu vực kinh tế tư nhân.",
-                            DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/chi%20tra_anh%203.jpg?ver=2020-06-13-094031-953",
-                            Title = "Đẩy mạnh quan hệ đối tác để cùng ứng phó với đại dịch COVID-19"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 4,
-                            CreateDate = new DateTime(2020, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Sáng 12/6/2020, Cụm Công đoàn số 6 gồm công đoàn các đơn vị BĐT Nam Định, Thái Bình, Hà Nam, Ninh Bình, Thanh Hóa tổ chức Hội nghị Cụm Công đoàn theo hình thức trực tuyến nhằm trao đổi kinh nghiệm, giải pháp để hoàn thành kế hoạch sản xuất kinh doanh 2020. Dự hội nghị có Phó Tổng giám đốc Chu Thị Lan Hương, Chủ tịch Công đoàn Tổng công ty Trần Đức Thích.",
-                            DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Chi%20Huong%20phat%20bieu.jpg?ver=2020-06-12-144406-523",
-                            Title = "Hội nghị Cụm Công đoàn số 6: Các giải pháp nhằm hoàn thành kế hoạch sản xuất kinh doanh năm 2020”"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 1,
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Là dịch vụ chuyển phát nhanh thư, tài liệu, vật phẩm, hàng hóa từ người gửi đến người nhận giữa Việt Nam trong nước và các nước trên thế giới trong khuôn khổ Liên minh Bưu chính Thế giới (UPU) và Hiệp hội EMS theo chỉ tiêu thời gian được Công ty Cổ phần Chuyển Phát Nhanh Bưu điện công bố trước. Chi tiết xin tham khảo tại website: www.ems.com.vn",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fEMS-2.jpg&size=3&ver=7",
+                            GalleryId = 1,
                             Title = "Chuyển phát nhanh EMS"
                         },
                         new
                         {
-                            Id = 5,
-                            CategoryId = 1,
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = 2,
                             Description = "Bưu phẩm bảo đảm là dịch vụ chấp nhận, vận chuyển và phát bưu phẩm đến địa chỉ nhận trong nước và quốc tế; bưu phẩm được gắn số hiệu để theo dõi, định vị trong quá trình chuyển phát.",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fDichVu%2fbuu-pham-dam-bao.jpg&size=3&ver=7",
+                            GalleryId = 1,
                             Title = "Bưu phẩm đảm bảo"
                         },
                         new
                         {
-                            Id = 6,
-                            CategoryId = 2,
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = 3,
                             Description = "Là dịch vụ giới thiệu, chào bán bảo hiểm, thu xếp việc giao kết hợp đồng bảo hiểm thông qua mạng lưới bưu cục, điểm cung cấp dịch vụ của Tổng Công ty Bưu điện Việt Nam.",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fbh-phi-nhan-tho-pti.jpg&size=3&ver=5",
+                            GalleryId = 2,
                             Title = "Bảo hiểm phi nhân thọ PTI"
                         },
                         new
                         {
-                            Id = 7,
-                            CategoryId = 2,
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = 4,
                             Description = "Là dịch vụ cho phép khách hàng nộp tiền phí bảo hiểm, vay trả góp, tiền điện, nước, cước điện thoại, tiền đặt chỗ, mua hàng qua mạng, tiền phí phạt vi phạm giao thông, tiền thuế, tiền lệ phí hồ sơ xét tuyển ĐH,CĐ, tiền cấp đổi CMND, Hộ chiếu, tiền đặt vé máy bay…tại bưu cục",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fthu-ho-chi-ho.jpg&size=3&ver=4",
+                            GalleryId = 2,
                             Title = "Thu hộ - Chi hộ"
                         },
                         new
                         {
-                            Id = 8,
-                            CategoryId = 3,
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = 5,
                             Description = "POSTMART là sàn giao dịch thương mại điện tử được sáng lập bởi Tổng Công ty Bưu Điện Việt Nam (VNPost) và vận hành bởi Công ty Phát hành báo chí TW.",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fviber_image_2019-06-06_14-38-15.jpg&size=3&ver=8",
+                            GalleryId = 3,
                             Title = "Sàn thương mại điện tử POSTMART"
                         },
                         new
                         {
-                            Id = 9,
-                            CategoryId = 3,
-                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = 6,
                             Description = "Truyền thông quảng cáo qua các xuất bản phẩm, hệ thống truyền thông quảng cáo ngoài trời, tại các bưu cục, trên các phương tiện vận tải, phong bì...",
                             DescriptionImg = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2ftruyen-thong-quang-cao.jpg&size=3&ver=8",
+                            GalleryId = 3,
                             Title = "Truyền thông, quảng cáo"
                         });
                 });
@@ -952,91 +932,91 @@ namespace VNPost.DataAccess.Migrations
                             Id = 1,
                             Content = "<p>Toàn quốc và trên 100 quốc gia và vùng lãnh thổ khắp thế giới theo thoả thuận giữa Công ty và Bưu chính các nước thuộc Liên minh Bưu chính Thế giới (UPU) hoặc các đối tác khác.</p>",
                             Name = "Phạm vi cung cấp",
-                            PostId = 4
+                            PostId = 1
                         },
                         new
                         {
                             Id = 2,
                             Content = "<h4>Khối lượng:</h4><br/><p>- Khối lượng bưu gửi EMS thông thường: Tối đa 31,5kg/bưu gửi.</p><br /><p>- Đối với bưu gửi là hàng nguyên khối không thể tách rời, vận chuyển bằng đường bộ được nhận gửi tối đa đến 50kg, nhưng phải đảm bảo giới hạn về kích thước theo quy định.</p><br /><p>- Đối với bưu gửi là hàng nhẹ (hàng có khối lượng thực tế nhỏ hơn khối lượng qui đổi), khối lượng tính cước không căn cứ vào khối lượng thực tế mà căn cứ vào khối lượng qui đổi theo cách tính như sau: Khối lượng qui đổi (kg) = Chiều dài x Chiều rộng x Chiều cao (cm) / 6000</p><br /><p>- Đối với bưu gửi quốc tế: Thực hiện theo thông báo của Công ty Cổ phần Chuyển phát nhanh Bưu điện đối với từng nước.</p><br /><h4>Kích thước:</h4><br /><p>- Kích thước tối thiểu:</p><br /><p>+ Ít nhất một mặt bưu gửi có kích thước không nhỏ hơn 90mm x 140mm với sai số 2 mm.</p><br /><p>+ Nếu cuộn tròn: Chiều dài bưu gửi cộng hai lần đường kính tối thiểu 170 mm và kích thước chiều lớn nhất không nhỏ  hơn 100mm.</p><br /><p>- Kích thước tối đa: Bất kỳ chiều nào của bưu gửi không vượt quá 1500mm và tổng chiều dài cộng với chu vi lớn nhất (không đo theo chiều dài đã đo) không vượt quá 3000mm.</p><br /><p>- Bưu gửi có kích thước lớn hơn so với kích thước thông thường được gọi là bưu gửi cồng kềnh và có quy định riêng phụ thuộc vào từng nơi nhận, nơi phát và điều kiện phương tiện vận chuyển.</p><br /><p>- Đối với bưu gửi quốc tế: Kích thước thông thường đối với bưu gửi EMS là bất kỳ chiều nào của bưu gửi cũng không vượt quá 1,5m và tổng chiều dài cộng với chu vi lớn nhất (không đo theo chiều dài đã đo) không vượt quá 3m.</p><br />",
                             Name = "Khối lượng, kích thước",
-                            PostId = 4
+                            PostId = 1
                         },
                         new
                         {
                             Id = 3,
                             Content = "<p>Tùy theo từng dịch vụ sẽ có bảng cước giá khác nhau kèm theo phí dịch vụ của các dịch vụ cộng thêm.</p><p>Bảng cước dịch vụ chuyển phát nhanh EMS trong nước</p><p>Bảng cước dịch vụ chuyển phát nhanh EMS quốc tế</p>",
                             Name = "Cước phí",
-                            PostId = 4
+                            PostId = 1
                         },
                         new
                         {
                             Id = 4,
                             Content = "<p>Toàn quốc</p>",
                             Name = "Phạm vi cung cấp dịch vụ",
-                            PostId = 5
+                            PostId = 2
                         },
                         new
                         {
                             Id = 5,
                             Content = "<h4>a. Giới hạn kích thước của bưu thiếp:</h4><br/><p>- Kích thước tối đa: 165 mm x 245 mm, với sai số 2 mm.</p><br /><p>- Kích thước tối thiểu: 90 mm x 140 mm, với sai số 2 mm. </p><br /><p>- Tỷ lệ tối thiểu giữa chiều dài và chiều rộng: dài = rộng x  (≈ 1,4).</p><br /><h4>b. Giới hạn kích thước của gói nhỏ: </h4><br /><p>- Kích thước tối thiểu: 210 x 148 mm.</p><br /><p>- Kích thước tối đa: Tổng chiều dài, chiều rộng và chiều cao là 900 mm, nhưng kích thước chiều lớn nhất không vượt quá 600 mm, với sai số 2 mm. Nếu cuộn tròn, chiều dài cộng hai lần đường kính là 1040 mm, nhưng kích thước lớn nhất không vượt quá 900 mm.</p><br /><h4>c. Giới hạn kích thước của các loại bưu phẩm khác:</h4><br /><p>- Kích thước tối đa: Tổng chiều dài, chiều rộng và chiều cao là 900 mm, nhưng kích thước chiều lớn nhất không vượt quá 600 mm, với sai số 2 mm. Nếu cuộn tròn, chiều dài cộng hai lần đường kính là 1040 mm, nhưng kích thước lớn nhất không vượt quá 900 mm, với sai số 2 mm.</p><br /><p>- Kích thước tối thiểu: Một mặt kích thước không nhỏ hơn 90 mm x 140 mm với sai số 2 mm. Nếu cuộn tròn: chiều dài cộng hai lần đường kính là 170 mm, nhưng kích thước chiều lớn nhất không nhỏ hơn 100 mm</p><br />",
                             Name = "Quy định về khối lượng / kích thước",
-                            PostId = 5
+                            PostId = 2
                         },
                         new
                         {
                             Id = 6,
                             Content = "<p>Tất cả các điểm cung cấp dịch vụ của Bưu điện Việt Nam trên toàn quốc</p>",
                             Name = "Phạm vi cung cấp dịch vụ",
-                            PostId = 6
+                            PostId = 3
                         },
                         new
                         {
                             Id = 7,
                             Content = "<p>Mức phí bảo hiểm cạnh tranh với nhiều chương trình bán hàng hấp dẫn.</p><br/><p>Liên hệ với các điểm bán hàng của Bưu điện trên toàn quốc để biết thông tin phí bảo hiểm chi tiết.</p>",
                             Name = "Bảng cước dịch vụ",
-                            PostId = 6
+                            PostId = 3
                         },
                         new
                         {
                             Id = 8,
                             Content = "<p>Tất cả các điểm cung cấp dịch vụ của Bưu điện Việt Nam trên toàn quốc</p>",
                             Name = "Phạm vi cung cấp dịch vụ",
-                            PostId = 7
+                            PostId = 4
                         },
                         new
                         {
                             Id = 9,
                             Content = "<p>Giá cước được thỏa thuận tùy theo từng đối tác và theo sản lượng giao dịch.</p>",
                             Name = "Bảng cước dịch vụ",
-                            PostId = 7
+                            PostId = 4
                         },
                         new
                         {
                             Id = 10,
                             Content = "<p>Trên toàn Quốc!</p>",
                             Name = "Phạm vi cung cấp dịch vụ",
-                            PostId = 8
+                            PostId = 5
                         },
                         new
                         {
                             Id = 11,
                             Content = "<p>Dịch vụ thương mại điện tử hay con gọi là E-commerce là hoạt động kinh doanh, mua bán các loại sản phẩm hàng hóa/ dịch vụ diễn ra trên môi trường internet, đặc biệt là thông qua các website và ứng dụng di động. Các hoạt động diễn ra chủ yếu theo 3 hình thức B2C, B2B và C2C</p>",
                             Name = "Đặc điểm dịch vụ",
-                            PostId = 8
+                            PostId = 5
                         },
                         new
                         {
                             Id = 12,
                             Content = "<p>Tất cả các điểm giao dịch trên 63 tỉnh, thành phố</p>",
                             Name = "Phạm vi cung cấp dịch vụ",
-                            PostId = 9
+                            PostId = 6
                         },
                         new
                         {
                             Id = 13,
                             Content = "<i>Theo thỏa thuận trên cơ sở đơn giá thị trường</i>",
                             Name = "Bảng cước dịch vụ",
-                            PostId = 9
+                            PostId = 6
                         });
                 });
 
@@ -1096,12 +1076,6 @@ namespace VNPost.DataAccess.Migrations
                     b.HasOne("VNPost.Models.Entity.Columnist", "Columnist")
                         .WithMany()
                         .HasForeignKey("ColumnistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VNPost.Models.Entity.Post", "Post")
-                        .WithMany()
-                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

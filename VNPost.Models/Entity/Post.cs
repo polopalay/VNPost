@@ -9,9 +9,8 @@ namespace VNPost.Models.Entity
         public string Title { get; set; }
         public string Description { get; set; }
         public string DescriptionImg { get; set; }
-        public int CategoryId { get; set; }
-        public DateTime CreateDate { get; set; }
-        [ForeignKey("CategoryId")]
+        public int GalleryId { get; set; }
+        [ForeignKey("GalleryId")]
         public Gallery Gallery = new Gallery();
         public string SoftDescription()
         {

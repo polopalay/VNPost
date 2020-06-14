@@ -27,7 +27,8 @@ namespace VNPost.Areas.Posts.Controllers
                 listMenuItem.Add(menuItem.Key, menuItem.Value);
             }
             List<Columnist> columnist = _unitOfWork.Columnist.GetAll().ToList();
-            ListArticleVM articleVM = new ListArticleVM(columnist, listMenuItem);
+            List<Article> articles = _unitOfWork.Article.GetAll().ToList();
+            ListArticleVM articleVM = new ListArticleVM(columnist, listMenuItem,articles);
             return View(articleVM);
         }
     }

@@ -62,7 +62,7 @@
             <div class="description-article">
                 <img src="@Model.Articles[0].DescriptionImg" id="img" />
                 <h4 id="title">@Model.Articles[0].Title</h4>
-                <p id="date">@Model.Articles[0].CreateDate</p>
+                <p id="date">@Model.Articles[0].DateCreate</p>
                 <span id="des">@Model.Articles[0].Description</span>
             </div>
             <div class="link-to-articles">
@@ -76,7 +76,7 @@
                             <a href="">
                                 <h4 id=@("title"+i)>@Model.Articles[i].Title</h4>
                             </a>
-                            <p id=@("date"+i)>@Model.Articles[i].CreateDate</p>
+                            <p id=@("date"+i)>@Model.Articles[i].DateCreate</p>
                             <input type="hidden" id=@("des"+i) value="@Model.Articles[i].Description" />
                         </div>
                     </div>
@@ -96,7 +96,7 @@
             <h2>@category.Name</h2>
             <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/line-service.png" />
             <div>
-                @foreach (Post post in Model.Posts.Where(p => p.CategoryId == category.Id))
+                @foreach (Post post in Model.Posts.Where(p => p.GalleryId == category.Id))
                 {
                     <a href="/Posts/Service/ServiceDetail/@(post.Id)" class="fas fa-caret-right">@post.Title</a>
                 }
