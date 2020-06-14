@@ -73,10 +73,9 @@
             }
 
             #article .left > div h1 {
-                font-size: 2.5rem;
+                font-size: 2.4rem;
             }
 
     #article .right {
-        background: blue;
         width: 73%;
     }
