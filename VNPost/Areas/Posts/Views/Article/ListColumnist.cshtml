@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Dịch vụ";
+}
+@using VNPost.Models.ViewModels;
+@using VNPost.Models.Entity;
+@model ListSearchArticleVM;
+
+<link rel="stylesheet" href="~/css/post/article/article.css" />
+<link rel="stylesheet" href="~/css/post/article/listsearch.css" />
+
+<section id="article">
+    @await Component.InvokeAsync("Left", new { columnistItemId = Model.ColumnistItemId, columnistId = Model.ColumnistId })
+    <div class="right">
+        <h1>TIN TỨC</h1>
+        <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd//img/product-border.png" alt="none">
+        <div>
+            @foreach (Article article in Model.Articles)
+            {
+                <div>
+                    <a href="/Posts/Article/ArticleDetail/@(article.Id)">@article.Title</a>
+                    <div>
+                        <div class="img-container">
+                            <img src="@article.DescriptionImg" />
+                        </div>
+                        <div class="des-container">
+                            <span>@article.DateCreate</span>
+                            <p>@article.SoftDescription()</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="pagination">
+            @for (int i = Model.Begin; i < Model.End; i++)
+            {
+                <a href="/Posts/Article/ListColumnist?index=@(i)&columnistId=@(Model.ColumnistId)&columnistItemId=@(Model.ColumnistItemId)"
+                   class="@(i==Model.Index?"current-page":"")">@i</a>
+            }
+        </div>
+    </div>
+</section>

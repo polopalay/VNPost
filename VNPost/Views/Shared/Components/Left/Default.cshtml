@@ -1,0 +1,55 @@
+﻿@using VNPost.Models.ViewModels
+@using VNPost.Models.Entity;
+@model LeftVM
+<link rel="stylesheet" href="~/css/component/left.css" />
+<section id="article-left">
+    <i class="fas fa-bars" id="columnist-hamburger"></i>
+    <div class="left" id="columnist-bar">
+        <article>
+            <h2>CHUYÊN MỤC</h2>
+            <ul>
+                @foreach (Columnist columnist in Model.Columnist)
+                {
+                    <li class="fas fa-angle-double-right">
+                        <a href="/Posts/Article/ListColumnist?columnistId=@(columnist.Id)"
+                           class="@(Model.ColumnistId==columnist.Id?"current":"")">
+                            @columnist.Name
+                        </a>
+                        <ul>
+                            @foreach (ColumnistItem columnistItem in Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id))
+                            {
+                                <li class="fas fa-angle-right">
+                                    <a href="/Posts/Article/ListColumnist?columnistItemId=@(columnistItem.Id)"
+                                       class="@(Model.ColumnistItemId==columnistItem.Id?"current":"")">
+                                        @columnistItem.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </article>
+        <div>
+            <p>@Model.ListMenuItem["PhoneText"]</p>
+            <h1>@Model.ListMenuItem["PhoneNumber"]</h1>
+        </div>
+    </div>
+</section>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>$("#columnist-hamburger").click(clickBtn);
+    function clickBtn() {
+        if ($("#columnist-bar").css("display") === "none" || menuBar.css("display") === undefined) {
+            $("#columnist-bar").css("display", "block")
+        } else {
+            $("#columnist-bar").css("display", "none")
+        }
+    } window.onresize = function () {
+        if (window.innerWidth >= 1202) {
+            $("#columnist-bar").css("display", "block")
+        } else {
+            $("#columnist-bar").css("display", "none")
+        }
+    };</script>
