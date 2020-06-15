@@ -15,6 +15,7 @@ namespace VNPost.DataAccess.Repository.IRepository
         IPostRepository Post { get; }
         IServiceRepository Service { get; }
         IColumnistRepository Columnist { get; }
+        IColumnistItemRepository ColumnistItem { get; }
         void Save();
     }
 }

@@ -14,7 +14,15 @@
             <ul>
                 @foreach (Columnist columnist in Model.Columnist)
                 {
-                    <li class="fas fa-angle-double-right"><a href="">@columnist.Name</a> </li>
+                    <li class="fas fa-angle-double-right">
+                        <a href="">@columnist.Name</a>
+                        <ul>
+                            @foreach (ColumnistItem columnistItem in Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id))
+                            {
+                                <li class="fas fa-angle-right"><a href="">@columnistItem.Name</a></li>
+                            }
+                        </ul>
+                    </li>
                 }
             </ul>
         </article>
@@ -26,10 +34,22 @@
     <div class="right">
         @foreach (Columnist columnist in Model.Columnist)
         {
-            <h2>@columnist.Name</h2>
-            @foreach (Article article in Model.Articles.Where(a => a.ColumnistId == columnist.Id))
+            <div>
+                <a href="">@columnist.Name</a>
+                <ul>
+                    @foreach (ColumnistItem columnistItem in Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id))
+                    {
+                        <li><a href="">@columnistItem.Name</a></li>
+                    }
+                </ul>
+            </div>
+            @foreach (Article article in Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id))
             {
-                @article.Title
+                <article>
+                    <h3>@article.Title</h3>
+                    <img src="@article.DescriptionImg" />
+                    <p>@article.Description</p>
+                </article>
             }
         }
     </div>

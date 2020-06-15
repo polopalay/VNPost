@@ -18,7 +18,7 @@ namespace VNPost.DataAccess.Repository
         public IPostRepository Post { get; }
         public IServiceRepository Service { get; }
         public IColumnistRepository Columnist { get; }
-
+        public IColumnistItemRepository ColumnistItem { get; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -31,6 +31,7 @@ namespace VNPost.DataAccess.Repository
             Post = new PostRepository(_db);
             Service = new ServiceRepository(_db);
             Columnist = new ColumnistRepository(_db);
+            ColumnistItem = new ColumnistItemRepository(_db);
         }
 
         public void Dispose()

@@ -27,16 +27,18 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedToPost(builder);
             SeedData.AddSeedToService(builder);
             SeedData.AddSeedToColumnist(builder);
+            SeedData.AddSeedToColumnistItem(builder);
         }
 
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<MenuLink> MenuLinks { get; set; }
         public DbSet<MenuLocation> MenuLocations { get; set; }
         public DbSet<Gallery> Galleries { get; set; }
-        public DbSet<Article> Articles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Columnist> Columnists { get; set; }
+        public DbSet<ColumnistItem> ColumnistItems { get; set; }
+        public DbSet<Article> Articles { get; set; }
     }
 }

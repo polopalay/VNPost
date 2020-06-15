@@ -13,9 +13,9 @@ namespace VNPost.Models.Entity
         public string Author { get; set; }
         public string Content { get; set; }
         public int View { get; set; }
-        public int ColumnistId { get; set; }
-        [ForeignKey("ColumnistId")]
-        public Columnist Columnist { get; set; }
+        public int ColumnistItemId { get; set; }
+        [ForeignKey("ColumnistItemId")]
+        public ColumnistItem ColumnistItem { get; set; }
         public string SoftDescription()
         {
             return Description.Length > 150 ? (Description.Substring(0, 150) + "...") : Description;

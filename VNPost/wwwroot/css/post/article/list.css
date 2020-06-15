@@ -11,7 +11,7 @@
 
         #article .left > article {
             background: #FFFAD5;
-            padding-bottom:2rem;
+            padding-bottom: 2rem;
         }
 
             #article .left > article h2 {
@@ -21,42 +21,58 @@
                 margin: 1rem 1rem 0.2rem 1rem;
             }
 
+
             #article .left > article ul {
                 display: flex;
                 flex-direction: column;
-                border-top: 1px solid #ebc27d;
                 padding-top: 0.5rem;
                 margin: 0.2rem 1rem 0 1rem;
                 list-style: none;
             }
 
-                #article .left > article ul li {
+            #article .left > article > ul {
+                border-top: 1px solid #ebc27d;
+            }
+
+                #article .left > article > ul > li:before {
+                    content: "\f101";
+                    font-weight: 300;
+                    display: inline-block;
+                    width: 1.3em;
+                }
+
+                #article .left > article > ul > li > ul > li {
                     border-bottom: 1px dotted #ebc27d;
                     padding-bottom: 0.5rem;
                     margin-bottom: 0.5rem;
                 }
 
-                    #article .left > article ul li:before {
-                        content: "\f101";
+                    #article .left > article > ul > li > ul > li:before {
+                        content: "\f105";
                         font-weight: 300;
                         display: inline-block;
                         width: 1.3em;
                     }
 
-                    #article .left > article ul li:hover {
+            #article .left > article ul li {
+                padding-bottom: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+                #article .left > article ul li:hover {
+                    color: #FCB71E;
+                }
+
+                #article .left > article ul li a {
+                    font-weight: 500;
+                    font-size: 1.6rem;
+                    color: black;
+                    text-decoration: none;
+                }
+
+                    #article .left > article ul li a:hover {
                         color: #FCB71E;
                     }
-
-                    #article .left > article ul li > a {
-                        font-weight: 500;
-                        font-size: 1.4rem;
-                        color: black;
-                        text-decoration: none;
-                    }
-
-                        #article .left > article ul li > a:hover {
-                            color: #FCB71E;
-                        }
 
 
 
@@ -84,3 +100,30 @@
     #article .right {
         width: 73%;
     }
+
+        #article .right > div {
+            width: 100%;
+            background: #EAF6FF;
+            border-top: 1px solid #8198C3;
+            border-bottom: 1px solid #D0E4F1;
+            display: flex;
+            margin: 1rem 0;
+            flex-direction: column;
+        }
+
+            #article .right > div > a {
+                font-size: 2rem;
+                font-weight: 600;
+                color: #485986;
+                text-decoration: none;
+            }
+
+            #article .right > div > ul {
+                display: flex;
+                list-style: none;
+                flex-wrap: wrap;
+            }
+
+                #article .right > div > ul > li > a {
+                    color:black;
+                }
