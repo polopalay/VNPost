@@ -26,7 +26,11 @@
                 <div class="article-description">
                     @if (Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList().Count > 0)
                     {
-                        <h5><a href="">@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Title</a></h5>
+                        <h5>
+                            <a href="/Posts/Article/ArticleDetail/@(Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Id)">
+                                @Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Title
+                            </a>
+                        </h5>
                         <img src="@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].DescriptionImg" />
                         <p>@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].SoftDescription()</p>
                     }
@@ -34,14 +38,18 @@
                 <div class="article-soft-list">
                     @foreach (Article article in Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id))
                     {
-                        <a href="">@article.Title</a>
+                        <a href="/Posts/Article/ArticleDetail/@(article.Id)">@article.Title</a>
                     }
                 </div>
                 <div class="article-right">
                     @if (Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList().Count > 0)
                     {
                         <img src="@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].DescriptionImg" />
-                        <h5><a href="">@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Title</a></h5>
+                        <h5>
+                            <a href="/Posts/Article/ArticleDetail/@(Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Id)">
+                                @Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Title
+                            </a>
+                        </h5>
                     }
                 </div>
             </div>

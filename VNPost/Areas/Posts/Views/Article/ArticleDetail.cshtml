@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Dịch vụ";
+}
+@using VNPost.Models.ViewModels;
+@using VNPost.Models.Entity;
+@model ArticleDetailVM;
+
+<link rel="stylesheet" href="~/css/post/article/article.css" />
+<link rel="stylesheet" href="~/css/post/article/articleDetail.css" />
+
+<section id="article">
+    @await Component.InvokeAsync("Left", new { columnistItemId = Model.ColumnistItemId, columnistId = Model.ColumnistId })
+    <div class="right">
+        <h2>@Model.Article.Title</h2>
+        <p>@Model.Article.DateCreate.ToString("MM/dd/yyyy")</p>
+        <div class="content">
+            @Html.Raw(Model.Article.Content.ToString())
+        </div>
+        <div class="info">
+            <i><i class="fas fa-eye"></i>Lượt xem: @Model.Article.View</i>
+            <span>@Model.Article.Author</span>
+        </div>
+    </div>
+</section>

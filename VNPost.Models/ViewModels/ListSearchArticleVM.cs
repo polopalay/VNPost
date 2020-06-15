@@ -14,5 +14,8 @@ namespace VNPost.Models.ViewModels
         public List<Article> Articles { get; set; }
         public int ColumnistId { get; set; }
         public int ColumnistItemId { get; set; }
+        public int Begin { get; set; }
+        public int End { get; set; }
+        public int Index { get; set; }
     }
 }

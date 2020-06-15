@@ -62,7 +62,7 @@
             <div class="description-article">
                 <img src="@Model.Articles[0].DescriptionImg" id="img" />
                 <h4 id="title">@Model.Articles[0].Title</h4>
-                <p id="date">@Model.Articles[0].DateCreate</p>
+                <p id="date">@Model.Articles[0].DateCreate.ToString("MM/dd/yyyy")</p>
                 <span id="des">@Model.Articles[0].Description</span>
             </div>
             <div class="link-to-articles">
@@ -73,10 +73,10 @@
                             <img id=@("img"+i) src="@Model.Articles[i].DescriptionImg" />
                         </div>
                         <div>
-                            <a href="">
+                            <a href="/Posts/Article/ArticleDetail/@(Model.Articles[i].Id)">
                                 <h4 id=@("title"+i)>@Model.Articles[i].Title</h4>
                             </a>
-                            <p id=@("date"+i)>@Model.Articles[i].DateCreate</p>
+                            <p id=@("date"+i)>@Model.Articles[i].DateCreate.ToString("MM/dd/yyyy")</p>
                             <input type="hidden" id=@("des"+i) value="@Model.Articles[i].Description" />
                         </div>
                     </div>
