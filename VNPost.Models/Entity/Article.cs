@@ -13,9 +13,6 @@ namespace VNPost.Models.Entity
         public string Author { get; set; }
         public string Content { get; set; }
         public int View { get; set; }
-        public int GalleryId { get; set; }
-        [ForeignKey("GalleryId")]
-        public Gallery Gallery = new Gallery();
         public int ColumnistId { get; set; }
         [ForeignKey("ColumnistId")]
         public Columnist Columnist { get; set; }

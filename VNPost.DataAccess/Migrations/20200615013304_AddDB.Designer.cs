@@ -10,7 +10,7 @@ using VNPost.DataAccess.Data;
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200614183945_AddDB")]
+    [Migration("20200615013304_AddDB")]
     partial class AddDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -246,9 +246,6 @@ namespace VNPost.DataAccess.Migrations
                     b.Property<string>("DescriptionImg")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GalleryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -271,7 +268,6 @@ namespace VNPost.DataAccess.Migrations
                             DateCreate = new DateTime(2020, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Nhiều tháng vừa qua là khoảng thời gian đầy thách thức đối với Bưu chính các nước hoạt động trên tuyến đầu chống đại dịch toàn cầu. Nhưng đây cũng là thời điểm thể hiện nỗ lực bền bỉ và đổi mới của Bưu chính các nước bằng việc mở rộng cung ứng các dịch vụ xã hội, tài chính và thương mại để hỗ trợ chính phủ.",
                             DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/anh%20upu.jpg?ver=2020-06-13-091631-810",
-                            GalleryId = 4,
                             Title = "Bưu chính đẩy mạnh quan hệ đối tác để đột phá thời COVID-19",
                             View = 0
                         },
@@ -284,7 +280,6 @@ namespace VNPost.DataAccess.Migrations
                             DateCreate = new DateTime(2020, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Quan hệ hợp tác hiệu quả giữa Bưu chính các nước, các cơ quan quản lý Nhà nước, tổ chức phi chính phủ (NGOs) và tổ chức doanh nghiệp thuộc khu vực kinh tế tư nhân.",
                             DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/chi%20tra_anh%203.jpg?ver=2020-06-13-094031-953",
-                            GalleryId = 4,
                             Title = "Đẩy mạnh quan hệ đối tác để cùng ứng phó với đại dịch COVID-19",
                             View = 0
                         },
@@ -297,7 +292,6 @@ namespace VNPost.DataAccess.Migrations
                             DateCreate = new DateTime(2020, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Sáng 12/6/2020, Cụm Công đoàn số 6 gồm công đoàn các đơn vị BĐT Nam Định, Thái Bình, Hà Nam, Ninh Bình, Thanh Hóa tổ chức Hội nghị Cụm Công đoàn theo hình thức trực tuyến nhằm trao đổi kinh nghiệm, giải pháp để hoàn thành kế hoạch sản xuất kinh doanh 2020. Dự hội nghị có Phó Tổng giám đốc Chu Thị Lan Hương, Chủ tịch Công đoàn Tổng công ty Trần Đức Thích.",
                             DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Chi%20Huong%20phat%20bieu.jpg?ver=2020-06-12-144406-523",
-                            GalleryId = 4,
                             Title = "Hội nghị Cụm Công đoàn số 6: Các giải pháp nhằm hoàn thành kế hoạch sản xuất kinh doanh năm 2020”",
                             View = 0
                         });
@@ -338,11 +332,6 @@ namespace VNPost.DataAccess.Migrations
                             Id = 3,
                             Img = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fDichVu%2f02+-+Buu+dien+Viet+Nam+(5)-+Product.png&size=3&ver=6",
                             Name = "Phân phối - Truyền thông"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Tin Tức"
                         });
                 });
 
@@ -645,6 +634,46 @@ namespace VNPost.DataAccess.Migrations
                         },
                         new
                         {
+                            Id = 8,
+                            Key = "",
+                            Link = "/Posts/Service/List/1",
+                            LocationId = 4,
+                            Value = "Bưu chính chuyển phát"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Key = "",
+                            Link = "/Posts/Service/List/2",
+                            LocationId = 4,
+                            Value = "Tài chính bưu chính"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Key = "",
+                            Link = "/Posts/Service/List/3",
+                            LocationId = 4,
+                            Value = "Phân phối -Truyền thông"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Key = "",
+                            Link = "/Posts/Article/List",
+                            LocationId = 4,
+                            Value = "Tin tức"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Key = "",
+                            Link = "#",
+                            LocationId = 4,
+                            Value = "Email"
+                        },
+                        new
+                        {
                             Id = 13,
                             Key = "fas fa-map-marker-alt",
                             Link = "#",
@@ -727,7 +756,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 35,
                             Key = "",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 9,
                             Value = "http://www.vnpost.vn/Portals/0/banner/Banner%20Chao%20mung%20DH%20Dang.jpg"
                         },
@@ -735,7 +764,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 36,
                             Key = "",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 9,
                             Value = "http://www.vnpost.vn/Portals/0/banner/IT-Banner-02.jpg"
                         },
@@ -743,7 +772,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 37,
                             Key = "",
-                            Link = "/",
+                            Link = "#",
                             LocationId = 9,
                             Value = "http://www.vnpost.vn/Portals/0/banner/Tem-COVID.jpg"
                         },
@@ -751,7 +780,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 38,
                             Key = "",
-                            Link = " /",
+                            Link = "#",
                             LocationId = 9,
                             Value = "http://www.vnpost.vn/Portals/0/banner/Banner%20Cong%20PostGreen.jpg"
                         },
@@ -759,7 +788,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 39,
                             Key = "SÀN THƯƠNG MẠI ĐIỆN TỬ POSTMART",
-                            Link = " /",
+                            Link = "#",
                             LocationId = 10,
                             Value = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fImages%2fPostmart+thumb.jpg&size=2&ver=28"
                         },
@@ -767,7 +796,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 40,
                             Key = "LỊCH TẾT",
-                            Link = " /",
+                            Link = "#",
                             LocationId = 10,
                             Value = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fLich+2019+(4).png&size=2&ver=31"
                         },
@@ -775,7 +804,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 41,
                             Key = "DỊCH VỤ DATAPOST",
-                            Link = " /",
+                            Link = "#",
                             LocationId = 10,
                             Value = "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fDataPost+(2).jpg&size=2&ver=31"
                         });
@@ -816,6 +845,11 @@ namespace VNPost.DataAccess.Migrations
                         },
                         new
                         {
+                            Id = 4,
+                            Name = "Bottom-menu"
+                        },
+                        new
+                        {
                             Id = 8,
                             Name = "Mạng xã hội"
                         },
@@ -852,6 +886,8 @@ namespace VNPost.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GalleryId");
 
                     b.ToTable("Posts");
 
@@ -1087,6 +1123,15 @@ namespace VNPost.DataAccess.Migrations
                     b.HasOne("VNPost.Models.Entity.MenuLocation", "MenuLocation")
                         .WithMany()
                         .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.Post", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.Gallery", "Gallery")
+                        .WithMany()
+                        .HasForeignKey("GalleryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

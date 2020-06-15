@@ -47,11 +47,12 @@
     </div>
     <div id="link-bar">
         <ul>
-            @foreach (Category category in Model.Categories)
+            @foreach (MenuLink linkItem in Model.ListMenuLink[4])
             {
-                <li><a href="@(category.Id!=4?("/Posts/Service/List/"+category.Id):"/Posts/Article/List")">@category.Name</a></li>
+                <li>
+                    <a href="@linkItem.Link">@linkItem.Value</a>
+                </li>
             }
-            <li><a href="/">Email</a></li>
         </ul>
     </div>
 </div>

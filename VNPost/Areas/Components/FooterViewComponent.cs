@@ -24,7 +24,7 @@ namespace VNPost.Areas.Components
                 listMenuItem.Add(menuItem.Key, menuItem.Value);
             }
             List<MenuLink> links = _unitOfWork.MenuLink.GetAll().Where(l => l.LocationId == 8).ToList();
-            List<Category> categories = _unitOfWork.Category.GetAll().Where(c => c.Id == 1 || c.Id == 2 || c.Id == 3).ToList();
+            List<Category> categories = _unitOfWork.Category.GetAll().ToList();
             List<Post> posts = _unitOfWork.Post.GetAll().ToList();
             FooterVM footerVM = new FooterVM(listMenuItem, categories, posts, links);
             return View(footerVM);
