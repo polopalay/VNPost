@@ -44,5 +44,6 @@
     <Folder Include="wwwroot\css\post\" />
     <Folder Include="Areas\Posts\Views\Article\" />
     <Folder Include="wwwroot\css\post\article\" />
+    <Folder Include="Views\Shared\Components\Left\" />
   </ItemGroup>
 </Project>

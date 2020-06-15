@@ -21,15 +21,40 @@ namespace VNPost.Areas.Posts.Controllers
 
         public IActionResult List()
         {
-            Dictionary<string, string> listMenuItem = new Dictionary<string, string>();
-            foreach (MenuItem menuItem in _unitOfWork.MenuItem.GetAll())
-            {
-                listMenuItem.Add(menuItem.Key, menuItem.Value);
-            }
             List<Columnist> columnist = _unitOfWork.Columnist.GetAll().ToList();
             List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
-            List<Article> articles = _unitOfWork.Article.GetAll().ToList();
-            ListArticleVM articleVM = new ListArticleVM(columnist, columnistItems, listMenuItem, articles);
+            List<Article> articles = new List<Article>();
+            foreach (Columnist c in _unitOfWork.Columnist.GetAll())
+            {
+
+                articles.AddRange(_unitOfWork.Article.GetAll().Where(a => a.ColumnistItem.ColumnistId == c.Id).Take(4));
+            }
+            ListArticleVM articleVM = new ListArticleVM(columnist, columnistItems, articles);
+            return View(articleVM);
+        }
+
+        public IActionResult ListColumnist([FromQuery] int columnistId, [FromQuery] int columnistItemId)
+        {
+            List<Columnist> columnist = _unitOfWork.Columnist.GetAll().ToList();
+            List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
+            List<Article> articles;
+            if (columnistId != 0)
+            {
+                articles = _unitOfWork.Article.GetAll().Where(a => a.ColumnistItem.ColumnistId == columnistId).ToList();
+            }
+            else if (columnistItemId != 0)
+            {
+                articles = _unitOfWork.Article.GetAll().Where(a => a.ColumnistItemId == columnistItemId).ToList();
+            }
+            else
+            {
+                articles = new List<Article>();
+            }
+            ListSearchArticleVM articleVM = new ListSearchArticleVM(articles)
+            {
+                ColumnistId = columnistId,
+                ColumnistItemId = columnistItemId
+            };
             return View(articleVM);
         }
     }

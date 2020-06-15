@@ -1,0 +1,19 @@
+﻿#article {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5% 1rem 5%;
+}
+
+    #article .right {
+        width: 78%;
+    }
+
+@media (max-width: 1202px) {
+    #article {
+        flex-direction: column;
+    }
+
+        #article .right {
+            width: 100%;
+        }
+}

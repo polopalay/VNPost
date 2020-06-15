@@ -5,52 +5,46 @@
 @using VNPost.Models.Entity;
 @model ListArticleVM;
 
+<link rel="stylesheet" href="~/css/post/article/article.css" />
 <link rel="stylesheet" href="~/css/post/article/list.css" />
 
 <section id="article">
-    <div class="left">
-        <article>
-            <h2>CHUYÊN MỤC</h2>
-            <ul>
-                @foreach (Columnist columnist in Model.Columnist)
-                {
-                    <li class="fas fa-angle-double-right">
-                        <a href="">@columnist.Name</a>
-                        <ul>
-                            @foreach (ColumnistItem columnistItem in Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id))
-                            {
-                                <li class="fas fa-angle-right"><a href="">@columnistItem.Name</a></li>
-                            }
-                        </ul>
-                    </li>
-                }
-            </ul>
-        </article>
-        <div>
-            <p>@Model.ListMenuItem["PhoneText"]</p>
-            <h1>@Model.ListMenuItem["PhoneNumber"]</h1>
-        </div>
-    </div>
+    @await Component.InvokeAsync("Left")
     <div class="right">
         @foreach (Columnist columnist in Model.Columnist)
         {
-            <div>
-                <a href="">@columnist.Name</a>
+            <div class="article-columnist">
+                <a href="/Posts/Article/ListColumnist?columnistId=@(columnist.Id)">@columnist.Name</a>
                 <ul>
                     @foreach (ColumnistItem columnistItem in Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id))
                     {
-                        <li><a href="">@columnistItem.Name</a></li>
+                        <li><a href="/Posts/Article/ListColumnist?columnistItemId=@(columnistItem.Id)">@columnistItem.Name</a></li>
                     }
                 </ul>
             </div>
-            @foreach (Article article in Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id))
-            {
-                <article>
-                    <h3>@article.Title</h3>
-                    <img src="@article.DescriptionImg" />
-                    <p>@article.Description</p>
-                </article>
-            }
+            <div class="article-list">
+                <div class="article-description">
+                    @if (Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList().Count > 0)
+                    {
+                        <h5><a href="">@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Title</a></h5>
+                        <img src="@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].DescriptionImg" />
+                        <p>@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].SoftDescription()</p>
+                    }
+                </div>
+                <div class="article-soft-list">
+                    @foreach (Article article in Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id))
+                    {
+                        <a href="">@article.Title</a>
+                    }
+                </div>
+                <div class="article-right">
+                    @if (Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList().Count > 0)
+                    {
+                        <img src="@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].DescriptionImg" />
+                        <h5><a href="">@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Title</a></h5>
+                    }
+                </div>
+            </div>
         }
     </div>
 </section>

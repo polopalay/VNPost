@@ -1,129 +1,110 @@
-﻿#article {
+﻿#article .right > .article-columnist {
+    width: 100%;
+    background: #EAF6FF;
+    border-top: 1px solid #8198C3;
+    border-bottom: 1px solid #D0E4F1;
     display: flex;
-    justify-content: space-between;
-    padding: 0 5%;
+    margin: 1rem 0;
+    flex-direction: column;
 }
 
-    #article .left {
-        height: auto;
-        width: 25%;
+    #article .right > .article-columnist > a {
+        font-size: 1.5rem;
+        font-weight: 600;
+        padding-left: 0.5rem;
+        color: #485986;
+        text-decoration: none;
     }
 
-        #article .left > article {
-            background: #FFFAD5;
-            padding-bottom: 2rem;
-        }
-
-            #article .left > article h2 {
-                color: #FCB71E;
-                border-bottom: 1px solid #ebc27d;
-                padding-bottom: 0.5rem;
-                margin: 1rem 1rem 0.2rem 1rem;
-            }
-
-
-            #article .left > article ul {
-                display: flex;
-                flex-direction: column;
-                padding-top: 0.5rem;
-                margin: 0.2rem 1rem 0 1rem;
-                list-style: none;
-            }
-
-            #article .left > article > ul {
-                border-top: 1px solid #ebc27d;
-            }
-
-                #article .left > article > ul > li:before {
-                    content: "\f101";
-                    font-weight: 300;
-                    display: inline-block;
-                    width: 1.3em;
-                }
-
-                #article .left > article > ul > li > ul > li {
-                    border-bottom: 1px dotted #ebc27d;
-                    padding-bottom: 0.5rem;
-                    margin-bottom: 0.5rem;
-                }
-
-                    #article .left > article > ul > li > ul > li:before {
-                        content: "\f105";
-                        font-weight: 300;
-                        display: inline-block;
-                        width: 1.3em;
-                    }
-
-            #article .left > article ul li {
-                padding-bottom: 0.5rem;
-                margin-bottom: 0.5rem;
-            }
-
-                #article .left > article ul li:hover {
-                    color: #FCB71E;
-                }
-
-                #article .left > article ul li a {
-                    font-weight: 500;
-                    font-size: 1.6rem;
-                    color: black;
-                    text-decoration: none;
-                }
-
-                    #article .left > article ul li a:hover {
-                        color: #FCB71E;
-                    }
-
-
-
-        #article .left > div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f90;
-        }
-
-            #article .left > div p,
-            #article .left > div h1 {
-                color: white;
-            }
-
-            #article .left > div p {
-                padding-top: 1rem;
-                font-size: 1.4rem;
-            }
-
-            #article .left > div h1 {
-                font-size: 2.4rem;
-            }
-
-    #article .right {
-        width: 73%;
+    #article .right > .article-columnist > ul {
+        display: flex;
+        list-style: none;
+        flex-wrap: wrap;
     }
 
-        #article .right > div {
-            width: 100%;
-            background: #EAF6FF;
-            border-top: 1px solid #8198C3;
-            border-bottom: 1px solid #D0E4F1;
-            display: flex;
+        #article .right > .article-columnist > ul > li > a {
+            color: #4e4b35;
+            font-size: 1.2rem;
+            padding: 0 1rem 0 0.5rem;
+            text-decoration: none;
+        }
+
+            #article .right > .article-columnist > ul > li > a:hover {
+                color: #f90;
+            }
+
+#article .right > .article-list {
+    display: grid;
+    grid-template-columns: 38.33% 38.33% 23.33%;
+}
+
+    #article .right > .article-list .article-description {
+        padding-right: 1rem;
+    }
+
+        #article .right > .article-list .article-description a {
+            color: black;
+            text-decoration: none;
+        }
+
+            #article .right > .article-list .article-description a:hover {
+                color: #f90;
+            }
+
+        #article .right > .article-list .article-description img {
+            width: 100%
+        }
+
+        #article .right > .article-list .article-description p {
+            color: #333333;
+            font-size: 1.2rem;
+        }
+
+    #article .right > .article-list .article-soft-list {
+        border-right: 1px solid #dcdcdc;
+        border-left: 1px solid #dcdcdc;
+        padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+        #article .right > .article-list .article-soft-list a {
+            font-size: 1.2rem;
+            color: #333333;
+            padding-bottom: 1rem;
+            text-decoration: none;
+        }
+
+            #article .right > .article-list .article-soft-list a:hover {
+                color: #f90;
+            }
+
+    #article .right > .article-list .article-right {
+        padding-left: 1rem;
+    }
+
+        #article .right > .article-list .article-right a {
+            color: black;
+            text-decoration: none;
+        }
+
+            #article .right > .article-list .article-right a:hover {
+                color: #f90;
+            }
+
+        #article .right > .article-list .article-right img {
+            width: 100%
+        }
+
+@media (max-width: 694px) {
+    #article .right > .article-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+        #article .right > .article-list .article-soft-list {
             margin: 1rem 0;
-            flex-direction: column;
+            padding: 0;
+            border: none;
         }
-
-            #article .right > div > a {
-                font-size: 2rem;
-                font-weight: 600;
-                color: #485986;
-                text-decoration: none;
-            }
-
-            #article .right > div > ul {
-                display: flex;
-                list-style: none;
-                flex-wrap: wrap;
-            }
-
-                #article .right > div > ul > li > a {
-                    color:black;
-                }
+}
