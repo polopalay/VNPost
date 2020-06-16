@@ -64,6 +64,10 @@ namespace VNPost.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            if (_signInManager.IsSignedIn(User))
+            {
+                await _signInManager.SignOutAsync();
+            }
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -79,7 +83,12 @@ namespace VNPost.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    return LocalRedirect(returnUrl);
+                    var rs = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, true, lockoutOnFailure: false);
+                    if (rs.Succeeded)
+                    {
+                        _logger.LogInformation("User logged in.");
+                        return LocalRedirect(returnUrl);
+                    }
                 }
                 foreach (var error in result.Errors)
                 {
