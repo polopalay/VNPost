@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,11 @@ namespace VNPost.Areas.Components
     public class HeaderViewComponent : ViewComponent
     {
         private readonly IUnitOfWork _unitOfWork;
-        public HeaderViewComponent(IUnitOfWork unitOfWork)
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public HeaderViewComponent(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager)
         {
             _unitOfWork = unitOfWork;
+            _signInManager = signInManager;
         }
         public IViewComponentResult Invoke()
         {
@@ -33,6 +36,7 @@ namespace VNPost.Areas.Components
             List<Category> categories = _unitOfWork.Category.GetAll().ToList();
 
             HeaderVM headerVM = new HeaderVM(listMenuItem, listMenuLink, categories);
+            headerVM.IsLogedIn = _signInManager.IsSignedIn((System.Security.Claims.ClaimsPrincipal)User);
             return View(headerVM);
         }
     }

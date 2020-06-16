@@ -1,0 +1,33 @@
+﻿.login-container {
+    width: 100%;
+    padding: 0 5%;
+}
+
+    .login-container ul {
+        list-style: none;
+    }
+
+    .login-container form {
+        width: 30rem;
+        margin: 1rem auto;
+        padding: 1rem;
+        background-color: #FFFAD5;
+        border: 1px solid #D2CB95;
+    }
+
+        .login-container form h1 {
+            text-align: center;
+        }
+
+        .login-container form div {
+        }
+
+            .login-container form div * {
+                font-size: 1.4rem;
+            }
+
+        .login-container form .login-option {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }

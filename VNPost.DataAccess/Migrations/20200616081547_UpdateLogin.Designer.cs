@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VNPost.DataAccess.Data;
 
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200616081547_UpdateLogin")]
+    partial class UpdateLogin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -709,6 +711,14 @@ namespace VNPost.DataAccess.Migrations
                             Link = "#",
                             LocationId = 1,
                             Value = "Liên hệ"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Key = "Login",
+                            Link = "/Identity/Account/login",
+                            LocationId = 1,
+                            Value = "Login"
                         },
                         new
                         {

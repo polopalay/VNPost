@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using VNPost.DataAccess.Repository.IRepository;
@@ -15,10 +16,11 @@ namespace VNPost.Controllers
     public class HomeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public HomeController(IUnitOfWork unitOfWork)
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public HomeController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager)
         {
             _unitOfWork = unitOfWork;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -38,7 +40,13 @@ namespace VNPost.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Privacy(string editordata)
+        {
+            object data = editordata;
+            return View(data);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

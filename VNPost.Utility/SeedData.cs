@@ -40,7 +40,7 @@ namespace VNPost.Utility
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 1, Key = "Description", Value = "Giới thiệu", LocationId = 1, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 2, Key = "QAndA", Value = "Hỏi đáp", LocationId = 1, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 3, Key = "Contact", Value = "Liên hệ", LocationId = 1, Link = "#" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 4, Key = "Login", Value = "Login", LocationId = 1, Link = "#" });
+            //builder.Entity<MenuLink>().HasData(new MenuLink { Id = 4, Key = "Login", Value = "Login", LocationId = 1, Link = "/Identity/Account/login" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 5, Key = "Search-price", Value = "<p>Tra cước</p><span>DỊCH VỤ</span>", LocationId = 2, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 6, Key = "Mess", Value = "<p>Đánh giá &</p><span>KHIẾU NẠI</span>", LocationId = 2, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 7, Key = "Recruitment", Value = "<p>Tin</p><span>TUYỂN DỤNG</span>", LocationId = 2, Link = "#" });

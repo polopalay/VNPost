@@ -14,6 +14,7 @@ namespace VNPost.Models.ViewModels
             Categories = categories;
         }
 
+        public bool IsLogedIn { get; set; }
         public Dictionary<string, string> ListMenuItem { get; set; }
         public Dictionary<int, List<MenuLink>> ListMenuLink { get; set; }
         public List<Category> Categories { get; set; }

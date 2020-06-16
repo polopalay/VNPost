@@ -13,6 +13,7 @@
         {
             <a href="@linkItem.Link">@linkItem.Value</a>
         }
+        <a href="@(Model.IsLogedIn?"/Identity/Account/Logout":"/Identity/Account/Login")">@(Model.IsLogedIn?"Logout":"Login")</a>
         <div class="language">
             <a href=""><img src="@Model.ListMenuItem["VN"]" id="flag1" alt="" /></a>
             <a href=""><img src="@Model.ListMenuItem["US"]" id="flag2" alt="" /></a>
