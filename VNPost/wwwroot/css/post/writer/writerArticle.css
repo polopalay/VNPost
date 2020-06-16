@@ -1,0 +1,59 @@
+﻿#form {
+    width: 100%;
+    padding: 0 5%;
+}
+
+    #form form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        #form form .contain-input {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+            #form form .contain-input .div-input {
+                width: 40%;
+                display: grid;
+                grid-template-columns:40% 55%;
+                align-items: center;
+                padding:1rem 0;
+            }
+
+                #form form .contain-input .div-input label {
+                    font-size: 1.6rem;
+                    text-align: center;
+                }
+
+                #form form .contain-input .div-input input, #form form .contain-input .div-input select {
+                    width: 100%;
+                    height: 3rem;
+                    border: 1px solid gray;
+                }
+
+        #form form .note-editor {
+            width: 100%;
+        }
+
+        #form form > button {
+            margin-top: 3rem;
+            width: 10rem;
+            height: 4rem;
+        }
+@media (max-width: 694px) {
+    #form form .contain-input .div-input {
+        width: 70%;
+    }
+}
+@media (max-width: 414px) {
+    #form form .contain-input .div-input {
+        width: 100%;
+    }
+}
+

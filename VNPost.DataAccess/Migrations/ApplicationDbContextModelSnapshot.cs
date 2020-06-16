@@ -770,9 +770,9 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 12,
                             Key = "",
-                            Link = "#",
+                            Link = "/Posts/Write/WriteArticle",
                             LocationId = 4,
-                            Value = "Email"
+                            Value = "Viết Bài"
                         },
                         new
                         {

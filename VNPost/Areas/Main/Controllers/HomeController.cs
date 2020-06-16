@@ -35,22 +35,5 @@ namespace VNPost.Controllers
             HomeVM homeVM = new HomeVM(links, galleries, categories, posts, location, item, articles);
             return View(homeVM);
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Privacy(string editordata)
-        {
-            object data = editordata;
-            return View(data);
-        }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
