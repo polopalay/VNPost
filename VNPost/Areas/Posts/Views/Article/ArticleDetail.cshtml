@@ -20,5 +20,21 @@
             <i><i class="fas fa-eye"></i>Lượt xem: @Model.Article.View</i>
             <span>@Model.Article.Author</span>
         </div>
+        <h1>Các tin khác</h1>
+        <div class="most-new">
+            <ul>
+                @for (int i = 0; i < Model.Articles.Count; i++)
+                {
+                    <li class="fas fa-angle-right">
+                        <a href="/Posts/Article/ArticleDetail/@(Model.Articles[i].Id)">@Model.Articles[i].Title</a>
+                        <span>@Model.Articles[i].DateCreate.ToString("MM/dd/yyyy")</span>
+                        @if (i == 0)
+                        {
+                            <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/new-icon.png" />
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
 </section>

@@ -73,10 +73,13 @@ namespace VNPost.Areas.Posts.Controllers
             List<Columnist> columnists = _unitOfWork.Columnist.GetAll().ToList();
             List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
             Article article = _unitOfWork.Article.Get(id);
+            List<Article> articles = _unitOfWork.Article.
+                GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate)).Where(a => a.ColumnistItem.ColumnistId == article.ColumnistItem.ColumnistId).
+                ToList();
             article.View++;
             _unitOfWork.Article.Update(article);
             _unitOfWork.Save();
-            ArticleDetailVM detailVM = new ArticleDetailVM(article, article.ColumnistItem.ColumnistId, article.ColumnistItemId);
+            ArticleDetailVM detailVM = new ArticleDetailVM(article, articles, article.ColumnistItem.ColumnistId, article.ColumnistItemId);
             return View(detailVM);
         }
     }
