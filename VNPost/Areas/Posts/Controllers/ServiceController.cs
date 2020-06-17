@@ -38,6 +38,10 @@ namespace VNPost.Areas.Posts.Controllers
         public IActionResult ServiceDetail(int id)
         {
             Post post = _unitOfWork.Post.Get(id);
+            if (post == null)
+            {
+                return Redirect("/");
+            }
             List<Service> service = _unitOfWork.Service.GetAll().Where(s => s.PostId == post.Id).ToList();
             ServiceDetailVM serviceDetail = new ServiceDetailVM(post, service);
             return View(serviceDetail);

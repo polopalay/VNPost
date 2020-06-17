@@ -14,11 +14,24 @@
         @foreach (Columnist columnist in Model.Columnist)
         {
             <div class="article-columnist">
-                <a href="/Posts/Article/ListColumnist?columnistId=@(columnist.Id)">@columnist.Name</a>
                 <ul>
-                    @foreach (ColumnistItem columnistItem in Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id))
+                    @if (Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id).ToList().Count > 1)
                     {
-                        <li><a href="/Posts/Article/ListColumnist?columnistItemId=@(columnistItem.Id)">@columnistItem.Name</a></li>
+                        <li>
+                            <a class="link-columnist" href="/Posts/Article/ListColumnist?columnistId=@(columnist.Id)">@columnist.Name</a>
+                        </li>
+                        @foreach (ColumnistItem columnistItem in Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id))
+                        {
+                            <li><a class="link-columnistItem" href="/Posts/Article/ListColumnist?columnistItemId=@(columnistItem.Id)">@columnistItem.Name</a></li>
+                        }
+                    }
+                    else
+                    {
+                        <li>
+                            <a class="link-columnist" href="/Posts/Article/ListColumnist?columnistItemId=@(Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id).ToList()[0].Id)">
+                                @columnist.Name
+                            </a>
+                        </li>
                     }
                 </ul>
             </div>

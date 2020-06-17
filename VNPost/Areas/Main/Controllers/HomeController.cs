@@ -31,7 +31,10 @@ namespace VNPost.Controllers
             List<Category> categories = _unitOfWork.Category.GetAll().ToList();
             List<Post> posts = _unitOfWork.Post.GetAll().ToList();
             MenuItem item = _unitOfWork.MenuItem.Get(12);
-            List<Article> articles = _unitOfWork.Article.GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate)).Take(5).ToList();
+            List<Article> articles = _unitOfWork.Article
+                .GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate))
+                .Select(a=>a.SoftArticle())
+                .Take(5).ToList();
             HomeVM homeVM = new HomeVM(links, galleries, categories, posts, location, item, articles);
             return View(homeVM);
         }

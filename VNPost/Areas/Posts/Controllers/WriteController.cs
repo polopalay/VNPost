@@ -66,7 +66,7 @@ namespace VNPost.Areas.Posts.Controllers
             article.View = 0;
             _unitOfWork.Article.Add(article);
             _unitOfWork.Save();
-            return Redirect("/");
+            return Redirect("/Posts/Article/List");
         }
     }
 }

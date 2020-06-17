@@ -16,6 +16,7 @@ namespace VNPost.Models.ViewModels
         public List<Columnist> Columnist { get; set; }
         public List<ColumnistItem> ColumnistItem { get; set; }
         public List<Article> Articles { get; set; }
+        public List<Article> MostNewArticles { get; set; }
         public int ColumnistId { get; set; }
         public int ColumnistItemId { get; set; }
     }

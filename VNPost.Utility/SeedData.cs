@@ -106,6 +106,7 @@ namespace VNPost.Utility
             builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 13, Name = "Công đoàn", ColumnistId = 4 });
             builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 14, Name = "Đoàn thanh niên", ColumnistId = 4 });
             builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 15, Name = "Góp ý xây dựng cơ chế - chính sách", ColumnistId = 4 });
+            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 16, Name = "Bưu điện - Văn hóa xã", ColumnistId = 2 });
         }
 
         public static void AddSeedToCategory(ModelBuilder builder)
