@@ -55,12 +55,12 @@
                     }
                 </div>
                 <div class="article-right">
-                    @if (Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList().Count > 0)
+                    @if (Model.MostNewArticles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList().Count > 0)
                     {
-                        <img src="@Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].DescriptionImg" />
+                        <img src="@Model.MostNewArticles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].DescriptionImg" />
                         <h5>
-                            <a href="/Posts/Article/ArticleDetail/@(Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Id)">
-                                @Model.Articles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Title
+                            <a href="/Posts/Article/ArticleDetail/@(Model.MostNewArticles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Id)">
+                                @Model.MostNewArticles.Where(a => a.ColumnistItem.ColumnistId == columnist.Id).ToList()[0].Title
                             </a>
                         </h5>
                     }
