@@ -10,23 +10,36 @@
             <ul>
                 @foreach (Columnist columnist in Model.Columnist)
                 {
-                    <li class="fas fa-angle-double-right">
-                        <a href="/Posts/Article/ListColumnist?columnistId=@(columnist.Id)"
-                           class="@(Model.ColumnistId==columnist.Id?"current":"")">
-                            @columnist.Name
-                        </a>
-                        <ul>
-                            @foreach (ColumnistItem columnistItem in Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id))
-                            {
-                                <li class="fas fa-angle-right">
-                                    <a href="/Posts/Article/ListColumnist?columnistItemId=@(columnistItem.Id)"
-                                       class="@(Model.ColumnistItemId==columnistItem.Id?"current":"")">
-                                        @columnistItem.Name
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                    </li>
+                    @if (Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id).ToList().Count > 1)
+                    {
+                        <li class="fas fa-angle-double-right">
+                            <a href="/Posts/Article/ListColumnist?columnistId=@(columnist.Id)"
+                               class="@(Model.ColumnistId==columnist.Id?"current":"")">
+                                @columnist.Name
+                            </a>
+                            <ul>
+                                @foreach (ColumnistItem columnistItem in Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id))
+                                {
+                                    <li class="fas fa-angle-right">
+                                        <a href="/Posts/Article/ListColumnist?columnistItemId=@(columnistItem.Id)"
+                                           class="@(Model.ColumnistItemId==columnistItem.Id?"current":"")">
+                                            @columnistItem.Name
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="fas fa-angle-double-right">
+                            <a href="/Posts/Article/ListColumnist?columnistItemId=@(Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id).ToList()[0].Id)"
+                               class="@((Model.ColumnistId==columnist.Id||Model.ColumnistItemId==Model.ColumnistItem.Where(cli => cli.ColumnistId == columnist.Id).ToList()[0].Id)?"current":"")"
+                               style="line-height:3rem;">
+                                @columnist.Name
+                            </a>
+                        </li>
+                    }
                 }
             </ul>
         </article>

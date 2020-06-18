@@ -24,7 +24,7 @@
         }
     </article>
     <div>
-        @for (int i = Model.Begin; i < Model.End; i++)
+        @for (int i = Model.Begin; i <= Model.End; i++)
         {
             <a href="/Posts/Service/List/+@(Model.Category.Id+"?index="+i)" class="@(i==Model.Index?"current-page":"")">@i</a>
         }

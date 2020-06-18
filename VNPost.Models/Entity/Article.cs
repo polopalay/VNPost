@@ -38,7 +38,14 @@ namespace VNPost.Models.Entity
 
         public string SoftDescription()
         {
-            return Description.Length > 150 ? (Description.Substring(0, 150) + "...") : Description;
+            if (Description == null)
+            {
+                return "";
+            }
+            else
+            {
+                return Description.Length > 150 ? (Description.Substring(0, 150) + "...") : Description;
+            }
         }
 
         public Article SoftArticle()

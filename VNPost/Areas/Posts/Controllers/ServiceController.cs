@@ -26,6 +26,10 @@ namespace VNPost.Areas.Posts.Controllers
                 index = 1;
             }
             Category category = _unitOfWork.Category.Get(id);
+            if (category == null)
+            {
+                return Redirect("/");
+            }
             List<Post> posts = _unitOfWork.Post.GetAll()
                 .Where(p => p.GalleryId == id)
                 .ToList();

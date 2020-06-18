@@ -17,10 +17,10 @@ namespace VNPost.Utility
                     ListT.Add(list[i]);
                 }
             }
-            if (!(list.Count < numberTInPage))
+            if (list.Count > numberTInPage)
             {
                 int numberPage;
-                if (list.Count / numberTInPage == 0)
+                if (list.Count % numberTInPage == 0)
                 {
                     numberPage = list.Count / numberTInPage;
                 }
@@ -34,7 +34,7 @@ namespace VNPost.Utility
             }
             else
             {
-                Begin = 0;
+                Begin = 1;
                 End = 0;
             }
         }

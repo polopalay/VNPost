@@ -31,7 +31,7 @@
             }
         </div>
         <div class="pagination">
-            @for (int i = Model.Begin; i < Model.End; i++)
+            @for (int i = Model.Begin; i <= Model.End; i++)
             {
                 <a href="/Posts/Article/ListColumnist?index=@(i)&columnistId=@(Model.ColumnistId)&columnistItemId=@(Model.ColumnistItemId)"
                    class="@(i==Model.Index?"current-page":"")">@i</a>

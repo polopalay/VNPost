@@ -75,7 +75,7 @@ namespace VNPost.Areas.Posts.Controllers
             {
                 articles = new List<Article>();
             }
-            int numberPostInPage = 10;
+            int numberPostInPage = 6;
             Pagination<Article> pagination = new Pagination<Article>(articles, index, numberPostInPage);
             ListSearchArticleVM articleVM = new ListSearchArticleVM(pagination.ListT)
             {
