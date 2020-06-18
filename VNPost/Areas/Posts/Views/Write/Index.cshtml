@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+
+@using VNPost.Models.ViewModels;
+@using VNPost.Models.Entity;
+@model ListSearchArticleVM;
+
+<link rel="stylesheet" href="~/css/post/article/listsearch.css" />
+
+<div class="container">
+    <p>
+        <a asp-action="Upsert">Viết bài</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Date create
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Articles)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreate)
+                    </td>
+                    <td>
+                    <td>
+                        <a asp-action="Upsert" asp-route-id="@item.Id">Sửa</a> |
+                        <a asp-action="Delete" onclick="return confirm('Bạn có chắc chắn muốn xoá bài viết này?')" asp-route-id="@item.Id">Xoá</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagination">
+        @for (int i = Model.Begin; i <= Model.End; i++)
+        {
+            <a href="/Posts/Write/Index?index=@(i)"
+               class="@(i==Model.Index?"current-page":"")">@i</a>
+        }
+    </div>
+</div>

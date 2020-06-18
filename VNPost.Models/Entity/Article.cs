@@ -8,7 +8,7 @@ namespace VNPost.Models.Entity
         public Article()
         {
         }
-        public Article(int id, string title, string description, string descriptionImg, ColumnistItem columnistItem, int columnistItemId, DateTime dateCreate)
+        Article(int id, string title, string description, string descriptionImg, ColumnistItem columnistItem, int columnistItemId, DateTime dateCreate)
         {
             Id = id;
             Title = title;
@@ -18,10 +18,11 @@ namespace VNPost.Models.Entity
             ColumnistItemId = columnistItemId;
             DateCreate = dateCreate;
         }
-        public Article(int id, string title, DateTime dateCreate)
+        Article(int id, string title, string auhtor, DateTime dateCreate)
         {
             Id = id;
             Title = title;
+            Author = auhtor;
             DateCreate = dateCreate;
         }
         public int Id { get; set; }
@@ -54,7 +55,7 @@ namespace VNPost.Models.Entity
         }
         public Article LiteArticle()
         {
-            return new Article(Id, Title, DateCreate);
+            return new Article(Id, Title, Author, DateCreate);
         }
     }
 }

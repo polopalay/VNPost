@@ -13,20 +13,23 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <link rel="stylesheet" href="~/css/post/writer/writerArticle.css" />
-<section id="form">
+<section id="form" style="padding-bottom:1rem;">
     <form method="post" enctype="multipart/form-data">
+        <input asp-for="Article.Id" style="display:none;" />
+        <input asp-for="Article.DateCreate" style="display:none;" />
+        <input asp-for="Article.View" style="display:none;" />
         <div class="contain-input">
             <div class="div-input">
                 <label asp-for="Article.Title" class="control-label">Tiêu đề</label>
-                <input asp-for="Article.Title" class="form-control" maxlength="120"/>
+                <input asp-for="Article.Title" class="form-control" maxlength="120" />
             </div>
             <div class="div-input">
                 <label asp-for="Article.Description" class="control-label">Mô tả</label>
-                <input asp-for="Article.Description" class="form-control"/>
+                <input asp-for="Article.Description" class="form-control" />
             </div>
             <div class="div-input">
                 <label asp-for="Article.Author" class="control-label">tác giả</label>
-                <input asp-for="Article.Author" class="form-control"maxlength="50"/>
+                <input asp-for="Article.Author" class="form-control" maxlength="50" />
             </div>
             <div class="div-input">
                 <label asp-for="Article.ColumnistItemId" class="control-label">chuyên mục</label>
@@ -35,10 +38,9 @@
             </div>
         </div>
         @Html.TextAreaFor(model => model.Article.Content)
-        <button type="submit" class="btn btn-success">Đăng bài</button>
+        <button type="submit" class="btn btn-success">@(Model.Article.Id==0? "Đăng bài" : "Lưu")</button>
     </form>
 </section>
-<img src="@Model.Article.Content" />
 <script>$('#Article_Content').summernote({
         tabsize: 2,
         height: 500,
