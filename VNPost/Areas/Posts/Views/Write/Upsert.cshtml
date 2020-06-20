@@ -2,48 +2,44 @@
     ViewData["Title"] = "Privacy Policy";
 }
 
-@using VNPost.Models.ViewModels;
-@using VNPost.Models.Entity;
-@model WriteArticleVM;
+@section Styles{
+    <link rel="stylesheet" href="~/css/post/writer/writerArticle.css" />
+}
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-<link rel="stylesheet" href="~/css/post/writer/writerArticle.css" />
 <section id="form" style="padding-bottom:1rem;">
-    <form method="post" enctype="multipart/form-data">
-        <input asp-for="Article.Id" style="display:none;" />
-        <input asp-for="Article.DateCreate" style="display:none;" />
-        <input asp-for="Article.View" style="display:none;" />
+    <form>
+        <input style="display:none;" />
         <div class="contain-input">
             <div class="div-input">
-                <label asp-for="Article.Title" class="control-label">Tiêu đề</label>
-                <input asp-for="Article.Title" class="form-control" maxlength="120" />
+                <label class="control-label">Tiêu đề</label>
+                <input id="title" class="form-control" maxlength="120" />
             </div>
             <div class="div-input">
-                <label asp-for="Article.Description" class="control-label">Mô tả</label>
-                <input asp-for="Article.Description" class="form-control" />
+                <label class="control-label">Mô tả</label>
+                <input id="description" class="form-control" />
             </div>
             <div class="div-input">
-                <label asp-for="Article.Author" class="control-label">tác giả</label>
-                <input asp-for="Article.Author" class="form-control" maxlength="50" />
+                <label class="control-label">tác giả</label>
+                <input id="author" class="form-control" maxlength="50" />
             </div>
             <div class="div-input">
-                <label asp-for="Article.ColumnistItemId" class="control-label">chuyên mục</label>
-                <select asp-for="Article.ColumnistItemId" class="form-control"
-                        asp-items="@(new SelectList(Model.ColumnistItems,"Id","Name"));"></select>
+                <label class="control-label">chuyên mục</label>
+                <select id="comlumnist" class="form-control"></select>
+            </div>
+            <div class="div-input">
+                <label class="control-label">chuyên mục con</label>
+                <select id="comlumnistItem" class="form-control"></select>
             </div>
         </div>
-        @Html.TextAreaFor(model => model.Article.Content)
-        <button type="submit" class="btn btn-success">@(Model.Article.Id==0? "Đăng bài" : "Lưu")</button>
+        <textarea id="content"></textarea>
+        <button type="button" id="submit" class="btn btn-success">Lưu</button>
     </form>
 </section>
-<script>$('#Article_Content').summernote({
-        tabsize: 2,
-        height: 500,
-    });</script>
+
+@section Scripts{
+    <script src="~/js/posts/write/upsert.js"></script>
+}
+
+
 
 

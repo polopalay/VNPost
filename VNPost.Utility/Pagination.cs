@@ -5,9 +5,11 @@ namespace VNPost.Utility
 {
     public class Pagination<T>
     {
+        public Pagination() { }
         public Pagination(List<T> list, int index, int numberTInPage)
         {
             ListT = new List<T>();
+            Index = index;
             int pageEnd = index * numberTInPage;
             int pageBegin = pageEnd - numberTInPage + 1;
             for (int i = 0; i < list.Count; i++)
@@ -40,7 +42,8 @@ namespace VNPost.Utility
         }
 
         public List<T> ListT { get; }
-        public int Begin { get; }
-        public int End { get; }
+        public int Begin { get; set; }
+        public int End { get; set; }
+        public int Index { get; set; }
     }
 }

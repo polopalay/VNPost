@@ -25,7 +25,7 @@ namespace VNPost.Areas.Posts.Controllers
             _signInManager = signInManager;
             _hostEnvironment = hostEnvironment;
         }
-        public IActionResult Index(int index)
+        public IActionResult Index()
         {
             if (!_signInManager.IsSignedIn(User))
             {
@@ -33,20 +33,7 @@ namespace VNPost.Areas.Posts.Controllers
             }
             else
             {
-                List<Article> articles = _unitOfWork.Article.GetAll(orderBy:x=>x.OrderByDescending(y=>y.DateCreate)).ToList();
-                if (index == 0)
-                {
-                    index = 1;
-                }
-                int numberPostInPage = 10;
-                Pagination<Article> pagination = new Pagination<Article>(articles, index, numberPostInPage);
-                ListSearchArticleVM articleVM = new ListSearchArticleVM(pagination.ListT)
-                {
-                    Begin = pagination.Begin,
-                    End = pagination.End,
-                    Index = index
-                };
-                return View(articleVM);
+                return View();
             }
         }
         public IActionResult Upsert(int id)
@@ -127,14 +114,54 @@ namespace VNPost.Areas.Posts.Controllers
         public IActionResult Delete(int id)
         {
             var objFromDb = _unitOfWork.Article.Get(id);
-            if (objFromDb == null)
-            {
-                return Json(new { success = false, message = "Error while deleting" });
-            }
             _unitOfWork.Article.Remove(objFromDb);
             _unitOfWork.Save();
             return Redirect("/Posts/Write/Index");
 
         }
+
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll([FromQuery] int index)
+        {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return Forbid();
+            }
+            List<Article> articles = _unitOfWork.Article.GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate)).ToList();
+            if (index == 0)
+            {
+                index = 1;
+            }
+            int numberPostInPage = 10;
+            Pagination<Article> pagination = new Pagination<Article>(articles, index, numberPostInPage);
+            var data = pagination.ListT;
+            return Ok(pagination);
+        }
+
+        [HttpGet]
+        public IActionResult GetColumnistItem()
+        {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return Forbid();
+            }
+            var data = _unitOfWork.ColumnistItem.GetAll().ToList();
+            return Ok(data);
+
+        }
+
+        [HttpGet]
+        public IActionResult GetColumnist()
+        {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return Forbid();
+            }
+            var data = _unitOfWork.Columnist.GetAll().ToList();
+            return Ok(data);
+
+        }
+        #endregion
     }
 }
