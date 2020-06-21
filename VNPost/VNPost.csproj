@@ -51,5 +51,6 @@
     <Folder Include="wwwroot\js\posts\write\" />
     <Folder Include="Controllers\" />
     <Folder Include="Areas\API\" />
+    <Folder Include="wwwroot\js\posts\article\" />
   </ItemGroup>
 </Project>

@@ -1,19 +1,22 @@
 ﻿const index = GetURLParameter("index") == null ? 1 : GetURLParameter("index");
 let table;
 
-function loadTbl(data) {
-    table=$('#tblData').DataTable({
+function loadTbl() {
+    table = $('#tblData').DataTable({
         "paging": true,
         "info": true,
         "order": [2, "desc"],
-        "lengthMenu": [4, 8, 16],
-        "aaData": data.listT,
+        "lengthMenu": [8, 6, 4, 2, 1],
+        "ajax": {
+            type: "GET",
+            url: "/api/articles?getAll=true&fillToDataTable=true&numberPostInPage=8&index=" + index,
+        },
         "columns": [
-            { "data": "title", "width": "50%" },
-            { "data": "author", "width": "20%" },
-            { "data": "dateCreate", "width": "20%" },
+            { "data": "Title", "width": "50%" },
+            { "data": "Author", "width": "20%" },
+            { "data": "DateCreate", "width": "20%" },
             {
-                "data": "id",
+                "data": "Id",
                 "render": function (data) {
                     return `
                                     <div class="text-center">
@@ -30,30 +33,31 @@ function loadTbl(data) {
         ]
     });
 }
-function loadPaging(data) {
-    $("#pagination").empty();
-    for (let i = data.begin; i <= data.end; i++) {
-        const list = $("<li></li>", {
-            class: i == index ? "page-item disabled" : "page-item",
-        });
-        const link = $("<a></a>", {
-            class: "page-link",
-            href: "/Posts/Write/Index?index=" + i,
-            text: i,
-        });
-        list.append(link);
-        $("#pagination").append(list);
-    }
+
+function loadPaging() {
+    $.ajax({
+        type: "GET",
+        "url": "/api/articles?getAll=true&fillToDataTable=true&numberPostInPage=8&getPagination=true&index=" + index,
+    }).done(function (data) {
+        $("#pagination").empty();
+        for (let i = data.begin; i <= data.end; i++) {
+            const list = $("<li></li>", {
+                class: i == index ? "page-item disabled" : "page-item",
+            });
+            const link = $("<a></a>", {
+                class: "page-link",
+                href: "/Posts/Write/Index?index=" + i,
+                text: i,
+            });
+            list.append(link);
+            $("#pagination").append(list);
+        }
+    })
 }
 
 function load() {
-    $.ajax({
-        type: "GET",
-        "url": "/api/articles?index=" + index,
-    }).done(function (data) {
-        loadTbl(data);
-        loadPaging(data);
-    })
+    loadTbl();
+    loadPaging();
 }
 
 function Delete(url) {
@@ -63,8 +67,7 @@ function Delete(url) {
         success: function (data) {
             if (data.success) {
                 toastr.success(data.message);
-                table.destroy();
-                load();
+                table.ajax.reload();
             }
             else {
                 toastr.error(data.message);

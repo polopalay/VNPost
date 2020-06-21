@@ -22,68 +22,15 @@ namespace VNPost.Areas.Posts.Controllers
 
         public IActionResult List()
         {
-            List<Columnist> columnist = _unitOfWork.Columnist.GetAll().ToList();
-            List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
-            List<Article> articles = new List<Article>();
-            List<Article> mostNewArticles = new List<Article>();
-            foreach (Columnist c in _unitOfWork.Columnist.GetAll())
-            {
-                articles.AddRange(_unitOfWork.Article.GetAll(
-                    orderBy: x => x.OrderByDescending(y => y.DateCreate),
-                    filter: a => a.ColumnistItem.ColumnistId == c.Id)
-                    .Select(a => a.SoftArticle())
-                    .Take(5));
-                List<Article> listNew = _unitOfWork.Article.GetAll(
-                    orderBy: x => x.OrderByDescending(y => y.View),
-                    filter: a => a.ColumnistItem.ColumnistId == c.Id).ToList();
-                if (listNew.Count > 0)
-                {
-                    mostNewArticles.Add(listNew[0]);
-                }
-            }
-            ListArticleVM articleVM = new ListArticleVM(columnist, columnistItems, articles);
-            articleVM.MostNewArticles = mostNewArticles;
-            return View(articleVM);
+            return View();
         }
 
-        public IActionResult ListColumnist([FromQuery] int columnistId, [FromQuery] int columnistItemId, [FromQuery] int index)
+        public IActionResult ListColumnist([FromQuery] int columnistId, [FromQuery] int columnistItemId)
         {
-            List<Columnist> columnist = _unitOfWork.Columnist.GetAll().ToList();
-            List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
-            List<Article> articles;
-            if (index == 0)
-            {
-                index = 1;
-            }
-            if (columnistId != 0)
-            {
-                articles = _unitOfWork.Article.GetAll(
-                    orderBy: x => x.OrderByDescending(y => y.DateCreate),
-                    filter: a => a.ColumnistItem.ColumnistId == columnistId)
-                    .Select(a => a.SoftArticle())
-                    .ToList();
-            }
-            else if (columnistItemId != 0)
-            {
-                articles = _unitOfWork.Article.GetAll(
-                    orderBy: x => x.OrderByDescending(y => y.DateCreate),
-                    filter: a => a.ColumnistItemId == columnistItemId)
-                    .Select(a => a.SoftArticle())
-                    .ToList();
-            }
-            else
-            {
-                articles = new List<Article>();
-            }
-            int numberPostInPage = 6;
-            Pagination<Article> pagination = new Pagination<Article>(articles, index, numberPostInPage);
-            ListSearchArticleVM articleVM = new ListSearchArticleVM(pagination.ListT)
+            ListSearchArticleVM articleVM = new ListSearchArticleVM()
             {
                 ColumnistId = columnistId,
                 ColumnistItemId = columnistItemId,
-                Begin = pagination.Begin,
-                End = pagination.End,
-                Index = index
             };
             return View(articleVM);
         }
@@ -93,7 +40,7 @@ namespace VNPost.Areas.Posts.Controllers
             List<Columnist> columnists = _unitOfWork.Columnist.GetAll().ToList();
             List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
             Article article = _unitOfWork.Article.Get(id);
-            if(article==null)
+            if (article == null)
             {
                 return Redirect("/");
             }

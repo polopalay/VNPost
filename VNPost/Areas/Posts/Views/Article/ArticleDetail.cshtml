@@ -5,8 +5,10 @@
 @using VNPost.Models.Entity;
 @model ArticleDetailVM;
 
-<link rel="stylesheet" href="~/css/post/article/article.css" />
-<link rel="stylesheet" href="~/css/post/article/articleDetail.css" />
+@section Styles{
+    <link rel="stylesheet" href="~/css/post/article/article.css" />
+    <link rel="stylesheet" href="~/css/post/article/articleDetail.css" />
+}
 
 <section id="article">
     @await Component.InvokeAsync("Left", new { columnistItemId = Model.ColumnistItemId, columnistId = Model.ColumnistId })
@@ -38,3 +40,9 @@
         </div>
     </div>
 </section>
+
+@section Scripts{
+    <script src="~/js/posts/article/detail.js"></script>
+}
+
+

@@ -6,6 +6,13 @@ namespace VNPost.Utility
     public class Pagination<T>
     {
         public Pagination() { }
+
+        Pagination(int begin, int end, int index)
+        {
+            Begin = begin;
+            End = end;
+            Index = index;
+        }
         public Pagination(List<T> list, int index, int numberTInPage)
         {
             ListT = new List<T>();
@@ -45,5 +52,9 @@ namespace VNPost.Utility
         public int Begin { get; set; }
         public int End { get; set; }
         public int Index { get; set; }
+        public Pagination<T> SortPagination()
+        {
+            return new Pagination<T>(Begin, End, Index);
+        }
     }
 }

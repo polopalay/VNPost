@@ -4,28 +4,31 @@ let columnistItemId;
 let columnist;
 let columnistItem;
 
-//get data of article from server
+/*get data of article from server*/
 function getData() {
     let url = (id == null) ? "/api/articles/0" : "/api/articles/" + id
     $.ajax({
         type: "GET",
         url: url,
     }).done(function (response) {
+        /*if article from server not null, fill data of article to form.
+         else create new article*/
         if (response != undefined) {
             $("#title").val(response.title);
             $("#description").val(response.description);
             $("#author").val(response.author);
             columnistItemId = response.columnistItemId;
             $('#content').summernote('code', response.content);
-            //after get article data, load data to select tag
+            /*after get article data, load data to select tag*/
             $.ajax({
                 type: "GET",
                 url: "/api/columnistItems"
             }).done(function (response) {
                 columnistItem = response;
+                /*if columnist item id equal columnist item id of article, generate columnist item*/
                 columnistItem.forEach(citem => {
                     if (citem.id == columnistItemId) {
-                        loadColumnistItem(citem);
+                        loadColumnists(citem);
                     }
                 });
             });
@@ -36,14 +39,14 @@ function getData() {
                 url: "/api/columnistItems"
             }).done(function (response) {
                 columnistItem = response;
-                loadColumnistItem(0);
+                loadColumnists(0);
             });
         }
     });
 }
 
-//load data to columnist item
-function loadColumnistItem(citem) {
+/*load data to columnist*/
+function loadColumnists(citem) {
     $.ajax({
         type: "GET",
         url: "/api/columnists"
@@ -57,12 +60,12 @@ function loadColumnistItem(citem) {
             });
             $("#comlumnist").append(link);
         });
-        loadColumnist();
+        loadColumnistItem();
     });
 }
 
-//load data to columnist
-function loadColumnist() {
+/*load data to columnist item*/
+function loadColumnistItem() {
     $("#comlumnistItem").empty();
     if (columnistItem != null) {
         columnistItem.filter(c => c.columnistId == $("#comlumnist").val()).forEach(item => {
@@ -77,7 +80,7 @@ function loadColumnist() {
 }
 
 
-//load data to form 
+/*load data to form */
 function loadForm() {
     getData();
     $('#content').summernote({
@@ -85,12 +88,15 @@ function loadForm() {
         height: 500,
     });
     $("#comlumnist").change(function () {
-        loadColumnist();
+        loadColumnistItem();
     });
-    //send data to server
+    /*send data to server*/
     $("#submit").click(function () {
+        /*get src code from textarea*/
         let content = $('#content').summernote('code');
+        /*generate src code to html element*/
         let element = $.parseHTML($('#content').summernote('code'));
+        /*create a div to contain element had been generated*/
         const link = $("<div></div>");
         link.append(element);
 
@@ -100,14 +106,15 @@ function loadForm() {
         let comlumnistItemId = $("#comlumnistItem").val();
         let descriptionImg;
 
-        //if content don't have image, use default image
+        /*if content don't have image, use default image*/
         if (link.find('img').length == 0) {
             descriptionImg = "http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd//img/vnpost-logo.png";
         } else {
+            /*get fist image found from div contain all element from textarea*/
             let firstImg = link.find('img').attr('src');
             descriptionImg = (firstImg);
         }
-
+        /*generate article */
         let article = {
             Title: title,
             Description: description,
@@ -116,10 +123,13 @@ function loadForm() {
             Content: content,
         }
 
+        /*select url to send to server */
         let url = (id == null)
             ? "/api/articles?comlumnistItemId=" + comlumnistItemId
             : "/api/articles/" + id + "?comlumnistItemId=" + comlumnistItemId;
+        /*select method to send to server */
         let method = (id == null) ? "POST" : "PUT";
+        /*send data to server and show message from server */
         $.ajax({
             type: method,
             data: JSON.stringify(article),
@@ -129,6 +139,7 @@ function loadForm() {
         }).done(function (data) {
             if (data.success) {
                 toastr.success(data.message);
+                /*if generate new article clean all input*/
                 if (id == null) {
                     $('#content').summernote('code', "")
                     $("#title").val("");

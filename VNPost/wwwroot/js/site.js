@@ -7,3 +7,13 @@
     };
     return $.urlParam(sParam);
 }
+
+function softDescription(description)
+{
+    if (description == null) {
+        return "";
+    }
+    else {
+        return description.length > 150 ? (description.substring(0, 150) + "...") : description;
+    }
+}
