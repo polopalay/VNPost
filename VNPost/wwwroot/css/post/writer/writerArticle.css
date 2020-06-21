@@ -21,9 +21,9 @@
             #form form .contain-input .div-input {
                 width: 40%;
                 display: grid;
-                grid-template-columns:40% 55%;
+                grid-template-columns: 40% 55%;
                 align-items: center;
-                padding:1rem 0;
+                padding: 1rem 0;
             }
 
                 #form form .contain-input .div-input label {
@@ -41,19 +41,26 @@
             width: 100%;
         }
 
-        #form form > button {
+        #form form > div > button,
+        #form form > div > a {
             margin-top: 3rem;
             width: 10rem;
             height: 4rem;
         }
+
+        #form form > div > a {
+            color:white;
+            line-height: 3rem;
+        }
+
 @media (max-width: 694px) {
     #form form .contain-input .div-input {
         width: 70%;
     }
 }
+
 @media (max-width: 414px) {
     #form form .contain-input .div-input {
         width: 100%;
     }
 }
-

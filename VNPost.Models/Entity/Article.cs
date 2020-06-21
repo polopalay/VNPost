@@ -8,6 +8,27 @@ namespace VNPost.Models.Entity
         public Article()
         {
         }
+
+        public Article(string title, string description, string author, string descriptionImg, string content)
+        {
+            Title = title;
+            Description = description;
+            Author = author;
+            DescriptionImg = descriptionImg;
+            Content = content;
+        }
+
+        public Article(int id, string title, string description, string author, int columnistItemId, string descriptionImg, string content)
+        {
+            Id = id;
+            Title = title;
+            Description = description;
+            Author = author;
+            ColumnistItemId = columnistItemId;
+            DescriptionImg = descriptionImg;
+            Content = content;
+        }
+
         Article(int id, string title, string description, string descriptionImg, ColumnistItem columnistItem, int columnistItemId, DateTime dateCreate)
         {
             Id = id;
@@ -18,6 +39,7 @@ namespace VNPost.Models.Entity
             ColumnistItemId = columnistItemId;
             DateCreate = dateCreate;
         }
+
         Article(int id, string title, string auhtor, DateTime dateCreate)
         {
             Id = id;

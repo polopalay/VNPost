@@ -1,9 +1,12 @@
 ﻿const index = GetURLParameter("index") == null ? 1 : GetURLParameter("index");
+let table;
 
 function loadTbl(data) {
-    $('#tblData').DataTable({
-        "paging": false,
-        "info": false,
+    table=$('#tblData').DataTable({
+        "paging": true,
+        "info": true,
+        "order": [2, "desc"],
+        "lengthMenu": [4, 8, 16],
         "aaData": data.listT,
         "columns": [
             { "data": "title", "width": "50%" },
@@ -17,7 +20,7 @@ function loadTbl(data) {
                                         <a href="/Posts/Write/Upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <button onclick=Delete("/Admin/Category/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                        <button onclick=Delete("/api/articles/${data}") class="btn btn-danger text-white" style="cursor:pointer">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
@@ -28,6 +31,7 @@ function loadTbl(data) {
     });
 }
 function loadPaging(data) {
+    $("#pagination").empty();
     for (let i = data.begin; i <= data.end; i++) {
         const list = $("<li></li>", {
             class: i == index ? "page-item disabled" : "page-item",
@@ -45,11 +49,28 @@ function loadPaging(data) {
 function load() {
     $.ajax({
         type: "GET",
-        "url": "/Posts/Write/GetAll?index=" + index,
+        "url": "/api/articles?index=" + index,
     }).done(function (data) {
         loadTbl(data);
         loadPaging(data);
     })
+}
+
+function Delete(url) {
+    $.ajax({
+        type: "DELETE",
+        url: url,
+        success: function (data) {
+            if (data.success) {
+                toastr.success(data.message);
+                table.destroy();
+                load();
+            }
+            else {
+                toastr.error(data.message);
+            }
+        }
+    });
 }
 
 load();

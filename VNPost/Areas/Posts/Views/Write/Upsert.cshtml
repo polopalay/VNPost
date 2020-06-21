@@ -8,7 +8,6 @@
 
 <section id="form" style="padding-bottom:1rem;">
     <form>
-        <input style="display:none;" />
         <div class="contain-input">
             <div class="div-input">
                 <label class="control-label">Tiêu đề</label>
@@ -16,7 +15,7 @@
             </div>
             <div class="div-input">
                 <label class="control-label">Mô tả</label>
-                <input id="description" class="form-control" />
+                <textarea id="description" rows="5" class="form-control"></textarea>
             </div>
             <div class="div-input">
                 <label class="control-label">tác giả</label>
@@ -32,7 +31,10 @@
             </div>
         </div>
         <textarea id="content"></textarea>
-        <button type="button" id="submit" class="btn btn-success">Lưu</button>
+        <div>
+            <button type="button" id="submit" class="btn btn-success">Lưu</button>
+            <a href="/Posts/Write/Index" id="submit" class="btn btn-warning">Về trang chủ</a>
+        </div>
     </form>
 </section>
 
