@@ -11,7 +11,7 @@ $.ajax({
     result.forEach(item => {
         let container = $("<div></div>");
         let title = $("<a></a>", {
-            href: "/Posts/Article/ArticleDetail/" + item.id,
+            href: "/Posts/Article/ArticleDetail?id=" + item.id,
             text: item.title,
         });
 
@@ -26,7 +26,7 @@ $.ajax({
             class: "des-container",
         });
         let dateCreate = $("<span></span>", {
-            text: item.dateCreate,
+            text: dateDMY(item.dateCreate),
         });
         let description = $("<p></p>", {
             text: softDescription(item.description),

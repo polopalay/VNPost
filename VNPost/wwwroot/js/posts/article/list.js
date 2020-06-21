@@ -68,7 +68,7 @@ function generateListArtile(item) {
             let title = $("<h5></h5>");
             let titleLink = $("<a></a>", {
                 text: listArticle[0].title,
-                href: "/Posts/Article/ArticleDetail/" + listArticle[0].id,
+                href: "/Posts/Article/ArticleDetail?id=" + listArticle[0].id,
             });
             /*create image*/
             let img = $("<img></img>", {
@@ -89,7 +89,7 @@ function generateListArtile(item) {
         listArticle.forEach(article => {
             let top4Link = $("<a></a>", {
                 text: article.title,
-                href: "/Posts/Article/ArticleDetail/" + article.id,
+                href: "/Posts/Article/ArticleDetail?id=" + article.id,
             });
             containArticleList.append(top4Link);
         });
@@ -108,7 +108,7 @@ function generateListArtile(item) {
             let title = $("<h5></h5>");
             let titleLink = $("<a></a>", {
                 text: listMostViewArticle[0].title,
-                href: "/Posts/Article/ArticleDetail/" + listMostViewArticle[0].id,
+                href: "/Posts/Article/ArticleDetail?id=" + listMostViewArticle[0].id,
             });
             title.append(titleLink);
             containArticleMostView.append(img);

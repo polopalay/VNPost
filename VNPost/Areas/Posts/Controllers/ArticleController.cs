@@ -35,7 +35,7 @@ namespace VNPost.Areas.Posts.Controllers
             return View(articleVM);
         }
 
-        public IActionResult ArticleDetail(int id)
+        public IActionResult ArticleDetail([FromQuery] int id)
         {
             List<Columnist> columnists = _unitOfWork.Columnist.GetAll().ToList();
             List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
@@ -44,16 +44,10 @@ namespace VNPost.Areas.Posts.Controllers
             {
                 return Redirect("/");
             }
-            List<Article> articles = _unitOfWork.Article.GetAll(
-                orderBy: x => x.OrderByDescending(y => y.DateCreate),
-                filter: a => a.ColumnistItem.ColumnistId == article.ColumnistItem.ColumnistId)
-                .Select(a => a.LiteArticle())
-                .Take(5)
-                .ToList();
             article.View++;
             _unitOfWork.Article.Update(article);
             _unitOfWork.Save();
-            ArticleDetailVM detailVM = new ArticleDetailVM(article, articles, article.ColumnistItem.ColumnistId, article.ColumnistItemId);
+            ArticleDetailVM detailVM = new ArticleDetailVM(article.ColumnistItem.ColumnistId, article.ColumnistItemId);
             return View(detailVM);
         }
     }

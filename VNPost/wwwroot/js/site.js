@@ -8,12 +8,17 @@
     return $.urlParam(sParam);
 }
 
-function softDescription(description)
-{
+function softDescription(description) {
     if (description == null) {
         return "";
     }
     else {
         return description.length > 150 ? (description.substring(0, 150) + "...") : description;
     }
+}
+
+function dateDMY(value) {
+    let date = new Date(value);
+    return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+
 }
