@@ -40,6 +40,15 @@ namespace VNPost.DataAccess.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
+                            ConcurrencyStamp = "9d93fed2-8e54-4c92-b3dc-a1c236b2a36a",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -127,6 +136,24 @@ namespace VNPost.DataAccess.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d882fc4a-4485-43b2-8dde-d94bc192feaf",
+                            Email = "polopalay@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "POLOPALAY@GMAIL.COM",
+                            NormalizedUserName = "POLOPALAY@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI2rNt77YvirvqeMB4vQ/CinWEN+kXmoaWNZEEQaXqup94Ko9xg6k9he3Bb/96UM6Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0d93973f-c47d-47fc-a5f9-6994bdeb95c2",
+                            TwoFactorEnabled = false,
+                            UserName = "polopalay@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -189,6 +216,13 @@ namespace VNPost.DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "01b96c14-de28-4831-afa9-3d1f84b93aed",
+                            RoleId = "13d23c51-re38-4831-wqa2-2e3f21c23ewd"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -253,44 +287,20 @@ namespace VNPost.DataAccess.Migrations
                         .HasName("Index_Article_View");
 
                     b.ToTable("Articles");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Author = "",
-                            ColumnistItemId = 1,
-                            Content = "<p> Nhiều tháng vừa qua là khoảng thời gian đầy thách thức đối với Bưu chính các nước hoạt động trên tuyến đầu chống đại dịch toàn cầu. Nhưng đây cũng là thời điểm thể hiện nỗ lực bền bỉ và đổi mới của Bưu chính các nước bằng việc mở rộng cung ứng các dịch vụ xã hội, tài chính và thương mại để hỗ trợ chính phủ.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/anh%20upu.jpg?ver=2020-06-13-091631-810\" /><i>Bưu chính Costa Rica</i></div><p>Những hoạt động đã tạo ra nhiều mối quan đối tác mới và phát triển nhiều mô hình kinh doanh mới. Điển hình là mô hình Bưu chính Costa Rica hợp tác với các công ty cho thuê xe tư nhân để chuyển phát thuốc; Bưu điện Việt Nam với chuyên môn về bản đồ đã hỗ trợ chính phủ trong việc tra cứu bản đồ dịch về các trường hợp nhiễm COVID-19, và Bưu chính Azerbaijan chuyển phát thực phẩm cho các tổ chức từ thiện.</p><br /><br /><p>Ghi nhận các giải pháp năng động của các nhà khai thác bưu chính trong việc ứng phó với khủng hoảng kinh tế và sức khỏe toàn cầu, UPU đã xây dựng một nền tảng chuyên ngành để tổng hợp và đăng thông tin nổi bật về các giải pháp điển hình thiết thực về đổi mới hoạt động kinh doanh các dịch vụ xã hội, tài chính.</p><br /><br /><p>Bưu chính các nước trên thế giới đã tham gia diễn đàn này của UPU để chia sẻ kiến thức mới, và những kiến thức thông tin này đã được bưu chính các nước đóng góp thông qua những tin, bài và các tham luận chuyên đề. Đây cũng là một nguồn tham khảo hữu ích trong việc thể hiện với chính phủ về vai trò của Bưu chính là một dịch vụ cần thiết.</p><br /><br />",
-                            DateCreate = new DateTime(2020, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Nhiều tháng vừa qua là khoảng thời gian đầy thách thức đối với Bưu chính các nước hoạt động trên tuyến đầu chống đại dịch toàn cầu. Nhưng đây cũng là thời điểm thể hiện nỗ lực bền bỉ và đổi mới của Bưu chính các nước bằng việc mở rộng cung ứng các dịch vụ xã hội, tài chính và thương mại để hỗ trợ chính phủ.",
-                            DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/anh%20upu.jpg?ver=2020-06-13-091631-810",
-                            Title = "Bưu chính đẩy mạnh quan hệ đối tác để đột phá thời COVID-19",
-                            View = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Author = "",
-                            ColumnistItemId = 13,
-                            Content = "<p> Quan hệ hợp tác hiệu quả giữa Bưu chính các nước, các cơ quan quản lý Nhà nước, tổ chức phi chính phủ (NGOs) và tổ chức doanh nghiệp thuộc khu vực kinh tế tư nhân.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/chi%20tra_anh%203.jpg?ver=2020-06-13-094031-953\" /><i>Bưu điện Việt Nam thực hiện chi trả lương hưu tại nhà trong dịch Covid-19</i></div><p><b>Đánh giá chung:</b>Quan hệ đối tác hiệu quả là yếu tố sống còn đối với Bưu chính các nước để đa dạng hóa các loại hình cung cấp dịch vụ xã hội mới. Áp lực khiến Bưu chính các nước có giải pháp ứng phó nhanh với đại dịch COVID-19 nhằm hỗ trợ người dân và Chính phủ càng nhấn mạnh thêm giá trị của sự hợp tác mà trong đó, các bên liên quan cùng nhau chia sẻ mọi nguồn lực vì mục tiêu chung. Trong bài viết này, chúng tôi khai thác vai trò của việc đẩy mạnh hợp tác đối tác để cung cấp các dịch vụ chuyển phát trang thiết bị y tế, giải pháp bản đồ số và cung ứng dịch vụ chuyển phát bưu kiện là thực phẩm của Bưu chính Costa Rica, Bưu điện Việt Nam và Bưu chính Azerbaijan. Việc xác định rõ trách nhiệm, xây dựng các kênh hợp tác và xây dựng quy trình triển khai là chìa khóa của sự thành công trong các dự án này.</p><br /><br /><p><b>Nhiều thách thức lớn gồm:</b>tìm nguồn cung ứng đủ sản phẩm trong vài ngày đầu tiên, đảm bảo quy định giấy phép vận chuyển chất có cồn và tổ chức các địa điểm tiếp nhận và xử lý đơn hàng.</p><br /><br />",
-                            DateCreate = new DateTime(2020, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Quan hệ hợp tác hiệu quả giữa Bưu chính các nước, các cơ quan quản lý Nhà nước, tổ chức phi chính phủ (NGOs) và tổ chức doanh nghiệp thuộc khu vực kinh tế tư nhân.",
-                            DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/chi%20tra_anh%203.jpg?ver=2020-06-13-094031-953",
-                            Title = "Đẩy mạnh quan hệ đối tác để cùng ứng phó với đại dịch COVID-19",
-                            View = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Author = "Trung Kiên",
-                            ColumnistItemId = 12,
-                            Content = "<p> Sáng 12/6/2020, Cụm Công đoàn số 6 gồm công đoàn các đơn vị BĐT Nam Định, Thái Bình, Hà Nam, Ninh Bình, Thanh Hóa tổ chức Hội nghị Cụm Công đoàn theo hình thức trực tuyến nhằm trao đổi kinh nghiệm, giải pháp để hoàn thành kế hoạch sản xuất kinh doanh 2020. Dự hội nghị có Phó Tổng giám đốc Chu Thị Lan Hương, Chủ tịch Công đoàn Tổng công ty Trần Đức Thích.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Chi%20Huong%20phat%20bieu.jpg?ver=2020-06-12-144406-523\" /><i>Đồng chí Chu Thị Lan Hương chỉ đạo các đơn vị tại Hội nghị</i></div><p>Tại Hội nghị, đồng chí Chu Thị Lan Hương đánh giá cao kết quả hoạt động sản xuất kinh doanh của các đơn vị trong cụm công đoàn số 6 trong 5 tháng đầu năm 2020. Đồng thời chỉ đạo các đơn vị cần tiếp tục phát huy trong thời gian còn lại của năm 2020, đảm bảo hoàn thành các chỉ tiêu kế hoạch mà Tổng công ty đã giao. Đồng chí cũng lưu ý các đơn vị cần đẩy mạnh hoạt động sản xuất kinh doanh để đảm bảo đời sống cho người lao động, đồng thời xây dựng môi trường làm việc thân thiện, vui vẻ, đoàn kết với mục tiêu cùng nhau phát triển.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Ca%20don%20vi%20tai%20diem%20cau.jpg?ver=2020-06-12-144523-527\"/><i>Hội nghị Cụm Công đoàn số 6 được kết nối qua hệ thống hội nghị truyền hình của Tổng công ty </i></div><p>Chủ tịch Công đoàn nhấn mạnh, song song với việc phối hợp cùng chuyên môn triển khai các chương trình thi đua, Công đoàn các đơn vị cần phát huy vai trò của mình trong việc bảo vệ quyền và lợi ích hợp pháp của người lao động, thực hiện đầy đủ chế độ, cơ chế, chính sách chăm sóc người lao động; giám sát việc thực hiện quy chế dân chủ cơ sở trong đó quan tâm đến hoạt động đối thoại định kỳ tại đơn vị nhằm giải quyết những vướng mắc phát sinh kịp thời, tránh để lâu, vượt cấp… để người lao động yên tâm công tác, cống hiến và gắn bó với công việc, đơn vị.</p><br /><br />",
-                            DateCreate = new DateTime(2020, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Sáng 12/6/2020, Cụm Công đoàn số 6 gồm công đoàn các đơn vị BĐT Nam Định, Thái Bình, Hà Nam, Ninh Bình, Thanh Hóa tổ chức Hội nghị Cụm Công đoàn theo hình thức trực tuyến nhằm trao đổi kinh nghiệm, giải pháp để hoàn thành kế hoạch sản xuất kinh doanh 2020. Dự hội nghị có Phó Tổng giám đốc Chu Thị Lan Hương, Chủ tịch Công đoàn Tổng công ty Trần Đức Thích.",
-                            DescriptionImg = "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Chi%20Huong%20phat%20bieu.jpg?ver=2020-06-12-144406-523",
-                            Title = "Hội nghị Cụm Công đoàn số 6: Các giải pháp nhằm hoàn thành kế hoạch sản xuất kinh doanh năm 2020",
-                            View = 0
-                        });
+            modelBuilder.Entity("VNPost.Models.Entity.CURD", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CURDs");
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.Category", b =>
@@ -965,6 +975,24 @@ namespace VNPost.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("VNPost.Models.Entity.PermissionCURD", b =>
+                {
+                    b.Property<int>("CRUDId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CURDId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RolePermissionId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasIndex("CURDId");
+
+                    b.HasIndex("RolePermissionId");
+
+                    b.ToTable("PermissionCURDs");
+                });
+
             modelBuilder.Entity("VNPost.Models.Entity.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -1038,6 +1066,27 @@ namespace VNPost.DataAccess.Migrations
                             GalleryId = 3,
                             Title = "Truyền thông, quảng cáo"
                         });
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.RolePermission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ColumnistItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ColumnistItemId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("RolePermissions");
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.Service", b =>
@@ -1233,6 +1282,19 @@ namespace VNPost.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("VNPost.Models.Entity.PermissionCURD", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.CURD", "ColumnistItem")
+                        .WithMany()
+                        .HasForeignKey("CURDId");
+
+                    b.HasOne("VNPost.Models.Entity.RolePermission", "RolePermission")
+                        .WithMany()
+                        .HasForeignKey("RolePermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("VNPost.Models.Entity.Post", b =>
                 {
                     b.HasOne("VNPost.Models.Entity.Gallery", "Gallery")
@@ -1240,6 +1302,19 @@ namespace VNPost.DataAccess.Migrations
                         .HasForeignKey("GalleryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.RolePermission", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.ColumnistItem", "ColumnistItem")
+                        .WithMany()
+                        .HasForeignKey("ColumnistItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.Service", b =>

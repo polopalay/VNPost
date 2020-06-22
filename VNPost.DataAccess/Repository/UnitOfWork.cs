@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using VNPost.DataAccess.Data;
 using VNPost.DataAccess.Repository.IRepository;
 
@@ -19,6 +22,11 @@ namespace VNPost.DataAccess.Repository
         public IServiceRepository Service { get; }
         public IColumnistRepository Columnist { get; }
         public IColumnistItemRepository ColumnistItem { get; }
+        public IRolePermissionRepository RolePermission { get; }
+        public IPermissionCURDRepository PermissionCURD { get; }
+        public ICURDRepository CURD { get; }
+        public IIdentityUserRepository IdentityUser { get; }
+        public IIdentityRoleRepository IdentityRole { get; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -32,6 +40,11 @@ namespace VNPost.DataAccess.Repository
             Service = new ServiceRepository(_db);
             Columnist = new ColumnistRepository(_db);
             ColumnistItem = new ColumnistItemRepository(_db);
+            RolePermission = new RolePermissionRepository(_db);
+            PermissionCURD = new PermissionCURDRepository(_db);
+            CURD = new CURDRepository(_db);
+            IdentityUser = new IdentityUserRepository(_db);
+            IdentityRole = new IdentityRoleRepository(_db);
         }
 
         public void Dispose()

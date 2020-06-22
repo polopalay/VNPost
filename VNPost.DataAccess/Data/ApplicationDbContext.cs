@@ -24,12 +24,15 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedDataToMenuLocation(builder);
             SeedData.AddSeedDataToMenuLink(builder);
             SeedData.AddSeedToGallery(builder);
-            SeedData.AddSeedToArticle(builder);
             SeedData.AddSeedToCategory(builder);
             SeedData.AddSeedToPost(builder);
             SeedData.AddSeedToService(builder);
             SeedData.AddSeedToColumnist(builder);
             SeedData.AddSeedToColumnistItem(builder);
+            SeedData.AddSeedToRole(builder);
+            SeedData.AddSeedToUser(builder);
+            SeedData.AddSeedToRoleUser(builder);
+            builder.Entity<PermissionCURD>().HasNoKey();
         }
 
         public DbSet<MenuItem> MenuItems { get; set; }
@@ -42,6 +45,9 @@ namespace VNPost.DataAccess.Data
         public DbSet<Columnist> Columnists { get; set; }
         public DbSet<ColumnistItem> ColumnistItems { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<PermissionCURD> PermissionCURDs { get; set; }
+        public DbSet<CURD> CURDs { get; set; }
         public DbSet<IdentityUser> IdentityUsers { get; set; }
         public DbSet<IdentityRole> IdentityRoles { get; set; }
     }

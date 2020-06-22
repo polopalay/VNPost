@@ -60,10 +60,13 @@
         <h3>Tin tức</h3>
         <div class="article">
             <div class="description-article">
-                <img src="@Model.Articles[0].DescriptionImg" id="img" />
-                <h4 id="title">@Model.Articles[0].Title</h4>
-                <p id="date">@Model.Articles[0].DateCreate.ToString("MM/dd/yyyy")</p>
-                <span id="des">@Model.Articles[0].Description</span>
+                @if (Model.Articles.Count > 0)
+                {
+                    <img src="@Model.Articles[0].DescriptionImg" id="img" />
+                    <h4 id="title">@Model.Articles[0].Title</h4>
+                    <p id="date">@Model.Articles[0].DateCreate.ToString("MM/dd/yyyy")</p>
+                    <span id="des">@Model.Articles[0].Description</span>
+                }
             </div>
             <div class="link-to-articles">
                 @for (int i = 0; i < Model.Articles.Count; i++)

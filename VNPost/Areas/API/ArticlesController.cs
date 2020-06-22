@@ -33,6 +33,7 @@ namespace VNPost.Areas.API
             [FromQuery] int columnistId, [FromQuery] int columnistItemId,
             [FromQuery] int numberPostInPage)
         {
+            List<IdentityRole> identityRoles = _unitOfWork.IdentityRole.GetAll().ToList();
             List<Columnist> columnist = _unitOfWork.Columnist.GetAll().ToList();
             List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
             if (index == 0)

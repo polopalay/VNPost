@@ -74,6 +74,19 @@ namespace VNPost.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CURDs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CURDs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Galleries",
                 columns: table => new
                 {
@@ -313,6 +326,32 @@ namespace VNPost.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RolePermissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RoleId = table.Column<string>(nullable: true),
+                    ColumnistItemId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RolePermissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RolePermissions_ColumnistItems_ColumnistItemId",
+                        column: x => x.ColumnistItemId,
+                        principalTable: "ColumnistItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RolePermissions_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Services",
                 columns: table => new
                 {
@@ -332,6 +371,40 @@ namespace VNPost.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "PermissionCURDs",
+                columns: table => new
+                {
+                    RolePermissionId = table.Column<int>(nullable: false),
+                    CRUDId = table.Column<int>(nullable: false),
+                    CURDId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.ForeignKey(
+                        name: "FK_PermissionCURDs_CURDs_CURDId",
+                        column: x => x.CURDId,
+                        principalTable: "CURDs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PermissionCURDs_RolePermissions_RolePermissionId",
+                        column: x => x.RolePermissionId,
+                        principalTable: "RolePermissions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "13d23c51-re38-4831-wqa2-2e3f21c23ewd", "9d93fed2-8e54-4c92-b3dc-a1c236b2a36a", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "01b96c14-de28-4831-afa9-3d1f84b93aed", 0, "d882fc4a-4485-43b2-8dde-d94bc192feaf", "polopalay@gmail.com", true, false, null, "POLOPALAY@GMAIL.COM", "POLOPALAY@GMAIL.COM", "AQAAAAEAACcQAAAAEI2rNt77YvirvqeMB4vQ/CinWEN+kXmoaWNZEEQaXqup94Ko9xg6k9he3Bb/96UM6Q==", null, false, "0d93973f-c47d-47fc-a5f9-6994bdeb95c2", false, "polopalay@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -391,12 +464,12 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Galleries",
                 columns: new[] { "Id", "Description", "ImgDescription", "Title" },
-                values: new object[] { 4, "Văn bản quản lý tem bưu chính", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDc0MDdCNjZGNjU0MTFFNTkxNjFBRTlFMzYwNTdCQ0EiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDc0MDdCNjdGNjU0MTFFNTkxNjFBRTlFMzYwNTdCQ0EiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NzQwN0I2NEY2NTQxMUU1OTE2MUFFOUUzNjA1N0JDQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NzQwN0I2NUY2NTQxMUU1OTE2MUFFOUUzNjA1N0JDQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pq9cyNUAAAYrSURBVHjavFhZbFRV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", "Tem bưu chính" });
+                values: new object[] { 3, "Văn bản quản lý chất lượng dịch vụ", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjkxQTQ0RTZGNjU0MTFFNUExQzg4ODBDMTA1NzU1MDciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjkxQTQ0RTdGNjU0MTFFNUExQzg4ODBDMTA1NzU1MDciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2OTFBNDRFNEY2NTQxMUU1QTFDODg4MEMxMDU3NTUwNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2OTFBNDRFNUY2NTQxMUU1QTFDODg4MEMxMDU3NTUwNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhZuB0EAAAahSURBVHjaxFhZbJVF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", "Quản lý chất lượng" });
 
             migrationBuilder.InsertData(
                 table: "Galleries",
                 columns: new[] { "Id", "Description", "ImgDescription", "Title" },
-                values: new object[] { 3, "Văn bản quản lý chất lượng dịch vụ", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjkxQTQ0RTZGNjU0MTFFNUExQzg4ODBDMTA1NzU1MDciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjkxQTQ0RTdGNjU0MTFFNUExQzg4ODBDMTA1NzU1MDciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2OTFBNDRFNEY2NTQxMUU1QTFDODg4MEMxMDU3NTUwNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2OTFBNDRFNUY2NTQxMUU1QTFDODg4MEMxMDU3NTUwNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhZuB0EAAAahSURBVHjaxFhZbJVF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", "Quản lý chất lượng" });
+                values: new object[] { 4, "Văn bản quản lý tem bưu chính", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDc0MDdCNjZGNjU0MTFFNTkxNjFBRTlFMzYwNTdCQ0EiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDc0MDdCNjdGNjU0MTFFNTkxNjFBRTlFMzYwNTdCQ0EiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NzQwN0I2NEY2NTQxMUU1OTE2MUFFOUUzNjA1N0JDQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NzQwN0I2NUY2NTQxMUU1OTE2MUFFOUUzNjA1N0JDQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pq9cyNUAAAYrSURBVHjavFhZbFRV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", "Tem bưu chính" });
 
             migrationBuilder.InsertData(
                 table: "Galleries",
@@ -446,7 +519,7 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "MenuItems",
                 columns: new[] { "Id", "Key", "Value" },
-                values: new object[] { 2, "US", "data:image/gif;base64,R0lGODlhGwASAPcAAMq6u//19v709awAF//3+KkAGv3p7NUAJcIAIKoAHpYAGu8nSvI9XPV7kPiUpfaUpvmruMaJlPesuuGlr/i3wv3N1ePS1f74+dkAKdkAKtgAKtEAKcgAJsQAJb0AJLQAI64AIacAIaAAH5cAHb0fQOwoUO48X78xTfJuidpje8FYbcNidfR7k8Z2hvejtMaDkMeSnMikq9+UpPrN18rGx8IAO7IANpUALdQ6acZAcs11nc+Iq8+avNG309Ta7zlcvEZnv0Jerh9FpidNqChOqStQqy1SqjFWuDRcvjdfvjJVqzhgvzpiwTlhwDhevDlfvT1jwDdZrT5kwUBmwUFnwkFmwUNow0JnwkRpxENowkRpw0VqxEZrw0dsxElsw0ptxExvxkxvxURjsURksU1wxkxuw05xxVBzxiBJpyFJpyRMqClSrCtRqzNdvjRdvjdgvzdgvjhhvzpjwTpiwDtjwTpivjtjvz5nxD1lwTxkwDxlwD5mwj1lwEFowkNqxENpw0Rqw0VrxD5gsD9hsUhvyElvxUhtxEhuxEtwxUxxxU1yxmeJ0m2N03yZ2ICa1WaJ0meL0m6R1mWDwHOU1XeW1n6c2X+d2n+d2ebd3f/29v/4+P77+8vKygAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAGwASAAAI/wCNCEojRsgYNIOIRFGyJsiNAQUiSpwYccgVM3YU2UlUBYwWLoWc7HDwoKTJkw9aGCGzxAwSM28S6ekCCE8ZHhAk6NzJU0IENXPAuDnjBkwdQ1T6EDpiA4GHp1CjehjBBlGTMHHAzEG0hwsWKYZ6VJhBtqzZGTGGUAk0hwuTLXi6SLHi54mOBizy6t3LYkWRQ3S+LDFER+6WP3eA1DiwobHjxxtCDAG71Y6hKV60ZOESx8emz6BDf+aUBgqcPG3yJOGzBM8SOT9yMDBBu7ZtEyckNYJ06ZGlRZUYUZoUyRGOBSWSK19eggQmAZqgSycQIFMm6Beya9+enUYHDODDi0zHkEFDhvPo058HkQKF+/fw48uHr8KCgfv48+vfnx/ABw4ABijggAQKKMIEFCSo4IIMNrggDDK4IOGEFFZoIYUvJKDAhhx26OGHHgYEADs=" });
+                values: new object[] { 1, "VN", "data:image/gif;base64,R0lGODlhGwASAOYAAOgAAuAACtgAE9YAFdIAGdAAGs8AG8kAH8cAIcAAJb4AJ70AJ7wAJ6sAI5gAH70AKLwAKLsAKLsAKboAKLoAKbkAKrcAK/3/Av3/A/z/BP3/Bfz/Bvn/B/r/B/n/CP7/Af/9Af7/Av/9Av/2Af/6Af/7Af/1Af7rAP7tAP3lAP3fAPzYAPzTAPvQAPrJAPivAPewAPajAPagAPWQAPWUAPWIAPSFAPSAAPN+APOAAPOBAPN9APJ6APF1AO9QAO5OAO5DAO0/AOw5AO02AOwuAOwvAOwlAOslAOseAOsWAOoQAOgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAGwASAAAHxIANgoOEhYaHComKi4yNiw4NjowLko+RlQoJRAiYCpCYCwQtAQyYn5USQxk/FKaXiw8UshYzGjEVshQPjaeKC0k2Ojw7KRgoOTw4NUaUlo0FOx0bHR8kItIdNALNir2+EkgsICXkISpCE9zdr4wSAykXICEmSq2O3osQSiMeHxwYQOzxYreIwg0NLoLA2PACgiR8iRYcWCHDAIUEPU4AcDjQ0YMlPiDsWhChyBGOjCAmSoAyUcuUBDtVguSgps2bOHPiDAQAOw==" });
 
             migrationBuilder.InsertData(
                 table: "MenuItems",
@@ -466,7 +539,7 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "MenuItems",
                 columns: new[] { "Id", "Key", "Value" },
-                values: new object[] { 1, "VN", "data:image/gif;base64,R0lGODlhGwASAOYAAOgAAuAACtgAE9YAFdIAGdAAGs8AG8kAH8cAIcAAJb4AJ70AJ7wAJ6sAI5gAH70AKLwAKLsAKLsAKboAKLoAKbkAKrcAK/3/Av3/A/z/BP3/Bfz/Bvn/B/r/B/n/CP7/Af/9Af7/Av/9Av/2Af/6Af/7Af/1Af7rAP7tAP3lAP3fAPzYAPzTAPvQAPrJAPivAPewAPajAPagAPWQAPWUAPWIAPSFAPSAAPN+APOAAPOBAPN9APJ6APF1AO9QAO5OAO5DAO0/AOw5AO02AOwuAOwvAOwlAOslAOseAOsWAOoQAOgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAGwASAAAHxIANgoOEhYaHComKi4yNiw4NjowLko+RlQoJRAiYCpCYCwQtAQyYn5USQxk/FKaXiw8UshYzGjEVshQPjaeKC0k2Ojw7KRgoOTw4NUaUlo0FOx0bHR8kItIdNALNir2+EkgsICXkISpCE9zdr4wSAykXICEmSq2O3osQSiMeHxwYQOzxYreIwg0NLoLA2PACgiR8iRYcWCHDAIUEPU4AcDjQ0YMlPiDsWhChyBGOjCAmSoAyUcuUBDtVguSgps2bOHPiDAQAOw==" });
+                values: new object[] { 2, "US", "data:image/gif;base64,R0lGODlhGwASAPcAAMq6u//19v709awAF//3+KkAGv3p7NUAJcIAIKoAHpYAGu8nSvI9XPV7kPiUpfaUpvmruMaJlPesuuGlr/i3wv3N1ePS1f74+dkAKdkAKtgAKtEAKcgAJsQAJb0AJLQAI64AIacAIaAAH5cAHb0fQOwoUO48X78xTfJuidpje8FYbcNidfR7k8Z2hvejtMaDkMeSnMikq9+UpPrN18rGx8IAO7IANpUALdQ6acZAcs11nc+Iq8+avNG309Ta7zlcvEZnv0Jerh9FpidNqChOqStQqy1SqjFWuDRcvjdfvjJVqzhgvzpiwTlhwDhevDlfvT1jwDdZrT5kwUBmwUFnwkFmwUNow0JnwkRpxENowkRpw0VqxEZrw0dsxElsw0ptxExvxkxvxURjsURksU1wxkxuw05xxVBzxiBJpyFJpyRMqClSrCtRqzNdvjRdvjdgvzdgvjhhvzpjwTpiwDtjwTpivjtjvz5nxD1lwTxkwDxlwD5mwj1lwEFowkNqxENpw0Rqw0VrxD5gsD9hsUhvyElvxUhtxEhuxEtwxUxxxU1yxmeJ0m2N03yZ2ICa1WaJ0meL0m6R1mWDwHOU1XeW1n6c2X+d2n+d2ebd3f/29v/4+P77+8vKygAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAGwASAAAI/wCNCEojRsgYNIOIRFGyJsiNAQUiSpwYccgVM3YU2UlUBYwWLoWc7HDwoKTJkw9aGCGzxAwSM28S6ekCCE8ZHhAk6NzJU0IENXPAuDnjBkwdQ1T6EDpiA4GHp1CjehjBBlGTMHHAzEG0hwsWKYZ6VJhBtqzZGTGGUAk0hwuTLXi6SLHi54mOBizy6t3LYkWRQ3S+LDFER+6WP3eA1DiwobHjxxtCDAG71Y6hKV60ZOESx8emz6BDf+aUBgqcPG3yJOGzBM8SOT9yMDBBu7ZtEyckNYJ06ZGlRZUYUZoUyRGOBSWSK19eggQmAZqgSycQIFMm6Beya9+enUYHDODDi0zHkEFDhvPo058HkQKF+/fw48uHr8KCgfv48+vfnx/ABw4ABijggAQKKMIEFCSo4IIMNrggDDK4IOGEFFZoIYUvJKDAhhx26OGHHgYEADs=" });
 
             migrationBuilder.InsertData(
                 table: "MenuItems",
@@ -509,9 +582,9 @@ namespace VNPost.DataAccess.Migrations
                 values: new object[] { 10, "Hiện tại chúng tôi có những gian hàng mua sắm online với đầy đủ những sản phẩm tiện ích, đa dạng. Hy vọng sẽ đem đến cho quý khách hàng những trải nghiệm mua sắm mới mẻ nhất. Hãy đến với hệ thống mua sắm trực tuyến của chúng tôi để tìm cho mình những sản phẩm thiết thực nhất.", "Mua sắm trực tuyến" });
 
             migrationBuilder.InsertData(
-                table: "ColumnistItems",
-                columns: new[] { "Id", "ColumnistId", "Name" },
-                values: new object[] { 1, 1, "Hoạt động ngành" });
+                table: "AspNetUserRoles",
+                columns: new[] { "UserId", "RoleId" },
+                values: new object[] { "01b96c14-de28-4831-afa9-3d1f84b93aed", "13d23c51-re38-4831-wqa2-2e3f21c23ewd" });
 
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
@@ -586,6 +659,11 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
                 columns: new[] { "Id", "ColumnistId", "Name" },
+                values: new object[] { 1, 1, "Hoạt động ngành" });
+
+            migrationBuilder.InsertData(
+                table: "ColumnistItems",
+                columns: new[] { "Id", "ColumnistId", "Name" },
                 values: new object[] { 7, 3, "Gương điển hình" });
 
             migrationBuilder.InsertData(
@@ -611,7 +689,7 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "MenuLinks",
                 columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 12, "", "/Posts/Write/WriteArticle", 4, "Viết Bài" });
+                values: new object[] { 12, "", "/Posts/Write/Index", 4, "Bài viết" });
 
             migrationBuilder.InsertData(
                 table: "MenuLinks",
@@ -626,7 +704,7 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "MenuLinks",
                 columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 35, "", "#", 9, "http://www.vnpost.vn/Portals/0/banner/Banner%20Chao%20mung%20DH%20Dang.jpg" });
+                values: new object[] { 36, "", "#", 9, "http://www.vnpost.vn/Portals/0/banner/IT-Banner-02.jpg" });
 
             migrationBuilder.InsertData(
                 table: "MenuLinks",
@@ -636,7 +714,7 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "MenuLinks",
                 columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 36, "", "#", 9, "http://www.vnpost.vn/Portals/0/banner/IT-Banner-02.jpg" });
+                values: new object[] { 35, "", "#", 9, "http://www.vnpost.vn/Portals/0/banner/Banner%20Chao%20mung%20DH%20Dang.jpg" });
 
             migrationBuilder.InsertData(
                 table: "MenuLinks",
@@ -759,21 +837,6 @@ namespace VNPost.DataAccess.Migrations
                 values: new object[] { 1, "Là dịch vụ chuyển phát nhanh thư, tài liệu, vật phẩm, hàng hóa từ người gửi đến người nhận giữa Việt Nam trong nước và các nước trên thế giới trong khuôn khổ Liên minh Bưu chính Thế giới (UPU) và Hiệp hội EMS theo chỉ tiêu thời gian được Công ty Cổ phần Chuyển Phát Nhanh Bưu điện công bố trước. Chi tiết xin tham khảo tại website: www.ems.com.vn", "http://www.vnpost.vn/ImageCaching.ashx?file=%2fPortals%2f0%2fEMS-2.jpg&size=3&ver=7", 1, "Chuyển phát nhanh EMS" });
 
             migrationBuilder.InsertData(
-                table: "Articles",
-                columns: new[] { "Id", "Author", "ColumnistItemId", "Content", "DateCreate", "Description", "DescriptionImg", "Title", "View" },
-                values: new object[] { 1, "", 1, "<p> Nhiều tháng vừa qua là khoảng thời gian đầy thách thức đối với Bưu chính các nước hoạt động trên tuyến đầu chống đại dịch toàn cầu. Nhưng đây cũng là thời điểm thể hiện nỗ lực bền bỉ và đổi mới của Bưu chính các nước bằng việc mở rộng cung ứng các dịch vụ xã hội, tài chính và thương mại để hỗ trợ chính phủ.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/anh%20upu.jpg?ver=2020-06-13-091631-810\" /><i>Bưu chính Costa Rica</i></div><p>Những hoạt động đã tạo ra nhiều mối quan đối tác mới và phát triển nhiều mô hình kinh doanh mới. Điển hình là mô hình Bưu chính Costa Rica hợp tác với các công ty cho thuê xe tư nhân để chuyển phát thuốc; Bưu điện Việt Nam với chuyên môn về bản đồ đã hỗ trợ chính phủ trong việc tra cứu bản đồ dịch về các trường hợp nhiễm COVID-19, và Bưu chính Azerbaijan chuyển phát thực phẩm cho các tổ chức từ thiện.</p><br /><br /><p>Ghi nhận các giải pháp năng động của các nhà khai thác bưu chính trong việc ứng phó với khủng hoảng kinh tế và sức khỏe toàn cầu, UPU đã xây dựng một nền tảng chuyên ngành để tổng hợp và đăng thông tin nổi bật về các giải pháp điển hình thiết thực về đổi mới hoạt động kinh doanh các dịch vụ xã hội, tài chính.</p><br /><br /><p>Bưu chính các nước trên thế giới đã tham gia diễn đàn này của UPU để chia sẻ kiến thức mới, và những kiến thức thông tin này đã được bưu chính các nước đóng góp thông qua những tin, bài và các tham luận chuyên đề. Đây cũng là một nguồn tham khảo hữu ích trong việc thể hiện với chính phủ về vai trò của Bưu chính là một dịch vụ cần thiết.</p><br /><br />", new DateTime(2020, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nhiều tháng vừa qua là khoảng thời gian đầy thách thức đối với Bưu chính các nước hoạt động trên tuyến đầu chống đại dịch toàn cầu. Nhưng đây cũng là thời điểm thể hiện nỗ lực bền bỉ và đổi mới của Bưu chính các nước bằng việc mở rộng cung ứng các dịch vụ xã hội, tài chính và thương mại để hỗ trợ chính phủ.", "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/anh%20upu.jpg?ver=2020-06-13-091631-810", "Bưu chính đẩy mạnh quan hệ đối tác để đột phá thời COVID-19", 0 });
-
-            migrationBuilder.InsertData(
-                table: "Articles",
-                columns: new[] { "Id", "Author", "ColumnistItemId", "Content", "DateCreate", "Description", "DescriptionImg", "Title", "View" },
-                values: new object[] { 3, "Trung Kiên", 12, "<p> Sáng 12/6/2020, Cụm Công đoàn số 6 gồm công đoàn các đơn vị BĐT Nam Định, Thái Bình, Hà Nam, Ninh Bình, Thanh Hóa tổ chức Hội nghị Cụm Công đoàn theo hình thức trực tuyến nhằm trao đổi kinh nghiệm, giải pháp để hoàn thành kế hoạch sản xuất kinh doanh 2020. Dự hội nghị có Phó Tổng giám đốc Chu Thị Lan Hương, Chủ tịch Công đoàn Tổng công ty Trần Đức Thích.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Chi%20Huong%20phat%20bieu.jpg?ver=2020-06-12-144406-523\" /><i>Đồng chí Chu Thị Lan Hương chỉ đạo các đơn vị tại Hội nghị</i></div><p>Tại Hội nghị, đồng chí Chu Thị Lan Hương đánh giá cao kết quả hoạt động sản xuất kinh doanh của các đơn vị trong cụm công đoàn số 6 trong 5 tháng đầu năm 2020. Đồng thời chỉ đạo các đơn vị cần tiếp tục phát huy trong thời gian còn lại của năm 2020, đảm bảo hoàn thành các chỉ tiêu kế hoạch mà Tổng công ty đã giao. Đồng chí cũng lưu ý các đơn vị cần đẩy mạnh hoạt động sản xuất kinh doanh để đảm bảo đời sống cho người lao động, đồng thời xây dựng môi trường làm việc thân thiện, vui vẻ, đoàn kết với mục tiêu cùng nhau phát triển.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Ca%20don%20vi%20tai%20diem%20cau.jpg?ver=2020-06-12-144523-527\"/><i>Hội nghị Cụm Công đoàn số 6 được kết nối qua hệ thống hội nghị truyền hình của Tổng công ty </i></div><p>Chủ tịch Công đoàn nhấn mạnh, song song với việc phối hợp cùng chuyên môn triển khai các chương trình thi đua, Công đoàn các đơn vị cần phát huy vai trò của mình trong việc bảo vệ quyền và lợi ích hợp pháp của người lao động, thực hiện đầy đủ chế độ, cơ chế, chính sách chăm sóc người lao động; giám sát việc thực hiện quy chế dân chủ cơ sở trong đó quan tâm đến hoạt động đối thoại định kỳ tại đơn vị nhằm giải quyết những vướng mắc phát sinh kịp thời, tránh để lâu, vượt cấp… để người lao động yên tâm công tác, cống hiến và gắn bó với công việc, đơn vị.</p><br /><br />", new DateTime(2020, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sáng 12/6/2020, Cụm Công đoàn số 6 gồm công đoàn các đơn vị BĐT Nam Định, Thái Bình, Hà Nam, Ninh Bình, Thanh Hóa tổ chức Hội nghị Cụm Công đoàn theo hình thức trực tuyến nhằm trao đổi kinh nghiệm, giải pháp để hoàn thành kế hoạch sản xuất kinh doanh 2020. Dự hội nghị có Phó Tổng giám đốc Chu Thị Lan Hương, Chủ tịch Công đoàn Tổng công ty Trần Đức Thích.", "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/Chi%20Huong%20phat%20bieu.jpg?ver=2020-06-12-144406-523", "Hội nghị Cụm Công đoàn số 6: Các giải pháp nhằm hoàn thành kế hoạch sản xuất kinh doanh năm 2020", 0 });
-
-            migrationBuilder.InsertData(
-                table: "Articles",
-                columns: new[] { "Id", "Author", "ColumnistItemId", "Content", "DateCreate", "Description", "DescriptionImg", "Title", "View" },
-                values: new object[] { 2, "", 13, "<p> Quan hệ hợp tác hiệu quả giữa Bưu chính các nước, các cơ quan quản lý Nhà nước, tổ chức phi chính phủ (NGOs) và tổ chức doanh nghiệp thuộc khu vực kinh tế tư nhân.</p><br /><br /><div><img src=\"http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/chi%20tra_anh%203.jpg?ver=2020-06-13-094031-953\" /><i>Bưu điện Việt Nam thực hiện chi trả lương hưu tại nhà trong dịch Covid-19</i></div><p><b>Đánh giá chung:</b>Quan hệ đối tác hiệu quả là yếu tố sống còn đối với Bưu chính các nước để đa dạng hóa các loại hình cung cấp dịch vụ xã hội mới. Áp lực khiến Bưu chính các nước có giải pháp ứng phó nhanh với đại dịch COVID-19 nhằm hỗ trợ người dân và Chính phủ càng nhấn mạnh thêm giá trị của sự hợp tác mà trong đó, các bên liên quan cùng nhau chia sẻ mọi nguồn lực vì mục tiêu chung. Trong bài viết này, chúng tôi khai thác vai trò của việc đẩy mạnh hợp tác đối tác để cung cấp các dịch vụ chuyển phát trang thiết bị y tế, giải pháp bản đồ số và cung ứng dịch vụ chuyển phát bưu kiện là thực phẩm của Bưu chính Costa Rica, Bưu điện Việt Nam và Bưu chính Azerbaijan. Việc xác định rõ trách nhiệm, xây dựng các kênh hợp tác và xây dựng quy trình triển khai là chìa khóa của sự thành công trong các dự án này.</p><br /><br /><p><b>Nhiều thách thức lớn gồm:</b>tìm nguồn cung ứng đủ sản phẩm trong vài ngày đầu tiên, đảm bảo quy định giấy phép vận chuyển chất có cồn và tổ chức các địa điểm tiếp nhận và xử lý đơn hàng.</p><br /><br />", new DateTime(2020, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Quan hệ hợp tác hiệu quả giữa Bưu chính các nước, các cơ quan quản lý Nhà nước, tổ chức phi chính phủ (NGOs) và tổ chức doanh nghiệp thuộc khu vực kinh tế tư nhân.", "http://www.vnpost.vn/Portals/0/anh%20tin%20tuc/2020-1/Thang%206/chi%20tra_anh%203.jpg?ver=2020-06-13-094031-953", "Đẩy mạnh quan hệ đối tác để cùng ứng phó với đại dịch COVID-19", 0 });
-
-            migrationBuilder.InsertData(
                 table: "Services",
                 columns: new[] { "Id", "Content", "Name", "PostId" },
                 values: new object[] { 1, "<p>Toàn quốc và trên 100 quốc gia và vùng lãnh thổ khắp thế giới theo thoả thuận giữa Công ty và Bưu chính các nước thuộc Liên minh Bưu chính Thế giới (UPU) hoặc các đối tác khác.</p>", "Phạm vi cung cấp", 1 });
@@ -844,6 +907,16 @@ namespace VNPost.DataAccess.Migrations
                 column: "ColumnistItemId");
 
             migrationBuilder.CreateIndex(
+                name: "Index_Article_Date",
+                table: "Articles",
+                column: "DateCreate");
+
+            migrationBuilder.CreateIndex(
+                name: "Index_Article_View",
+                table: "Articles",
+                column: "View");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -891,9 +964,29 @@ namespace VNPost.DataAccess.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PermissionCURDs_CURDId",
+                table: "PermissionCURDs",
+                column: "CURDId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PermissionCURDs_RolePermissionId",
+                table: "PermissionCURDs",
+                column: "RolePermissionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Posts_GalleryId",
                 table: "Posts",
                 column: "GalleryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolePermissions_ColumnistItemId",
+                table: "RolePermissions",
+                column: "ColumnistItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolePermissions_RoleId",
+                table: "RolePermissions",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Services_PostId",
@@ -931,13 +1024,10 @@ namespace VNPost.DataAccess.Migrations
                 name: "MenuLinks");
 
             migrationBuilder.DropTable(
+                name: "PermissionCURDs");
+
+            migrationBuilder.DropTable(
                 name: "Services");
-
-            migrationBuilder.DropTable(
-                name: "ColumnistItems");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
@@ -946,13 +1036,25 @@ namespace VNPost.DataAccess.Migrations
                 name: "MenuLocations");
 
             migrationBuilder.DropTable(
+                name: "CURDs");
+
+            migrationBuilder.DropTable(
+                name: "RolePermissions");
+
+            migrationBuilder.DropTable(
                 name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "Columnists");
+                name: "ColumnistItems");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Galleries");
+
+            migrationBuilder.DropTable(
+                name: "Columnists");
         }
     }
 }

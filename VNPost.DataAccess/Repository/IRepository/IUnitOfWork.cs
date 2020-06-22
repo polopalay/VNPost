@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace VNPost.DataAccess.Repository.IRepository
 {
@@ -16,6 +17,11 @@ namespace VNPost.DataAccess.Repository.IRepository
         IServiceRepository Service { get; }
         IColumnistRepository Columnist { get; }
         IColumnistItemRepository ColumnistItem { get; }
+        IRolePermissionRepository RolePermission { get; }
+        IPermissionCURDRepository PermissionCURD { get; }
+        ICURDRepository CURD { get; }
+        IIdentityUserRepository IdentityUser { get; }
+        IIdentityRoleRepository IdentityRole { get; }
         void Save();
     }
 }
