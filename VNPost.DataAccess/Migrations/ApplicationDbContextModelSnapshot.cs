@@ -246,6 +246,12 @@ namespace VNPost.DataAccess.Migrations
 
                     b.HasIndex("ColumnistItemId");
 
+                    b.HasIndex("DateCreate")
+                        .HasName("Index_Article_Date");
+
+                    b.HasIndex("View")
+                        .HasName("Index_Article_View");
+
                     b.ToTable("Articles");
 
                     b.HasData(

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VNPost.Models.Entity;
@@ -18,6 +19,7 @@ namespace VNPost.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            AddIndex.AddIndexToArticle(builder);
             SeedData.AddSeedDataToMenuItem(builder);
             SeedData.AddSeedDataToMenuLocation(builder);
             SeedData.AddSeedDataToMenuLink(builder);
@@ -40,5 +42,7 @@ namespace VNPost.DataAccess.Data
         public DbSet<Columnist> Columnists { get; set; }
         public DbSet<ColumnistItem> ColumnistItems { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<IdentityUser> IdentityUsers { get; set; }
+        public DbSet<IdentityRole> IdentityRoles { get; set; }
     }
 }

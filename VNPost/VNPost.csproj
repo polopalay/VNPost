@@ -49,7 +49,6 @@
     <Folder Include="wwwroot\css\post\writer\" />
     <Folder Include="wwwroot\js\posts\" />
     <Folder Include="wwwroot\js\posts\write\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Areas\API\" />
     <Folder Include="wwwroot\js\posts\article\" />
   </ItemGroup>
