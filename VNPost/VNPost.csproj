@@ -12,6 +12,7 @@
     <EmbeddedResource Remove="wwwroot\img\**" />
     <None Remove="wwwroot\img\**" />
     <Content Remove="wwwroot\favicon.ico" />
+    <Content Remove="wwwroot\lib\_ViewImports.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,5 +52,9 @@
     <Folder Include="wwwroot\js\posts\write\" />
     <Folder Include="Areas\API\" />
     <Folder Include="wwwroot\js\posts\article\" />
+    <Folder Include="Areas\Admin\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\Admin\Views\Manager\" />
   </ItemGroup>
 </Project>

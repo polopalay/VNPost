@@ -27,6 +27,7 @@ namespace VNPost.DataAccess.Repository
         public ICURDRepository CURD { get; }
         public IIdentityUserRepository IdentityUser { get; }
         public IIdentityRoleRepository IdentityRole { get; }
+        public IIdentityUserRoleRepository IdentityUserRole { get; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -45,6 +46,7 @@ namespace VNPost.DataAccess.Repository
             CURD = new CURDRepository(_db);
             IdentityUser = new IdentityUserRepository(_db);
             IdentityRole = new IdentityRoleRepository(_db);
+            IdentityUserRole = new IdentityUserRoleRepository(_db);
         }
 
         public void Dispose()

@@ -22,6 +22,7 @@ namespace VNPost.DataAccess.Repository.IRepository
         ICURDRepository CURD { get; }
         IIdentityUserRepository IdentityUser { get; }
         IIdentityRoleRepository IdentityRole { get; }
+        IIdentityUserRoleRepository IdentityUserRole { get; }
         void Save();
     }
 }
