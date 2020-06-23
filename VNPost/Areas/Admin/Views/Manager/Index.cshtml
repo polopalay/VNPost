@@ -1,40 +1,22 @@
-﻿@page
-@{
+﻿@section Styles{
+    <link rel="stylesheet" href="~/css/admin/manager/index.css" />
 }
 <div class="container">
-    <ul>
-        <li>
-            <label><input type="checkbox" value="">Option 1</label>
-            <ul>
-                <li>
-                    <label><input type="checkbox" value="">Option 1</label>
-                    <label><input type="checkbox" value="">Option 1</label>
-                    <label><input type="checkbox" value="">Option 1</label>
-                    <label><input type="checkbox" value="">Option 1</label>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <label><input type="checkbox" value="">Option 1</label>
-            <ul>
-                <li>
-                    <label><input type="checkbox" value="">Option 1</label>
-                    <label><input type="checkbox" value="">Option 1</label>
-                    <label><input type="checkbox" value="">Option 1</label>
-                    <label><input type="checkbox" value="">Option 1</label>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <label><input type="checkbox" value="">Option 1</label>
-            <ul>
-                <li>
-                    <label><input type="checkbox" value="">Option 1</label>
-                    <label><input type="checkbox" value="">Option 1</label>
-                    <label><input type="checkbox" value="">Option 1</label>
-                    <label><input type="checkbox" value="">Option 1</label>
-                </li>
-            </ul>
-        </li>
-    </ul>
+    <div>
+        <h3 class="text-info">Danh sách các chuyên mục</h3>
+        <ul id="columnistContainer">
+        </ul>
+    </div>
+    <div>
+        <h3 class="text-info">Các chuyên mục được cho phép</h3>
+        <select id="list-columnist" class="form-control"></select>
+    </div>
+    <div>
+        <h3 class="text-info">Quyền hạn</h3>
+        <ul id="curdContainer">
+        </ul>
+    </div>
 </div>
+@section Scripts{
+    <script src="~/js/admin/manager/index.js"></script>
+}

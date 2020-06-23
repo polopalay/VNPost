@@ -32,6 +32,7 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedToRole(builder);
             SeedData.AddSeedToUser(builder);
             SeedData.AddSeedToRoleUser(builder);
+            SeedData.AddSeedToCURD(builder);
             builder.Entity<PermissionCURD>().HasNoKey();
         }
 

@@ -156,6 +156,13 @@ namespace VNPost.Utility
         {
             builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string> { RoleId = "13d23c51-re38-4831-wqa2-2e3f21c23ewd", UserId = "01b96c14-de28-4831-afa9-3d1f84b93aed" });
         }
+
+        public static void AddSeedToCURD(ModelBuilder builder)
+        {
+            builder.Entity<CURD>().HasData(new CURD { Id = 1, Name = "Create" });
+            builder.Entity<CURD>().HasData(new CURD { Id = 2, Name = "Insert" });
+            builder.Entity<CURD>().HasData(new CURD { Id = 3, Name = "Update" });
+        }
     }
 }
 

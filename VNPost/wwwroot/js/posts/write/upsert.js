@@ -85,7 +85,11 @@ function loadForm() {
     getData();
     $('#content').summernote({
         tabsize: 2,
-        height: 500,
+    });
+    $(function () {
+        $('#content').each(function () {
+            $(this).height($(this).prop('scrollHeight'));
+        });
     });
     $("#comlumnist").change(function () {
         loadColumnistItem();

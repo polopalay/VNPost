@@ -56,5 +56,9 @@
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Admin\Views\Manager\" />
+    <Folder Include="wwwroot\css\admin\" />
+    <Folder Include="wwwroot\css\admin\manager\" />
+    <Folder Include="wwwroot\js\admin\" />
+    <Folder Include="wwwroot\js\admin\manager\" />
   </ItemGroup>
 </Project>

@@ -45,7 +45,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "9d93fed2-8e54-4c92-b3dc-a1c236b2a36a",
+                            ConcurrencyStamp = "debac651-70f9-4bb9-a979-6428d56bbbf5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -142,7 +142,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d882fc4a-4485-43b2-8dde-d94bc192feaf",
+                            ConcurrencyStamp = "e8e171e6-591e-4f77-b89c-10f5fc0afdbc",
                             Email = "polopalay@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -150,7 +150,7 @@ namespace VNPost.DataAccess.Migrations
                             NormalizedUserName = "POLOPALAY@GMAIL.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAEI2rNt77YvirvqeMB4vQ/CinWEN+kXmoaWNZEEQaXqup94Ko9xg6k9he3Bb/96UM6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0d93973f-c47d-47fc-a5f9-6994bdeb95c2",
+                            SecurityStamp = "4110671b-847b-48e2-bced-62356dc8e1f7",
                             TwoFactorEnabled = false,
                             UserName = "polopalay@gmail.com"
                         });
@@ -301,6 +301,23 @@ namespace VNPost.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CURDs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Create"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Insert"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Update"
+                        });
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.Category", b =>

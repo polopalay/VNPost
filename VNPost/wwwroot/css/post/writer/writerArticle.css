@@ -49,9 +49,17 @@
         }
 
         #form form > div > a {
-            color:white;
+            color: white;
             line-height: 3rem;
         }
+
+.note-toolbar.card-header {
+    background-color: lightgray;
+    position: sticky;
+    top: 0;
+    opacity: 1;
+    z-index: 1;
+}
 
 @media (max-width: 694px) {
     #form form .contain-input .div-input {
