@@ -1,0 +1,46 @@
+﻿.container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+}
+
+    .container > div {
+        padding: 0 0.3rem;
+    }
+
+        .container > div > ul {
+            list-style: none;
+        }
+
+            .container > div > ul label {
+                padding: 0.3rem 0;
+            }
+
+            .container > div > ul input {
+                margin-right: 0.4rem;
+                cursor: pointer;
+            }
+
+            .container > div > ul > li > ul {
+                list-style: none;
+                padding-left: 1rem;
+                display: flex;
+                flex-direction: column;
+            }
+
+.form > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+    .form > div > input {
+        width: 40%;
+        margin-bottom: 1rem;
+    }
+
+    .form > div > button {
+        width: 20%;
+    }
