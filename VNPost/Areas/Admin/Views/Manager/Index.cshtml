@@ -1,4 +1,7 @@
-﻿@section Styles{
+﻿@{
+    ViewData["Title"] = "VNPost";
+}
+@section Styles{
     <link rel="stylesheet" href="~/css/admin/manager/index.css" />
 }
 <div class="container">
@@ -9,12 +12,18 @@
     </div>
     <div>
         <h3 class="text-info">Các chuyên mục được cho phép</h3>
-        <select id="list-columnist" class="form-control"></select>
+        <select id="listColumnist" class="form-control"></select>
     </div>
     <div>
         <h3 class="text-info">Quyền hạn</h3>
         <ul id="curdContainer">
         </ul>
+    </div>
+</div>
+<div class="container form">
+    <div>
+        <input type="text" class="form-control" />
+        <button type="button" onclick="submit()" class="btn btn-success">Lưu</button>
     </div>
 </div>
 @section Scripts{

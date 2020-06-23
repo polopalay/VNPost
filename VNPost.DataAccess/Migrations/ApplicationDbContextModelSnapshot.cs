@@ -45,7 +45,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "debac651-70f9-4bb9-a979-6428d56bbbf5",
+                            ConcurrencyStamp = "24df3682-6fd9-42e4-95df-a4cff79ac6a6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -142,7 +142,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e8e171e6-591e-4f77-b89c-10f5fc0afdbc",
+                            ConcurrencyStamp = "d08e4013-2c3d-41ba-8c52-acff5b6acbf0",
                             Email = "polopalay@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -150,7 +150,7 @@ namespace VNPost.DataAccess.Migrations
                             NormalizedUserName = "POLOPALAY@GMAIL.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAEI2rNt77YvirvqeMB4vQ/CinWEN+kXmoaWNZEEQaXqup94Ko9xg6k9he3Bb/96UM6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4110671b-847b-48e2-bced-62356dc8e1f7",
+                            SecurityStamp = "1fdd9b91-1c08-4a92-9277-b5a8231039b4",
                             TwoFactorEnabled = false,
                             UserName = "polopalay@gmail.com"
                         });
@@ -1094,8 +1094,17 @@ namespace VNPost.DataAccess.Migrations
                     b.Property<int>("ColumnistItemId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Create")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Delete")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("RoleId")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("Update")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

@@ -13,5 +13,8 @@ namespace VNPost.Models.Entity
         public int ColumnistItemId { get; set; }
         [ForeignKey("ColumnistItemId")]
         public ColumnistItem ColumnistItem { get; set; }
+        public bool Create { get; set; }
+        public bool Update { get; set; }
+        public bool Delete { get; set; }
     }
 }
