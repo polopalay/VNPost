@@ -201,14 +201,26 @@ function addOptionToCurd() {
 }
 
 function submit() {
+    let dataToSend = [];
+    permisions.forEach(item => {
+        let data = { Id: item.id, CURDs: [] };
+        //item.curd.forEach(curdItem => {
+        //    let curdData = { Id: curdItem.id, State: curdItem.state };
+        //    data.CURDs.push(curdData);
+        //});
+
+        dataToSend.push(data);
+
+    });
+
     $.ajax({
         type: "POST",
-        data: JSON.stringify(permisions),
+        data: JSON.stringify(dataToSend),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         url: "/api/permision",
     }).done(function (data) {
-        alert('done');
+        console.log(data);
     });
 }
 

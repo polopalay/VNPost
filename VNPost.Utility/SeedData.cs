@@ -160,8 +160,8 @@ namespace VNPost.Utility
         public static void AddSeedToCURD(ModelBuilder builder)
         {
             builder.Entity<CURD>().HasData(new CURD { Id = 1, Name = "Create" });
-            builder.Entity<CURD>().HasData(new CURD { Id = 2, Name = "Insert" });
-            builder.Entity<CURD>().HasData(new CURD { Id = 3, Name = "Update" });
+            builder.Entity<CURD>().HasData(new CURD { Id = 2, Name = "Update" });
+            builder.Entity<CURD>().HasData(new CURD { Id = 3, Name = "Delete" });
         }
     }
 }

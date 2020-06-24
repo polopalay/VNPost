@@ -6,6 +6,18 @@ namespace VNPost.Models.Entity
 {
     public class RolePermission
     {
+        public RolePermission()
+        {
+        }
+
+        public RolePermission(int columnistItemId, bool create, bool update, bool delete)
+        {
+            ColumnistItemId = columnistItemId;
+            Create = create;
+            Update = update;
+            Delete = delete;
+        }
+
         public int Id { get; set; }
         public string RoleId { get; set; }
         [ForeignKey("RoleId")]

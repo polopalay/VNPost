@@ -23,15 +23,15 @@ namespace VNPost.Areas.API
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] List<object> data)
+        public IActionResult Post([FromBody] List<Object> data)
         {
-            string s = data[0].ToString();
-            var list = data[0].GetType().GetProperties();
+            //string x = data[0];
+            //var list = data[0].GetType().GetProperties();
             if (true)
             {
 
             }
-            return Ok();
+            return Ok(data);
         }
 
         [HttpPut("{id}")]
@@ -45,5 +45,37 @@ namespace VNPost.Areas.API
         {
             return Ok();
         }
+    }
+
+   public class DataFromClient
+    {
+        public DataFromClient()
+        {
+        }
+
+        public DataFromClient(int id, List<CURDFromClient> cURDs)
+        {
+            Id = id;
+            CURDs = cURDs;
+        }
+
+        public int Id { get; set; }
+        public List<CURDFromClient> CURDs { get; set; }
+    }
+
+   public class CURDFromClient
+    {
+        public CURDFromClient()
+        {
+        }
+
+        public CURDFromClient(int id, bool state)
+        {
+            Id = id;
+            State = state;
+        }
+
+        public int Id { get; set; }
+        public bool State { get; set; }
     }
 }
