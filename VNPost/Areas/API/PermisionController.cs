@@ -2,36 +2,77 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using VNPost.DataAccess.Repository;
+using VNPost.DataAccess.Repository.IRepository;
 using VNPost.Models.Entity;
+using VNPost.Utility;
 
 namespace VNPost.Areas.API
 {
     [Route("api/[controller]")]
-    public class PermisionController : Controller
+    [ApiController]
+    public class PermisionController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly IUnitOfWork _unitOfWork;
+        public PermisionController(IUnitOfWork unitOfWork)
         {
-            return Ok();
+            _unitOfWork = unitOfWork;
+        }
+        [HttpGet]
+        public IActionResult Get([FromQuery] bool getPagination, [FromQuery] int index, [FromQuery] int numberPostInPage)
+        {
+            if (index == 0)
+            {
+                index = 1;
+            }
+            if (numberPostInPage == 0)
+            {
+                numberPostInPage = 10;
+            }
+            List<IdentityRole> role = _unitOfWork.IdentityRole.GetAll().Where(r=>r.Id!= "13d23c51-re38-4831-wqa2-2e3f21c23ewd").ToList();
+            Pagination<IdentityRole> pagination = new Pagination<IdentityRole>(role, index, numberPostInPage);
+            if (getPagination)
+            {
+                return Ok(pagination.SortPagination());
+            }
+            else
+            {
+                return Ok(JsonConvert.SerializeObject(new { data = pagination.ListT }));
+            }
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok();
+            return Ok(JsonConvert.SerializeObject(new { data = "" }));
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] List<Object> data)
+        public IActionResult Post([FromQuery] string name, [FromBody] List<RolePermission> data)
         {
-            //string x = data[0];
-            //var list = data[0].GetType().GetProperties();
-            if (true)
+            if (name == null)
             {
-
+                return Ok(new { success = false, message = "Error while inserting" });
             }
-            return Ok(data);
+            IdentityRole role = new IdentityRole(name);
+            try
+            {
+                _unitOfWork.IdentityRole.Add(role);
+                foreach (RolePermission rolePermission in data)
+                {
+                    rolePermission.RoleId = role.Id;
+                    _unitOfWork.RolePermission.Add(rolePermission);
+                }
+            }
+            catch
+            {
+                return Ok(new { success = false, message = "Error while inserting" });
+            }
+            _unitOfWork.Save();
+            return Ok(new { success = true, message = "Insert Successful" });
         }
 
         [HttpPut("{id}")]
@@ -41,41 +82,19 @@ namespace VNPost.Areas.API
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult DeleteArticle(string id)
         {
-            return Ok();
+            var objFromDb = _unitOfWork.IdentityRole.Get(id);
+            if (objFromDb == null)
+            {
+                return Ok(new { success = false, message = "Error while deleting" });
+            }
+            _unitOfWork.RolePermission.RemoveRange(_unitOfWork.RolePermission.GetAll().Where(x=>x.RoleId==id));
+            _unitOfWork.IdentityUserRole.RemoveRange(_unitOfWork.IdentityUserRole.GetAll().Where(x => x.RoleId == id));
+            _unitOfWork.IdentityRole.Remove(objFromDb);
+            _unitOfWork.Save();
+            return Ok(new { success = true, message = "Delete Successful" });
+
         }
-    }
-
-   public class DataFromClient
-    {
-        public DataFromClient()
-        {
-        }
-
-        public DataFromClient(int id, List<CURDFromClient> cURDs)
-        {
-            Id = id;
-            CURDs = cURDs;
-        }
-
-        public int Id { get; set; }
-        public List<CURDFromClient> CURDs { get; set; }
-    }
-
-   public class CURDFromClient
-    {
-        public CURDFromClient()
-        {
-        }
-
-        public CURDFromClient(int id, bool state)
-        {
-            Id = id;
-            State = state;
-        }
-
-        public int Id { get; set; }
-        public bool State { get; set; }
     }
 }

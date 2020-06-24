@@ -12,5 +12,10 @@ namespace VNPost.DataAccess.Repository.IRepository
         {
             _db = db;
         }
+
+        public IdentityRole Get(string id)
+        {
+            return dbSet.Find(id);
+        }
     }
 }

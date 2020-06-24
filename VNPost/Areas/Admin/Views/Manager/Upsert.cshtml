@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "VNPost";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/css/admin/manager/upsert.css" />
+}
+<div class="container">
+    <div>
+        <h3 class="text-info">Danh sách các chuyên mục</h3>
+        <ul id="columnistContainer">
+        </ul>
+    </div>
+    <div>
+        <h3 class="text-info">Các chuyên mục được cho phép</h3>
+        <select id="listColumnist" class="form-control"></select>
+    </div>
+    <div>
+        <h3 class="text-info">Quyền hạn</h3>
+        <ul id="curdContainer">
+        </ul>
+    </div>
+</div>
+<div class="container form">
+    <div>
+        <input type="text" id="name" class="form-control" />
+        <button type="button" onclick="submit();" class="btn btn-success">Lưu</button>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/admin/manager/upsert.js"></script>
+}

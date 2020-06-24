@@ -2,30 +2,32 @@
     ViewData["Title"] = "VNPost";
 }
 @section Styles{
-    <link rel="stylesheet" href="~/css/admin/manager/index.css" />
 }
-<div class="container">
-    <div>
-        <h3 class="text-info">Danh sách các chuyên mục</h3>
-        <ul id="columnistContainer">
-        </ul>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Danh sách các loại người dùng</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a class="btn btn-info" asp-action="Upsert"><i class="fas fa-plus"></i>Tạo loại người dùng mới</a>
+        </div>
     </div>
-    <div>
-        <h3 class="text-info">Các chuyên mục được cho phép</h3>
-        <select id="listColumnist" class="form-control"></select>
-    </div>
-    <div>
-        <h3 class="text-info">Quyền hạn</h3>
-        <ul id="curdContainer">
-        </ul>
-    </div>
+    <table class="table" width="100%" id="tblData">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <ul class="pagination pagination-lg mt-3" id="pagination">
+    </ul>
 </div>
-<div class="container form">
-    <div>
-        <input type="text" class="form-control" />
-        <button type="button" onclick="submit();" class="btn btn-success">Lưu</button>
-    </div>
-</div>
+
 @section Scripts{
     <script src="~/js/admin/manager/index.js"></script>
 }

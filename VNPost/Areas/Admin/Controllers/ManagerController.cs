@@ -21,14 +21,18 @@ namespace VNPost.Areas.Admin.Controllers
             _signInManager = signInManager;
             _unitOfWork = unitOfWork;
         }
-        public async Task<IActionResult> IndexAsync()
+        public IActionResult Index()
         {
             if (_signInManager.IsSignedIn(User))
             {
-                IdentityUser userName = await _userManager.FindByEmailAsync(User.Identity.Name);
-                List<IdentityRole> roles = _unitOfWork.IdentityRole.GetAll().ToList();
-                List<IdentityUserRole<string>> userRoles = _unitOfWork.IdentityUserRole.GetAll().ToList();
-                List<IdentityUser> user = _unitOfWork.IdentityUser.GetAll().ToList();
+            }
+            return View();
+        }
+
+        public IActionResult Upsert()
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
             }
             return View();
         }
