@@ -179,7 +179,9 @@ function addOptionToCurd() {
                 permisions.filter(x => x.id == $("#listColumnist").val())[0].curd.filter(x => x.id == curdItem.id)[0].state = $(this).is(':checked');
                 let allIsFalse = false;
                 permisions.filter(x => x.id == $("#listColumnist").val())[0].curd.forEach(curdState => {
-                    allIsFalse = curdState.state;
+                    if (curdState.state) {
+                        allIsFalse = curdState.state;
+                    }
                 });
                 /*if all checkbox curd is unchecked, uncheck columnist item*/
                 if (!allIsFalse) {
