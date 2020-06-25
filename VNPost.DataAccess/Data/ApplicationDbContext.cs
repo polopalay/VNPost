@@ -33,7 +33,6 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedToUser(builder);
             SeedData.AddSeedToRoleUser(builder);
             SeedData.AddSeedToCURD(builder);
-            builder.Entity<PermissionCURD>().HasNoKey();
         }
 
         public DbSet<MenuItem> MenuItems { get; set; }
@@ -47,7 +46,6 @@ namespace VNPost.DataAccess.Data
         public DbSet<ColumnistItem> ColumnistItems { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
-        public DbSet<PermissionCURD> PermissionCURDs { get; set; }
         public DbSet<CURD> CURDs { get; set; }
         public DbSet<IdentityUser> IdentityUsers { get; set; }
         public DbSet<IdentityRole> IdentityRoles { get; set; }

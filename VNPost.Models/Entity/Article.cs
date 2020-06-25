@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace VNPost.Models.Entity
 {
@@ -58,6 +59,9 @@ namespace VNPost.Models.Entity
         public int ColumnistItemId { get; set; }
         [ForeignKey("ColumnistItemId")]
         public ColumnistItem ColumnistItem { get; set; }
+        public string IdentityUserId { get; set; }
+        [ForeignKey("IdentityUserId")]
+        public IdentityUser IdentityUser { get; set; }
 
         public string SoftDescription()
         {

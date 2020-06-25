@@ -45,7 +45,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "d2ba4c46-ec9b-451a-9971-9c1ee4fe92e5",
+                            ConcurrencyStamp = "7240f6d5-8be1-4066-a732-b9540c20a111",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -142,7 +142,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a3cb8de0-71c7-4194-840c-9c772b7a4b61",
+                            ConcurrencyStamp = "6bd477ad-7ada-433a-9be0-086a3dd108fd",
                             Email = "polopalay@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -150,7 +150,7 @@ namespace VNPost.DataAccess.Migrations
                             NormalizedUserName = "POLOPALAY@GMAIL.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAEI2rNt77YvirvqeMB4vQ/CinWEN+kXmoaWNZEEQaXqup94Ko9xg6k9he3Bb/96UM6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ac06ad5f-0676-4cdc-9b52-43c67b245583",
+                            SecurityStamp = "138c669f-7639-4c59-941c-4240d7ba1a55",
                             TwoFactorEnabled = false,
                             UserName = "polopalay@gmail.com"
                         });
@@ -270,6 +270,9 @@ namespace VNPost.DataAccess.Migrations
                     b.Property<string>("DescriptionImg")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
@@ -282,6 +285,8 @@ namespace VNPost.DataAccess.Migrations
 
                     b.HasIndex("DateCreate")
                         .HasName("Index_Article_Date");
+
+                    b.HasIndex("IdentityUserId");
 
                     b.HasIndex("View")
                         .HasName("Index_Article_View");
@@ -797,7 +802,7 @@ namespace VNPost.DataAccess.Migrations
                             Key = "",
                             Link = "/Posts/Write/Index",
                             LocationId = 4,
-                            Value = "Bài viết"
+                            Value = "Tài khoản"
                         },
                         new
                         {
@@ -990,24 +995,6 @@ namespace VNPost.DataAccess.Migrations
                             Descrtiption = "Hiện tại chúng tôi có những gian hàng mua sắm online với đầy đủ những sản phẩm tiện ích, đa dạng. Hy vọng sẽ đem đến cho quý khách hàng những trải nghiệm mua sắm mới mẻ nhất. Hãy đến với hệ thống mua sắm trực tuyến của chúng tôi để tìm cho mình những sản phẩm thiết thực nhất.",
                             Name = "Mua sắm trực tuyến"
                         });
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.PermissionCURD", b =>
-                {
-                    b.Property<int>("CRUDId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CURDId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("RolePermissionId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasIndex("CURDId");
-
-                    b.HasIndex("RolePermissionId");
-
-                    b.ToTable("PermissionCURDs");
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.Post", b =>
@@ -1288,6 +1275,10 @@ namespace VNPost.DataAccess.Migrations
                         .HasForeignKey("ColumnistItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.ColumnistItem", b =>
@@ -1304,19 +1295,6 @@ namespace VNPost.DataAccess.Migrations
                     b.HasOne("VNPost.Models.Entity.MenuLocation", "MenuLocation")
                         .WithMany()
                         .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.PermissionCURD", b =>
-                {
-                    b.HasOne("VNPost.Models.Entity.CURD", "ColumnistItem")
-                        .WithMany()
-                        .HasForeignKey("CURDId");
-
-                    b.HasOne("VNPost.Models.Entity.RolePermission", "RolePermission")
-                        .WithMany()
-                        .HasForeignKey("RolePermissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

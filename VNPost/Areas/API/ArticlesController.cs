@@ -206,12 +206,44 @@ namespace VNPost.Areas.API
             {
                 return Forbid();
             }
-            if (article == null || comlumnistItemId == 0 || id == 0 || _unitOfWork.Article.Get(id) == null)
+            if (article == null || id == 0 || _unitOfWork.Article.Get(id) == null)
             {
                 return Ok(new { success = false, message = "Error while updating" });
             }
+            if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+            {
+                string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+                if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).Count() > 0)
+                {
+                    string roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).ToList()[0].RoleId;
+                    if (_unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == comlumnistItemId).Count() > 0)
+                    {
+                        RolePermission rolePermission =
+                            _unitOfWork.RolePermission.GetAll(
+                                filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == comlumnistItemId
+                                ).ToList()[0];
+                        if (!rolePermission.Update)
+                        {
+                            return Ok(new { success = false, message = "Don't have permision" });
+                        }
+                    }
+                    else
+                    {
+                        return Ok(new { success = false, message = "Don't have permision" });
+                    }
+                }
+                else
+                {
+                    return Ok(new { success = false, message = "Don't have permision" });
+                }
+            }
+            else
+            {
+                return Ok(new { success = false, message = "Don't have permision" });
+            }
             article.Id = _unitOfWork.Article.Get(id).Id;
             article.DateCreate = _unitOfWork.Article.Get(id).DateCreate;
+            article.IdentityUserId = _unitOfWork.Article.Get(id).IdentityUserId;
             article.View = _unitOfWork.Article.Get(id).View;
             article.ColumnistItemId = comlumnistItemId;
             _unitOfWork.Article.Update(article);
@@ -230,7 +262,39 @@ namespace VNPost.Areas.API
             {
                 return Ok(new { success = false, message = "Error while inserting" });
             }
-
+            string userId = null;
+            if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+            {
+                userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+                if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).Count() > 0)
+                {
+                    string roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).ToList()[0].RoleId;
+                    if (_unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == comlumnistItemId).Count() > 0)
+                    {
+                        RolePermission rolePermission =
+                            _unitOfWork.RolePermission.GetAll(
+                                filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == comlumnistItemId
+                                ).ToList()[0];
+                        if (!rolePermission.Create)
+                        {
+                            return Ok(new { success = false, message = "Don't have permision" });
+                        }
+                    }
+                    else
+                    {
+                        return Ok(new { success = false, message = "Don't have permision" });
+                    }
+                }
+                else
+                {
+                    return Ok(new { success = false, message = "Don't have permision" });
+                }
+            }
+            else
+            {
+                return Ok(new { success = false, message = "Don't have permision" });
+            }
+            article.IdentityUserId = userId;
             article.ColumnistItemId = comlumnistItemId;
             article.DateCreate = DateTime.Now;
             article.View = 0;
@@ -242,10 +306,42 @@ namespace VNPost.Areas.API
         [HttpDelete("{id}")]
         public IActionResult DeleteArticle(int id)
         {
-            var objFromDb = _unitOfWork.Article.Get(id);
+            _unitOfWork.ColumnistItem.GetAll();
+            Article objFromDb = _unitOfWork.Article.Get(id);
             if (objFromDb == null)
             {
                 return Ok(new { success = false, message = "Error while deleting" });
+            }
+            if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+            {
+                string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+                if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).Count() > 0)
+                {
+                    string roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).ToList()[0].RoleId;
+                    if (_unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == objFromDb.ColumnistItemId).Count() > 0)
+                    {
+                        RolePermission rolePermission =
+                            _unitOfWork.RolePermission.GetAll(
+                                filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == objFromDb.ColumnistItemId
+                                ).ToList()[0];
+                        if (!rolePermission.Delete)
+                        {
+                            return Ok(new { success = false, message = "Don't have permision" });
+                        }
+                    }
+                    else
+                    {
+                        return Ok(new { success = false, message = "Don't have permision" });
+                    }
+                }
+                else
+                {
+                    return Ok(new { success = false, message = "Don't have permision" });
+                }
+            }
+            else
+            {
+                return Ok(new { success = false, message = "Don't have permision" });
             }
             _unitOfWork.Article.Remove(objFromDb);
             _unitOfWork.Save();

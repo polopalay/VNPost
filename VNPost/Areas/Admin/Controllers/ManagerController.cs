@@ -13,11 +13,9 @@ namespace VNPost.Areas.Admin.Controllers
     public class ManagerController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        public ManagerController(UserManager<IdentityUser> userManager, IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager)
+        public ManagerController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
             _unitOfWork = unitOfWork;
         }
@@ -25,6 +23,23 @@ namespace VNPost.Areas.Admin.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
+                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+                {
+                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+                    
+                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
+                    {
+                        return Forbid();
+                    }
+                }
+                else
+                {
+                    return Forbid();
+                }
+            }
+            else
+            {
+                return Forbid();
             }
             return View();
         }
@@ -33,6 +48,23 @@ namespace VNPost.Areas.Admin.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
+                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+                {
+                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+
+                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
+                    {
+                        return Forbid();
+                    }
+                }
+                else
+                {
+                    return Forbid();
+                }
+            }
+            else
+            {
+                return Forbid();
             }
             return View();
         }

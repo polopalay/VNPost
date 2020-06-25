@@ -30,5 +30,27 @@ namespace VNPost.Areas.API
             var data = _unitOfWork.Columnist.GetAll().ToList();
             return Ok(data);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetColumnisByUser(string id)
+        {
+            _unitOfWork.Columnist.GetAll();
+            _unitOfWork.ColumnistItem.GetAll();
+            string roleId = "";
+            if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == id).Count() > 0)
+            {
+                roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == id).ToList()[0].RoleId;
+            }
+            List<Columnist> columnistItems = new List<Columnist>();
+            foreach (RolePermission rolePermission in _unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == roleId))
+            {
+                if(columnistItems.Where(c=>c.Id==rolePermission.ColumnistItem.ColumnistId).Count()==0)
+                {
+                    columnistItems.Add(rolePermission.ColumnistItem.Columnist);
+                }
+            }
+            return Ok(columnistItems);
+
+        }
     }
 }

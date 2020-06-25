@@ -1,5 +1,5 @@
 ﻿const id = GetURLParameter("id");
-
+let userId;
 let columnistItemId;
 let columnist;
 let columnistItem;
@@ -11,37 +11,43 @@ function getData() {
         type: "GET",
         url: url,
     }).done(function (response) {
-        /*if article from server not null, fill data of article to form.
-         else create new article*/
-        if (response != undefined) {
-            $("#title").val(response.title);
-            $("#description").val(response.description);
-            $("#author").val(response.author);
-            columnistItemId = response.columnistItemId;
-            $('#content').summernote('code', response.content);
-            /*after get article data, load data to select tag*/
-            $.ajax({
-                type: "GET",
-                url: "/api/columnistItems"
-            }).done(function (response) {
-                columnistItem = response;
-                /*if columnist item id equal columnist item id of article, generate columnist item*/
-                columnistItem.forEach(citem => {
-                    if (citem.id == columnistItemId) {
-                        loadColumnists(citem);
-                    }
+        $.ajax({
+            type: "GET",
+            url: "/api/User?getId=true",
+        }).done(function (result) {
+            userId = result;
+            /*if article from server not null, fill data of article to form.
+             else create new article*/
+            if (response != undefined) {
+                $("#title").val(response.title);
+                $("#description").val(response.description);
+                $("#author").val(response.author);
+                columnistItemId = response.columnistItemId;
+                $('#content').summernote('code', response.content);
+                /*after get article data, load data to select tag*/
+                $.ajax({
+                    type: "GET",
+                    url: "/api/columnistItems/" + userId,
+                }).done(function (response) {
+                    columnistItem = response;
+                    /*if columnist item id equal columnist item id of article, generate columnist item*/
+                    columnistItem.forEach(citem => {
+                        if (citem.id == columnistItemId) {
+                            loadColumnists(citem);
+                        }
+                    });
                 });
-            });
-        }
-        else {
-            $.ajax({
-                type: "GET",
-                url: "/api/columnistItems"
-            }).done(function (response) {
-                columnistItem = response;
-                loadColumnists(0);
-            });
-        }
+            }
+            else {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/columnistItems/" + userId,
+                }).done(function (response) {
+                    columnistItem = response;
+                    loadColumnists(0);
+                });
+            }
+        });
     });
 }
 
@@ -49,7 +55,7 @@ function getData() {
 function loadColumnists(citem) {
     $.ajax({
         type: "GET",
-        url: "/api/columnists"
+        url: "/api/columnists/" + userId,
     }).done(function (response) {
         columnist = response;
         response.forEach(c => {

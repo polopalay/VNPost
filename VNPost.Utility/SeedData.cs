@@ -41,7 +41,6 @@ namespace VNPost.Utility
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 1, Key = "Description", Value = "Giới thiệu", LocationId = 1, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 2, Key = "QAndA", Value = "Hỏi đáp", LocationId = 1, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 3, Key = "Contact", Value = "Liên hệ", LocationId = 1, Link = "#" });
-            //builder.Entity<MenuLink>().HasData(new MenuLink { Id = 4, Key = "Login", Value = "Login", LocationId = 1, Link = "/Identity/Account/login" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 5, Key = "Search-price", Value = "<p>Tra cước</p><span>DỊCH VỤ</span>", LocationId = 2, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 6, Key = "Mess", Value = "<p>Đánh giá &</p><span>KHIẾU NẠI</span>", LocationId = 2, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 7, Key = "Recruitment", Value = "<p>Tin</p><span>TUYỂN DỤNG</span>", LocationId = 2, Link = "#" });
@@ -49,7 +48,7 @@ namespace VNPost.Utility
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 9, Key = "", Value = "Tài chính bưu chính", LocationId = 4, Link = "/Posts/Service/List/2" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 10, Key = "", Value = "Phân phối -Truyền thông", LocationId = 4, Link = "/Posts/Service/List/3" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 11, Key = "", Value = "Tin tức", LocationId = 4, Link = "/Posts/Article/List" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 12, Key = "", Value = "Bài viết", LocationId = 4, Link = "/Posts/Write/Index" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 12, Key = "", Value = "Tài khoản", LocationId = 4, Link = "/Posts/Write/Index" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 13, Key = "fas fa-map-marker-alt", Value = "Định Vị Bưu Gửi", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 14, Key = "fas fa-money-bill-alt", Value = "Định vị chuyển tiền", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 15, Key = "fas fa-map", Value = "Mạng lưới bưu cục", LocationId = 3, Link = "#" });

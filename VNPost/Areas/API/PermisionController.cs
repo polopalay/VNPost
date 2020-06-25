@@ -17,13 +17,16 @@ namespace VNPost.Areas.API
     public class PermisionController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        public PermisionController(IUnitOfWork unitOfWork)
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public PermisionController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager)
         {
+            _signInManager = signInManager;
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        public IActionResult Get([FromQuery] bool getPagination, [FromQuery] int index, [FromQuery] int numberPostInPage)
+        public IActionResult Get([FromQuery] bool getPagination, [FromQuery] int index, [FromQuery] int numberPostInPage,[FromQuery] bool dontPaging)
         {
+
             if (index == 0)
             {
                 index = 1;
@@ -32,7 +35,11 @@ namespace VNPost.Areas.API
             {
                 numberPostInPage = 10;
             }
-            List<IdentityRole> role = _unitOfWork.IdentityRole.GetAll().Where(r=>r.Id!= "13d23c51-re38-4831-wqa2-2e3f21c23ewd").ToList();
+            List<IdentityRole> role = _unitOfWork.IdentityRole.GetAll().ToList();
+            if(dontPaging)
+            {
+                return Ok(role.Where(r=>r.Id!= "13d23c51-re38-4831-wqa2-2e3f21c23ewd"));
+            }
             Pagination<IdentityRole> pagination = new Pagination<IdentityRole>(role, index, numberPostInPage);
             if (getPagination)
             {
@@ -45,14 +52,65 @@ namespace VNPost.Areas.API
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(string id,[FromQuery] bool getName)
         {
-            return Ok(JsonConvert.SerializeObject(new { data = "" }));
+            if (_signInManager.IsSignedIn(User))
+            {
+                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+                {
+                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+
+                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
+                    {
+                        return Forbid();
+                    }
+                }
+                else
+                {
+                    return Forbid();
+                }
+            }
+            else
+            {
+                return Forbid();
+            }
+            _unitOfWork.Columnist.GetAll();
+            _unitOfWork.ColumnistItem.GetAll();
+            _unitOfWork.IdentityRole.GetAll();
+            if(getName)
+            {
+                if(_unitOfWork.IdentityRole.Get(id)!=null)
+                {
+                    string name = _unitOfWork.IdentityRole.Get(id).Name;
+                    return Ok(name);
+                }
+            }
+            return Ok(_unitOfWork.RolePermission.GetAll(filter: x => x.RoleId == id));
         }
 
         [HttpPost]
         public IActionResult Post([FromQuery] string name, [FromBody] List<RolePermission> data)
         {
+            if (_signInManager.IsSignedIn(User))
+            {
+                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+                {
+                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+
+                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
+                    {
+                        return Forbid();
+                    }
+                }
+                else
+                {
+                    return Forbid();
+                }
+            }
+            else
+            {
+                return Forbid();
+            }
             if (name == null)
             {
                 return Ok(new { success = false, message = "Error while inserting" });
@@ -76,20 +134,84 @@ namespace VNPost.Areas.API
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id)
+        public IActionResult Put(string id, [FromQuery] string name, [FromBody] List<RolePermission> data)
         {
-            return Ok();
+            if (_signInManager.IsSignedIn(User))
+            {
+                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+                {
+                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+
+                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
+                    {
+                        return Forbid();
+                    }
+                }
+                else
+                {
+                    return Forbid();
+                }
+            }
+            else
+            {
+                return Forbid();
+            }
+            if (data == null || data.Count == 0 || _unitOfWork.IdentityRole.Get(id) == null)
+            {
+                return Ok(new { success = false, message = "Error while updating" });
+            }
+            try
+            {
+                _unitOfWork.RolePermission.RemoveRange(_unitOfWork.RolePermission.GetAll().Where(x => x.RoleId == id));
+                foreach (RolePermission rolePermission in data)
+                {
+                    rolePermission.RoleId = id;
+                    _unitOfWork.RolePermission.Add(rolePermission);
+                }
+                IdentityRole role = _unitOfWork.IdentityRole.Get(id);
+                _unitOfWork.IdentityRole.Update(role, name);
+            }
+            catch
+            {
+                return Ok(new { success = false, message = "Error while updating" });
+            }
+            _unitOfWork.Save();
+            return Ok(new { success = true, message = "Update Successful" });
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteArticle(string id)
         {
+            if (_signInManager.IsSignedIn(User))
+            {
+                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+                {
+                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+
+                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
+                    {
+                        return Forbid();
+                    }
+                }
+                else
+                {
+                    return Forbid();
+                }
+            }
+            else
+            {
+                return Forbid();
+            }
             var objFromDb = _unitOfWork.IdentityRole.Get(id);
             if (objFromDb == null)
             {
                 return Ok(new { success = false, message = "Error while deleting" });
             }
-            _unitOfWork.RolePermission.RemoveRange(_unitOfWork.RolePermission.GetAll().Where(x=>x.RoleId==id));
+            if(id== "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+            {
+                return Ok(new { success = false, message = "Can't delete admin" });
+            }
+            _unitOfWork.RolePermission.RemoveRange(_unitOfWork.RolePermission.GetAll().Where(x => x.RoleId == id));
             _unitOfWork.IdentityUserRole.RemoveRange(_unitOfWork.IdentityUserRole.GetAll().Where(x => x.RoleId == id));
             _unitOfWork.IdentityRole.Remove(objFromDb);
             _unitOfWork.Save();

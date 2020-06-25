@@ -55,11 +55,6 @@ function loadPaging() {
     })
 }
 
-function load() {
-    loadTbl();
-    loadPaging();
-}
-
 function Delete(url) {
     $.ajax({
         type: "DELETE",
@@ -76,4 +71,30 @@ function Delete(url) {
     });
 }
 
+function load() {
+    loadTbl();
+    loadPaging();
+}
+
+function checkPermision() {
+    $.ajax({
+        type: "GET",
+        url: "/api/user",
+    }).done(function (data) {
+        let link = $("<a></a>", {
+            href: "/Admin/Manager",
+            class: "btn btn-warning",
+        })
+        let i = $("<i></i>", {
+            class: "fas fa-plus",
+        });
+        link.append(i);
+        link.append(" Quản lý người dùng");
+        if (data) {
+            $("#user").append(link);
+        }
+    });
+}
+
 load();
+checkPermision();

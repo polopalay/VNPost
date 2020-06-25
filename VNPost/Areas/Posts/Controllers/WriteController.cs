@@ -35,7 +35,7 @@ namespace VNPost.Areas.Posts.Controllers
             }
         }
 
-        public IActionResult Upsert()
+        public IActionResult Upsert([FromQuery] int id)
         {
             if (!_signInManager.IsSignedIn(User))
             {
@@ -43,6 +43,43 @@ namespace VNPost.Areas.Posts.Controllers
             }
             else
             {
+                if(id==0)
+                {
+                    return View();
+                }
+                _unitOfWork.ColumnistItem.GetAll();
+                Article objFromDb = _unitOfWork.Article.Get(id);
+                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+                {
+                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+                    if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).Count() > 0)
+                    {
+                        string roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).ToList()[0].RoleId;
+                        if (_unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == objFromDb.ColumnistItemId).Count() > 0)
+                        {
+                            RolePermission rolePermission =
+                                _unitOfWork.RolePermission.GetAll(
+                                    filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == objFromDb.ColumnistItemId
+                                    ).ToList()[0];
+                            if (!rolePermission.Delete)
+                            {
+                                return Forbid();
+                            }
+                        }
+                        else
+                        {
+                            return Forbid();
+                        }
+                    }
+                    else
+                    {
+                        return Forbid();
+                    }
+                }
+                else
+                {
+                    return Forbid();
+                }
                 return View();
             }
 

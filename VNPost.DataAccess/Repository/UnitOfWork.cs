@@ -23,7 +23,6 @@ namespace VNPost.DataAccess.Repository
         public IColumnistRepository Columnist { get; }
         public IColumnistItemRepository ColumnistItem { get; }
         public IRolePermissionRepository RolePermission { get; }
-        public IPermissionCURDRepository PermissionCURD { get; }
         public ICURDRepository CURD { get; }
         public IIdentityUserRepository IdentityUser { get; }
         public IIdentityRoleRepository IdentityRole { get; }
@@ -42,7 +41,6 @@ namespace VNPost.DataAccess.Repository
             Columnist = new ColumnistRepository(_db);
             ColumnistItem = new ColumnistItemRepository(_db);
             RolePermission = new RolePermissionRepository(_db);
-            PermissionCURD = new PermissionCURDRepository(_db);
             CURD = new CURDRepository(_db);
             IdentityUser = new IdentityUserRepository(_db);
             IdentityRole = new IdentityRoleRepository(_db);

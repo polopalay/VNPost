@@ -9,8 +9,9 @@
         <div class="col-6">
             <h2 class="text-info">Danh sách các bài viết</h2>
         </div>
-        <div class="col-6 text-right">
-            <a class="btn btn-info" asp-action="Upsert"><i class="fas fa-plus"></i>Viết bài</a>
+        <div id="user" class="col-6 text-right">
+            <a class="btn btn-success" asp-action="Upsert"><i class="fas fa-plus"></i>Viết bài</a>
+            <a class="btn btn-info" href="/Admin/RegisterTypeUser/Index"><i class="fas fa-plus"></i>Đăng ký loại người dùng</a>
         </div>
     </div>
     <table class="table" width="100%" id="tblData">

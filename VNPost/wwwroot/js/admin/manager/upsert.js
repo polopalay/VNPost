@@ -1,4 +1,5 @@
-﻿let columnists;
+﻿let id = GetURLParameter("id");
+let columnists;
 let columnistItems;
 let permisions = [];
 let curd;
@@ -51,6 +52,7 @@ function loadDataToCheckBox() {
             $("#listColumnist").change(function () {
                 changeOption();
             });
+            loadPermisionData();
         });
     });
 }
@@ -200,6 +202,45 @@ function addOptionToCurd() {
     });
 }
 
+function loadPermisionData() {
+    $.ajax({
+        url: "/api/permision/" + id,
+        type: "GET",
+    }).done(function (result) {
+        if (result != null) {
+            if (result.length > 0) {
+                $("#name").val(result[0].role.name);
+                result.forEach(item => {
+                    let data = {
+                        id: item.columnistItem.id,
+                        name: item.columnistItem.name,
+                        cid: item.columnistItem.columnistId,
+                        curd: [
+                            { id: 1, state: item.create },
+                            { id: 2, state: item.update },
+                            { id: 3, state: item.delete },
+                        ],
+                    };
+                    permisions.push(data);
+                });
+                addOption();
+                permisions.forEach(permisionItem => {
+                    $("#ci" + permisionItem.id).prop("checked", true);
+                    $("#c" + permisionItem.cid).prop("checked", true);
+                });
+            }
+        }
+    });
+    $.ajax({
+        url: "/api/permision/" + id + "?getName=true",
+        type: "GET",
+    }).done(function (result) {
+        if (result != null) {
+            $("#name").val(result);
+        }
+    });
+}
+
 function submit() {
     let dataToSend = [];
     permisions.forEach(item => {
@@ -214,10 +255,18 @@ function submit() {
         };
         dataToSend.push(data);
     });
-
-    let url = "/api/permision?name=" + $("#name").val();
+    let url;
+    let method;
+    if (id != null) {
+        url = "/api/permision/" + id + "?name=" + $("#name").val();
+        method = "PUT";
+    }
+    else {
+        url = "/api/permision?name=" + $("#name").val();
+        method = "POST";
+    }
     $.ajax({
-        type: "POST",
+        type: method,
         data: JSON.stringify(dataToSend),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -225,18 +274,20 @@ function submit() {
     }).done(function (data) {
         if (data.success) {
             toastr.success(data.message);
-            permisions = [];
-            $("#name").val("")
-            addOption();
-            curd.forEach(item => {
-                $("#curd" + item.id).prop("checked", false);
-            });
-            columnists.forEach(item => {
-                $("#c" + item.id).prop("checked", false);
-            });
-            columnistItems.forEach(item => {
-                $("#ci" + item.id).prop("checked", false);
-            });
+            if (id == null) {
+                permisions = [];
+                $("#name").val("")
+                addOption();
+                curd.forEach(item => {
+                    $("#curd" + item.id).prop("checked", false);
+                });
+                columnists.forEach(item => {
+                    $("#c" + item.id).prop("checked", false);
+                });
+                columnistItems.forEach(item => {
+                    $("#ci" + item.id).prop("checked", false);
+                });
+            }
         }
         else {
             toastr.error(data.message);

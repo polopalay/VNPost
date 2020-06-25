@@ -18,7 +18,6 @@ namespace VNPost.DataAccess.Repository.IRepository
         IColumnistRepository Columnist { get; }
         IColumnistItemRepository ColumnistItem { get; }
         IRolePermissionRepository RolePermission { get; }
-        IPermissionCURDRepository PermissionCURD { get; }
         ICURDRepository CURD { get; }
         IIdentityUserRepository IdentityUser { get; }
         IIdentityRoleRepository IdentityRole { get; }
