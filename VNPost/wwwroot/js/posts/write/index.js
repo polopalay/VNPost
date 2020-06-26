@@ -86,7 +86,7 @@ function checkPermision() {
             class: "btn btn-warning",
         })
         let i = $("<i></i>", {
-            class: "fas fa-plus",
+            class: "fas fa-tasks",
         });
         link.append(i);
         link.append(" Quản lý người dùng");
