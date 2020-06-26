@@ -83,7 +83,7 @@ function checkPermision() {
     }).done(function (data) {
         let link = $("<a></a>", {
             href: "/Admin/Manager",
-            class: "btn btn-warning",
+            class: "btn btn-warning text-white",
         })
         let i = $("<i></i>", {
             class: "fas fa-tasks",
@@ -93,6 +93,33 @@ function checkPermision() {
         if (data) {
             $("#user").append(link);
         }
+        loadType();
+    });
+}
+
+function loadType() {
+    $.ajax({
+        type: "GET",
+        url: "/api/user?getType=true",
+    }).done(function (data) {
+        let link = $("<a></a>", {
+            class: "btn btn-secondary text-white ml-1",
+        });
+        let i;
+        if (data == "Admin") {
+            i = $("<i></i>", {
+                class: "fas fa-user-cog",
+            });
+        }
+        else {
+            i = $("<i></i>", {
+                class: "fas fa-user",
+            });
+        }
+        link.append(i);
+        data = (data == null ? "No type" : data);
+        link.append(" " + data);
+        $("#user").append(link);
     });
 }
 

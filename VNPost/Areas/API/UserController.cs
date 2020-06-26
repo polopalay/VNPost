@@ -21,7 +21,7 @@ namespace VNPost.Areas.API
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        public IActionResult Get([FromQuery] bool getId)
+        public IActionResult Get([FromQuery] bool getId, [FromQuery] bool getType)
         {
 
             if (getId)
@@ -30,6 +30,34 @@ namespace VNPost.Areas.API
                 {
                     string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
                     return Ok(userId);
+                }
+                else
+                {
+                    return Ok(null);
+                }
+            }
+            else if (getType)
+            {
+                if (_signInManager.IsSignedIn(User))
+                {
+                    if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+                    {
+                        string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
+
+                        if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId).Count() == 0)
+                        {
+                            return Ok(null);
+                        }
+                        else
+                        {
+                            string roleId = _unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId).ToList()[0].RoleId;
+                            return Ok(_unitOfWork.IdentityRole.Get(roleId).Name);
+                        }
+                    }
+                    else
+                    {
+                        return Ok(null);
+                    }
                 }
                 else
                 {
