@@ -5,5 +5,6 @@ namespace VNPost.DataAccess.Repository.IRepository
 {
     public interface IIdentityUserRepository : IRepository<IdentityUser>
     {
+        IdentityUser Get(string id);
     }
 }

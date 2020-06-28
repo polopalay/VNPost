@@ -48,7 +48,7 @@ namespace VNPost.Utility
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 9, Key = "", Value = "Tài chính bưu chính", LocationId = 4, Link = "/Posts/Service/List/2" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 10, Key = "", Value = "Phân phối -Truyền thông", LocationId = 4, Link = "/Posts/Service/List/3" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 11, Key = "", Value = "Tin tức", LocationId = 4, Link = "/Posts/Article/List" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 12, Key = "", Value = "Tài khoản", LocationId = 4, Link = "/Posts/Write/Index" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 12, Key = "", Value = "Tài khoản", LocationId = 4, Link = "/Admin/Article/Index" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 13, Key = "fas fa-map-marker-alt", Value = "Định Vị Bưu Gửi", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 14, Key = "fas fa-money-bill-alt", Value = "Định vị chuyển tiền", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 15, Key = "fas fa-map", Value = "Mạng lưới bưu cục", LocationId = 3, Link = "#" });

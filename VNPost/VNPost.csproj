@@ -46,10 +46,10 @@
     <Folder Include="Areas\Posts\Views\Article\" />
     <Folder Include="wwwroot\css\post\article\" />
     <Folder Include="Views\Shared\Components\Left\" />
-    <Folder Include="Areas\Posts\Views\Write\" />
-    <Folder Include="wwwroot\css\post\writer\" />
+    <Folder Include="Areas\Admin\Views\Article\" />
+    <Folder Include="wwwroot\css\admin\article\" />
     <Folder Include="wwwroot\js\posts\" />
-    <Folder Include="wwwroot\js\posts\write\" />
+    <Folder Include="wwwroot\js\admin\article\" />
     <Folder Include="Areas\API\" />
     <Folder Include="wwwroot\js\posts\article\" />
     <Folder Include="Areas\Admin\" />

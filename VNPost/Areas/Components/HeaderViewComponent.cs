@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using VNPost.DataAccess.Repository.IRepository;
 using VNPost.Models.Entity;
@@ -36,7 +37,7 @@ namespace VNPost.Areas.Components
             List<Category> categories = _unitOfWork.Category.GetAll().ToList();
 
             HeaderVM headerVM = new HeaderVM(listMenuItem, listMenuLink, categories);
-            headerVM.IsLogedIn = _signInManager.IsSignedIn((System.Security.Claims.ClaimsPrincipal)User);
+            headerVM.IsLogedIn = _signInManager.IsSignedIn((ClaimsPrincipal)User);
             return View(headerVM);
         }
     }

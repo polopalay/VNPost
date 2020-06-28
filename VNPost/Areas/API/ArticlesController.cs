@@ -14,164 +14,53 @@ namespace VNPost.Areas.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArticlesController : ControllerBase
+    public class ArticlesController : BaseApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        public ArticlesController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager)
+        public ArticlesController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
-            _unitOfWork = unitOfWork;
-            _signInManager = signInManager;
+            _unitOfWork.Columnist.GetAll();
+            _unitOfWork.ColumnistItem.GetAll();
         }
 
         [HttpGet]
-        public IActionResult GetArticles([FromQuery] int index,
-            [FromQuery] bool getTop5ByDate, [FromQuery] bool getTop1ByView,
-            [FromQuery] bool getAll, [FromQuery] bool getPagination,
-            [FromQuery] bool fillToDataTable, [FromQuery] bool getLatest,
-            [FromQuery] int columnistId, [FromQuery] int columnistItemId,
-            [FromQuery] int numberPostInPage)
+        public IActionResult GetArticles([FromQuery] int index = 1, [FromQuery] int numberPostInPage = 10,
+            [FromQuery] bool getTop5ByDate = false, [FromQuery] bool getTop1ByView = false,
+            [FromQuery] bool getAll = false, [FromQuery] bool getPagination = false,
+            [FromQuery] bool fillToDataTable = false, [FromQuery] bool getLatest = false,
+            [FromQuery] int columnistId = 0, [FromQuery] int columnistItemId = 0)
         {
-            List<IdentityRole> identityRoles = _unitOfWork.IdentityRole.GetAll().ToList();
-            List<Columnist> columnist = _unitOfWork.Columnist.GetAll().ToList();
-            List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
-            if (index == 0)
-            {
-                index = 1;
-            }
-            if (numberPostInPage == 0)
-            {
-                numberPostInPage = 10;
-            }
             List<Article> articles = new List<Article>();
-
             if (getAll)
             {
-                articles.AddRange(_unitOfWork.Article.GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate)).ToList());
-                Pagination<Article> pagination = new Pagination<Article>(articles, index, numberPostInPage);
-                if (getPagination)
-                {
-                    return Ok(pagination.SortPagination());
-                }
-                else
-                {
-                    if (fillToDataTable)
-                    {
-                        return Ok(JsonConvert.SerializeObject(new { data = pagination.ListT }));
-                    }
-                    else
-                    {
-                        return Ok(pagination.ListT);
-                    }
-                }
+                articles = _unitOfWork.Article.GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate)).ToList();
             }
             else if (getLatest)
             {
-                articles.AddRange(_unitOfWork.Article.GetAll(
-                orderBy: x => x.OrderByDescending(y => y.DateCreate))
-                .Select(a => a.LiteArticle())
-                .Take(5)
-                .ToList());
-                if (fillToDataTable)
-                {
-                    return Ok(JsonConvert.SerializeObject(new { data = articles }));
-                }
-                else
-                {
-                    return Ok(articles);
-                }
+                articles = _unitOfWork.Article.GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate)).Select(a => a.LiteArticle()).Take(5).ToList();
             }
             else if (getTop5ByDate)
             {
-                foreach (Columnist c in _unitOfWork.Columnist.GetAll())
-                {
-                    articles.AddRange(_unitOfWork.Article.GetAll(
-                        orderBy: x => x.OrderByDescending(y => y.DateCreate),
-                        filter: a => a.ColumnistItem.ColumnistId == c.Id)
-                        .Select(a => a.SoftArticle())
-                        .Take(5));
-                }
-                if (fillToDataTable)
-                {
-                    return Ok(JsonConvert.SerializeObject(new { data = articles }));
-                }
-                else
-                {
-                    return Ok(articles);
-                }
+                articles = GetArticleByDateForEachType(5);
             }
             else if (getTop1ByView)
             {
-                foreach (Columnist c in _unitOfWork.Columnist.GetAll())
-                {
-                    List<Article> listNew = _unitOfWork.Article.GetAll(
-                        orderBy: x => x.OrderByDescending(y => y.View),
-                        filter: a => a.ColumnistItem.ColumnistId == c.Id).ToList();
-                    if (listNew.Count > 0)
-                    {
-                        articles.Add(listNew[0]);
-                    }
-                }
-
-                if (fillToDataTable)
-                {
-                    return Ok(JsonConvert.SerializeObject(new { data = articles }));
-                }
-                else
-                {
-                    return Ok(articles);
-                }
+                articles = GetArticleByViewForEachType(1);
             }
             else if (columnistId != 0)
             {
-                articles.AddRange(_unitOfWork.Article.GetAll(
+                articles = _unitOfWork.Article.GetAll(
                     orderBy: x => x.OrderByDescending(y => y.DateCreate),
                     filter: a => a.ColumnistItem.ColumnistId == columnistId)
-                    .Select(a => a.SoftArticle())
-                    .ToList());
-                Pagination<Article> pagination = new Pagination<Article>(articles, index, numberPostInPage);
-                if (getPagination)
-                {
-                    return Ok(pagination.SortPagination());
-                }
-                else
-                {
-                    if (fillToDataTable)
-                    {
-                        return Ok(JsonConvert.SerializeObject(new { data = pagination.ListT }));
-                    }
-                    else
-                    {
-                        return Ok(pagination.ListT);
-                    }
-                }
+                    .Select(a => a.SoftArticle()).ToList();
             }
             else if (columnistItemId != 0)
             {
-                articles.AddRange(_unitOfWork.Article.GetAll(
+                articles = _unitOfWork.Article.GetAll(
                     orderBy: x => x.OrderByDescending(y => y.DateCreate),
                     filter: a => a.ColumnistItemId == columnistItemId)
-                    .Select(a => a.SoftArticle())
-                    .ToList());
-                Pagination<Article> pagination = new Pagination<Article>(articles, index, numberPostInPage);
-                if (getPagination)
-                {
-                    return Ok(pagination.SortPagination());
-                }
-                else
-                {
-                    if (fillToDataTable)
-                    {
-                        return Ok(JsonConvert.SerializeObject(new { data = pagination.ListT }));
-                    }
-                    else
-                    {
-                        return Ok(pagination.ListT);
-                    }
-                }
+                    .Select(a => a.SoftArticle()).ToList();
             }
-            else
+            if (getAll || columnistId != 0 || columnistItemId != 0)
             {
                 Pagination<Article> pagination = new Pagination<Article>(articles, index, numberPostInPage);
                 if (getPagination)
@@ -180,15 +69,16 @@ namespace VNPost.Areas.API
                 }
                 else
                 {
-                    if (fillToDataTable)
-                    {
-                        return Ok(JsonConvert.SerializeObject(new { data = pagination.ListT }));
-                    }
-                    else
-                    {
-                        return Ok(pagination.ListT);
-                    }
+                    articles = pagination.ListT;
                 }
+            }
+            if (fillToDataTable)
+            {
+                return Ok(JsonConvert.SerializeObject(new { data = articles }));
+            }
+            else
+            {
+                return Ok(articles);
             }
         }
 
@@ -202,42 +92,15 @@ namespace VNPost.Areas.API
         [HttpPut("{id}")]
         public IActionResult PutArticle(int id, [FromQuery] int comlumnistItemId, [FromBody] Article article)
         {
-            if (!_signInManager.IsSignedIn(User))
+            if (_identityUser == null)
             {
-                return Forbid();
+                return Ok(new { success = false, message = "Don't have permision" });
             }
-            if (article == null || id == 0 || _unitOfWork.Article.Get(id) == null)
+            if (_rolePermissions == null)
             {
-                return Ok(new { success = false, message = "Error while updating" });
+                return Ok(new { success = false, message = "Don't have permision" });
             }
-            if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-            {
-                string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-                if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).Count() > 0)
-                {
-                    string roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).ToList()[0].RoleId;
-                    if (_unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == comlumnistItemId).Count() > 0)
-                    {
-                        RolePermission rolePermission =
-                            _unitOfWork.RolePermission.GetAll(
-                                filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == comlumnistItemId
-                                ).ToList()[0];
-                        if (!rolePermission.Update)
-                        {
-                            return Ok(new { success = false, message = "Don't have permision" });
-                        }
-                    }
-                    else
-                    {
-                        return Ok(new { success = false, message = "Don't have permision" });
-                    }
-                }
-                else
-                {
-                    return Ok(new { success = false, message = "Don't have permision" });
-                }
-            }
-            else
+            if (GetRolePermissionCanUpdate().Where(rp => rp.ColumnistItemId == comlumnistItemId).Count() == 0)
             {
                 return Ok(new { success = false, message = "Don't have permision" });
             }
@@ -254,46 +117,19 @@ namespace VNPost.Areas.API
         [HttpPost]
         public IActionResult PostArticle([FromQuery] int comlumnistItemId, [FromBody] Article article)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return Forbid();
-            }
-            if (article == null || comlumnistItemId == 0)
-            {
-                return Ok(new { success = false, message = "Error while inserting" });
-            }
-            string userId = null;
-            if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-            {
-                userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-                if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).Count() > 0)
-                {
-                    string roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).ToList()[0].RoleId;
-                    if (_unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == comlumnistItemId).Count() > 0)
-                    {
-                        RolePermission rolePermission =
-                            _unitOfWork.RolePermission.GetAll(
-                                filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == comlumnistItemId
-                                ).ToList()[0];
-                        if (!rolePermission.Create)
-                        {
-                            return Ok(new { success = false, message = "Don't have permision" });
-                        }
-                    }
-                    else
-                    {
-                        return Ok(new { success = false, message = "Don't have permision" });
-                    }
-                }
-                else
-                {
-                    return Ok(new { success = false, message = "Don't have permision" });
-                }
-            }
-            else
+            if (_identityUser == null)
             {
                 return Ok(new { success = false, message = "Don't have permision" });
             }
+            if (_rolePermissions == null)
+            {
+                return Ok(new { success = false, message = "Don't have permision" });
+            }
+            if (GetRolePermissionCanCreate().Where(rp => rp.ColumnistItemId == comlumnistItemId).Count() == 0)
+            {
+                return Ok(new { success = false, message = "Don't have permision" });
+            }
+            string userId = _identityUser.Id;
             article.IdentityUserId = userId;
             article.ColumnistItemId = comlumnistItemId;
             article.DateCreate = DateTime.Now;
@@ -306,47 +142,57 @@ namespace VNPost.Areas.API
         [HttpDelete("{id}")]
         public IActionResult DeleteArticle(int id)
         {
-            _unitOfWork.ColumnistItem.GetAll();
-            Article objFromDb = _unitOfWork.Article.Get(id);
-            if (objFromDb == null)
+            Article article = _unitOfWork.Article.Get(id);
+            if (article == null)
             {
-                return Ok(new { success = false, message = "Error while deleting" });
+                return Ok(new { success = false, message = "Not found" });
             }
-            if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-            {
-                string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-                if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).Count() > 0)
-                {
-                    string roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).ToList()[0].RoleId;
-                    if (_unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == objFromDb.ColumnistItemId).Count() > 0)
-                    {
-                        RolePermission rolePermission =
-                            _unitOfWork.RolePermission.GetAll(
-                                filter: rp => rp.RoleId == roleId && rp.ColumnistItemId == objFromDb.ColumnistItemId
-                                ).ToList()[0];
-                        if (!rolePermission.Delete)
-                        {
-                            return Ok(new { success = false, message = "Don't have permision" });
-                        }
-                    }
-                    else
-                    {
-                        return Ok(new { success = false, message = "Don't have permision" });
-                    }
-                }
-                else
-                {
-                    return Ok(new { success = false, message = "Don't have permision" });
-                }
-            }
-            else
+            if (_identityUser == null)
             {
                 return Ok(new { success = false, message = "Don't have permision" });
             }
-            _unitOfWork.Article.Remove(objFromDb);
+            if (_rolePermissions == null)
+            {
+                return Ok(new { success = false, message = "Don't have permision" });
+            }
+            if (GetRolePermissionCanDelete().Where(rp => rp.ColumnistItemId == article.ColumnistItemId).Count() == 0)
+            {
+                return Ok(new { success = false, message = "Don't have permision" });
+            }
+            _unitOfWork.Article.Remove(article);
             _unitOfWork.Save();
             return Ok(new { success = true, message = "Delete Successful" });
 
+        }
+
+        private List<Article> GetArticleByDateForEachType(int number)
+        {
+            List<Article> articles = new List<Article>();
+            foreach (Columnist c in _unitOfWork.Columnist.GetAll())
+            {
+                articles.AddRange(_unitOfWork.Article.GetAll(
+                    orderBy: x => x.OrderByDescending(y => y.DateCreate),
+                    filter: a => a.ColumnistItem.ColumnistId == c.Id)
+                    .Select(a => a.SoftArticle())
+                    .Take(number));
+            }
+            return articles;
+        }
+
+        private List<Article> GetArticleByViewForEachType(int number)
+        {
+            List<Article> articles = new List<Article>();
+            foreach (Columnist c in _unitOfWork.Columnist.GetAll())
+            {
+                List<Article> listNew = _unitOfWork.Article.GetAll(
+                    orderBy: x => x.OrderByDescending(y => y.View),
+                    filter: a => a.ColumnistItem.ColumnistId == c.Id).ToList();
+                if (listNew.Count >= number)
+                {
+                    articles.AddRange(listNew.Take(number));
+                }
+            }
+            return articles;
         }
     }
 }

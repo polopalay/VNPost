@@ -9,7 +9,7 @@ using VNPost.DataAccess.Repository.IRepository;
 namespace VNPost.Areas.API
 {
     [Route("api/[controller]")]
-    public class CURDController : Controller
+    public class CURDController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly SignInManager<IdentityUser> _signInManager;

@@ -10,61 +10,34 @@ using VNPost.DataAccess.Repository.IRepository;
 namespace VNPost.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ManagerController : Controller
+    public class ManagerController : BaseController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        public ManagerController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager)
+        public ManagerController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
-            _signInManager = signInManager;
-            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            if (_signInManager.IsSignedIn(User))
-            {
-                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-                {
-                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-                    
-                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
-                    {
-                        return Forbid();
-                    }
-                }
-                else
-                {
-                    return Forbid();
-                }
-            }
-            else
+            var x = _unitOfWork.IdentityRole.GetAll();
+            if (_identityRole == null)
             {
                 return Forbid();
             }
-            return View();
+            if (_identityRole.Id == "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+            {
+                return View();
+            }
+            return Forbid();
         }
 
         public IActionResult Upsert()
         {
-            if (_signInManager.IsSignedIn(User))
-            {
-                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-                {
-                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-
-                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
-                    {
-                        return Forbid();
-                    }
-                }
-                else
-                {
-                    return Forbid();
-                }
-            }
-            else
+            if (_identityRole == null)
             {
                 return Forbid();
+            }
+            if (!_identityRole.Equals("13d23c51-re38-4831-wqa2-2e3f21c23ewd"))
+            {
+                Forbid();
             }
             return View();
         }

@@ -14,31 +14,19 @@ namespace VNPost.Areas.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PermisionController : ControllerBase
+    public class PermisionController : BaseApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        public PermisionController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager)
+        public PermisionController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
-            _signInManager = signInManager;
-            _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        public IActionResult Get([FromQuery] bool getPagination, [FromQuery] int index, [FromQuery] int numberPostInPage,[FromQuery] bool dontPaging)
+        public IActionResult Get([FromQuery] bool getPagination = false, [FromQuery] bool dontPaging = false,
+            [FromQuery] int index = 1, [FromQuery] int numberPostInPage = 10)
         {
-
-            if (index == 0)
-            {
-                index = 1;
-            }
-            if (numberPostInPage == 0)
-            {
-                numberPostInPage = 10;
-            }
             List<IdentityRole> role = _unitOfWork.IdentityRole.GetAll().ToList();
-            if(dontPaging)
+            if (dontPaging)
             {
-                return Ok(role.Where(r=>r.Id!= "13d23c51-re38-4831-wqa2-2e3f21c23ewd"));
+                return Ok(role.Where(r => r.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd"));
             }
             Pagination<IdentityRole> pagination = new Pagination<IdentityRole>(role, index, numberPostInPage);
             if (getPagination)
@@ -52,34 +40,22 @@ namespace VNPost.Areas.API
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(string id,[FromQuery] bool getName)
+        public IActionResult Get(string id, [FromQuery] bool getName)
         {
-            if (_signInManager.IsSignedIn(User))
+            if (_identityUser == null)
             {
-                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-                {
-                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-
-                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
-                    {
-                        return Forbid();
-                    }
-                }
-                else
-                {
-                    return Forbid();
-                }
+                return Forbid();
             }
-            else
+            if (_identityUser.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
             {
                 return Forbid();
             }
             _unitOfWork.Columnist.GetAll();
             _unitOfWork.ColumnistItem.GetAll();
             _unitOfWork.IdentityRole.GetAll();
-            if(getName)
+            if (getName)
             {
-                if(_unitOfWork.IdentityRole.Get(id)!=null)
+                if (_unitOfWork.IdentityRole.Get(id) != null)
                 {
                     string name = _unitOfWork.IdentityRole.Get(id).Name;
                     return Ok(name);
@@ -91,23 +67,11 @@ namespace VNPost.Areas.API
         [HttpPost]
         public IActionResult Post([FromQuery] string name, [FromBody] List<RolePermission> data)
         {
-            if (_signInManager.IsSignedIn(User))
+            if (_identityUser == null)
             {
-                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-                {
-                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-
-                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
-                    {
-                        return Forbid();
-                    }
-                }
-                else
-                {
-                    return Forbid();
-                }
+                return Forbid();
             }
-            else
+            if (_identityUser.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
             {
                 return Forbid();
             }
@@ -136,23 +100,11 @@ namespace VNPost.Areas.API
         [HttpPut("{id}")]
         public IActionResult Put(string id, [FromQuery] string name, [FromBody] List<RolePermission> data)
         {
-            if (_signInManager.IsSignedIn(User))
+            if (_identityUser == null)
             {
-                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-                {
-                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-
-                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
-                    {
-                        return Forbid();
-                    }
-                }
-                else
-                {
-                    return Forbid();
-                }
+                return Forbid();
             }
-            else
+            if (_identityUser.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
             {
                 return Forbid();
             }
@@ -182,23 +134,11 @@ namespace VNPost.Areas.API
         [HttpDelete("{id}")]
         public IActionResult DeleteArticle(string id)
         {
-            if (_signInManager.IsSignedIn(User))
+            if (_identityUser == null)
             {
-                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-                {
-                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-
-                    if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
-                    {
-                        return Forbid();
-                    }
-                }
-                else
-                {
-                    return Forbid();
-                }
+                return Forbid();
             }
-            else
+            if (_identityUser.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
             {
                 return Forbid();
             }
@@ -207,7 +147,7 @@ namespace VNPost.Areas.API
             {
                 return Ok(new { success = false, message = "Error while deleting" });
             }
-            if(id== "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+            if (id == "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
             {
                 return Ok(new { success = false, message = "Can't delete admin" });
             }
