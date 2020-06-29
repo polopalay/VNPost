@@ -38,6 +38,7 @@ namespace VNPost.Areas.Components
 
             HeaderVM headerVM = new HeaderVM(listMenuItem, listMenuLink, categories);
             headerVM.IsLogedIn = _signInManager.IsSignedIn((ClaimsPrincipal)User);
+            headerVM.Name = User.Identity.Name;
             return View(headerVM);
         }
     }

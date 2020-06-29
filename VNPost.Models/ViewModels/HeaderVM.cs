@@ -18,5 +18,6 @@ namespace VNPost.Models.ViewModels
         public Dictionary<string, string> ListMenuItem { get; set; }
         public Dictionary<int, List<MenuLink>> ListMenuLink { get; set; }
         public List<Category> Categories { get; set; }
+        public string Name { get; set; }
     }
 }

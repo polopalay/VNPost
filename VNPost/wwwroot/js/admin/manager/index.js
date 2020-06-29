@@ -1,4 +1,5 @@
 ﻿const index = GetURLParameter("index") == null ? 1 : GetURLParameter("index");
+const numberPostInPage = 100;
 let table;
 
 function loadTbl() {
@@ -8,7 +9,7 @@ function loadTbl() {
         "lengthMenu": [10, 5],
         "ajax": {
             type: "GET",
-            url: "/api/permision?index=" + index,
+            url: "/api/permision?numberPostInPage=" + numberPostInPage + "&index=" + index,
         },
         "columns": [
             { "data": "Name", "width": "50%" },
@@ -34,7 +35,7 @@ function loadTbl() {
 function loadPaging() {
     $.ajax({
         type: "GET",
-        "url": "/api/permision?index=" + index,
+        "url": "/api/permision?getPagination=true&numberPostInPage=" + numberPostInPage + "&index=" + index,
     }).done(function (data) {
         $("#pagination").empty();
         for (let i = data.begin; i <= data.end; i++) {
@@ -43,7 +44,7 @@ function loadPaging() {
             });
             const link = $("<a></a>", {
                 class: "page-link",
-                href: "/Admin/Manager/Index?getPagination=true&index=" + i,
+                href: "/Admin/Manager/Index?getPagination=true&numberPostInPage=" + numberPostInPage + "&index=" + i,
                 text: i,
             });
             list.append(link);

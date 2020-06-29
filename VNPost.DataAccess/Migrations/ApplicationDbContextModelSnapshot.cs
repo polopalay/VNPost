@@ -45,7 +45,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "770bd0f5-29d7-47bd-9d68-a7ae240671f1",
+                            ConcurrencyStamp = "cca15ff2-7608-4a56-ac69-7aa919fc83d6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -142,7 +142,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "419a934d-9089-4555-87b3-567dc41ad557",
+                            ConcurrencyStamp = "cdadf717-103b-4dec-a71b-a2bfe3b3080a",
                             Email = "polopalay@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -150,7 +150,7 @@ namespace VNPost.DataAccess.Migrations
                             NormalizedUserName = "POLOPALAY@GMAIL.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAEI2rNt77YvirvqeMB4vQ/CinWEN+kXmoaWNZEEQaXqup94Ko9xg6k9he3Bb/96UM6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "86418387-129c-47b8-96d7-978093f50ecc",
+                            SecurityStamp = "4a27e3cd-5502-44e9-af78-45bfc06c2571",
                             TwoFactorEnabled = false,
                             UserName = "polopalay@gmail.com"
                         });
@@ -795,14 +795,6 @@ namespace VNPost.DataAccess.Migrations
                             Link = "/Posts/Article/List",
                             LocationId = 4,
                             Value = "Tin tức"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Key = "",
-                            Link = "/Admin/Article/Index",
-                            LocationId = 4,
-                            Value = "Tài khoản"
                         },
                         new
                         {
