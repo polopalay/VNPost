@@ -4,27 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using VNPost.DataAccess.Repository.IRepository;
 
 namespace VNPost.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class RegisterTypeUserController : Controller
+    public class RegisterTypeUserController : BaseController
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        public RegisterTypeUserController(SignInManager<IdentityUser> signInManager)
+        public RegisterTypeUserController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
-            _signInManager = signInManager;
         }
         public IActionResult Index()
         {
-            if (!_signInManager.IsSignedIn(User))
+            if (IsAdmin())
             {
-                return Redirect("/Identity/Account/Login");
+                return View();
             }
             else
             {
-                return View();
+                return Forbid();
             }
         }
     }

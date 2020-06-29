@@ -61,7 +61,16 @@ namespace VNPost.Models.Entity
         public ColumnistItem ColumnistItem { get; set; }
         public string IdentityUserId { get; set; }
         [ForeignKey("IdentityUserId")]
-        public IdentityUser IdentityUser { get; set; }
+        private IdentityUser identityUser;
+        public IdentityUser IdentityUser
+        {
+            get
+            {
+                if (identityUser == null) { return identityUser; }
+                else { return new IdentityUser(identityUser.UserName); }
+            }
+            set { identityUser = value; }
+        }
 
         public string SoftDescription()
         {

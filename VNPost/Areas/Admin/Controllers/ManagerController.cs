@@ -17,29 +17,26 @@ namespace VNPost.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            var x = _unitOfWork.IdentityRole.GetAll();
-            if (_identityRole == null)
-            {
-                return Forbid();
-            }
-            if (_identityRole.Id == "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+            if (IsAdmin())
             {
                 return View();
             }
-            return Forbid();
+            else
+            {
+                return Forbid();
+            }
         }
 
         public IActionResult Upsert()
         {
-            if (_identityRole == null)
+            if (IsAdmin())
+            {
+                return View();
+            }
+            else
             {
                 return Forbid();
             }
-            if (!_identityRole.Equals("13d23c51-re38-4831-wqa2-2e3f21c23ewd"))
-            {
-                Forbid();
-            }
-            return View();
         }
     }
 }

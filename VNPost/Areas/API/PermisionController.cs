@@ -42,13 +42,9 @@ namespace VNPost.Areas.API
         [HttpGet("{id}")]
         public IActionResult Get(string id, [FromQuery] bool getName)
         {
-            if (_identityUser == null)
+            if (!CheckUser())
             {
-                return Forbid();
-            }
-            if (_identityUser.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
-            {
-                return Forbid();
+                return Ok(new { success = false, message = "Don't have permision" });
             }
             _unitOfWork.Columnist.GetAll();
             _unitOfWork.ColumnistItem.GetAll();
@@ -67,13 +63,9 @@ namespace VNPost.Areas.API
         [HttpPost]
         public IActionResult Post([FromQuery] string name, [FromBody] List<RolePermission> data)
         {
-            if (_identityUser == null)
+            if (!CheckUser())
             {
-                return Forbid();
-            }
-            if (_identityUser.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
-            {
-                return Forbid();
+                return Ok(new { success = false, message = "Don't have permision" });
             }
             if (name == null)
             {
@@ -100,15 +92,11 @@ namespace VNPost.Areas.API
         [HttpPut("{id}")]
         public IActionResult Put(string id, [FromQuery] string name, [FromBody] List<RolePermission> data)
         {
-            if (_identityUser == null)
+            if (!CheckUser())
             {
-                return Forbid();
+                return Ok(new { success = false, message = "Don't have permision" });
             }
-            if (_identityUser.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
-            {
-                return Forbid();
-            }
-            if (data == null || data.Count == 0 || _unitOfWork.IdentityRole.Get(id) == null)
+            if (data == null || _unitOfWork.IdentityRole.Get(id) == null)
             {
                 return Ok(new { success = false, message = "Error while updating" });
             }
@@ -134,13 +122,9 @@ namespace VNPost.Areas.API
         [HttpDelete("{id}")]
         public IActionResult DeleteArticle(string id)
         {
-            if (_identityUser == null)
+            if (!CheckUser())
             {
-                return Forbid();
-            }
-            if (_identityUser.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
-            {
-                return Forbid();
+                return Ok(new { success = false, message = "Don't have permision" });
             }
             var objFromDb = _unitOfWork.IdentityRole.Get(id);
             if (objFromDb == null)
@@ -151,12 +135,36 @@ namespace VNPost.Areas.API
             {
                 return Ok(new { success = false, message = "Can't delete admin" });
             }
-            _unitOfWork.RolePermission.RemoveRange(_unitOfWork.RolePermission.GetAll().Where(x => x.RoleId == id));
-            _unitOfWork.IdentityUserRole.RemoveRange(_unitOfWork.IdentityUserRole.GetAll().Where(x => x.RoleId == id));
-            _unitOfWork.IdentityRole.Remove(objFromDb);
-            _unitOfWork.Save();
+            try
+            {
+                _unitOfWork.RolePermission.RemoveRange(_unitOfWork.RolePermission.GetAll().Where(x => x.RoleId == id));
+                _unitOfWork.IdentityUserRole.RemoveRange(_unitOfWork.IdentityUserRole.GetAll().Where(x => x.RoleId == id));
+                _unitOfWork.IdentityRole.Remove(objFromDb);
+                _unitOfWork.Save();
+            }
+            catch
+            {
+                return Ok(new { success = false, message = "Error while deleting" });
+            }
             return Ok(new { success = true, message = "Delete Successful" });
 
+        }
+
+        private bool CheckUser()
+        {
+            if (_identityUser == null)
+            {
+                return false;
+            }
+            if (_identityRole == null)
+            {
+                return false;
+            }
+            if (_identityRole.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

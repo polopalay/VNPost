@@ -26,12 +26,9 @@ namespace VNPost.Areas.Admin.Controllers
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            if (_identityUser == null && _identityRole == null && _rolePermissions == null)
-            {
-                GetIdentityUser();
-                GetIdentityRole();
-                GetRolePermission();
-            }
+            GetIdentityUser();
+            GetIdentityRole();
+            GetRolePermission();
             base.OnActionExecuting(context);
         }
 
@@ -89,6 +86,18 @@ namespace VNPost.Areas.Admin.Controllers
         protected List<RolePermission> GetRolePermissionCanDelete()
         {
             return _rolePermissions.Where(rp => rp.Delete == true).ToList();
+        }
+        protected bool IsAdmin()
+        {
+            if (_identityRole == null)
+            {
+                return false;
+            }
+            if (_identityRole.Id == "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

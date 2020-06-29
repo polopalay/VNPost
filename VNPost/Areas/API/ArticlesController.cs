@@ -20,6 +20,7 @@ namespace VNPost.Areas.API
         {
             _unitOfWork.Columnist.GetAll();
             _unitOfWork.ColumnistItem.GetAll();
+            _unitOfWork.IdentityUser.GetAll();
         }
 
         [HttpGet]

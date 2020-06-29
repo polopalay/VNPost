@@ -5,117 +5,102 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using VNPost.DataAccess.Repository.IRepository;
+using VNPost.Models.Entity;
 
 namespace VNPost.Areas.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : BaseApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        public UserController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager)
+        public UserController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
-            _signInManager = signInManager;
-            _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        public IActionResult Get([FromQuery] bool getId, [FromQuery] bool getType)
+        public IActionResult Get([FromQuery] bool getId, [FromQuery] bool getType, [FromQuery] bool getName,
+            [FromQuery] bool getAll)
         {
 
-            if (getId)
+            if (getAll)
             {
-                if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+                List<UserRole> userRoles = new List<UserRole>();
+                List<string> userHaveRole = new List<string>();
+                foreach (IdentityUserRole<string> identityUserRole in _unitOfWork.IdentityUserRole.GetAll())
                 {
-                    string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-                    return Ok(userId);
+                    UserRole userRole = new UserRole()
+                    {
+                        IdentityRole = new IdentityRole()
+                        {
+                            Id = _unitOfWork.IdentityRole.Get(identityUserRole.RoleId).Id,
+                            Name = _unitOfWork.IdentityRole.Get(identityUserRole.RoleId).Name,
+                        },
+                        IdentityUser = new IdentityUser()
+                        {
+                            Id = _unitOfWork.IdentityUser.Get(identityUserRole.UserId).Id,
+                            UserName = _unitOfWork.IdentityUser.Get(identityUserRole.UserId).UserName,
+                        },
+                    };
+                    userHaveRole.Add(userRole.IdentityUser.Id);
+                    userRoles.Add(userRole);
                 }
-                else
+                foreach (IdentityUser user in _unitOfWork.IdentityUser.GetAll(filter: u => (!userHaveRole.Contains(u.Id))))
                 {
-                    return Ok(null);
+                    UserRole userRole = new UserRole()
+                    {
+                        IdentityUser = user,
+                    };
+                    userRoles.Add(userRole);
+
                 }
+                return Ok(JsonConvert.SerializeObject(new { data = userRoles }));
+            }
+            else if (getId)
+            {
+                return Ok(_identityUser == null ? null : _identityUser.Id);
             }
             else if (getType)
             {
-                if (_signInManager.IsSignedIn(User))
-                {
-                    if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-                    {
-                        string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-
-                        if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId).Count() == 0)
-                        {
-                            return Ok(null);
-                        }
-                        else
-                        {
-                            string roleId = _unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId).ToList()[0].RoleId;
-                            return Ok(_unitOfWork.IdentityRole.Get(roleId).Name);
-                        }
-                    }
-                    else
-                    {
-                        return Ok(null);
-                    }
-                }
-                else
-                {
-                    return Ok(null);
-                }
+                return Ok(_identityRole == null ? null : _identityRole.Name);
+            }
+            else if (getName)
+            {
+                return Ok(_identityUser == null ? null : _identityUser.UserName);
             }
             else
             {
-                if (_signInManager.IsSignedIn(User))
-                {
-                    if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
-                    {
-                        string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-
-                        if (_unitOfWork.IdentityUserRole.GetAll(ur => ur.UserId == userId && ur.RoleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd").Count() == 0)
-                        {
-                            return Ok(false);
-                        }
-                    }
-                    else
-                    {
-                        return Ok(false);
-                    }
-                }
-                else
-                {
-                    return Ok(false);
-                }
-                return Ok(true);
+                return Ok(_identityRole == null ? false : _identityRole.Id == "13d23c51-re38-4831-wqa2-2e3f21c23ewd");
             }
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] string data)
+        [HttpPost("{userId}")]
+        public IActionResult Post(string userId, [FromBody] string roleId)
         {
-            if (_unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList().Count > 0)
+            if (_identityRole == null)
             {
-                string userId = _unitOfWork.IdentityUser.GetAll(filter: x => x.UserName == User.Identity.Name).ToList()[0].Id;
-                string roleId = null;
-                if (_unitOfWork.IdentityUserRole.GetAll(filter:ur=>ur.UserId==userId).Count()>0)
-                {
-                    roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).ToList()[0].RoleId;
-                }
-                if (roleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
-                {
-                   return Ok(new { success = false, message = "Can't register admin" });
-                }
-                else
-                {
-                    _unitOfWork.IdentityUserRole.RemoveRange(_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId));
-                    _unitOfWork.IdentityUserRole.Add(new IdentityUserRole<string> { RoleId = data, UserId = userId });
-                    _unitOfWork.Save();
-                    return Ok(new { success = true, message = "Register successfull" });
-                }
+                return Ok(new { success = false, message = "Don't have permision" });
             }
             else
             {
-                return Ok(new { success = false, message = "Can't find user id" });
+                if (_identityRole.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+                {
+                    return Ok(new { success = false, message = "Don't have permision" });
+                }
+            }
+            if (roleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+            {
+                return Ok(new { success = false, message = "Can't set type admin" });
+            }
+            else
+            {
+                _unitOfWork.IdentityUserRole.RemoveRange(_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId));
+                if (roleId != "")
+                {
+                    _unitOfWork.IdentityUserRole.Add(new IdentityUserRole<string> { RoleId = roleId, UserId = userId });
+                }
+                _unitOfWork.Save();
+                return Ok(new { success = true, message = "Set type successfull" });
             }
         }
     }

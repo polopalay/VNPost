@@ -6,11 +6,23 @@
 }
 
 <div class="container">
-    <form>
-        <select id="select" class="form-control"></select>
-        <button id="button" type="button" class="btn btn-success mb-4">Đăng ký</button>
-        <a class="btn btn-warning text-white" href="/Admin/Article">Về trang chủ</a>
-    </form>
+    <div class="d-flex align-items-end flex-column my-2" >
+        <a class="btn btn-warning text-white" href="/Admin/Article"><i class="fas fa-home"></i> Về trang chủ</a>
+    </div>
+    <table class="table" width="100%" id="tblData">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+    </table>
 </div>
 
 @section Scripts{
