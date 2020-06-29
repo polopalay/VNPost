@@ -25,15 +25,29 @@ namespace VNPost.Areas.API
 
         [HttpGet]
         public IActionResult GetArticles([FromQuery] int index = 1, [FromQuery] int numberPostInPage = 10,
+            [FromQuery] int columnistId = 0, [FromQuery] int columnistItemId = 0,
             [FromQuery] bool getTop5ByDate = false, [FromQuery] bool getTop1ByView = false,
             [FromQuery] bool getAll = false, [FromQuery] bool getPagination = false,
             [FromQuery] bool fillToDataTable = false, [FromQuery] bool getLatest = false,
-            [FromQuery] int columnistId = 0, [FromQuery] int columnistItemId = 0)
+            [FromQuery] bool getByUSer = false)
         {
             List<Article> articles = new List<Article>();
             if (getAll)
             {
                 articles = _unitOfWork.Article.GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate)).ToList();
+            }
+            else if (getByUSer)
+            {
+                if (_identityRole != null)
+                {
+                    List<RolePermission> rolePermissions = _unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == _identityRole.Id).ToList();
+                    List<int> columnistRp = new List<int>();
+                    foreach (RolePermission rolePermission in rolePermissions)
+                    {
+                        columnistRp.Add(rolePermission.ColumnistItemId);
+                    }
+                    articles = _unitOfWork.Article.GetAll(filter: a => columnistRp.Contains(a.ColumnistItemId)).ToList();
+                }
             }
             else if (getLatest)
             {

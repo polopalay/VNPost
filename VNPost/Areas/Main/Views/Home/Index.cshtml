@@ -76,7 +76,7 @@
                             <img id=@("img"+i) src="@Model.Articles[i].DescriptionImg" />
                         </div>
                         <div>
-                            <a href="/Posts/Article/ArticleDetail/@(Model.Articles[i].Id)">
+                            <a href="/Posts/Article/ArticleDetail?id=@(Model.Articles[i].Id)">
                                 <h4 id=@("title"+i)>@Model.Articles[i].Title</h4>
                             </a>
                             <p id=@("date"+i)>@Model.Articles[i].DateCreate.ToString("MM/dd/yyyy")</p>
