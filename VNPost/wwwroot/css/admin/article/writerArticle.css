@@ -45,16 +45,14 @@
         #form form > div > a {
             margin-top: 3rem;
             width: 10rem;
-            height: 4rem;
         }
 
         #form form > div > a {
             color: white;
-            line-height: 3rem;
         }
 
 .note-toolbar.card-header {
-    background-color: lightgray;
+    background-color: #f1f1f1;
     position: sticky;
     top: 0;
     opacity: 1;

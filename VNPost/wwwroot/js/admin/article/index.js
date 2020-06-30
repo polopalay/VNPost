@@ -1,4 +1,5 @@
 ﻿const index = GetURLParameter("index") == null ? 1 : GetURLParameter("index");
+const numberPostInPage = 100;
 let table;
 
 function loadTbl() {
@@ -6,21 +7,27 @@ function loadTbl() {
         "paging": true,
         "info": true,
         "order": [2, "desc"],
-        "lengthMenu": [8, 6, 4, 2, 1],
+        "lengthMenu": [10, 5, 1],
         "ajax": {
             type: "GET",
-            url: "/api/articles?getAll=true&fillToDataTable=true&numberPostInPage=8&index=" + index,
+            url: "/api/articles?getByUSer=true&fillToDataTable=true&numberPostInPage=" + numberPostInPage + "&index=" + index,
         },
         "columns": [
-            { "data": "Title", "width": "50%" },
-            { "data": "Author", "width": "20%" },
-            { "data": "DateCreate", "width": "20%" },
+            { "data": "Title", "width": "30%" },
+            { "data": "IdentityUser.UserName", "width": "20%" },
+            {
+                "data": "DateCreate",
+                "render": function (data) {
+                    return dateDMY(data);
+                }, "width": "20%"
+            },
+            { "data": "ColumnistItem.Name", "width": "20%" },
             {
                 "data": "Id",
                 "render": function (data) {
                     return `
                                     <div class="text-center">
-                                        <a href="/Posts/Write/Upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                        <a href="/Admin/Article/Upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <button onclick=Delete("/api/articles/${data}") class="btn btn-danger text-white" style="cursor:pointer">
@@ -37,7 +44,7 @@ function loadTbl() {
 function loadPaging() {
     $.ajax({
         type: "GET",
-        "url": "/api/articles?getAll=true&fillToDataTable=true&numberPostInPage=8&getPagination=true&index=" + index,
+        "url": "/api/articles?getByUSer=true&fillToDataTable=true&numberPostInPage=" + numberPostInPage + "&getPagination=true&index=" + index,
     }).done(function (data) {
         $("#pagination").empty();
         for (let i = data.begin; i <= data.end; i++) {
@@ -81,16 +88,26 @@ function checkPermision() {
         type: "GET",
         url: "/api/user",
     }).done(function (data) {
-        let link = $("<a></a>", {
-            href: "/Admin/Manager",
-            class: "btn btn-warning text-white",
-        })
-        let i = $("<i></i>", {
-            class: "fas fa-tasks",
-        });
-        link.append(i);
-        link.append(" Quản lý người dùng");
         if (data) {
+            let link = $("<a></a>", {
+                href: "/Admin/Manager",
+                class: "btn btn-warning text-white",
+            })
+            let i = $("<i></i>", {
+                class: "fas fa-tasks",
+            });
+            link.append(i);
+            link.append(" Quản lý loại người dùng");
+            $("#user").append(link);
+            link = $("<a></a>", {
+                href: "/Admin/RegisterTypeUser",
+                class: "btn btn-primary text-white ml-1",
+            })
+            i = $("<i></i>", {
+                class: "fas fa-user-plus",
+            });
+            link.append(i);
+            link.append(" Quản lý người dùng");
             $("#user").append(link);
         }
         loadType();
@@ -117,7 +134,26 @@ function loadType() {
             });
         }
         link.append(i);
-        data = (data == null ? "No type" : data);
+        data = (data == null ? "Không có quyền hạn" : data);
+        link.append(" " + data);
+        $("#user").append(link);
+        loadName();
+    });
+}
+
+function loadName() {
+    $.ajax({
+        type: "GET",
+        url: "/api/user?getName=true",
+    }).done(function (data) {
+        let link = $("<a></a>", {
+            class: "btn btn-info text-white ml-1",
+        });
+        let i = $("<i></i>", {
+            class: "fas fa-signature",
+        });
+        link.append(i);
+        data = (data == null ? "Vô danh" : data);
         link.append(" " + data);
         $("#user").append(link);
     });

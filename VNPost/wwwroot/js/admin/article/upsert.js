@@ -89,8 +89,43 @@ function loadColumnistItem() {
 /*load data to form */
 function loadForm() {
     getData();
-    $('#content').summernote({
+    $("#content").summernote({
         tabsize: 2,
+        toolbar: [
+            ["style", ["style"]],
+            ["font", ["bold", "italic", "underline", "strikethrough", "superscript", "subscript", "clear"]],
+            ["fontname", ["fontname"]],
+            ["fontstyle", ["fontsize", "fontsizeunit"]],
+            ["color", ["color"]],
+            ["para", ["ul", "ol", "paragraph"]],
+            ["height", ["height"]],
+            ["table", ["table"]],
+            ["insert", ["link", "picture", "video", "audio", "hr"]],
+            ["action", ["undo", "redo",]],
+            ["view", ["fullscreen", "codeview", "help"]],
+        ],
+        popover: {
+            image: [
+                ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+                ['float', ['floatLeft', 'floatRight', 'floatNone']],
+                ['remove', ['removeMedia']]
+            ],
+            link: [
+                ['link', ['linkDialogShow', 'unlink']]
+            ],
+            table: [
+                ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+                ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+            ],
+            air: [
+                ['color', ['color']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['para', ['ul', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']]
+            ]
+        },
+        lang: "vi-VN",
     });
     $(function () {
         $('#content').each(function () {

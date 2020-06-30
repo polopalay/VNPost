@@ -3,7 +3,7 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/post/writer/writerArticle.css" />
+    <link rel="stylesheet" href="~/css/admin/article/writerArticle.css" />
 }
 
 <section id="form" style="padding-bottom:1rem;">
@@ -32,14 +32,14 @@
         </div>
         <textarea id="content"></textarea>
         <div>
-            <button type="button" id="submit" class="btn btn-success">Lưu</button>
-            <a href="/Posts/Write/Index" id="submit" class="btn btn-warning">Về trang chủ</a>
+            <button type="button" id="submit" class="btn btn-success"><i class="fas fa-save"></i> Lưu</button>
+            <a href="/Admin/Article/Index" id="submit" class="btn btn-warning"><i class="fas fa-home"></i> Về trang chủ</a>
         </div>
     </form>
 </section>
 
 @section Scripts{
-    <script src="~/js/posts/write/upsert.js"></script>
+    <script src="~/js/admin/article/upsert.js"></script>
 }
 
 

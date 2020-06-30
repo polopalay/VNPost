@@ -10,8 +10,7 @@
             <h2 class="text-info">Danh sách các bài viết</h2>
         </div>
         <div id="user" class="col-6 text-right">
-            <a class="btn btn-success" href="/Posts/Write/Upsert"><i class="fas fa-plus"></i> Viết bài</a>
-            <a class="btn btn-info" href="/Admin/RegisterTypeUser/Index"><i class="fas fa-user-plus"></i> Đăng ký loại người dùng</a>
+            <a class="btn btn-success" href="/Admin/Article/Upsert"><i class="fas fa-plus"></i> Viết bài</a>
         </div>
     </div>
     <table class="table" width="100%" id="tblData">
@@ -24,7 +23,11 @@
                     Author
                 </th>
                 <th>
-                    Date create
+                    Date
+                </th>
+
+                <th>
+                    Type
                 </th>
                 <th>
                 </th>
@@ -36,6 +39,6 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/posts/write/index.js"></script>
+    <script src="~/js/admin/article/index.js"></script>
 }
 
