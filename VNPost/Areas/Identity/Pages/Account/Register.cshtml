@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Đăng ký";
 }
 
 <link rel="stylesheet" href="~/css/user/form.css" />
@@ -27,8 +27,8 @@
             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
         </div>
         <div class="form-group login-option">
-            <button type="submit" class="btn btn-primary">Register</button>
-            <a id="forgot-password" asp-page="./Login">Back to login</a>
+            <button type="submit" class="btn btn-primary">Đăng ký</button>
+            <a href="/Admin/RegisterTypeUser" id="submit" class="btn btn-warning text-white">Về quản lý người dùng</a>
         </div>
     </form>
 </div>

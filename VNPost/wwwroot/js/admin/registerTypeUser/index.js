@@ -1,4 +1,5 @@
-﻿function loadData() {
+﻿let table;
+function loadData() {
     $.ajax({
         type: "GET",
         url: "/api/permision?dontPaging=true",
@@ -8,7 +9,7 @@
 }
 
 function loadTbl(permision) {
-    $('#tblData').DataTable({
+    table = $('#tblData').DataTable({
         "paging": true,
         "info": true,
         "order": [0, "desc"],
@@ -18,7 +19,14 @@ function loadTbl(permision) {
             url: "/api/user?getAll=true",
         },
         "columns": [
-            { "data": "IdentityUser.UserName", "width": "50%" },
+            { "data": "IdentityUser.UserName", "width": "35%" },
+            {
+                "data": "IdentityRole",
+                "render": function (data) {
+                    return data == null ? "Không có quyền hạn" : data.Name;
+                }
+                , "width": "20%"
+            },
             {
                 "data": {},
                 "render": function (data) {
@@ -44,7 +52,7 @@ function loadTbl(permision) {
                         select += `</select>`;
                         return select;
                     }
-                }, "width": "40%"
+                }, "width": "35%"
             },
             {
                 "data": {},
@@ -54,9 +62,13 @@ function loadTbl(permision) {
                     }
                     else {
                         return `
-                                   <button id="btn${data.IdentityUser.Id}" onclick=save("${data.IdentityUser.Id}") class="btn btn-success text-white" style="cursor:pointer">
-                                       <i class="fas fa-save"></i>
-                                   </button>
+                                    <div class="text-center">
+                                        <button id="btn${data.IdentityUser.Id}" onclick=save("${data.IdentityUser.Id}") class="btn btn-success text-white" style="cursor:pointer">
+                                            <i class="fas fa-save"></i>
+                                        </button>
+                                        <button onclick=remove("${data.IdentityUser.Id}") class="btn btn-danger text-white" style="cursor:pointer">
+                                           <i class="fas fa-trash-alt"></i>
+                                        </button>
                                    `;
                     }
                 }, "width": "10%"
@@ -74,7 +86,22 @@ function save(data) {
         dataType: "json",
     }).done(function (result) {
         if (result.success) {
+            table.ajax.reload();
             $("#btn" + data).attr("class", "btn btn-success text-white");
+            toastr.success(result.message);
+        }
+        else {
+            toastr.error(result.message);
+        }
+    });
+}
+function remove(data) {
+    $.ajax({
+        type: "DELETE",
+        url: "/api/user/" + data,
+    }).done(function (result) {
+        if (result.success) {
+            table.ajax.reload();
             toastr.success(result.message);
         }
         else {

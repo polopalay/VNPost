@@ -17,5 +17,11 @@ namespace VNPost.DataAccess.Repository.IRepository
         {
             return dbSet.Find(id);
         }
+
+        public void Remove(string uid)
+        {
+            IdentityUser entity = dbSet.Find(uid);
+            Remove(entity);
+        }
     }
 }

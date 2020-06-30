@@ -13,5 +13,11 @@ namespace VNPost.DataAccess.Repository
         {
             _db = db;
         }
+
+        public void Remove(string uid, string rid)
+        {
+            IdentityUserRole<string> entity = dbSet.Find(uid, rid);
+            Remove(entity);
+        }
     }
 }

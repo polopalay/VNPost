@@ -15,8 +15,10 @@ namespace VNPost.Areas.API
     [ApiController]
     public class UserController : BaseApiController
     {
-        public UserController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
+        private readonly UserManager<IdentityUser> _userManager;
+        public UserController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager) : base(unitOfWork, signInManager)
         {
+            _userManager = userManager;
         }
         [HttpGet]
         public IActionResult Get([FromQuery] bool getId, [FromQuery] bool getType, [FromQuery] bool getName,
@@ -101,6 +103,79 @@ namespace VNPost.Areas.API
                 }
                 _unitOfWork.Save();
                 return Ok(new { success = true, message = "Set type successfull" });
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Put([FromBody] IdentityUser identityUser, [FromQuery] string password)
+        {
+            if (_identityRole == null)
+            {
+                return Ok(new { success = false, message = "Don't have permision" });
+            }
+            else
+            {
+                if (_identityRole.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+                {
+                    return Ok(new { success = false, message = "Don't have permision" });
+                }
+            }
+            identityUser.Email = identityUser.UserName;
+            identityUser.EmailConfirmed = true;
+            var result = _userManager.CreateAsync(identityUser, password);
+            _unitOfWork.Save();
+            if (result.IsCompletedSuccessfully)
+            {
+                return Ok(new { success = true, message = "Successfull" });
+            }
+            else
+            {
+                return Ok(new { success = false, message = "Fail" });
+            }
+
+        }
+
+        [HttpDelete("{userId}")]
+        public IActionResult Delete(string userId)
+        {
+            if (_identityRole == null)
+            {
+                return Ok(new { success = false, message = "Don't have permision" });
+            }
+            else
+            {
+                if (_identityRole.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+                {
+                    return Ok(new { success = false, message = "Don't have permision" });
+                }
+            }
+            try
+            {
+                string roleId = null;
+                if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == userId).ToList().Count() > 0)
+                {
+                    roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == _identityUser.Id).ToList()[0].RoleId;
+                    if (roleId == "13d23c51-re38-4831-wqa2-2e3f21c23ewd")
+                    {
+                        return Ok(new { success = false, message = "Can't delete admin" });
+                    }
+                }
+                if (roleId != null)
+                {
+                    if (_identityUser != null)
+                    {
+                    }
+                    _unitOfWork.IdentityUserRole.Remove(userId, roleId);
+                }
+                _unitOfWork.IdentityUser.Remove(userId);
+                _unitOfWork.Save();
+                return Ok(new { success = true, message = "Remove successfull" });
+            }
+            catch
+            {
+                _unitOfWork.Save();
+                return Ok(new { success = false, message = "Remove fail" });
+
             }
         }
     }

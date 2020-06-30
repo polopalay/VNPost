@@ -63,5 +63,6 @@
     <Folder Include="Areas\Admin\Views\RegisterTypeUser\" />
     <Folder Include="wwwroot\js\admin\registerTypeUser\" />
     <Folder Include="wwwroot\css\admin\registerTypeUser\" />
+    <Folder Include="Areas\Admin\Views\CreateUser\" />
   </ItemGroup>
 </Project>

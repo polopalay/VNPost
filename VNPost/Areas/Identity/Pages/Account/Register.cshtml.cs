@@ -13,27 +13,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using VNPost.DataAccess.Repository.IRepository;
 
 namespace VNPost.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        protected readonly IUnitOfWork _unitOfWork;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private IdentityUser _identityUser = null;
+        private IdentityRole _identityRole = null;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _logger = logger;
-            _emailSender = emailSender;
+            _unitOfWork = unitOfWork;
         }
 
         [BindProperty]
@@ -62,19 +62,21 @@ namespace VNPost.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public IActionResult OnGet(string returnUrl = null)
         {
-            if (_signInManager.IsSignedIn(User))
+            if (!CheckAdmin())
             {
-                await _signInManager.SignOutAsync();
+                return Forbid();
             }
-            ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync()
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            if (!CheckAdmin())
+            {
+                return Forbid();
+            }
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -82,13 +84,8 @@ namespace VNPost.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-                    var rs = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, true, lockoutOnFailure: false);
-                    if (rs.Succeeded)
-                    {
-                        _logger.LogInformation("User logged in.");
-                        return LocalRedirect(returnUrl);
-                    }
+                    await _signInManager.PasswordSignInAsync(_identityUser.Email, _identityUser.PasswordHash, false, lockoutOnFailure: false);
+                    return Redirect("/Admin/RegisterTypeUser");
                 }
                 foreach (var error in result.Errors)
                 {
@@ -96,8 +93,35 @@ namespace VNPost.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private bool CheckAdmin()
+        {
+            if (User != null)
+            {
+                if (_signInManager.IsSignedIn(User))
+                {
+                    _identityUser = _unitOfWork.IdentityUser.GetAll(filter: i => i.UserName == User.Identity.Name).ToList()[0];
+                }
+            }
+            if (_identityUser != null)
+            {
+                if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == _identityUser.Id).ToList().Count() > 0)
+                {
+                    string roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == _identityUser.Id).ToList()[0].RoleId;
+                    _identityRole = _unitOfWork.IdentityRole.Get(roleId);
+                }
+            }
+            if (_identityRole == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (_identityRole.Id != "13d23c51-re38-4831-wqa2-2e3f21c23ewd") return false;
+                else return true;
+            }
         }
     }
 }
