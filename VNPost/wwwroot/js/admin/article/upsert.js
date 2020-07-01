@@ -91,6 +91,7 @@ function loadForm() {
     getData();
     $("#content").summernote({
         tabsize: 2,
+        blockquoteBreakingLevel: 2,
         toolbar: [
             ["style", ["style"]],
             ["font", ["bold", "italic", "underline", "strikethrough", "superscript", "subscript", "clear"]],

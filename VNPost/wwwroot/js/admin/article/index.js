@@ -66,15 +66,16 @@ function Delete(url) {
     $.ajax({
         type: "DELETE",
         url: url,
-        success: function (data) {
-            if (data.success) {
-                toastr.success(data.message);
-                table.ajax.reload();
-            }
-            else {
-                toastr.error(data.message);
-            }
+    }).done(function (data) {
+        if (data.success) {
+            toastr.success(data.message);
+            table.ajax.reload();
         }
+        else {
+            toastr.error(data.message);
+        }
+    }).fail(function () {
+        toastr.error("Send data fail");
     });
 }
 
