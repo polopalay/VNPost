@@ -36,6 +36,8 @@ function getData() {
                             loadColumnists(citem);
                         }
                     });
+                }).fail(function () {
+                    toastr.error("Error to send request to server");
                 });
             }
             else {
@@ -45,9 +47,13 @@ function getData() {
                 }).done(function (response) {
                     columnistItem = response;
                     loadColumnists(0);
+                }).fail(function () {
+                    toastr.error("Error to send request to server");
                 });
             }
         });
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 
@@ -67,6 +73,8 @@ function loadColumnists(citem) {
             $("#comlumnist").append(link);
         });
         loadColumnistItem();
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 
@@ -196,6 +204,8 @@ function loadForm() {
             else {
                 toastr.error(data.message);
             }
+        }).fail(function () {
+            toastr.error("Error to send request to server");
         });
     });
 }

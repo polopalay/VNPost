@@ -59,7 +59,9 @@ function loadPaging() {
             list.append(link);
             $("#pagination").append(list);
         }
-    })
+    }).fail(function () {
+        toastr.error("Error to send request to server");
+    });
 }
 
 function Delete(url) {
@@ -75,7 +77,7 @@ function Delete(url) {
             toastr.error(data.message);
         }
     }).fail(function () {
-        toastr.error("Send data fail");
+        toastr.error("Error to send request to server");
     });
 }
 
@@ -112,6 +114,8 @@ function checkPermision() {
             $("#user").append(link);
         }
         loadType();
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 
@@ -139,6 +143,8 @@ function loadType() {
         link.append(" " + data);
         $("#user").append(link);
         loadName();
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 
@@ -157,6 +163,8 @@ function loadName() {
         data = (data == null ? "Vô danh" : data);
         link.append(" " + data);
         $("#user").append(link);
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 

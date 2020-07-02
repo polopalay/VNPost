@@ -5,6 +5,8 @@ function loadData() {
         url: "/api/permision?dontPaging=true",
     }).done(function (result) {
         loadTbl(result);
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 
@@ -93,6 +95,8 @@ function save(data) {
         else {
             toastr.error(result.message);
         }
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 function remove(data) {
@@ -107,6 +111,8 @@ function remove(data) {
         else {
             toastr.error(result.message);
         }
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 

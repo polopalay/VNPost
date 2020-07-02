@@ -53,6 +53,8 @@ function loadDataToCheckBox() {
                 changeOption();
             });
             loadPermisionData();
+        }).fail(function () {
+            toastr.error("Error to send request to server");
         });
     });
 }
@@ -149,6 +151,8 @@ function addDataToCURD() {
         });
         addOption();
         addOptionToCurd();
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 
@@ -169,6 +173,11 @@ function changeOption() {
         /*set state of check box curd by data of permision*/
         firstColumnist.curd.forEach(curdItem => {
             $("#curd" + curdItem.id).prop("checked", curdItem.state);
+        });
+    }
+    if ($('#listColumnist > option').length == 0) {
+        curd.forEach(item => {
+            $("#curd" + item.id).prop("checked", false);
         });
     }
 }
@@ -230,6 +239,8 @@ function loadPermisionData() {
                 });
             }
         }
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
     $.ajax({
         url: "/api/permision/" + id + "?getName=true",
@@ -238,6 +249,8 @@ function loadPermisionData() {
         if (result != null) {
             $("#name").val(result);
         }
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 
@@ -292,6 +305,8 @@ function submit() {
         else {
             toastr.error(data.message);
         }
+    }).fail(function () {
+        toastr.error("Error to send request to server");
     });
 }
 
