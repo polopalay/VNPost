@@ -6,11 +6,13 @@
 
 <div class="container my-4">
     <div class="row">
-        <div class="col-6">
-            <h2 class="text-info">Danh sách các bài viết</h2>
+        <div class="col-4">
+            <h2 class="text-dark">Danh sách các bài viết</h2>
         </div>
-        <div id="user" class="col-6 text-right">
-            <a class="btn btn-success" href="/Admin/Article/Upsert"><i class="fas fa-plus"></i> Viết bài</a>
+        <div id="user" class="col-8 text-end d-flex justify-content-between pb-2">
+            <a class="btn btn-success mx-1" href="/Admin/Article/Upsert"><i class="fas fa-plus"></i> Viết bài </a>
+            <a class="btn btn-light mx-1" href="/Admin/Location"><i class="fas fa-map-marked-alt"></i> Quản lý bưu phẩm </a>
+            <a class="btn btn-dark mx-1" href="/Admin/Parcel"><i class="fas fa-shipping-fast"></i> Viết bài</a>
         </div>
     </div>
     <table class="table" width="100%" id="tblData">

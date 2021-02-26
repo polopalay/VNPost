@@ -63,8 +63,7 @@
     justify-content: center;
 }
 
-.pre-header-toolbar span,
-.pre-header-toolbar input {
+.pre-header-toolbar span, .pre-header-toolbar input {
     background: white;
 }
 
@@ -127,8 +126,7 @@
             width: 2.5rem;
         }
 
-    .main-header li p,
-    .main-header li span {
+    .main-header li p, .main-header li span {
         padding: 0;
         margin: 0;
         font-size: 1.5rem;
@@ -173,13 +171,11 @@
     }
 
 #menu-bar-accessory {
-    padding: 1.2rem 0;
+    padding: 1rem 0;
     cursor: pointer;
 }
 
-.bottom-header,
-.bottom-header ul,
-.bottom-header li {
+.bottom-header, .bottom-header ul, .bottom-header li {
     height: 4rem;
 }
 
@@ -193,8 +189,7 @@
         text-decoration: none;
     }
 
-    #menu-bar-accessory,
-    .bottom-header li {
+    #menu-bar-accessory, .bottom-header li {
         padding-top: 1rem 0;
     }
 
@@ -227,15 +222,14 @@
 }
 
     #menu-bar ul {
-        width: 100%;
+        width: 100% !important;
         list-style: none;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
     }
 
-        #menu-bar ul li div,
-        #menu-bar ul li form {
+        #menu-bar li div, #menu-bar ul li form {
             width: 80%;
             margin: 0 auto;
             height: 4rem;
@@ -243,14 +237,14 @@
             justify-content: flex-start;
         }
 
-            #menu-bar ul li div:nth-child(1) {
-                height: 2rem;
-                margin-bottom: 1rem;
-            }
+        #menu-bar ul li div:nth-child(1) {
+            height: 2rem;
+            margin-bottom: 1rem;
+        }
 
-            #menu-bar ul li div a:nth-child(1) {
-                line-height: 2rem;
-            }
+        #menu-bar ul li div a:nth-child(1) {
+            line-height: 2rem;
+        }
 
         #menu-bar ul li form {
             display: flex;
@@ -263,14 +257,14 @@
                 margin-right: 0.1rem;
             }
 
-            #menu-bar ul li form button {
+        /* #menu-bar ul li form button {
                 height: 3.5rem;
                 width: 3.5rem;
                 color: white;
                 border: 3px solid #fcb71e;
                 background: #fcb71e;
                 border-radius: 0.2rem;
-            }
+            } */
 
         #menu-bar ul li div a:hover {
             color: #fcb71e;
@@ -281,7 +275,7 @@
             margin-right: 2rem;
         }
 
-/*            #menu-bar ul li div a i::after {
+        /*            #menu-bar ul li div a i::after {
                 content: "|";
                 padding: 0 1rem;
             }*/
@@ -334,8 +328,7 @@
         width: 40rem;
     }
 
-    .main-header li p,
-    .main-header li span {
+    .main-header li p, .main-header li span {
         display: none;
     }
 
@@ -392,8 +385,7 @@
         padding-left: 2rem;
     }
 
-    #menu-bar-accessory,
-    #menu-bar {
+    #menu-bar-accessory, #menu-bar {
         width: 18rem;
     }
 
@@ -436,8 +428,7 @@
         width: 24rem;
     }
 
-    .main-header li p,
-    .main-header li span {
+    .main-header li p, .main-header li span {
         display: none;
     }
 
@@ -479,9 +470,7 @@
         width: 90%;
     }
 
-    .main-header li p,
-    .main-header li span,
-    .main-header li a {
+    .main-header li p, .main-header li span, .main-header li a {
         display: none;
     }
 }

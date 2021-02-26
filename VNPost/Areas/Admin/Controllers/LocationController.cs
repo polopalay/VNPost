@@ -14,9 +14,15 @@ namespace VNPost.Areas.Admin.Controllers
         public LocationController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
         }
+
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult District(int id)
+        {
+            return View(id);
         }
     }
 }

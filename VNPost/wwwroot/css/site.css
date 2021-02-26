@@ -19,3 +19,7 @@ body {
 select, button, svg {
     cursor: pointer;
 }
+
+ol, ul {
+    padding-left: 0;
+}

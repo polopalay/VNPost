@@ -27,10 +27,10 @@ function loadTbl() {
                 "render": function (data) {
                     return `
                                     <div class="text-center">
-                                        <a href="/Admin/Article/Upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                        <a href="/Admin/Article/Upsert?id=${data}" class="btn btn-success" style="cursor:pointer">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <button onclick=Delete("/api/articles/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                        <button onclick=Delete("/api/articles/${data}") class="btn btn-danger" style="cursor:pointer">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
@@ -94,7 +94,7 @@ function checkPermision() {
         if (data) {
             let link = $("<a></a>", {
                 href: "/Admin/Manager",
-                class: "btn btn-warning text-white",
+                class: "btn btn-warning",
             })
             let i = $("<i></i>", {
                 class: "fas fa-tasks",
@@ -102,9 +102,10 @@ function checkPermision() {
             link.append(i);
             link.append(" Quản lý loại người dùng");
             $("#user").append(link);
+
             link = $("<a></a>", {
                 href: "/Admin/RegisterTypeUser",
-                class: "btn btn-primary text-white ml-1",
+                class: "btn btn-primary ml-2",
             })
             i = $("<i></i>", {
                 class: "fas fa-user-plus",
@@ -125,7 +126,7 @@ function loadType() {
         url: "/api/user?getType=true",
     }).done(function (data) {
         let link = $("<a></a>", {
-            class: "btn btn-secondary text-white ml-1",
+            class: "btn btn-secondary ml-1",
         });
         let i;
         if (data == "Admin") {
@@ -154,7 +155,7 @@ function loadName() {
         url: "/api/user?getName=true",
     }).done(function (data) {
         let link = $("<a></a>", {
-            class: "btn btn-info text-white ml-1",
+            class: "btn btn-info ml-1",
         });
         let i = $("<i></i>", {
             class: "fas fa-signature",
