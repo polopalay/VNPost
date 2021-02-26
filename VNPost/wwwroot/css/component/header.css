@@ -281,10 +281,10 @@
             margin-right: 2rem;
         }
 
-            #menu-bar ul li div a i::after {
+/*            #menu-bar ul li div a i::after {
                 content: "|";
                 padding: 0 1rem;
-            }
+            }*/
 
         #menu-bar ul li div a {
             color: #21427f;

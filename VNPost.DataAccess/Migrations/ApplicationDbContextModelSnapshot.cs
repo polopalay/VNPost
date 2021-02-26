@@ -45,7 +45,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "cca15ff2-7608-4a56-ac69-7aa919fc83d6",
+                            ConcurrencyStamp = "1a1fcdaf-4f89-4ed5-a175-c272561d0ca8",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -142,7 +142,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cdadf717-103b-4dec-a71b-a2bfe3b3080a",
+                            ConcurrencyStamp = "eaff43a1-6a75-467f-b000-277057dbdc48",
                             Email = "polopalay@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -150,7 +150,7 @@ namespace VNPost.DataAccess.Migrations
                             NormalizedUserName = "POLOPALAY@GMAIL.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAEI2rNt77YvirvqeMB4vQ/CinWEN+kXmoaWNZEEQaXqup94Ko9xg6k9he3Bb/96UM6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4a27e3cd-5502-44e9-af78-45bfc06c2571",
+                            SecurityStamp = "eec32248-c7ec-4f92-9b7c-861c09976998",
                             TwoFactorEnabled = false,
                             UserName = "polopalay@gmail.com"
                         });
@@ -515,6 +515,25 @@ namespace VNPost.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("VNPost.Models.Entity.District", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProvinceId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.ToTable("Districts");
+                });
+
             modelBuilder.Entity("VNPost.Models.Entity.Gallery", b =>
                 {
                     b.Property<int>("Id")
@@ -598,6 +617,30 @@ namespace VNPost.DataAccess.Migrations
                             ImgDescription = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAACXBIWXMAAAsTAAALEwEAmpwYAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAEgUlEQVR42mL8//8/w0ADgABiYhgEACCABoUjAAJoUDgCIIBY8Mr++8XAwMQGZ///+5sBSIBwLiO7QDbD/3//GBiZ7Bn+/nz9HyjOyMIN1/r/5xsGhj/fGIDycDFGLhms1gAEEAtpbv4nwcjGa8jw/38N0CFiQGNBRocArbwMxEdBdpMTEgABRMgRhUDMD2W/A1qoD8RJDIyMyDE5jYGJ9T/jf+aFQDc8YIBIgtyzFOjY2wyMhN0FEECMeLPo/3//4cH5/8/////+PGZkYpcEBgAjsiqQOUCSBW4/CPz9eQ6oxxko9QHhZS6s1gAEECOBcuI7EHMgpZGXQIe8BTqMCxH0/4EJhYGZkYlDGcURECAFxM8JhQRAABGKDlQXMrGJMwIxkVH9ndg0AhBARCZMsG9/EjAUJMcOxKwoWYIIABBAhBwBjOt/DP9/fYhiYGR9DjSbHY9DGBn+fX/CyCZowcAISqTEA4AAIiIkgImGkcWNgYlFDxjnQqAkh9sstvnAODtKahYFCCAiHMEICl0NRmZWPaAFnPid+98ISF0g1REAAURMmgAG869ihn8s94Ehwg4OGVxVwL+fTxiY2Z0ZGBhJcgRAABEVHYysPNbAAgmYLRn/MeC2AaiOVw4YamykhgRAABETEsBQ/lvJyMAqRljh35uMDEzlWMoLvAAggIhJE0wMv7/mAAupd8BUz45FHhhdP74xMrH8Auag98BwksGsof8j0hcWABBARIUEMCqACY5JA2iIMFruAJkKDH7GE/9/fallYOH+CkwTchBdf4FV6P/voCzO8O8vkPrJwMgmgNUCgAAiJk0Aw4LVG2i4LsRz/zECguEvo8L/vz8XABmXGP79uQUMtetAdbzAMk6TkZnzBEQP7nIOIICIiQ7G/3+/FzMyMn0C5g5OzNzByALMFU+B3r0BjK44oItDGJmAdQsjiyTDf7YlQPGzQEXt+LIuQAARFxKsPGLAKLkNDIl/WHzE+P/fX2ClxpYCbNRMBzoEWJsywyJLGUgCMZMNw9/v7kD2FWw2AAQQKOnjw9+BQfv3/59v74D1+H/s4C8wut8t+f/n+xns8kB9/4Bqfn/bgMsegAAiJmEyAU2oAVYbr4Exw4KlzfEdGPRaDMwc0ZhywPTx6+M8Rla+emBMmuKyACCAiKpFGZm5HgDj+ggOyV/AxAfLMcCa9h8wfTApgXLH/x9vi4EJ2gFY74Cy9ldc5gMEECFHMIHjl5FhC87k/e/P+f+/v04BNnxBvA/AkOkEJlRjYOgdBIaOLiMbfzHWtgkSAAggvGni399fr/4TAv/+fP7369NupDTz9N+vd6b/f38JR1N5H5c9AAFEoMn/2wWYK3gIFKjANseffwy/v7xkYOUFpQspRhbe7UAJFH3/f77rZ2QXwmoEQAARiA7GS8Q1vIANnz+f3jAyMgszsHB6ABOqMELu729g7prH8PfHbFzaAQKIhYEqAFwn3Pn/50sbsHqRAqYjROP4769zwJZ3FzBnfcelGyCAGAdDrxwggAZFXxQggAaFIwACDADSAiUSdEccxgAAAABJRU5ErkJggg==",
                             Title = "Thông tin Doanh nghiệp"
                         });
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DistricId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ParcelId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DistricId");
+
+                    b.HasIndex("ParcelId");
+
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.MenuItem", b =>
@@ -800,7 +843,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 13,
                             Key = "fas fa-map-marker-alt",
-                            Link = "#",
+                            Link = "/Admin/Location/Index",
                             LocationId = 3,
                             Value = "Định Vị Bưu Gửi"
                         },
@@ -989,6 +1032,37 @@ namespace VNPost.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("VNPost.Models.Entity.Parcel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CustomerInfo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Destination")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Items")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OtherInfo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PointAway")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Parcels");
+                });
+
             modelBuilder.Entity("VNPost.Models.Entity.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -1062,6 +1136,20 @@ namespace VNPost.DataAccess.Migrations
                             GalleryId = 3,
                             Title = "Truyền thông, quảng cáo"
                         });
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.Province", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Provinces");
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.RolePermission", b =>
@@ -1209,6 +1297,20 @@ namespace VNPost.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("VNPost.Models.Entity.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statuses");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1282,11 +1384,44 @@ namespace VNPost.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("VNPost.Models.Entity.District", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.Province", "Province")
+                        .WithMany()
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.Location", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.District", "District")
+                        .WithMany()
+                        .HasForeignKey("DistricId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VNPost.Models.Entity.Parcel", "Parcel")
+                        .WithMany()
+                        .HasForeignKey("ParcelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("VNPost.Models.Entity.MenuLink", b =>
                 {
                     b.HasOne("VNPost.Models.Entity.MenuLocation", "MenuLocation")
                         .WithMany()
                         .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.Parcel", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

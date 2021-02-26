@@ -27,6 +27,11 @@ namespace VNPost.DataAccess.Repository
         public IIdentityUserRepository IdentityUser { get; }
         public IIdentityRoleRepository IdentityRole { get; }
         public IIdentityUserRoleRepository IdentityUserRole { get; }
+        public IDistrictRepository District { get; }
+        public ILocationRepository Location { get; }
+        public IParcelRepository Parcel { get; }
+        public IProvinceRepository Province { get; }
+        public IStatusRepository Status { get; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -45,6 +50,11 @@ namespace VNPost.DataAccess.Repository
             IdentityUser = new IdentityUserRepository(_db);
             IdentityRole = new IdentityRoleRepository(_db);
             IdentityUserRole = new IdentityUserRoleRepository(_db);
+            District = new DistrictRepository(_db);
+            Location = new LocationRepository(_db);
+            Parcel = new ParcelRepository(_db);
+            Province = new ProvinceRepository(_db);
+            Status = new StatusRepository(_db);
         }
 
         public void Dispose()

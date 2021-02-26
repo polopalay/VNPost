@@ -22,6 +22,11 @@ namespace VNPost.DataAccess.Repository.IRepository
         IIdentityUserRepository IdentityUser { get; }
         IIdentityRoleRepository IdentityRole { get; }
         IIdentityUserRoleRepository IdentityUserRole { get; }
+        IDistrictRepository District { get; }
+        ILocationRepository Location { get; }
+        IParcelRepository Parcel { get; }
+        IProvinceRepository Province { get; }
+        IStatusRepository Status { get; }
         void Save();
     }
 }

@@ -49,5 +49,10 @@ namespace VNPost.DataAccess.Data
         public DbSet<CURD> CURDs { get; set; }
         public DbSet<IdentityUser> IdentityUsers { get; set; }
         public DbSet<IdentityRole> IdentityRoles { get; set; }
+        public DbSet<District> Districts { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Parcel> Parcels { get; set; }
+        public DbSet<Province> Provinces { get; set; }
+        public DbSet<Status> Statuses { get; set; }
     }
 }
