@@ -45,7 +45,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "1a1fcdaf-4f89-4ed5-a175-c272561d0ca8",
+                            ConcurrencyStamp = "ee2a3908-953c-41df-bb07-c25fe92fa8e5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -142,17 +142,17 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "eaff43a1-6a75-467f-b000-277057dbdc48",
-                            Email = "polopalay@gmail.com",
+                            ConcurrencyStamp = "588a4bef-a063-40da-99de-65c53c70ff80",
+                            Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "POLOPALAY@GMAIL.COM",
-                            NormalizedUserName = "POLOPALAY@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI2rNt77YvirvqeMB4vQ/CinWEN+kXmoaWNZEEQaXqup94Ko9xg6k9he3Bb/96UM6Q==",
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eec32248-c7ec-4f92-9b7c-861c09976998",
+                            SecurityStamp = "4ca193bf-3c6c-44b7-b3ea-4ad7388bec0e",
                             TwoFactorEnabled = false,
-                            UserName = "polopalay@gmail.com"
+                            UserName = "admin@gmail.com"
                         });
                 });
 
@@ -522,6 +522,7 @@ namespace VNPost.DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ProvinceId")
@@ -626,6 +627,7 @@ namespace VNPost.DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("DistricId")
@@ -843,7 +845,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = 13,
                             Key = "fas fa-map-marker-alt",
-                            Link = "/Admin/Location/Index",
+                            Link = "/Main/Search",
                             LocationId = 3,
                             Value = "Định Vị Bưu Gửi"
                         },
@@ -1039,18 +1041,23 @@ namespace VNPost.DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CustomerInfo")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Destination")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Items")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("OtherInfo")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PointAway")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("StatusId")
@@ -1145,6 +1152,7 @@ namespace VNPost.DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -1309,6 +1317,23 @@ namespace VNPost.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Prepare"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Pending"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Done"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

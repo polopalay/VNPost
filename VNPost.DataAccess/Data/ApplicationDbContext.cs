@@ -33,6 +33,7 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedToUser(builder);
             SeedData.AddSeedToRoleUser(builder);
             SeedData.AddSeedToCURD(builder);
+            SeedData.AddSeedToStatuses(builder);
         }
 
         public DbSet<MenuItem> MenuItems { get; set; }

@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+@model VNPost.Models.Entity.Parcel
+<div class="container">
+    <h2 class="text-secondary">@(Model.Id!=0?"Edit":"Create")</h2>
+
+    <div class="border container" style="padding:30px;">
+        <form method="post">
+            @if (Model.Id != 0)
+            {
+                <input type="hidden" asp-for="Id" />
+            }
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+            <div class="form-group row mb-3">
+                <div class="col-4">
+                    <label asp-for="Items"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Items" class="form-control" />
+                </div>
+                <span asp-validation-for="Items" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row mb-3">
+                <div class="col-4">
+                    <label asp-for="PointAway"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PointAway" class="form-control" />
+                </div>
+                <span asp-validation-for="PointAway" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row mb-3">
+                <div class="col-4">
+                    <label asp-for="Destination"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Destination" class="form-control" />
+                </div>
+                <span asp-validation-for="Destination" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row mb-3">
+                <div class="col-4">
+                    <label asp-for="Destination"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="StatusId" class="form-select">
+                        <option value="1">Prepare</option>
+                        <option value="2">Pending</option>
+                        <option value="3">Done</option>
+                    </select>
+                </div>
+                <span asp-validation-for="Destination" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row mb-3">
+                <div class="col-4">
+                    <label asp-for="CustomerInfo"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="CustomerInfo" class="form-control" />
+                </div>
+                <span asp-validation-for="CustomerInfo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row mb-3">
+                <div class="col-4">
+                    <label asp-for="OtherInfo"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="OtherInfo" class="form-control" />
+                </div>
+                <span asp-validation-for="OtherInfo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row d-flex justify-content-center">
+                <div class="col-2 offset-3">
+                    <button type="submit" class="btn btn-primary form-control">
+                        @(Model.Id!=0?"Update":"Create")
+                    </button>
+                </div>
+                <div class="col-2">
+                    <a asp-action="Index" class="btn btn-success form-control">Back To List</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script></script>
+}
+

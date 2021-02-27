@@ -33,7 +33,7 @@ namespace VNPost.Controllers
             MenuItem item = _unitOfWork.MenuItem.Get(12);
             List<Article> articles = _unitOfWork.Article
                 .GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate))
-                .Select(a=>a.SoftArticle())
+                .Select(a => a.SoftArticle())
                 .Take(5).ToList();
             HomeVM homeVM = new HomeVM(links, galleries, categories, posts, location, item, articles);
             return View(homeVM);

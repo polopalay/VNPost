@@ -13,6 +13,7 @@
     <None Remove="wwwroot\img\**" />
     <Content Remove="wwwroot\favicon.ico" />
     <Content Remove="wwwroot\lib\_ViewImports.cshtml" />
+    <Content Remove="Areas\Parcel\Views\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -66,5 +67,6 @@
     <Folder Include="Areas\Admin\Views\Location\" />
     <Folder Include="wwwroot\js\admin\location\" />
     <Folder Include="Areas\Admin\Views\Parcel\" />
+    <Folder Include="Areas\Main\Views\Search\" />
   </ItemGroup>
 </Project>

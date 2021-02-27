@@ -2,24 +2,19 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using VNPost.Models.Entity;
 
-namespace VNPost.Models.Entity
+namespace VNPost.Models.ViewModels
 {
-    public class Parcel
+    public class ParcelViewModel
     {
         public int Id { get; set; }
-        [Required]
         public string Items { get; set; }
-        [Required]
         public string PointAway { get; set; }
-        [Required]
         public string Destination { get; set; }
-        public int StatusId { get; set; }
-        [ForeignKey("StatusId")]
         public Status Status { get; set; }
-        [Required]
         public string CustomerInfo { get; set; }
-        [Required]
         public string OtherInfo { get; set; }
+        public Location Location { get; set; }
     }
 }

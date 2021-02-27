@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace VNPost.Models.Entity
 {
@@ -12,6 +14,7 @@ namespace VNPost.Models.Entity
         public int ParcelId { get; set; }
         [ForeignKey("ParcelId")]
         public Parcel Parcel { get; set; }
+        [Required]
         public string Description { get; set; }
     }
 }

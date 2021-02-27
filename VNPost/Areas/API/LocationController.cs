@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VNPost.DataAccess.Repository.IRepository;
 using VNPost.Models.Entity;
+using VNPost.Models.ViewModels;
 
 namespace VNPost.Areas.API
 {
@@ -14,6 +15,32 @@ namespace VNPost.Areas.API
     {
         public LocationController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
+        }
+
+        [HttpGet("location/{id}")]
+        public IActionResult GetCurrentLocation(int id)
+        {
+            _unitOfWork.Status.GetAll();
+            _unitOfWork.Province.GetAll();
+            Parcel parcel = _unitOfWork.Parcel.Get(id);
+            if (parcel == null)
+            {
+                return Ok(new ParcelViewModel() { Id = 0 });
+            }
+            List<Location> locations = _unitOfWork.Location.GetAll(filter: l => l.ParcelId == id, orderBy: ls => ls.OrderByDescending(l => l.Id)).ToList();
+            Location location = locations.Count == 0 ? null : new Location() { Id = locations[0].Id, Description = locations[0].Description, District = _unitOfWork.District.Get(locations[0].DistricId) };
+            ParcelViewModel parcelView = new ParcelViewModel()
+            {
+                Id = parcel.Id,
+                Items = parcel.Items,
+                Destination = parcel.Destination,
+                CustomerInfo = parcel.CustomerInfo,
+                OtherInfo = parcel.OtherInfo,
+                PointAway = parcel.PointAway,
+                Status = parcel.Status,
+                Location = location
+            };
+            return Ok(parcelView);
         }
 
         [HttpGet("province")]

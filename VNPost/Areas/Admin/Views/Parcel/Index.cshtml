@@ -3,6 +3,7 @@
 }
 @section Styles{
 }
+@model int
 
 <div class="container my-4">
     <div class="container my-4">
@@ -11,24 +12,20 @@
                 <h2 class="text-dark">Danh sách các bài viết</h2>
             </div>
             <div class="col d-flex flex-row-reverse mb-2">
-                <button id="addProvince" class="btn btn-success">Thêm mới tỉnh thành</button>
+                <a href='/Admin/Parcel/Upsert/0' class="btn btn-success mb-2"> Thêm mới </a>
             </div>
         </div>
         <table class="table" width="100%" id="tblData">
             <thead>
                 <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        List District
-                    </th>
-                    <th>
-                        Edit Province
-                    </th>
-                    <th>
-                        Remove Province
-                    </th>
+                    <th> Id </th>
+                    <th> Items </th>
+                    <th> Point Away </th>
+                    <th> Destination </th>
+                    <th> Status </th>
+                    <th> Customer Info </th>
+                    <th> Other Info </th>
+                    <th> Action </th>
                 </tr>
             </thead>
         </table>
@@ -36,6 +33,56 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/admin/location/index.js"></script>
+    <script>let table;
+
+        function loadTbl() {
+            table = $('#tblData').DataTable({
+                "paging": true,
+                "info": true,
+                "lengthMenu": [10, 5, 1],
+                "ajax": {
+                    type: "GET",
+                    url: "/api/parcel",
+                },
+                "columns": [
+                    { "data": "id", "width": "12%" },
+                    { "data": "items", "width": "12%" },
+                    { "data": "pointAway", "width": "12%" },
+                    { "data": "destination", "width": "12%" },
+                    { "data": "status.name", "width": "12%" },
+                    { "data": "customerInfo", "width": "12%" },
+                    { "data": "otherInfo", "width": "12%" },
+                    {
+                        "data": "id",
+                        "render": function (data) {
+                            return `
+                                                                        <div class="text-center">
+                                                                            <a href='/Admin/Parcel/Location/${data}' class="btn btn-info">
+                                                                                <i class="fas fa-map-marked"></i>
+                                                                            </a>
+                                                                            <a href='/Admin/Parcel/Upsert/${data}' class="btn btn-warning">
+                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                            </a>
+                                                                            <button onclick=deleteProvince("/api/parcel/${data}") class="btn btn-danger" style="cursor:pointer">
+                                                                                <i class="fas fa-trash"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                       `;
+                        }, "width": "16%"
+                    }
+                ]
+            });
+        }
+        function deleteProvince(url) {
+            const requestOptions = {
+                method: "DELETE",
+                redirect: "follow",
+            };
+            fetch(url, requestOptions).then(rs => rs.text()).then(rs => {
+                swal(rs);
+                table.ajax.reload();
+            })
+        }
+        loadTbl();</script>
 }
 

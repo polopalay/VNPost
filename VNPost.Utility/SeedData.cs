@@ -48,7 +48,7 @@ namespace VNPost.Utility
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 9, Key = "", Value = "Tài chính bưu chính", LocationId = 4, Link = "/Posts/Service/List/2" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 10, Key = "", Value = "Phân phối -Truyền thông", LocationId = 4, Link = "/Posts/Service/List/3" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 11, Key = "", Value = "Tin tức", LocationId = 4, Link = "/Posts/Article/List" });
-            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 13, Key = "fas fa-map-marker-alt", Value = "Định Vị Bưu Gửi", LocationId = 3, Link = "/Admin/Location/Index" });
+            builder.Entity<MenuLink>().HasData(new MenuLink { Id = 13, Key = "fas fa-map-marker-alt", Value = "Định Vị Bưu Gửi", LocationId = 3, Link = "/Main/Search" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 14, Key = "fas fa-money-bill-alt", Value = "Định vị chuyển tiền", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 15, Key = "fas fa-map", Value = "Mạng lưới bưu cục", LocationId = 3, Link = "#" });
             builder.Entity<MenuLink>().HasData(new MenuLink { Id = 16, Key = "fas fa-ban", Value = "Tra cứu hàng cấm gửi", LocationId = 3, Link = "#" });
@@ -143,7 +143,7 @@ namespace VNPost.Utility
         }
         public static void AddSeedToUser(ModelBuilder builder)
         {
-            builder.Entity<IdentityUser>().HasData(new IdentityUser { Id = "01b96c14-de28-4831-afa9-3d1f84b93aed", UserName = "polopalay@gmail.com", Email = "polopalay@gmail.com", EmailConfirmed = true, PasswordHash = "AQAAAAEAACcQAAAAEI2rNt77YvirvqeMB4vQ/CinWEN+kXmoaWNZEEQaXqup94Ko9xg6k9he3Bb/96UM6Q==", NormalizedEmail = "POLOPALAY@GMAIL.COM", NormalizedUserName = "POLOPALAY@GMAIL.COM" });
+            builder.Entity<IdentityUser>().HasData(new IdentityUser { Id = "01b96c14-de28-4831-afa9-3d1f84b93aed", UserName = "admin@gmail.com", Email = "admin@gmail.com", EmailConfirmed = true, PasswordHash = "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	", NormalizedEmail = "ADMIN@GMAIL.COM", NormalizedUserName = "ADMIN@GMAIL.COM" });
         }
         public static void AddSeedToRole(ModelBuilder builder)
         {
@@ -160,6 +160,13 @@ namespace VNPost.Utility
             builder.Entity<CURD>().HasData(new CURD { Id = 1, Name = "Create" });
             builder.Entity<CURD>().HasData(new CURD { Id = 2, Name = "Update" });
             builder.Entity<CURD>().HasData(new CURD { Id = 3, Name = "Delete" });
+        }
+
+        public static void AddSeedToStatuses(ModelBuilder builder)
+        {
+            builder.Entity<Status>().HasData(new Status { Id = 1, Name = "Prepare" });
+            builder.Entity<Status>().HasData(new Status { Id = 2, Name = "Pending" });
+            builder.Entity<Status>().HasData(new Status { Id = 3, Name = "Done" });
         }
     }
 }
