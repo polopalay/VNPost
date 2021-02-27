@@ -19,7 +19,6 @@ namespace VNPost.Models.Entity
         public Status Status { get; set; }
         [Required]
         public string CustomerInfo { get; set; }
-        [Required]
         public string OtherInfo { get; set; }
     }
 }

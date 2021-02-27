@@ -27,6 +27,10 @@ namespace VNPost.Areas.API
         public IActionResult DeleteDistrict(int id)
         {
             Parcel parcel = _unitOfWork.Parcel.Get(id);
+            foreach (Location location in _unitOfWork.Location.GetAll(filter: l => l.ParcelId == id))
+            {
+                _unitOfWork.Location.Remove(location);
+            }
             if (parcel == null)
             {
                 return Ok("Không tìm thấy");

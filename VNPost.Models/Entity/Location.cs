@@ -14,7 +14,6 @@ namespace VNPost.Models.Entity
         public int ParcelId { get; set; }
         [ForeignKey("ParcelId")]
         public Parcel Parcel { get; set; }
-        [Required]
         public string Description { get; set; }
     }
 }

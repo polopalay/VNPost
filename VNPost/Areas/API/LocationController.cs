@@ -96,6 +96,14 @@ namespace VNPost.Areas.API
             {
                 return Ok("Không tìm thấy");
             }
+            foreach (District district in _unitOfWork.District.GetAll(filter: l => l.ProvinceId == id))
+            {
+                foreach (Location location in _unitOfWork.Location.GetAll(filter: l => l.DistricId == district.Id))
+                {
+                    _unitOfWork.Location.Remove(location);
+                }
+                _unitOfWork.District.Remove(district);
+            }
             _unitOfWork.Province.Remove(province);
             _unitOfWork.Save();
             return Ok("Xoá thành công");
@@ -145,6 +153,10 @@ namespace VNPost.Areas.API
             if (province == null)
             {
                 return Ok("Không tìm thấy");
+            }
+            foreach (Location location in _unitOfWork.Location.GetAll(filter: l => l.DistricId == id))
+            {
+                _unitOfWork.Location.Remove(location);
             }
             _unitOfWork.District.Remove(province);
             _unitOfWork.Save();
