@@ -11,9 +11,9 @@
             <div class="col-2">
                 <h2 class="text-dark">Home</h2>
             </div>
-            <div id="user" class="col-10 text-end d-flex justify-content-between pb-2">
-                <a class="btn btn-success mx-1" href="/Admin/Article/Index"><i class="fas fa-edit"></i> Quản lý bài đăng </a>
-                <a class="btn btn-danger mx-1" href="/Admin/Home/List"><i class="fas fa-truck"></i> Chỉnh sửa mặt hàng </a>
+            <div id="user" class="col-10 row text-end d-flex justify-content-between pb-2">
+                <a class="btn btn-success col" href="/Admin/Article/Index"><i class="fas fa-edit"></i> Quản lý bài đăng </a>
+                <a class="btn btn-danger col" href="/Admin/Home/List"><i class="fas fa-truck"></i> Chỉnh sửa mặt hàng </a>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
 
                     link = $("<a></a>", {
                         href: "/Admin/Location",
-                        class: "btn btn-light",
+                        class: "btn btn-light col",
                     })
                     i = $("<i></i>", {
                         class: "fas fa-map-marked-alt",
@@ -42,7 +42,7 @@
 
                     link = $("<a></a>", {
                         href: "/Admin/Parcel",
-                        class: "btn btn-dark",
+                        class: "btn btn-dark col",
                     })
                     i = $("<i></i>", {
                         class: "fas fa-shipping-fast",
@@ -53,7 +53,7 @@
 
                     link = $("<a></a>", {
                         href: "/Admin/Manager",
-                        class: "btn btn-warning",
+                        class: "btn btn-warning col",
                     })
                     i = $("<i></i>", {
                         class: "fas fa-tasks",
@@ -64,7 +64,7 @@
 
                     link = $("<a></a>", {
                         href: "/Admin/RegisterTypeUser",
-                        class: "btn btn-primary ml-2",
+                        class: "btn btn-primary col",
                     })
                     i = $("<i></i>", {
                         class: "fas fa-user-plus",
@@ -85,7 +85,7 @@
                 url: "/api/user?getType=true",
             }).done(function (data) {
                 let link = $("<a></a>", {
-                    class: "btn btn-secondary ml-1",
+                    class: "btn btn-secondary col",
                 });
                 let i;
                 if (data == "Admin") {
@@ -114,7 +114,7 @@
                 url: "/api/user?getName=true",
             }).done(function (data) {
                 let link = $("<a></a>", {
-                    class: "btn btn-info ml-1",
+                    class: "btn btn-info col",
                 });
                 let i = $("<i></i>", {
                     class: "fas fa-signature",

@@ -3,29 +3,31 @@
 @model HeaderVM
 <link rel="stylesheet" href="~/css/component/header.css" />
 <div class="pre-header header-container">
-    <div id="phone-number">
-        <i class="fas fa-phone-alt"></i>
-        <p id="phone-number-text">Đường dây nóng hỗ trợ</p>
-        <p id="phone-number-num">1900 54 54 81</p>
-    </div>
-    <div class="pre-header-toolbar">
-        <a href="#">Liên hệ</a>
-        <a href="#">Hỏi đáp</a>
-        <a href="#">Giới thiệu</a>
-        <a href="@(Model.IsLogedIn?"/Identity/Account/Logout":"/Identity/Account/Login")">@(Model.IsLogedIn?"Logout":"Login")</a>
-        <div class="language">
-            <a href=""><img src="~/image/header/vi-VN.gif" id="flag1" alt="" /></a>
-            <a href=""><img src="~/image/header/en-US.gif" id="flag2" alt="" /></a>
+    <div class="container d-flex justify-content-between">
+        <div id="phone-number">
+            <i class="fas fa-phone-alt"></i>
+            <p id="phone-number-text">Đường dây nóng hỗ trợ</p>
+            <p id="phone-number-num">1900 54 54 81</p>
         </div>
-        <form>
-            <span class="todo-button">
-                <i class="far fa-search"></i>
-            </span>
-            <input type="text" class="todo-input" placeholder="Tìm kiếm" />
-        </form>
+        <div class="pre-header-toolbar  d-flex justify-content-between">
+            <a href="#">Liên hệ</a>
+            <a href="#">Hỏi đáp</a>
+            <a href="#">Giới thiệu</a>
+            <a href="@(Model.IsLogedIn?"/Identity/Account/Logout":"/Identity/Account/Login")">@(Model.IsLogedIn?"Logout":"Login")</a>
+            <div class="language">
+                <a href=""><img src="~/image/header/vi-VN.gif" id="flag1" alt="" /></a>
+                <a href=""><img src="~/image/header/en-US.gif" id="flag2" alt="" /></a>
+            </div>
+            <form class=" d-flex justify-content-center">
+                <span class="todo-button">
+                    <i class="far fa-search"></i>
+                </span>
+                <input type="text" class="todo-input" placeholder="Tìm kiếm" />
+            </form>
+        </div>
     </div>
 </div>
-<div class="main-header header-container">
+<div class="main-header container d-flex justify-content-between">
     <a href="/"><img src="~/image/header/vnpost-logo.png" class="logo" alt="" /></a>
     <ul>
         <li>
@@ -69,7 +71,7 @@
                     <li><div><a class="dropdown-item" href="#"><i class="fas fa-qrcode"></i> Mã địa chỉ bưu chính </a></div></li>
                 </ul>
             </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">

@@ -23,6 +23,25 @@ namespace VNPost.Areas.API
             return Ok(new { data = _unitOfWork.Parcel.GetAll() });
         }
 
+        [HttpPost]
+        public IActionResult Get([FromQuery] int id, [FromQuery] int statusId)
+        {
+            Parcel parcelUpdate = _unitOfWork.Parcel.Get(id);
+            if (parcelUpdate == null)
+            {
+                return Ok("Không tìm thấy bưu kiện");
+            }
+            Status status = _unitOfWork.Status.Get(statusId);
+            if (status == null)
+            {
+                return Ok("Không tìm thấy trạng thái");
+            }
+            parcelUpdate.StatusId = statusId;
+            _unitOfWork.Parcel.Update(parcelUpdate);
+            _unitOfWork.Save();
+            return Ok("Cập nhật thành công");
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteDistrict(int id)
         {

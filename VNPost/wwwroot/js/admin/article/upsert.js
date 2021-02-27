@@ -3,66 +3,42 @@ let userId;
 let columnistItemId;
 let columnist;
 let columnistItem;
+let editor;
 
-/*get data of article from server*/
 function getData() {
-    let url = (id == null) ? "/api/articles/0" : "/api/articles/" + id
-    $.ajax({
-        type: "GET",
-        url: url,
-    }).done(function (response) {
-        $.ajax({
-            type: "GET",
-            url: "/api/User?getId=true",
-        }).done(function (result) {
-            userId = result;
-            /*if article from server not null, fill data of article to form.
-             else create new article*/
-            if (response != undefined) {
+    if (id != null) {
+        fetch("/api/articles/" + id).then(rs => rs.json()).then(response => {
+            fetch("/api/User?getId=true").then(rs => rs.text()).then(result => {
+                userId = result;
                 $("#title").val(response.title);
                 $("#description").val(response.description);
                 $("#author").val(response.author);
                 columnistItemId = response.columnistItemId;
-                $('#content').summernote('code', response.content);
-                /*after get article data, load data to select tag*/
-                $.ajax({
-                    type: "GET",
-                    url: "/api/columnistItems/" + userId,
-                }).done(function (response) {
-                    columnistItem = response;
-                    /*if columnist item id equal columnist item id of article, generate columnist item*/
+                editor.setData(response.content)
+                fetch("/api/columnistItems/" + userId).then(rs => rs.json()).then((columnists) => {
+                    columnistItem = columnists;
                     columnistItem.forEach(citem => {
                         if (citem.id == columnistItemId) {
                             loadColumnists(citem);
                         }
                     });
-                }).fail(function () {
-                    toastr.error("Error to send request to server");
-                });
-            }
-            else {
-                $.ajax({
-                    type: "GET",
-                    url: "/api/columnistItems/" + userId,
-                }).done(function (response) {
-                    columnistItem = response;
-                    loadColumnists(0);
-                }).fail(function () {
-                    toastr.error("Error to send request to server");
-                });
-            }
-        });
-    }).fail(function () {
-        toastr.error("Error to send request to server");
-    });
+                })
+            })
+        }).catch(rs => console.log(rs))
+    }
+    else {
+        fetch("/api/User?getId=true").then(rs => rs.text()).then(result => {
+            userId = result;
+            fetch("/api/columnistItems/" + userId).then(rs => rs.json()).then((columnists) => {
+                columnistItem = columnists;
+                loadColumnists(0);
+            })
+        })
+    }
 }
 
-/*load data to columnist*/
 function loadColumnists(citem) {
-    $.ajax({
-        type: "GET",
-        url: "/api/columnists/" + userId,
-    }).done(function (response) {
+    fetch("/api/columnists/").then(rs => rs.json()).then(response => {
         columnist = response;
         response.forEach(c => {
             const link = $("<option></option>", {
@@ -73,12 +49,9 @@ function loadColumnists(citem) {
             $("#comlumnist").append(link);
         });
         loadColumnistItem();
-    }).fail(function () {
-        toastr.error("Error to send request to server");
-    });
+    })
 }
 
-/*load data to columnist item*/
 function loadColumnistItem() {
     $("#comlumnistItem").empty();
     if (columnistItem != null) {
@@ -94,48 +67,12 @@ function loadColumnistItem() {
 }
 
 
-/*load data to form */
 function loadForm() {
     getData();
-    $("#content").summernote({
-        tabsize: 2,
-        blockquoteBreakingLevel: 2,
-        toolbar: [
-            ["style", ["style"]],
-            ["font", ["bold", "italic", "underline", "strikethrough", "superscript", "subscript", "clear"]],
-            ["fontname", ["fontname"]],
-            ["fontstyle", ["fontsize", "fontsizeunit"]],
-            ["color", ["color"]],
-            ["para", ["ul", "ol", "paragraph"]],
-            ["height", ["height"]],
-            ["table", ["table"]],
-            ["insert", ["link", "picture", "video", "hr"]],
-            ["action", ["undo", "redo",]],
-            ["view", ["fullscreen", "codeview", "help"]],
-        ],
-        popover: {
-            image: [
-                ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-                ['float', ['floatLeft', 'floatRight', 'floatNone']],
-                ['remove', ['removeMedia']]
-            ],
-            link: [
-                ['link', ['linkDialogShow', 'unlink']]
-            ],
-            table: [
-                ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-                ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-            ],
-            air: [
-                ['color', ['color']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['para', ['ul', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture']]
-            ]
-        },
-        lang: "vi-VN",
-    });
+    ClassicEditor.create(document.querySelector('#content'))
+        .then(newEditor => {
+            editor = newEditor;
+        })
     $(function () {
         $('#content').each(function () {
             $(this).height($(this).prop('scrollHeight'));
@@ -144,13 +81,10 @@ function loadForm() {
     $("#comlumnist").change(function () {
         loadColumnistItem();
     });
-    /*send data to server*/
+
     $("#submit").click(function () {
-        /*get src code from textarea*/
-        let content = $('#content').summernote('code');
-        /*generate src code to html element*/
-        let element = $.parseHTML($('#content').summernote('code'));
-        /*create a div to contain element had been generated*/
+        let content = editor.getData()
+        let element = $.parseHTML(editor.getData());
         const link = $("<div></div>");
         link.append(element);
 
@@ -160,15 +94,12 @@ function loadForm() {
         let comlumnistItemId = $("#comlumnistItem").val();
         let descriptionImg;
 
-        /*if content don't have image, use default image*/
         if (link.find('img').length == 0) {
             descriptionImg = "http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd//img/vnpost-logo.png";
         } else {
-            /*get fist image found from div contain all element from textarea*/
             let firstImg = link.find('img').attr('src');
             descriptionImg = (firstImg);
         }
-        /*generate article */
         let article = {
             Title: title,
             Description: description,
@@ -177,13 +108,10 @@ function loadForm() {
             Content: content,
         }
 
-        /*select url to send to server */
         let url = (id == null)
             ? "/api/articles?comlumnistItemId=" + comlumnistItemId
             : "/api/articles/" + id + "?comlumnistItemId=" + comlumnistItemId;
-        /*select method to send to server */
         let method = (id == null) ? "POST" : "PUT";
-        /*send data to server and show message from server */
         $.ajax({
             type: method,
             data: JSON.stringify(article),
@@ -193,9 +121,8 @@ function loadForm() {
         }).done(function (data) {
             if (data.success) {
                 toastr.success(data.message);
-                /*if generate new article clean all input*/
                 if (id == null) {
-                    $('#content').summernote('code', "")
+                    editor.setData("")
                     $("#title").val("");
                     $("#description").val("");
                     $("#author").val("");
@@ -204,9 +131,7 @@ function loadForm() {
             else {
                 toastr.error(data.message);
             }
-        }).fail(function () {
-            toastr.error("Error to send request to server");
-        });
+        })
     });
 }
 

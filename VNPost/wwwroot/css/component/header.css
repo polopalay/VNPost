@@ -1,12 +1,10 @@
 ﻿.header-container {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
 }
 
 .pre-header {
     height: 3rem;
-    padding: 0.4rem 5%;
+    padding: 0.4rem 0;
     font-size: 1.4rem;
     background: #ececec;
 }
@@ -31,8 +29,6 @@
 }
 
 .pre-header-toolbar {
-    display: flex;
-    justify-content: space-between;
     width: 55%;
 }
 
@@ -59,12 +55,11 @@
 
 .pre-header-toolbar form {
     width: 17rem;
-    display: flex;
-    justify-content: center;
 }
 
 .pre-header-toolbar span, .pre-header-toolbar input {
     background: white;
+    height:2.2rem;
 }
 
 .pre-header-toolbar i {
@@ -89,7 +84,7 @@
 
 .main-header {
     height: 10.7rem;
-    padding: 2rem 5%;
+    padding: 2rem 0;
 }
 
 .logo {

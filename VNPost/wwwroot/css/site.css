@@ -11,9 +11,6 @@ html, body {
 
 body {
     font-family: 'Roboto', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     min-height: 100vh;
 }
 
@@ -23,4 +20,8 @@ select, button, svg {
 
 ol, ul {
     padding-left: 0;
+}
+
+p, a, label, span, b {
+    font-size: 1.2rem;
 }

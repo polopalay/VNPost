@@ -31,7 +31,7 @@
     </div>
 </section>
 
-<section id="article">
+<section id="article" class="container my-5">
     <div class="gallery">
         <h3>Chuyên trang</h3>
         <ul class="list-group">
@@ -84,24 +84,25 @@
 </section>
 
 
-<section id="category">
-
-    @foreach (Category category in Model.Categories)
-    {
-        <div>
-            <a href="@("/Posts/Service/List/"+category.Id)" class="category-contain"><img src="@category.Img" /></a>
-            <h2>@category.Name</h2>
-            <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/line-service.png" />
+<section class="d-flex justify-content-center" id="category-container">
+    <div id="category" class="container">
+        @foreach (Category category in Model.Categories)
+        {
             <div>
-                @foreach (Post post in Model.Posts.Where(p => p.GalleryId == category.Id))
-                {
-                    <a href="/Posts/Service/ServiceDetail/@(post.Id)" class="fas fa-caret-right">@post.Title</a>
-                }
+                <a href="@("/Posts/Service/List/"+category.Id)" class="category-contain"><img src="@category.Img" /></a>
+                <h2>@category.Name</h2>
+                <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/line-service.png" />
+                <div>
+                    @foreach (Post post in Model.Posts.Where(p => p.GalleryId == category.Id))
+                    {
+                        <a href="/Posts/Service/ServiceDetail/@(post.Id)" class="fas fa-caret-right">@post.Title</a>
+                    }
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </section>
-<section id="service">
+<section id="service" class="container my-5">
     <div class="library-video">
         <a>
             <h1>THƯ VIỆN VIDEO</h1>

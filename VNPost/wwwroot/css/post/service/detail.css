@@ -1,65 +1,60 @@
-﻿#article {
+﻿#article > h1 {
     width: 100%;
-    padding: 0 20% 10rem 20%;
+    text-align: center;
+    color: #fcb71e;
+    text-transform: uppercase;
+    font-size: 3rem;
+    margin: 4rem 0 1rem 0;
 }
 
-    #article > h1 {
-        width: 100%;
-        text-align: center;
-        color: #fcb71e;
-        text-transform: uppercase;
-        font-size: 3rem;
-        margin: 4rem 0 1rem 0;
+#article > img {
+    width: 10rem;
+    margin: 1rem 46% 3rem 46%;
+}
+
+#article > div {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding-bottom: 1rem;
+}
+
+    #article > div a {
+        color: white;
+        background: #5b9bd1;
+        padding: 1rem;
+        margin: 0 0.2rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
     }
 
-    #article > img {
-        width: 10rem;
-        margin: 1rem 46% 3rem 46%;
-    }
-
-    #article > div {
-        display: flex;
-        width: 100%;
-        justify-content: flex-end;
-        padding-bottom: 1rem;
-    }
-
-        #article > div a {
-            color: white;
-            background: #5b9bd1;
-            padding: 1rem;
-            margin: 0 0.2rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
+        #article > div a:hover {
+            background: #3071a9;
         }
 
-            #article > div a:hover {
-                background: #3071a9;
-            }
+#article > p {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
 
-    #article > p {
-        font-size: 1.4rem;
-        font-weight: 600;
-    }
+#article > article h3 {
+    color: #144e8c;
+    font-size: 1.6rem;
+    line-height: 3rem;
+    border-bottom: 1px solid #c2c2c2;
+    margin-bottom: 1rem;
+    margin-bottom: 3rem;
+}
 
-    #article > article h3 {
-        color: #144e8c;
-        font-size: 1.6rem;
-        line-height: 3rem;
-        border-bottom: 1px solid #c2c2c2;
-        margin-bottom: 1rem;
-        margin-bottom: 3rem;
-    }
+#article > article h4,
+#article > article p,
+#article > article i {
+    font-size: 1.4rem;
+}
 
-    #article > article h4,
-    #article > article p,
-    #article > article i {
-        font-size: 1.4rem;
-    }
-
-    #article > article p {
-        font-weight: 300;
-    }
+#article > article p {
+    font-weight: 300;
+}
 
 @media (max-width: 568px) {
     #article {

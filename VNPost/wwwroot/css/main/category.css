@@ -1,10 +1,12 @@
-﻿
+﻿#category-container {
+    background: #f6f6f6;
+}
 #category {
-    width: 100%;
+/*    width: 100%;*/
     display: flex;
     justify-content: space-around;
     background: #f6f6f6;
-    padding: 3rem 5%;
+    padding: 3rem 0;
     margin: 5rem 0;
 }
 

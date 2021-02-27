@@ -32,7 +32,7 @@
                     <label>Status</label>
                 </div>
                 <div class="col-8">
-                    <select class="form-select" id="status">
+                    <select class="form-select" id="statusId">
                         <option value="1">Prepare</option>
                         <option value="2">Pending</option>
                         <option value="3">Done</option>
@@ -138,6 +138,12 @@
         })
         $("#form").submit((event)=> {
             event.preventDefault();
+            let id =@Model.ParcelId
+            let statusId = $("#statusId").val()
+            fetch(`/api/parcel?id=${id}&statusId=${statusId}`, { method: "POST" }) .then((response) => response.text()) .then((result) => {
+                swal(result)
+                location.reload()
+            });
         })
     </script>
 }

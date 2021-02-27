@@ -1,7 +1,7 @@
 ﻿#article {
     display: flex;
     justify-content: space-between;
-    padding: 0 5% 1rem 5%;
+/*    padding: 0 5% 1rem 5%;*/
 }
 
     #article .right {

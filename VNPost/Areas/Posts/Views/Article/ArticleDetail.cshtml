@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/css/post/article/articleDetail.css" />
 }
 
-<section id="article">
+<section id="article" class="container pb-4">
     @await Component.InvokeAsync("Left", new { columnistItemId = Model.ColumnistItemId, columnistId = Model.ColumnistId })
     <div class="right" id="right">
     </div>
