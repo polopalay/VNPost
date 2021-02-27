@@ -109,7 +109,7 @@ function loadForm() {
             ["para", ["ul", "ol", "paragraph"]],
             ["height", ["height"]],
             ["table", ["table"]],
-            ["insert", ["link", "picture", "video", "audio", "hr"]],
+            ["insert", ["link", "picture", "video", "hr"]],
             ["action", ["undo", "redo",]],
             ["view", ["fullscreen", "codeview", "help"]],
         ],
