@@ -68,5 +68,8 @@
     <Folder Include="wwwroot\js\admin\location\" />
     <Folder Include="Areas\Admin\Views\Parcel\" />
     <Folder Include="Areas\Main\Views\Search\" />
+    <Folder Include="Areas\Admin\Views\Home\" />
+    <Folder Include="wwwroot\image\" />
+    <Folder Include="wwwroot\image\header\" />
   </ItemGroup>
 </Project>

@@ -19,9 +19,9 @@ namespace VNPost.Controllers
         {
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromQuery] int id)
         {
-            return View();
+            return View(id);
         }
     }
 }

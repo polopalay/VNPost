@@ -5,18 +5,17 @@
 <div class="pre-header header-container">
     <div id="phone-number">
         <i class="fas fa-phone-alt"></i>
-        <p id="phone-number-text">@Model.ListMenuItem["PhoneText"]</p>
-        <p id="phone-number-num">@Model.ListMenuItem["PhoneNumber"]</p>
+        <p id="phone-number-text">Đường dây nóng hỗ trợ</p>
+        <p id="phone-number-num">1900 54 54 81</p>
     </div>
     <div class="pre-header-toolbar">
-        @foreach (MenuLink linkItem in Model.ListMenuLink[1])
-        {
-            <a href="@linkItem.Link">@linkItem.Value</a>
-        }
+        <a href="#">Liên hệ</a>
+        <a href="#">Hỏi đáp</a>
+        <a href="#">Giới thiệu</a>
         <a href="@(Model.IsLogedIn?"/Identity/Account/Logout":"/Identity/Account/Login")">@(Model.IsLogedIn?"Logout":"Login")</a>
         <div class="language">
-            <a href=""><img src="@Model.ListMenuItem["VN"]" id="flag1" alt="" /></a>
-            <a href=""><img src="@Model.ListMenuItem["US"]" id="flag2" alt="" /></a>
+            <a href=""><img src="~/image/header/vi-VN.gif" id="flag1" alt="" /></a>
+            <a href=""><img src="~/image/header/en-US.gif" id="flag2" alt="" /></a>
         </div>
         <form>
             <span class="todo-button">
@@ -27,74 +26,68 @@
     </div>
 </div>
 <div class="main-header header-container">
-    <a href="/"><img src="@Model.ListMenuItem["Logo"]" class="logo" alt="" /></a>
+    <a href="/"><img src="~/image/header/vnpost-logo.png" class="logo" alt="" /></a>
     <ul>
-        @foreach (MenuLink linkItem in Model.ListMenuLink[2])
-        {
-            <li>
-                <a href="@linkItem.Link"><img src="@Model.ListMenuItem[linkItem.Key]" alt="" /></a>
-                @Html.Raw(@linkItem.Value.ToString())
-            </li>
-        }
-    </ul>
-</div>
-<div class="bottom-header">
-    <div id="menu-bar-accessory">
-        <p>Tra cứu - Định vị</p>
-        <i class="fas fa-caret-down"></i>
-    </div>
-    <div class="hamburger" id="hamburger">
-        <i class="fas fa-bars"></i>
-    </div>
-    <div id="link-bar">
-        <ul>
-            @foreach (MenuLink linkItem in Model.ListMenuLink[4])
-            {
-                <li>
-                    <a href="@linkItem.Link">@linkItem.Value</a>
-                </li>
-            }
-            <li>
-                <a href="/Admin/Article/Index">@Model.Name</a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div id="menu-bar">
-    <ul>
-        @for (int i = 0; i < Model.ListMenuLink[3].Count; i++)
-        {
-            if (i == 0)
-            {
-                <li>
-                    <div>
-                        <a href="@Model.ListMenuLink[3][i].Link">
-                            <i class="@Model.ListMenuLink[3][i].Key"></i>
-                            @Model.ListMenuLink[3][i].Value
-                        </a>
-                    </div>
-                    <form action="">
-                        <input type="text" />
-                        <button type="submit" class="btn btn-warning">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                </li>
-            }
-            else
-            {
-                <li>
-                    <div>
-                        <a href="@Model.ListMenuLink[3][i].Link">
-                            <i class="@Model.ListMenuLink[3][i].Key"></i>
-                            @Model.ListMenuLink[3][i].Value
-                        </a>
-                    </div>
-                </li>
-            }
-        }
+        <li>
+            <a href="#"><img src="~/image/header/search-price.png" alt="" /></a>
+            <p>Tra cước</p>
+            <span>DỊCH VỤ</span>
+        </li>
+        <li>
+            <a href="#"><img src="~/image/header/mess.png" alt="" /></a>
+            <p>Đánh giá &amp;</p>
+            <span>KHIẾU NẠI</span>
+        </li>
+        <li>
+            <a href="#"><img src="~/image/header/recruitment.png" alt="" /></a>
+            <p>Tin</p>
+            <span>TUYỂN DỤNG</span>
+        </li>
     </ul>
 </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="~/js/component/header.js"></script>
+<div class="bottom-header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+        <div class="container-fluid">
+            <div class="dropdown navbar-brand">
+                <div id="menu-bar-accessory" data-bs-toggle="dropdown" aria-expanded="false">
+                    <p>Tra cứu - Định vị</p>
+                    <i class="fas fa-caret-down"></i>
+                </div>
+                <ul class="dropdown-menu" aria-labelledby="menu-bar-accessory">
+                    <li><div><a class="dropdown-item" href="/Main/Search"><i class="fas fa-map-marker-alt"></i> Định Vị Bưu Gửi </a></div></li>
+                    <li>
+                        <form action="/Main/Search" class="d-flex">
+                            <input type="number" name="id" class="form-control" required>
+                            <button type="submit" class="btn btn-warning text-white"><i class="fas fa-search"></i></button>
+                        </form>
+                    </li>
+                    <li><div><a class="dropdown-item" href="#"><i class="fas fa-money-bill-alt"></i> Định vị chuyển tiền </a></div></li>
+                    <li><div><a class="dropdown-item" href="#"><i class="fas fa-map"></i> Mạng lưới bưu cục </a></div></li>
+                    <li><div><a class="dropdown-item" href="#"><i class="fas fa-ban"></i> Tra cứu hàng cấm gửi </a></div></li>
+                    <li><div><a class="dropdown-item" href="#"><i class="fas fa-search-plus"></i> Tra cứu kỳ cước KHL </a></div></li>
+                    <li><div><a class="dropdown-item" href="#"><i class="fas fa-qrcode"></i> Mã địa chỉ bưu chính </a></div></li>
+                </ul>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    @foreach (MenuLink linkItem in Model.ListMenuLink[4])
+                    {
+                        <li class="nav-item">
+                            <a href="@linkItem.Link">@linkItem.Value</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a href="/Admin/Home/Index">@Model.Name</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>

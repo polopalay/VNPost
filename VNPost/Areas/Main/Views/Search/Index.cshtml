@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-@model VNPost.Models.Entity.Location
+@model int
 <div class="container">
 
 
@@ -59,7 +59,24 @@
                 }
             })
 })
-        console.log($("#result"))
-        $("#result").css({ "display": "none" })</script>
+        if (@Model!= 0) {
+            fetch(`/api/location/location/${@Model}`).then(rs => rs.json()).then(rs => {
+                if (rs.id == 0) {
+                    $("#result").css({ "display": "none" })
+                    swal("Not Found")
+                } else {
+                    $("#result").css({ "display": "flex" })
+                    $("#customerInfo").text("Người gửi: " + rs.customerInfo)
+                    $("#otherInfo").text("Thông tin: " + rs.otherInfo)
+                    $("#pointAway").text("Điểm đi: " + rs.pointAway)
+                    $("#destination").text("Điểm đến: " + rs.destination)
+                    $("#status").text("Trạng thái: " + rs.status.name)
+                    $("#items").text("Các vật phẩm: " + rs.items)
+                    $("#location").text("Địa điểm hiện tại: " + (rs.location == null ? "Chưa có" : (rs.location.district.province.name + ", " + rs.location.district.name + ", " + rs.location.description)))
+                }
+            })
+        } else {
+            $("#result").css({ "display": "none" })
+        }</script>
 }
 

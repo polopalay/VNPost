@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+@model VNPost.Models.Entity.Location
+<div class="container">
+
+    <div class="d-flex justify-content-center row m-5">
+        <div class=" col-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin gói hàng</h5>
+                    <h6 class="card-subtitle mb-2 text-muted" id="customerInfo">Customer</h6>
+                    <p class="card-subtitle mb-2 text-muted" id="otherInfo">Thông tin khác</p>
+                    <p class="card-subtitle mb-2 text-muted" id="location">Current</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" id="items">Vat pham</li>
+                    <li class="list-group-item" id="pointAway">Diem di</li>
+                    <li class="list-group-item" id="destination">Điểm đến:</li>
+                    <li class="list-group-item" id="status">Trang thai</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center row m-5">
+        <form class="border p-4 col-8" id="form">
+            <h2 class="text-secondary">Chỉnh sửa trạng thái đơn hàng</h2>
+
+            <div class="form-group row mb-3">
+                <div class="col-4">
+                    <label>Status</label>
+                </div>
+                <div class="col-8">
+                    <select class="form-select" id="status">
+                        <option value="1">Prepare</option>
+                        <option value="2">Pending</option>
+                        <option value="3">Done</option>
+                    </select>
+                </div>
+                <spa class="text-danger"></spa>
+            </div>
+
+            <div class="input-group row d-flex justify-content-center">
+                <div class="col-2 offset-3">
+                    <button type="submit" class="btn btn-primary form-control">
+                        Update
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <form class="border p-4 col-8" method="post">
+            <h2 class="text-secondary">Chỉnh sửa vị trí đơn hàng</h2>
+
+            <input type="hidden" asp-for="ParcelId" />
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+            <div class="input-group row mb-3">
+                <div class="col-4">
+                    <label asp-for="Description"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Description" class="form-control" />
+                </div>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="input-group row mb-3">
+                <div class="col-4">
+                    <label>Province</label>
+                </div>
+                <div class="col-8">
+                    <select id="province" class="form-select"></select>
+                </div>
+            </div>
+
+            <div class="input-group row mb-3">
+                <div class="col-4">
+                    <label asp-for="DistricId"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="DistricId" id="district" class="form-select"></select>
+                </div>
+                <span asp-validation-for="DistricId" class="text-danger"></span>
+            </div>
+
+            <div class="input-group row d-flex justify-content-center">
+                <div class="col-2 offset-3">
+                    <button type="submit" class="btn btn-primary form-control">
+                        Add
+                    </button>
+                </div>
+                <div class="col-2">
+                    <a asp-action="List" class="btn btn-success form-control">Back To List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script>$("#province").empty()
+        $("#district").empty()
+        fetch("/api/location/province").then(rs => rs.json()).then(rs => {
+            rs.data.forEach(item => {
+                let option = $("<option>", { text: item.name, value: item.id })
+                $("#province").append(option)
+            })
+
+            fetch(`/api/location/district/${$("#province").val()}`).then(result => result.json()).then(result => {
+                $("#district").empty()
+                result.data.forEach(item => {
+                    let optionSon = $("<option>", { text: item.name, value: item.id })
+                    $("#district").append(optionSon)
+                })
+            })
+
+            $("#province").change((event) => {
+                fetch(`/api/location/district/${event.target.value}`).then(result => result.json()).then(result => {
+                    $("#district").empty()
+                    result.data.forEach(item => {
+                        let optionSon = $("<option>", { text: item.name, value: item.id })
+                        $("#district").append(optionSon)
+                    })
+                })
+            })
+        }
+        )
+        fetch(`/api/location/location/@Model.ParcelId`).then(rs => rs.json()).then(rs => {
+            $("#customerInfo").text("Người gửi: "+rs.customerInfo)
+            $("#otherInfo").text("Thông tin: "+rs.otherInfo)
+            $("#pointAway").text("Điểm đi: "+rs.pointAway)
+            $("#destination").text("Điểm đến: "+rs.destination)
+            $("#status").text("Trạng thái: "+rs.status.name)
+            $("#items").text("Các vật phẩm: " + rs.items)
+            $("#location").text("Địa điểm hiện tại: " + (rs.location == null ? "Chưa có" : (rs.location.district.province.name + ", " + rs.location.district.name + ", " + rs.location.description)))
+        })
+        $("#form").submit((event)=> {
+            event.preventDefault();
+        })
+    </script>
+}
+
