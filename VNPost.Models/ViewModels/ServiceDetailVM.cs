@@ -6,12 +6,12 @@ namespace VNPost.Models.ViewModels
 {
     public class ServiceDetailVM
     {
-        public ServiceDetailVM(Post post, List<Service> service)
+        public ServiceDetailVM(Service service, List<ServiceDetail> serviceDetails)
         {
-            Post = post;
             Service = service;
+            ServiceDetails = serviceDetails;
         }
-        public Post Post { get; set; }
-        public List<Service> Service { get; set; }
+        public Service Service { get; set; }
+        public List<ServiceDetail> ServiceDetails { get; set; }
     }
 }

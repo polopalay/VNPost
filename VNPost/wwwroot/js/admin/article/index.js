@@ -13,7 +13,7 @@ function loadTbl() {
         },
         "columns": [
             { "data": "title", "width": "30%" },
-            { "data": "identityUser.userName", "width": "20%" },
+            { "data": "author", "width": "20%" },
             {
                 "data": "dateCreate",
                 "render": function (data) {

@@ -6,10 +6,15 @@ namespace VNPost.Models.Entity
     public class Service
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Content { get; set; }
-        public int PostId { get; set; }
-        [ForeignKey("PostId")]
-        public Post Post { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string DescriptionImg { get; set; }
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
+        public string SoftDescription()
+        {
+            return Description.Length > 150 ? (Description.Substring(0, 150) + "...") : Description;
+        }
     }
 }

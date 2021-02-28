@@ -30,23 +30,23 @@ namespace VNPost.Areas.Posts.Controllers
             {
                 return Redirect("/");
             }
-            List<Post> posts = _unitOfWork.Post.GetAll()
+            List<Service> posts = _unitOfWork.Service.GetAll()
                 .Where(p => p.CategoryId == id)
                 .ToList();
             int numberPostInPage = 6;
-            Pagination<Post> pagination = new Pagination<Post>(posts, index, numberPostInPage);
+            Pagination<Service> pagination = new Pagination<Service>(posts, index, numberPostInPage);
             ListSerivceVM listSerivce = new ListSerivceVM(pagination.ListT, pagination.Begin, pagination.End, index, category);
             return View(listSerivce);
         }
 
         public IActionResult ServiceDetail(int id)
         {
-            Post post = _unitOfWork.Post.Get(id);
+            Service post = _unitOfWork.Service.Get(id);
             if (post == null)
             {
                 return Redirect("/");
             }
-            List<Service> service = _unitOfWork.Service.GetAll().Where(s => s.PostId == post.Id).ToList();
+            List<ServiceDetail> service = _unitOfWork.ServiceDetail.GetAll().Where(s => s.ServiceId == post.Id).ToList();
             ServiceDetailVM serviceDetail = new ServiceDetailVM(post, service);
             return View(serviceDetail);
         }

@@ -8,16 +8,16 @@
 <link rel="stylesheet" href="~/css/post/service/detail.css" />
 
 <section id="article" class="container">
-    <h1>@Model.Post.Title</h1>
+    <h1>@Model.Service.Title</h1>
     <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/p-border.png" alt="none">
     <div>
-        @foreach (Service service in Model.Service)
+        @foreach (ServiceDetail service in Model.ServiceDetails)
         {
             <a href="@("#"+service.Id)">@service.Name</a>
         }
     </div>
-    <p>@Model.Post.Description</p>
-    @foreach (Service service in Model.Service)
+    <p>@Model.Service.Description</p>
+    @foreach (ServiceDetail service in Model.ServiceDetails)
     {
         <article id="@service.Id">
             <h3>@service.Name</h3>

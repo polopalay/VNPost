@@ -9,7 +9,7 @@ using VNPost.DataAccess.Data;
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210228073141_AddDB")]
+    [Migration("20210228114922_AddDB")]
     partial class AddDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "e9812968-f132-423e-9e7f-18853de8de53",
+                            ConcurrencyStamp = "13b4b55f-97b0-4d34-ae4d-08782f41557f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -144,7 +144,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de002930-1ba1-48c2-8ac4-fb555285619f",
+                            ConcurrencyStamp = "34e5ffb7-6171-4e97-a758-457e2cfe40d8",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -152,7 +152,7 @@ namespace VNPost.DataAccess.Migrations
                             NormalizedUserName = "ADMIN@GMAIL.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a7800704-eb36-4a68-a129-3dd379999d99",
+                            SecurityStamp = "5e7b04f7-3bf6-4157-a22a-ccb9ccd8f771",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -682,7 +682,52 @@ namespace VNPost.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("VNPost.Models.Entity.Post", b =>
+            modelBuilder.Entity("VNPost.Models.Entity.Province", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Provinces");
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.RolePermission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ColumnistId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Create")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Delete")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Update")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ColumnistId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("RolePermissions");
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.Service", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -757,52 +802,7 @@ namespace VNPost.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("VNPost.Models.Entity.Province", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Provinces");
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.RolePermission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ColumnistId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Create")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Delete")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Update")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ColumnistId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("RolePermissions");
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.Service", b =>
+            modelBuilder.Entity("VNPost.Models.Entity.ServiceDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -814,14 +814,14 @@ namespace VNPost.DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PostId")
+                    b.Property<int>("ServiceId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("ServiceId");
 
-                    b.ToTable("Services");
+                    b.ToTable("ServiceDetails");
 
                     b.HasData(
                         new
@@ -829,91 +829,91 @@ namespace VNPost.DataAccess.Migrations
                             Id = 1,
                             Content = "<p>Toàn quốc và trên 100 quốc gia và vùng lãnh thổ khắp thế giới theo thoả thuận giữa Công ty và Bưu chính các nước thuộc Liên minh Bưu chính Thế giới (UPU) hoặc các đối tác khác.</p>",
                             Name = "Phạm vi cung cấp",
-                            PostId = 1
+                            ServiceId = 1
                         },
                         new
                         {
                             Id = 2,
                             Content = "<h4>Khối lượng:</h4><br/><p>- Khối lượng bưu gửi EMS thông thường: Tối đa 31,5kg/bưu gửi.</p><br /><p>- Đối với bưu gửi là hàng nguyên khối không thể tách rời, vận chuyển bằng đường bộ được nhận gửi tối đa đến 50kg, nhưng phải đảm bảo giới hạn về kích thước theo quy định.</p><br /><p>- Đối với bưu gửi là hàng nhẹ (hàng có khối lượng thực tế nhỏ hơn khối lượng qui đổi), khối lượng tính cước không căn cứ vào khối lượng thực tế mà căn cứ vào khối lượng qui đổi theo cách tính như sau: Khối lượng qui đổi (kg) = Chiều dài x Chiều rộng x Chiều cao (cm) / 6000</p><br /><p>- Đối với bưu gửi quốc tế: Thực hiện theo thông báo của Công ty Cổ phần Chuyển phát nhanh Bưu điện đối với từng nước.</p><br /><h4>Kích thước:</h4><br /><p>- Kích thước tối thiểu:</p><br /><p>+ Ít nhất một mặt bưu gửi có kích thước không nhỏ hơn 90mm x 140mm với sai số 2 mm.</p><br /><p>+ Nếu cuộn tròn: Chiều dài bưu gửi cộng hai lần đường kính tối thiểu 170 mm và kích thước chiều lớn nhất không nhỏ  hơn 100mm.</p><br /><p>- Kích thước tối đa: Bất kỳ chiều nào của bưu gửi không vượt quá 1500mm và tổng chiều dài cộng với chu vi lớn nhất (không đo theo chiều dài đã đo) không vượt quá 3000mm.</p><br /><p>- Bưu gửi có kích thước lớn hơn so với kích thước thông thường được gọi là bưu gửi cồng kềnh và có quy định riêng phụ thuộc vào từng nơi nhận, nơi phát và điều kiện phương tiện vận chuyển.</p><br /><p>- Đối với bưu gửi quốc tế: Kích thước thông thường đối với bưu gửi EMS là bất kỳ chiều nào của bưu gửi cũng không vượt quá 1,5m và tổng chiều dài cộng với chu vi lớn nhất (không đo theo chiều dài đã đo) không vượt quá 3m.</p><br />",
                             Name = "Khối lượng, kích thước",
-                            PostId = 1
+                            ServiceId = 1
                         },
                         new
                         {
                             Id = 3,
                             Content = "<p>Tùy theo từng dịch vụ sẽ có bảng cước giá khác nhau kèm theo phí dịch vụ của các dịch vụ cộng thêm.</p><p>Bảng cước dịch vụ chuyển phát nhanh EMS trong nước</p><p>Bảng cước dịch vụ chuyển phát nhanh EMS quốc tế</p>",
                             Name = "Cước phí",
-                            PostId = 1
+                            ServiceId = 1
                         },
                         new
                         {
                             Id = 4,
                             Content = "<p>Toàn quốc</p>",
                             Name = "Phạm vi cung cấp dịch vụ",
-                            PostId = 2
+                            ServiceId = 2
                         },
                         new
                         {
                             Id = 5,
                             Content = "<h4>a. Giới hạn kích thước của bưu thiếp:</h4><br/><p>- Kích thước tối đa: 165 mm x 245 mm, với sai số 2 mm.</p><br /><p>- Kích thước tối thiểu: 90 mm x 140 mm, với sai số 2 mm. </p><br /><p>- Tỷ lệ tối thiểu giữa chiều dài và chiều rộng: dài = rộng x  (≈ 1,4).</p><br /><h4>b. Giới hạn kích thước của gói nhỏ: </h4><br /><p>- Kích thước tối thiểu: 210 x 148 mm.</p><br /><p>- Kích thước tối đa: Tổng chiều dài, chiều rộng và chiều cao là 900 mm, nhưng kích thước chiều lớn nhất không vượt quá 600 mm, với sai số 2 mm. Nếu cuộn tròn, chiều dài cộng hai lần đường kính là 1040 mm, nhưng kích thước lớn nhất không vượt quá 900 mm.</p><br /><h4>c. Giới hạn kích thước của các loại bưu phẩm khác:</h4><br /><p>- Kích thước tối đa: Tổng chiều dài, chiều rộng và chiều cao là 900 mm, nhưng kích thước chiều lớn nhất không vượt quá 600 mm, với sai số 2 mm. Nếu cuộn tròn, chiều dài cộng hai lần đường kính là 1040 mm, nhưng kích thước lớn nhất không vượt quá 900 mm, với sai số 2 mm.</p><br /><p>- Kích thước tối thiểu: Một mặt kích thước không nhỏ hơn 90 mm x 140 mm với sai số 2 mm. Nếu cuộn tròn: chiều dài cộng hai lần đường kính là 170 mm, nhưng kích thước chiều lớn nhất không nhỏ hơn 100 mm</p><br />",
                             Name = "Quy định về khối lượng / kích thước",
-                            PostId = 2
+                            ServiceId = 2
                         },
                         new
                         {
                             Id = 6,
                             Content = "<p>Tất cả các điểm cung cấp dịch vụ của Bưu điện Việt Nam trên toàn quốc</p>",
                             Name = "Phạm vi cung cấp dịch vụ",
-                            PostId = 3
+                            ServiceId = 3
                         },
                         new
                         {
                             Id = 7,
                             Content = "<p>Mức phí bảo hiểm cạnh tranh với nhiều chương trình bán hàng hấp dẫn.</p><br/><p>Liên hệ với các điểm bán hàng của Bưu điện trên toàn quốc để biết thông tin phí bảo hiểm chi tiết.</p>",
                             Name = "Bảng cước dịch vụ",
-                            PostId = 3
+                            ServiceId = 3
                         },
                         new
                         {
                             Id = 8,
                             Content = "<p>Tất cả các điểm cung cấp dịch vụ của Bưu điện Việt Nam trên toàn quốc</p>",
                             Name = "Phạm vi cung cấp dịch vụ",
-                            PostId = 4
+                            ServiceId = 4
                         },
                         new
                         {
                             Id = 9,
                             Content = "<p>Giá cước được thỏa thuận tùy theo từng đối tác và theo sản lượng giao dịch.</p>",
                             Name = "Bảng cước dịch vụ",
-                            PostId = 4
+                            ServiceId = 4
                         },
                         new
                         {
                             Id = 10,
                             Content = "<p>Trên toàn Quốc!</p>",
                             Name = "Phạm vi cung cấp dịch vụ",
-                            PostId = 5
+                            ServiceId = 5
                         },
                         new
                         {
                             Id = 11,
                             Content = "<p>Dịch vụ thương mại điện tử hay con gọi là E-commerce là hoạt động kinh doanh, mua bán các loại sản phẩm hàng hóa/ dịch vụ diễn ra trên môi trường internet, đặc biệt là thông qua các website và ứng dụng di động. Các hoạt động diễn ra chủ yếu theo 3 hình thức B2C, B2B và C2C</p>",
                             Name = "Đặc điểm dịch vụ",
-                            PostId = 5
+                            ServiceId = 5
                         },
                         new
                         {
                             Id = 12,
                             Content = "<p>Tất cả các điểm giao dịch trên 63 tỉnh, thành phố</p>",
                             Name = "Phạm vi cung cấp dịch vụ",
-                            PostId = 6
+                            ServiceId = 6
                         },
                         new
                         {
                             Id = 13,
                             Content = "<i>Theo thỏa thuận trên cơ sở đơn giá thị trường</i>",
                             Name = "Bảng cước dịch vụ",
-                            PostId = 6
+                            ServiceId = 6
                         });
                 });
 
@@ -1045,15 +1045,6 @@ namespace VNPost.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VNPost.Models.Entity.Post", b =>
-                {
-                    b.HasOne("VNPost.Models.Entity.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("VNPost.Models.Entity.RolePermission", b =>
                 {
                     b.HasOne("VNPost.Models.Entity.Columnist", "Columnist")
@@ -1069,9 +1060,18 @@ namespace VNPost.DataAccess.Migrations
 
             modelBuilder.Entity("VNPost.Models.Entity.Service", b =>
                 {
-                    b.HasOne("VNPost.Models.Entity.Post", "Post")
+                    b.HasOne("VNPost.Models.Entity.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("PostId")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VNPost.Models.Entity.ServiceDetail", b =>
+                {
+                    b.HasOne("VNPost.Models.Entity.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

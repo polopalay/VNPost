@@ -1,46 +1,72 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
+@model VNPost.Models.Entity.Article;
 
 @section Styles{
     <link rel="stylesheet" href="~/css/admin/article/writerArticle.css" />
 }
 
 <section id="form" style="padding-bottom:1rem;">
-    <form>
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="Id" style="display:none;" />
+        <input asp-for="DateCreate" style="display:none;" />
+        <input asp-for="View" style="display:none;" />
+        <input asp-for="DescriptionImg" style="display:none;" />
         <div class="contain-input">
             <div class="div-input">
-                <label class="control-label">Tiêu đề</label>
-                <input id="title" class="form-control" maxlength="120" />
+                <label asp-for="Title" class="control-label">Tiêu đề</label>
+                <input asp-for="Title" class="form-control" maxlength="120" />
             </div>
             <div class="div-input">
-                <label class="control-label">Mô tả</label>
-                <textarea id="description" rows="5" class="form-control"></textarea>
+                <label asp-for="Description" class="control-label">Mô tả</label>
+                <input asp-for="Description" class="form-control" />
             </div>
             <div class="div-input">
-                <label class="control-label">tác giả</label>
-                <input id="author" class="form-control" maxlength="50" />
-            </div>
-            <div class="div-input">
-                <label class="control-label">chuyên mục</label>
-                <select id="comlumnist" class="form-control"></select>
+                <label asp-for="Author" class="control-label">Tác giả</label>
+                <input asp-for="Author" class="form-control" maxlength="50" />
             </div>
             <div class="div-input">
                 <label class="control-label">chuyên mục con</label>
-                <select id="comlumnistItem" class="form-control"></select>
+                <select asp-for="ColumnistId" id="comlumnistItem" class="form-control"></select>
             </div>
         </div>
-        @*<textarea id="content"></textarea>*@
-        <div id="content"></div>
+        <textarea asp-for="Content" onchange="event => console.log(event.target.value)"></textarea>
         <div>
-            <button type="button" id="submit" class="btn btn-success"><i class="fas fa-save"></i> Lưu</button>
+            <button type="submit" id="submit" class="btn btn-success"><i class="fas fa-save"></i> Lưu</button>
             <a href="/Admin/Article/Index" id="submit" class="btn btn-warning"><i class="fas fa-home"></i> Về trang chủ</a>
         </div>
     </form>
 </section>
 
 @section Scripts{
-    <script src="~/js/admin/article/upsert.js"></script>
+    <script>ClassicEditor.create(document.querySelector('#Content'))
+            .then(editor => {
+                editor.model.document.on('change:data', (evt, data) => {
+                    let element = $.parseHTML(editor.getData());
+                    const link = $("<div></div>");
+                    link.append(element);
+                    let descriptionImg;
+
+                    if (link.find('img').length == 0) {
+                        descriptionImg = "/image/vnpost-logo.png";
+                    } else {
+                        let firstImg = link.find('img').attr('src');
+                        descriptionImg = (firstImg);
+                    }
+                    $("#DescriptionImg").val(descriptionImg)
+                });
+            })
+        fetch("/api/columnists/current").then(rs => rs.json()).then(rs => {
+            rs.forEach(item => {
+                const option = $("<option></option>", {
+                    value: item.id,
+                    text: item.name,
+                });
+                $("#comlumnistItem").append(option);
+            }
+            )
+        })</script>
 }
 
 

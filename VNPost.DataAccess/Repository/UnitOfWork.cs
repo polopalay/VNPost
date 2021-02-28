@@ -16,8 +16,8 @@ namespace VNPost.DataAccess.Repository
         public IMenuRepository Menu { get; }
         public IArticleRepository Article { get; }
         public ICategoryRepository Category { get; }
-        public IPostRepository Post { get; }
         public IServiceRepository Service { get; }
+        public IServiceDetailRepository ServiceDetail { get; }
         public IColumnistRepository Columnist { get; }
         public IRolePermissionRepository RolePermission { get; }
         public IPermissionRepository Permissions { get; }
@@ -36,8 +36,8 @@ namespace VNPost.DataAccess.Repository
             Menu = new MenuRepository(_db);
             Article = new ArticleRepository(_db);
             Category = new CategoryRepository(_db);
-            Post = new PostRepository(_db);
             Service = new ServiceRepository(_db);
+            ServiceDetail = new ServiceDetailRepository(_db);
             Columnist = new ColumnistRepository(_db);
             RolePermission = new RolePermissionRepository(_db);
             Permissions = new PermissionRepository(_db);

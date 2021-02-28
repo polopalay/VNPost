@@ -6,15 +6,15 @@ namespace VNPost.Models.ViewModels
 {
     public class ListSerivceVM
     {
-        public ListSerivceVM(List<Post> posts, int begin, int end, int index, Category category)
+        public ListSerivceVM(List<Service> services, int begin, int end, int index, Category category)
         {
-            Posts = posts;
+            Services = services;
             Begin = begin;
             End = end;
             Index = index;
             Category = category;
         }
-        public List<Post> Posts { get; set; }
+        public List<Service> Services { get; set; }
         public int Begin { get; set; }
         public int End { get; set; }
         public int Index { get; set; }

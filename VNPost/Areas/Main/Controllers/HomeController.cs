@@ -27,7 +27,7 @@ namespace VNPost.Controllers
         {
             List<Banner> banners = _unitOfWork.Banner.GetAll().ToList();
             List<Category> categories = _unitOfWork.Category.GetAll().ToList();
-            List<Post> posts = _unitOfWork.Post.GetAll().ToList();
+            List<Service> posts = _unitOfWork.Service.GetAll().ToList();
             List<Article> articles = _unitOfWork.Article
                 .GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate))
                 .Select(a => a.SoftArticle())

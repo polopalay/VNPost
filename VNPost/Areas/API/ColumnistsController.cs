@@ -13,15 +13,10 @@ namespace VNPost.Areas.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColumnistsController : ControllerBase
+    public class ColumnistsController : BaseApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        public ColumnistsController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager)
+        public ColumnistsController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
-            _unitOfWork = unitOfWork;
-            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -48,6 +43,23 @@ namespace VNPost.Areas.API
                 {
                     columnistItems.Add(_unitOfWork.Columnist.Get(rolePermission.Columnist.FatherId));
                 }
+            }
+            return Ok(columnistItems);
+
+        }
+        [HttpGet("current")]
+        public IActionResult GetColumnisCurrentUser()
+        {
+            _unitOfWork.Columnist.GetAll();
+            string roleId = "";
+            if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == _identityUser.Id.ToString()).Count() > 0)
+            {
+                roleId = _unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == _identityUser.Id.ToString()).ToList()[0].RoleId;
+            }
+            List<Columnist> columnistItems = new List<Columnist>();
+            foreach (RolePermission rolePermission in _unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == roleId))
+            {
+                columnistItems.Add(rolePermission.Columnist);
             }
             return Ok(columnistItems);
 

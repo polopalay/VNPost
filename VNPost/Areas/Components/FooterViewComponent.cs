@@ -19,7 +19,7 @@ namespace VNPost.Areas.Components
         public IViewComponentResult Invoke()
         {
             List<Category> categories = _unitOfWork.Category.GetAll().ToList();
-            List<Post> posts = _unitOfWork.Post.GetAll().ToList();
+            List<Service> posts = _unitOfWork.Service.GetAll().ToList();
             FooterVM footerVM = new FooterVM(categories, posts);
             return View(footerVM);
         }

@@ -136,7 +136,7 @@
                 <h2>@category.Name</h2>
                 <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/line-service.png" />
                 <div>
-                    @foreach (Post post in Model.Posts.Where(p => p.CategoryId == category.Id))
+                    @foreach (Service post in Model.Services.Where(p => p.CategoryId == category.Id))
                     {
                         <a href="/Posts/Service/ServiceDetail/@(post.Id)" class="fas fa-caret-right">@post.Title</a>
                     }

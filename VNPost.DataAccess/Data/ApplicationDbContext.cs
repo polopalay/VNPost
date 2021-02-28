@@ -36,8 +36,8 @@ namespace VNPost.DataAccess.Data
         public DbSet<Banner> Banners { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<Service> Services { get; set; }
+        public DbSet<Service> Posts { get; set; }
+        public DbSet<ServiceDetail> ServiceDetails { get; set; }
         public DbSet<Columnist> Columnists { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }

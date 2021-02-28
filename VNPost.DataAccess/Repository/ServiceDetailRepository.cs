@@ -5,9 +5,9 @@ using VNPost.Models.Entity;
 
 namespace VNPost.DataAccess.Repository
 {
-    public class PostRepository : Repository<Post>, IPostRepository
+    public class ServiceDetailRepository : Repository<ServiceDetail>, IServiceDetailRepository
     {
-        public PostRepository(ApplicationDbContext db) : base(db)
+        public ServiceDetailRepository(ApplicationDbContext db) : base(db)
         {
         }
     }

@@ -11,8 +11,8 @@ namespace VNPost.DataAccess.Repository.IRepository
         IMenuRepository Menu { get; }
         IArticleRepository Article { get; }
         ICategoryRepository Category { get; }
-        IPostRepository Post { get; }
         IServiceRepository Service { get; }
+        IServiceDetailRepository ServiceDetail { get; }
         IColumnistRepository Columnist { get; }
         IRolePermissionRepository RolePermission { get; }
         IPermissionRepository Permissions { get; }

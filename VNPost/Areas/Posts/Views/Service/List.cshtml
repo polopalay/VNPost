@@ -12,7 +12,7 @@
     <h1>@Model.Category.Name.ToUpper()</h1>
     <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/p-border.png" alt="none">
     <article>
-        @foreach (Post post in Model.Posts)
+        @foreach (Service post in Model.Services)
         {
             <a href="/Posts/Service/ServiceDetail/@(post.Id)">
                 <img src="@post.DescriptionImg" />

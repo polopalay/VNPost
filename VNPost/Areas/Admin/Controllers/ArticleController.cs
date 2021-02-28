@@ -15,6 +15,10 @@ namespace VNPost.Areas.Admin.Controllers
     [Area("Admin")]
     public class ArticleController : BaseController
     {
+        [BindProperty]
+        public Article Article { get; set; }
+        [BindProperty]
+        public string UserId { get; set; }
 
         public ArticleController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
@@ -22,59 +26,32 @@ namespace VNPost.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return Redirect("/Identity/Account/Login");
-            }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
         public IActionResult Upsert([FromQuery] int id)
         {
-            if (!_signInManager.IsSignedIn(User))
+            Article = _unitOfWork.Article.Get(id);
+            return View(Article ?? new Article());
+        }
+
+        [HttpPost]
+        public IActionResult Upsert()
+        {
+            if (ModelState.IsValid)
             {
-                return Redirect("/Identity/Account/Login");
-            }
-            else
-            {
-                if (_identityRole == null)
+                if (Article.Id == 0)
                 {
-                    return Forbid();
-                }
-                Article article = _unitOfWork.Article.Get(id);
-                if (article == null)
-                {
-                    if (GetRolePermissionCanCreate().Count() > 0)
-                    {
-                        return View();
-                    }
-                    else
-                    {
-                        return Forbid();
-                    }
+                    _unitOfWork.Article.Add(Article);
                 }
                 else
                 {
-                    RolePermission rolePermission = GetDetailRolePermission(article.ColumnistId);
-                    if (rolePermission == null)
-                    {
-                        return Forbid();
-                    }
-                    if (rolePermission.Update)
-                    {
-                        return View();
-                    }
-                    else
-                    {
-                        return Forbid();
-                    }
+                    _unitOfWork.Article.Update(Article);
                 }
-
+                _unitOfWork.Save();
+                return Redirect("/Admin/Article/Index");
             }
-
+            return View(Article);
         }
     }
 }

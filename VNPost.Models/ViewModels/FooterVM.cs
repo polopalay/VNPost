@@ -7,13 +7,13 @@ namespace VNPost.Models.ViewModels
 {
     public class FooterVM
     {
-        public FooterVM(List<Category> categories, List<Post> posts)
+        public FooterVM(List<Category> categories, List<Service> services)
         {
             Categories = categories;
-            Posts = posts;
+            Services = services;
         }
 
         public List<Category> Categories { get; set; }
-        public List<Post> Posts { get; set; }
+        public List<Service> Services { get; set; }
     }
 }
