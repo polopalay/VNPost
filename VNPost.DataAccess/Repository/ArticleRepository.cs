@@ -11,11 +11,8 @@ namespace VNPost.DataAccess.Repository
 {
     public class ArticleRepository : Repository<Article>, IArticleRepository
     {
-        private readonly ApplicationDbContext _db;
-
         public ArticleRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
         public void Update(Article article)
         {

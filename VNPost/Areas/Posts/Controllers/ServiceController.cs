@@ -31,7 +31,7 @@ namespace VNPost.Areas.Posts.Controllers
                 return Redirect("/");
             }
             List<Post> posts = _unitOfWork.Post.GetAll()
-                .Where(p => p.GalleryId == id)
+                .Where(p => p.CategoryId == id)
                 .ToList();
             int numberPostInPage = 6;
             Pagination<Post> pagination = new Pagination<Post>(posts, index, numberPostInPage);

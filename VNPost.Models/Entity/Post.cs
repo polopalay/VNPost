@@ -9,9 +9,9 @@ namespace VNPost.Models.Entity
         public string Title { get; set; }
         public string Description { get; set; }
         public string DescriptionImg { get; set; }
-        public int GalleryId { get; set; }
-        [ForeignKey("GalleryId")]
-        public Gallery Gallery { get; set; }
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
         public string SoftDescription()
         {
             return Description.Length > 150 ? (Description.Substring(0, 150) + "...") : Description;

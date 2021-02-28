@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using VNPost.DataAccess.Data;
 using VNPost.DataAccess.Repository.IRepository;
 using VNPost.Models.Entity;
 
 namespace VNPost.DataAccess.Repository
 {
-    class MenuLinkRepository:Repository<MenuLink>,IMenuLinkRepository
+    public class BannerRepository : Repository<Banner>, IBannerRepository
     {
-        private readonly ApplicationDbContext _db;
-
-        public MenuLinkRepository(ApplicationDbContext db) : base(db)
+        public BannerRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
     }
 }

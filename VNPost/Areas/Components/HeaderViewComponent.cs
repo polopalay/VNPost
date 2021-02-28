@@ -22,23 +22,13 @@ namespace VNPost.Areas.Components
         }
         public IViewComponentResult Invoke()
         {
-            Dictionary<string, string> listMenuItem = new Dictionary<string, string>();
-            foreach (MenuItem menuItem in _unitOfWork.MenuItem.GetAll())
-            {
-                listMenuItem.Add(menuItem.Key, menuItem.Value);
-            }
-            Dictionary<int, List<MenuLink>> listMenuLink = new Dictionary<int, List<MenuLink>>();
-            foreach (MenuLocation menuLocation in _unitOfWork.MenuLocation.GetAll())
-            {
-                List<MenuLink> links = _unitOfWork.MenuLink.GetAll(link => link.LocationId == menuLocation.Id).ToList();
-                listMenuLink.Add(menuLocation.Id, links);
-            }
-
             List<Category> categories = _unitOfWork.Category.GetAll().ToList();
 
-            HeaderVM headerVM = new HeaderVM(listMenuItem, listMenuLink, categories);
-            headerVM.IsLogedIn = _signInManager.IsSignedIn((ClaimsPrincipal)User);
-            headerVM.Name = User.Identity.Name;
+            HeaderVM headerVM = new HeaderVM(_unitOfWork.Menu.GetAll().ToList(), categories)
+            {
+                IsLogedIn = _signInManager.IsSignedIn((ClaimsPrincipal)User),
+                Name = User.Identity.Name
+            };
             return View(headerVM);
         }
     }

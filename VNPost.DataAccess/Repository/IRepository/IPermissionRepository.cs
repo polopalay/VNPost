@@ -3,7 +3,7 @@ using VNPost.Models.Entity;
 
 namespace VNPost.DataAccess.Repository.IRepository
 {
-    public interface ICURDRepository : IRepository<CURD>
+    public interface IPermissionRepository : IRepository<Permission>
     {
     }
 }

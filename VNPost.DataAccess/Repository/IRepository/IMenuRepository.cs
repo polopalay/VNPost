@@ -5,7 +5,7 @@ using VNPost.Models.Entity;
 
 namespace VNPost.DataAccess.Repository.IRepository
 {
-    public interface IMenuLinkRepository:IRepository<MenuLink>
+    public interface IMenuRepository : IRepository<Menu>
     {
     }
 }

@@ -11,11 +11,8 @@ namespace VNPost.DataAccess.Repository
 {
     public class ProvinceRepository : Repository<Province>, IProvinceRepository
     {
-        private readonly ApplicationDbContext _db;
-
         public ProvinceRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
         public void Update(Province article)
         {

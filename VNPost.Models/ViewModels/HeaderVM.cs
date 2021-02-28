@@ -7,16 +7,14 @@ namespace VNPost.Models.ViewModels
 {
     public class HeaderVM
     {
-        public HeaderVM(Dictionary<string, string> listMenuItem, Dictionary<int, List<MenuLink>> listMenuLink, List<Category> categories)
+        public HeaderVM(List<Menu> menus, List<Category> categories)
         {
-            ListMenuItem = listMenuItem;
-            ListMenuLink = listMenuLink;
+            Menus = menus;
             Categories = categories;
         }
 
         public bool IsLogedIn { get; set; }
-        public Dictionary<string, string> ListMenuItem { get; set; }
-        public Dictionary<int, List<MenuLink>> ListMenuLink { get; set; }
+        public List<Menu> Menus { get; set; }
         public List<Category> Categories { get; set; }
         public string Name { get; set; }
     }

@@ -76,10 +76,10 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    @foreach (MenuLink linkItem in Model.ListMenuLink[4])
+                    @foreach (Menu menu in Model.Menus)
                     {
                         <li class="nav-item">
-                            <a href="@linkItem.Link">@linkItem.Value</a>
+                            <a href="@menu.Link">@menu.Value</a>
                         </li>
                     }
                     <li class="nav-item">

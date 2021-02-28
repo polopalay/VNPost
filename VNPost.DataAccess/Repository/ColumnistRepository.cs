@@ -7,11 +7,8 @@ namespace VNPost.DataAccess.Repository
 {
     public class ColumnistRepository : Repository<Columnist>, IColumnistRepository
     {
-        private readonly ApplicationDbContext _db;
-
         public ColumnistRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
     }
 }

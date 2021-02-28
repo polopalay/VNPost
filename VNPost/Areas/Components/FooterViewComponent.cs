@@ -18,15 +18,9 @@ namespace VNPost.Areas.Components
         }
         public IViewComponentResult Invoke()
         {
-            Dictionary<string, string> listMenuItem = new Dictionary<string, string>();
-            foreach (MenuItem menuItem in _unitOfWork.MenuItem.GetAll())
-            {
-                listMenuItem.Add(menuItem.Key, menuItem.Value);
-            }
-            List<MenuLink> links = _unitOfWork.MenuLink.GetAll().Where(l => l.LocationId == 8).ToList();
             List<Category> categories = _unitOfWork.Category.GetAll().ToList();
             List<Post> posts = _unitOfWork.Post.GetAll().ToList();
-            FooterVM footerVM = new FooterVM(listMenuItem, categories, posts, links);
+            FooterVM footerVM = new FooterVM(categories, posts);
             return View(footerVM);
         }
     }

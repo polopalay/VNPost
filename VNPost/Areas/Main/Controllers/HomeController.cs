@@ -25,17 +25,15 @@ namespace VNPost.Controllers
 
         public IActionResult Index()
         {
-            MenuLocation location = _unitOfWork.MenuLocation.Get(10);
-            List<MenuLink> links = _unitOfWork.MenuLink.GetAll().Where(link => link.LocationId == 9 || link.LocationId == location.Id).ToList();
+            List<Banner> banners = _unitOfWork.Banner.GetAll().ToList();
             List<Gallery> galleries = _unitOfWork.Gallery.GetAll().ToList();
             List<Category> categories = _unitOfWork.Category.GetAll().ToList();
             List<Post> posts = _unitOfWork.Post.GetAll().ToList();
-            MenuItem item = _unitOfWork.MenuItem.Get(12);
             List<Article> articles = _unitOfWork.Article
                 .GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate))
                 .Select(a => a.SoftArticle())
                 .Take(5).ToList();
-            HomeVM homeVM = new HomeVM(links, galleries, categories, posts, location, item, articles);
+            HomeVM homeVM = new HomeVM(banners, galleries, categories, posts, articles);
             return View(homeVM);
         }
     }

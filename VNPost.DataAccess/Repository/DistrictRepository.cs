@@ -11,11 +11,8 @@ namespace VNPost.DataAccess.Repository
 {
     public class DistrictRepository : Repository<District>, IDistrictRepository
     {
-        private readonly ApplicationDbContext _db;
-
         public DistrictRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
         public void Update(District article)
         {

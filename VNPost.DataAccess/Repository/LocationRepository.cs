@@ -11,11 +11,8 @@ namespace VNPost.DataAccess.Repository
 {
     public class LocationRepository : Repository<Location>, ILocationRepository
     {
-        private readonly ApplicationDbContext _db;
-
         public LocationRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
         public void Update(Location article)
         {

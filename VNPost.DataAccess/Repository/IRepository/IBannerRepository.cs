@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
 using VNPost.Models.Entity;
 
 namespace VNPost.DataAccess.Repository.IRepository
 {
-    public interface IMenuLocationRepository :IRepository<MenuLocation>
+    public interface IBannerRepository : IRepository<Banner>
     {
     }
 }

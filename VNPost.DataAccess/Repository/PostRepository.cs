@@ -7,11 +7,8 @@ namespace VNPost.DataAccess.Repository
 {
     public class PostRepository : Repository<Post>, IPostRepository
     {
-        private readonly ApplicationDbContext _db;
-
         public PostRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
     }
 }

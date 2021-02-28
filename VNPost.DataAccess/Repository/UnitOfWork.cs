@@ -12,9 +12,8 @@ namespace VNPost.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _db;
-        public IMenuItemRepository MenuItem { get; }
-        public IMenuLocationRepository MenuLocation { get; }
-        public IMenuLinkRepository MenuLink { get; }
+        public IBannerRepository Banner { get; }
+        public IMenuRepository Menu { get; }
         public IGalleryRepository Gallery { get; }
         public IArticleRepository Article { get; }
         public ICategoryRepository Category { get; }
@@ -23,7 +22,7 @@ namespace VNPost.DataAccess.Repository
         public IColumnistRepository Columnist { get; }
         public IColumnistItemRepository ColumnistItem { get; }
         public IRolePermissionRepository RolePermission { get; }
-        public ICURDRepository CURD { get; }
+        public IPermissionRepository Permissions { get; }
         public IIdentityUserRepository IdentityUser { get; }
         public IIdentityRoleRepository IdentityRole { get; }
         public IIdentityUserRoleRepository IdentityUserRole { get; }
@@ -35,9 +34,8 @@ namespace VNPost.DataAccess.Repository
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            MenuItem = new MenuItemRepository(_db);
-            MenuLocation = new MenuLocationRepository(_db);
-            MenuLink = new MenuLinkRepository(_db);
+            Banner = new BannerRepository(_db);
+            Menu = new MenuRepository(_db);
             Gallery = new GalleryRepository(_db);
             Article = new ArticleRepository(_db);
             Category = new CategoryRepository(_db);
@@ -46,7 +44,7 @@ namespace VNPost.DataAccess.Repository
             Columnist = new ColumnistRepository(_db);
             ColumnistItem = new ColumnistItemRepository(_db);
             RolePermission = new RolePermissionRepository(_db);
-            CURD = new CURDRepository(_db);
+            Permissions = new PermissionRepository(_db);
             IdentityUser = new IdentityUserRepository(_db);
             IdentityRole = new IdentityRoleRepository(_db);
             IdentityUserRole = new IdentityUserRoleRepository(_db);

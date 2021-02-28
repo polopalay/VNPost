@@ -7,24 +7,20 @@ namespace VNPost.Models.ViewModels
 {
     public class HomeVM
     {
-        public HomeVM(List<MenuLink> links, List<Gallery> galleries, List<Category> categories,
-            List<Post> posts, MenuLocation location, MenuItem item, List<Article> articles)
+        public HomeVM(List<Banner> banners, List<Gallery> galleries, List<Category> categories,
+            List<Post> posts, List<Article> articles)
         {
-            Links = links;
+            Banners = banners;
             Galleries = galleries;
             Categories = categories;
             Posts = posts;
-            Location = location;
-            Item = item;
             Articles = articles;
         }
 
-        public List<MenuLink> Links { get; set; }
+        public List<Banner> Banners { get; set; }
         public List<Gallery> Galleries { get; set; }
         public List<Category> Categories { get; set; }
         public List<Post> Posts { get; set; }
         public List<Article> Articles { get; set; }
-        public MenuLocation Location { get; set; }
-        public MenuItem Item { get; set; }
     }
 }

@@ -17,14 +17,9 @@ namespace VNPost.Areas.Components
         }
         public IViewComponentResult Invoke([FromQuery] int columnistId, [FromQuery] int columnistItemId)
         {
-            Dictionary<string, string> listMenuItem = new Dictionary<string, string>();
-            foreach (MenuItem menuItem in _unitOfWork.MenuItem.GetAll())
-            {
-                listMenuItem.Add(menuItem.Key, menuItem.Value);
-            }
             List<Columnist> columnist = _unitOfWork.Columnist.GetAll().ToList();
             List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
-            LeftVM articleVM = new LeftVM(columnist, columnistItems, listMenuItem, columnistId, columnistItemId);
+            LeftVM articleVM = new LeftVM(columnist, columnistItems, columnistId, columnistItemId);
             return View(articleVM);
         }
     }

@@ -11,11 +11,8 @@ namespace VNPost.DataAccess.Repository
 {
     public class ParcelRepository : Repository<Parcel>, IParcelRepository
     {
-        private readonly ApplicationDbContext _db;
-
         public ParcelRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
         public void Update(Parcel article)
         {

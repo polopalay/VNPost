@@ -132,7 +132,7 @@ function addActionToCheckBoxColumnist() {
 function addDataToCURD() {
     $.ajax({
         type: "GET",
-        url: "/api/curd",
+        url: "/api/permission",
     }).done(function (result) {
         curd = result;
         /*add check box option update,create, delete*/

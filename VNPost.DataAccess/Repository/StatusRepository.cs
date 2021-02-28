@@ -11,11 +11,9 @@ namespace VNPost.DataAccess.Repository
 {
     public class StatusRepository : Repository<Status>, IStatusRepository
     {
-        private readonly ApplicationDbContext _db;
 
         public StatusRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
         public void Update(Status article)
         {

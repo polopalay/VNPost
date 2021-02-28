@@ -47,6 +47,21 @@ namespace VNPost.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Banners",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Image = table.Column<string>(nullable: true),
+                    Link = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Banners", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -74,19 +89,6 @@ namespace VNPost.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CURDs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CURDs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Galleries",
                 columns: table => new
                 {
@@ -102,31 +104,31 @@ namespace VNPost.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MenuItems",
+                name: "Menus",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Key = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
+                    Value = table.Column<string>(nullable: true),
+                    Link = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MenuItems", x => x.Id);
+                    table.PrimaryKey("PK_Menus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MenuLocations",
+                name: "Permissions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Descrtiption = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MenuLocations", x => x.Id);
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -262,6 +264,28 @@ namespace VNPost.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Posts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    DescriptionImg = table.Column<string>(nullable: true),
+                    CategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Posts_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ColumnistItems",
                 columns: table => new
                 {
@@ -277,50 +301,6 @@ namespace VNPost.DataAccess.Migrations
                         name: "FK_ColumnistItems_Columnists_ColumnistId",
                         column: x => x.ColumnistId,
                         principalTable: "Columnists",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Posts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    DescriptionImg = table.Column<string>(nullable: true),
-                    GalleryId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Posts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Posts_Galleries_GalleryId",
-                        column: x => x.GalleryId,
-                        principalTable: "Galleries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MenuLinks",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Key = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true),
-                    Link = table.Column<string>(nullable: true),
-                    LocationId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MenuLinks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MenuLinks_MenuLocations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "MenuLocations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -365,6 +345,27 @@ namespace VNPost.DataAccess.Migrations
                         name: "FK_Parcels_Statuses_StatusId",
                         column: x => x.StatusId,
                         principalTable: "Statuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Services",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    PostId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Services", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Services_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -432,27 +433,6 @@ namespace VNPost.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Services",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
-                    PostId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Services", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Services_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
                 {
@@ -482,27 +462,32 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "13d23c51-re38-4831-wqa2-2e3f21c23ewd", "20e6071b-fbd8-4c55-806a-a79b3b1c4a8b", "Admin", "ADMIN" });
+                values: new object[] { "13d23c51-re38-4831-wqa2-2e3f21c23ewd", "d6d8567b-fad8-4fea-b08b-da7970e895e2", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "01b96c14-de28-4831-afa9-3d1f84b93aed", 0, "ecff460b-adfc-411e-9f35-5c3bcec94910", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	", null, false, "6ffaeab3-f7bb-4889-8127-35ed8b0f2b53", false, "admin@gmail.com" });
+                values: new object[] { "01b96c14-de28-4831-afa9-3d1f84b93aed", 0, "0f9793d3-c181-4653-b28d-40da85eec311", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	", null, false, "63141cc0-df01-4896-94ee-66659f8f4366", false, "admin@gmail.com" });
 
             migrationBuilder.InsertData(
-                table: "CURDs",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Create" });
+                table: "Banners",
+                columns: new[] { "Id", "Description", "Image", "Link" },
+                values: new object[] { 1, "", "/image/slider/banner1.jpg", "#" });
 
             migrationBuilder.InsertData(
-                table: "CURDs",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 2, "Update" });
+                table: "Banners",
+                columns: new[] { "Id", "Description", "Image", "Link" },
+                values: new object[] { 2, "", "/image/slider/banner2.jpg", "#" });
 
             migrationBuilder.InsertData(
-                table: "CURDs",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 3, "Delete" });
+                table: "Banners",
+                columns: new[] { "Id", "Description", "Image", "Link" },
+                values: new object[] { 3, "", "/image/slider/banner3.jpg", "#" });
+
+            migrationBuilder.InsertData(
+                table: "Banners",
+                columns: new[] { "Id", "Description", "Image", "Link" },
+                values: new object[] { 4, "", "/image/slider/banner4.jpg", "#" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -522,12 +507,7 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Columnists",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Tin Vietnam Post" });
-
-            migrationBuilder.InsertData(
-                table: "Columnists",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 2, "Bưu điện - Văn hóa xã" });
+                values: new object[] { 4, "Hoạt động Đảng - Đoàn thể" });
 
             migrationBuilder.InsertData(
                 table: "Columnists",
@@ -537,97 +517,57 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Columnists",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 4, "Hoạt động Đảng - Đoàn thể" });
+                values: new object[] { 1, "Tin Vietnam Post" });
 
             migrationBuilder.InsertData(
-                table: "Galleries",
-                columns: new[] { "Id", "Description", "ImgDescription", "Title" },
-                values: new object[] { 9, "Chuyên trang thông tin doanh nghiệp", "/image/gallery/list-top.png", "Thông tin Doanh nghiệp" });
-
-            migrationBuilder.InsertData(
-                table: "Galleries",
-                columns: new[] { "Id", "Description", "ImgDescription", "Title" },
-                values: new object[] { 8, "Hướng tới Đại hội Đại biểu Đảng bộ TCT lần II", "/image/gallery/Icon-Dang.png", "Đại hội Đảng" });
-
-            migrationBuilder.InsertData(
-                table: "Galleries",
-                columns: new[] { "Id", "Description", "ImgDescription", "Title" },
-                values: new object[] { 7, "Văn bản pháp lý và các thông tin liên quan", "/image/gallery/folder.png", "Văn bản pháp lý" });
-
-            migrationBuilder.InsertData(
-                table: "Galleries",
-                columns: new[] { "Id", "Description", "ImgDescription", "Title" },
-                values: new object[] { 5, "Tổng hợp thông tin thi đua khen thưởng", "/image/gallery/thi-dua-khen-thuong.png", "Thi đua - khen thưởng" });
-
-            migrationBuilder.InsertData(
-                table: "Galleries",
-                columns: new[] { "Id", "Description", "ImgDescription", "Title" },
-                values: new object[] { 4, "Văn bản quản lý tem bưu chính", "/image/gallery/stamp.png", "Tem bưu chính" });
-
-            migrationBuilder.InsertData(
-                table: "Galleries",
-                columns: new[] { "Id", "Description", "ImgDescription", "Title" },
-                values: new object[] { 3, "Văn bản quản lý chất lượng dịch vụ", "/image/gallery/quan-ly-chat-luong.png", "Quản lý chất lượng" });
-
-            migrationBuilder.InsertData(
-                table: "Galleries",
-                columns: new[] { "Id", "Description", "ImgDescription", "Title" },
-                values: new object[] { 2, "Tổng hợp báo chí ngành bưu điện", "/image/gallery/newspaper.png", "Tổng hợp báo chí" });
-
-            migrationBuilder.InsertData(
-                table: "Galleries",
-                columns: new[] { "Id", "Description", "ImgDescription", "Title" },
-                values: new object[] { 1, "Bưu điện Việt Nam vì một cuộc sống xanh", "/image/gallery/Recycle.png", "Nói không với rác thải nhựa" });
-
-            migrationBuilder.InsertData(
-                table: "MenuItems",
-                columns: new[] { "Id", "Key", "Value" },
-                values: new object[] { 9, "Company", "TỔNG CÔNG TY BƯU ĐIỆN VIỆT NAM - VIETNAM POST" });
-
-            migrationBuilder.InsertData(
-                table: "MenuItems",
-                columns: new[] { "Id", "Key", "Value" },
-                values: new object[] { 10, "Location", "Địa chỉ: Số 05 đường Phạm Hùng - Mỹ Đình 2 - Nam Từ Liêm - Hà Nội - Việt Nam" });
-
-            migrationBuilder.InsertData(
-                table: "MenuItems",
-                columns: new[] { "Id", "Key", "Value" },
-                values: new object[] { 11, "Policy", "Ghi rõ nguồn \"www.vnpost.vn\" khi phát hành lại thông tin từ website này" });
-
-            migrationBuilder.InsertData(
-                table: "MenuItems",
-                columns: new[] { "Id", "Key", "Value" },
-                values: new object[] { 12, "Ra mắt nền tảng mã địa chỉ bưu chính - Vpostcode", "https://www.youtube.com/embed/iPEvFyikq-g" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLocations",
-                columns: new[] { "Id", "Descrtiption", "Name" },
-                values: new object[] { 4, null, "Bottom-menu" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLocations",
-                columns: new[] { "Id", "Descrtiption", "Name" },
-                values: new object[] { 8, null, "Mạng xã hội" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLocations",
-                columns: new[] { "Id", "Descrtiption", "Name" },
-                values: new object[] { 9, null, "Slider" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLocations",
-                columns: new[] { "Id", "Descrtiption", "Name" },
-                values: new object[] { 10, "Hiện tại chúng tôi có những gian hàng mua sắm online với đầy đủ những sản phẩm tiện ích, đa dạng. Hy vọng sẽ đem đến cho quý khách hàng những trải nghiệm mua sắm mới mẻ nhất. Hãy đến với hệ thống mua sắm trực tuyến của chúng tôi để tìm cho mình những sản phẩm thiết thực nhất.", "Mua sắm trực tuyến" });
-
-            migrationBuilder.InsertData(
-                table: "Statuses",
+                table: "Columnists",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Prepare" });
+                values: new object[] { 2, "Bưu điện - Văn hóa xã" });
+
+            migrationBuilder.InsertData(
+                table: "Menus",
+                columns: new[] { "Id", "Key", "Link", "Value" },
+                values: new object[] { 8, "", "/Posts/Service/List/1", "Bưu chính chuyển phát" });
+
+            migrationBuilder.InsertData(
+                table: "Menus",
+                columns: new[] { "Id", "Key", "Link", "Value" },
+                values: new object[] { 9, "", "/Posts/Service/List/2", "Tài chính bưu chính" });
+
+            migrationBuilder.InsertData(
+                table: "Menus",
+                columns: new[] { "Id", "Key", "Link", "Value" },
+                values: new object[] { 10, "", "/Posts/Service/List/3", "Phân phối -Truyền thông" });
+
+            migrationBuilder.InsertData(
+                table: "Menus",
+                columns: new[] { "Id", "Key", "Link", "Value" },
+                values: new object[] { 11, "", "/Posts/Article/List", "Tin tức" });
+
+            migrationBuilder.InsertData(
+                table: "Permissions",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Create" });
+
+            migrationBuilder.InsertData(
+                table: "Permissions",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "Update" });
+
+            migrationBuilder.InsertData(
+                table: "Permissions",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "Delete" });
 
             migrationBuilder.InsertData(
                 table: "Statuses",
                 columns: new[] { "Id", "Name" },
                 values: new object[] { 2, "Pending" });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Prepare" });
 
             migrationBuilder.InsertData(
                 table: "Statuses",
@@ -642,22 +582,17 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
                 columns: new[] { "Id", "ColumnistId", "Name" },
-                values: new object[] { 15, 4, "Góp ý xây dựng cơ chế - chính sách" });
-
-            migrationBuilder.InsertData(
-                table: "ColumnistItems",
-                columns: new[] { "Id", "ColumnistId", "Name" },
-                values: new object[] { 14, 4, "Đoàn thanh niên" });
-
-            migrationBuilder.InsertData(
-                table: "ColumnistItems",
-                columns: new[] { "Id", "ColumnistId", "Name" },
                 values: new object[] { 13, 4, "Công đoàn" });
 
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
                 columns: new[] { "Id", "ColumnistId", "Name" },
                 values: new object[] { 12, 4, "Công tác Đảng" });
+
+            migrationBuilder.InsertData(
+                table: "ColumnistItems",
+                columns: new[] { "Id", "ColumnistId", "Name" },
+                values: new object[] { 11, 3, "Tìm hiểu Tem Bưu chính" });
 
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
@@ -677,7 +612,7 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
                 columns: new[] { "Id", "ColumnistId", "Name" },
-                values: new object[] { 11, 3, "Tìm hiểu Tem Bưu chính" });
+                values: new object[] { 7, 3, "Gương điển hình" });
 
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
@@ -692,12 +627,12 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
                 columns: new[] { "Id", "ColumnistId", "Name" },
-                values: new object[] { 5, 1, "Điểm chi trả chế độ BHXH" });
+                values: new object[] { 14, 4, "Đoàn thanh niên" });
 
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
                 columns: new[] { "Id", "ColumnistId", "Name" },
-                values: new object[] { 4, 1, "Lương hưu - bảo trợ xã hội" });
+                values: new object[] { 5, 1, "Điểm chi trả chế độ BHXH" });
 
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
@@ -717,112 +652,42 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "ColumnistItems",
                 columns: new[] { "Id", "ColumnistId", "Name" },
-                values: new object[] { 7, 3, "Gương điển hình" });
+                values: new object[] { 4, 1, "Lương hưu - bảo trợ xã hội" });
 
             migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 33, "", "https://www.linkedin.com/authwall?trk=gf&trkInfo=AQEcHBePbUPbnwAAAXKW4SzYfqas88PMwWIydrQUKt7vRdlRm_Thesf7HIcEsfHSkUXiZuX_nMjyj4IfViiABffUTA0XRALzYNn5xU6ph_mz0P_XK4651j2JANKqojtkFw3fRAk=&originalReferer=http://www.vnpost.vn/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Ftt-dvkh-529b25197%2F", 8, "fab fa-linkedin" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 34, "", "http://www.vnpost.vn/desktopmodules/vnp_webapi/rssfeed.aspx", 8, "fab fa-instagram" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 35, "", "#", 9, "/image/slider/banner1.jpg" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 39, "SÀN THƯƠNG MẠI ĐIỆN TỬ POSTMART", "#", 10, "/image/other/ImageCaching.ashx.jpeg" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 37, "", "#", 9, "/image/slider/banner3.jpg" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 38, "", "#", 9, "/image/slider/banner4.jpg" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 32, "", "https://twitter.com/buudienvietnam", 8, "fab fa-twitter" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 36, "", "#", 9, "/image/slider/banner2.jpg" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 31, "", "https://www.facebook.com/vnpost.vn", 8, "fab fa-facebook-f" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 41, "DỊCH VỤ DATAPOST", "#", 10, "/image/other/ImageCaching.ashx-2.jpeg" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 10, "", "/Posts/Service/List/3", 4, "Phân phối -Truyền thông" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 9, "", "/Posts/Service/List/2", 4, "Tài chính bưu chính" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 8, "", "/Posts/Service/List/1", 4, "Bưu chính chuyển phát" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 40, "LỊCH TẾT", "#", 10, "/image/other/ImageCaching.ashx.png" });
-
-            migrationBuilder.InsertData(
-                table: "MenuLinks",
-                columns: new[] { "Id", "Key", "Link", "LocationId", "Value" },
-                values: new object[] { 11, "", "/Posts/Article/List", 4, "Tin tức" });
+                table: "ColumnistItems",
+                columns: new[] { "Id", "ColumnistId", "Name" },
+                values: new object[] { 15, 4, "Góp ý xây dựng cơ chế - chính sách" });
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "Description", "DescriptionImg", "GalleryId", "Title" },
-                values: new object[] { 6, "Truyền thông quảng cáo qua các xuất bản phẩm, hệ thống truyền thông quảng cáo ngoài trời, tại các bưu cục, trên các phương tiện vận tải, phong bì...", "/image/post/ImageCaching-6.ashx.jpeg", 3, "Truyền thông, quảng cáo" });
+                columns: new[] { "Id", "CategoryId", "Description", "DescriptionImg", "Title" },
+                values: new object[] { 6, 3, "Truyền thông quảng cáo qua các xuất bản phẩm, hệ thống truyền thông quảng cáo ngoài trời, tại các bưu cục, trên các phương tiện vận tải, phong bì...", "/image/post/ImageCaching-6.ashx.jpeg", "Truyền thông, quảng cáo" });
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "Description", "DescriptionImg", "GalleryId", "Title" },
-                values: new object[] { 5, "POSTMART là sàn giao dịch thương mại điện tử được sáng lập bởi Tổng Công ty Bưu Điện Việt Nam (VNPost) và vận hành bởi Công ty Phát hành báo chí TW.", "/image/post/ImageCaching-5.ashx.jpeg", 3, "Sàn thương mại điện tử POSTMART" });
+                columns: new[] { "Id", "CategoryId", "Description", "DescriptionImg", "Title" },
+                values: new object[] { 5, 3, "POSTMART là sàn giao dịch thương mại điện tử được sáng lập bởi Tổng Công ty Bưu Điện Việt Nam (VNPost) và vận hành bởi Công ty Phát hành báo chí TW.", "/image/post/ImageCaching-5.ashx.jpeg", "Sàn thương mại điện tử POSTMART" });
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "Description", "DescriptionImg", "GalleryId", "Title" },
-                values: new object[] { 4, "Là dịch vụ cho phép khách hàng nộp tiền phí bảo hiểm, vay trả góp, tiền điện, nước, cước điện thoại, tiền đặt chỗ, mua hàng qua mạng, tiền phí phạt vi phạm giao thông, tiền thuế, tiền lệ phí hồ sơ xét tuyển ĐH,CĐ, tiền cấp đổi CMND, Hộ chiếu, tiền đặt vé máy bay…tại bưu cục", "/image/post/ImageCaching-4.ashx.jpeg", 2, "Thu hộ - Chi hộ" });
+                columns: new[] { "Id", "CategoryId", "Description", "DescriptionImg", "Title" },
+                values: new object[] { 4, 2, "Là dịch vụ cho phép khách hàng nộp tiền phí bảo hiểm, vay trả góp, tiền điện, nước, cước điện thoại, tiền đặt chỗ, mua hàng qua mạng, tiền phí phạt vi phạm giao thông, tiền thuế, tiền lệ phí hồ sơ xét tuyển ĐH,CĐ, tiền cấp đổi CMND, Hộ chiếu, tiền đặt vé máy bay…tại bưu cục", "/image/post/ImageCaching-4.ashx.jpeg", "Thu hộ - Chi hộ" });
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "Description", "DescriptionImg", "GalleryId", "Title" },
-                values: new object[] { 3, "Là dịch vụ giới thiệu, chào bán bảo hiểm, thu xếp việc giao kết hợp đồng bảo hiểm thông qua mạng lưới bưu cục, điểm cung cấp dịch vụ của Tổng Công ty Bưu điện Việt Nam.", "/image/post/ImageCaching-3.ashx.jpeg", 2, "Bảo hiểm phi nhân thọ PTI" });
+                columns: new[] { "Id", "CategoryId", "Description", "DescriptionImg", "Title" },
+                values: new object[] { 3, 2, "Là dịch vụ giới thiệu, chào bán bảo hiểm, thu xếp việc giao kết hợp đồng bảo hiểm thông qua mạng lưới bưu cục, điểm cung cấp dịch vụ của Tổng Công ty Bưu điện Việt Nam.", "/image/post/ImageCaching-3.ashx.jpeg", "Bảo hiểm phi nhân thọ PTI" });
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "Description", "DescriptionImg", "GalleryId", "Title" },
-                values: new object[] { 1, "Là dịch vụ chuyển phát nhanh thư, tài liệu, vật phẩm, hàng hóa từ người gửi đến người nhận giữa Việt Nam trong nước và các nước trên thế giới trong khuôn khổ Liên minh Bưu chính Thế giới (UPU) và Hiệp hội EMS theo chỉ tiêu thời gian được Công ty Cổ phần Chuyển Phát Nhanh Bưu điện công bố trước. Chi tiết xin tham khảo tại website: www.ems.com.vn", "/image/post/ImageCaching.ashx.jpeg", 1, "Chuyển phát nhanh EMS" });
+                columns: new[] { "Id", "CategoryId", "Description", "DescriptionImg", "Title" },
+                values: new object[] { 2, 1, "Bưu phẩm bảo đảm là dịch vụ chấp nhận, vận chuyển và phát bưu phẩm đến địa chỉ nhận trong nước và quốc tế; bưu phẩm được gắn số hiệu để theo dõi, định vị trong quá trình chuyển phát.", "/image/post/ImageCaching.ashx-2.jpeg", "Bưu phẩm đảm bảo" });
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "Description", "DescriptionImg", "GalleryId", "Title" },
-                values: new object[] { 2, "Bưu phẩm bảo đảm là dịch vụ chấp nhận, vận chuyển và phát bưu phẩm đến địa chỉ nhận trong nước và quốc tế; bưu phẩm được gắn số hiệu để theo dõi, định vị trong quá trình chuyển phát.", "/image/post/ImageCaching.ashx-2.jpeg", 1, "Bưu phẩm đảm bảo" });
+                columns: new[] { "Id", "CategoryId", "Description", "DescriptionImg", "Title" },
+                values: new object[] { 1, 1, "Là dịch vụ chuyển phát nhanh thư, tài liệu, vật phẩm, hàng hóa từ người gửi đến người nhận giữa Việt Nam trong nước và các nước trên thế giới trong khuôn khổ Liên minh Bưu chính Thế giới (UPU) và Hiệp hội EMS theo chỉ tiêu thời gian được Công ty Cổ phần Chuyển Phát Nhanh Bưu điện công bố trước. Chi tiết xin tham khảo tại website: www.ems.com.vn", "/image/post/ImageCaching.ashx.jpeg", "Chuyển phát nhanh EMS" });
 
             migrationBuilder.InsertData(
                 table: "Services",
@@ -967,19 +832,14 @@ namespace VNPost.DataAccess.Migrations
                 column: "ParcelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MenuLinks_LocationId",
-                table: "MenuLinks",
-                column: "LocationId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Parcels_StatusId",
                 table: "Parcels",
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_GalleryId",
+                name: "IX_Posts_CategoryId",
                 table: "Posts",
-                column: "GalleryId");
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RolePermissions_ColumnistItemId",
@@ -1018,19 +878,19 @@ namespace VNPost.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Banners");
 
             migrationBuilder.DropTable(
-                name: "CURDs");
+                name: "Galleries");
 
             migrationBuilder.DropTable(
                 name: "Locations");
 
             migrationBuilder.DropTable(
-                name: "MenuItems");
+                name: "Menus");
 
             migrationBuilder.DropTable(
-                name: "MenuLinks");
+                name: "Permissions");
 
             migrationBuilder.DropTable(
                 name: "RolePermissions");
@@ -1046,9 +906,6 @@ namespace VNPost.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Parcels");
-
-            migrationBuilder.DropTable(
-                name: "MenuLocations");
 
             migrationBuilder.DropTable(
                 name: "ColumnistItems");
@@ -1069,7 +926,7 @@ namespace VNPost.DataAccess.Migrations
                 name: "Columnists");
 
             migrationBuilder.DropTable(
-                name: "Galleries");
+                name: "Categories");
         }
     }
 }

@@ -7,9 +7,8 @@ namespace VNPost.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork : IDisposable
     {
-        IMenuItemRepository MenuItem { get; }
-        IMenuLocationRepository MenuLocation { get; }
-        IMenuLinkRepository MenuLink { get; }
+        IBannerRepository Banner { get; }
+        IMenuRepository Menu { get; }
         IGalleryRepository Gallery { get; }
         IArticleRepository Article { get; }
         ICategoryRepository Category { get; }
@@ -18,7 +17,7 @@ namespace VNPost.DataAccess.Repository.IRepository
         IColumnistRepository Columnist { get; }
         IColumnistItemRepository ColumnistItem { get; }
         IRolePermissionRepository RolePermission { get; }
-        ICURDRepository CURD { get; }
+        IPermissionRepository Permissions { get; }
         IIdentityUserRepository IdentityUser { get; }
         IIdentityRoleRepository IdentityRole { get; }
         IIdentityUserRoleRepository IdentityUserRole { get; }

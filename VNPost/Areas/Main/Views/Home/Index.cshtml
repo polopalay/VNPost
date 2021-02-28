@@ -13,10 +13,10 @@
 <section id="slider">
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            @for (int i = 0; i < Model.Links.Where(l => l.LocationId == 9).Count(); i++)
+            @for (int i = 0; i < Model.Banners.Count; i++)
             {
                 <div class="carousel-item contain-img @(i == 0? "active" : "")">
-                    <img tyle="width:100%;" class="d-block" src="@Model.Links[i].Value" alt="">
+                    <img tyle="width:100%;" class="d-block" src="@Model.Banners[i].Image" alt="">
                 </div>
             }
         </div>
@@ -35,19 +35,62 @@
     <div class="gallery">
         <h3>Chuyên trang</h3>
         <ul class="list-group">
-            @foreach (Gallery gallery in Model.Galleries)
-            {
-                <li class="list-group-item">
-                    <a href="">
-                        <img src="@gallery.ImgDescription" />
-                        <div>
-                            <h5>@gallery.Title</h5>
-                            <p>@gallery.Description</p>
-                        </div>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </li>
-            }
+            <li class="list-group-item">
+                <a href="#">
+                    <img src="/image/gallery/Recycle.png">
+                    <div><h5>Nói không với rác thải nhựa</h5><p>Bưu điện Việt Nam vì một cuộc sống xanh</p></div>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">
+                    <img src="/image/gallery/newspaper.png">
+                    <div><h5>Tổng hợp báo chí</h5><p>Tổng hợp báo chí ngành bưu điện</p></div>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">
+                    <img src="/image/gallery/quan-ly-chat-luong.png">
+                    <div><h5>Quản lý chất lượng</h5><p>Văn bản quản lý chất lượng dịch vụ</p></div>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">
+                    <img src="/image/gallery/stamp.png">
+                    <div><h5>Tem bưu chính</h5><p>Văn bản quản lý tem bưu chính</p></div>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">
+                    <img src="/image/gallery/thi-dua-khen-thuong.png">
+                    <div><h5>Thi đua - khen thưởng</h5><p>Tổng hợp thông tin thi đua khen thưởng</p></div>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">
+                    <img src="/image/gallery/folder.png">
+                    <div><h5>Văn bản pháp lý</h5><p>Văn bản pháp lý và các thông tin liên quan</p></div>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">
+                    <img src="/image/gallery/Icon-Dang.png">
+                    <div><h5>Đại hội Đảng</h5><p>Hướng tới Đại hội Đại biểu Đảng bộ TCT lần II</p></div>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">
+                    <img src="/image/gallery/list-top.png">
+                    <div><h5>Thông tin Doanh nghiệp</h5><p>Chuyên trang thông tin doanh nghiệp</p></div>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
         </ul>
     </div>
     <div class="list-article">
@@ -93,7 +136,7 @@
                 <h2>@category.Name</h2>
                 <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/line-service.png" />
                 <div>
-                    @foreach (Post post in Model.Posts.Where(p => p.GalleryId == category.Id))
+                    @foreach (Post post in Model.Posts.Where(p => p.CategoryId == category.Id))
                     {
                         <a href="/Posts/Service/ServiceDetail/@(post.Id)" class="fas fa-caret-right">@post.Title</a>
                     }
@@ -107,24 +150,29 @@
         <a>
             <h1>THƯ VIỆN VIDEO</h1>
         </a>
-        <iframe class="description-video" src="@Model.Item.Value" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <h3>@Model.Item.Key</h3>
+        <iframe class="description-video" src="https://www.youtube.com/embed/iPEvFyikq-g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        <h3>Ra mắt nền tảng mã địa chỉ bưu chính - Vpostcode</h3>
     </div>
     <div class="library-service">
         <div>
-            <h2>@Model.Location.Name.ToUpper()</h2>
+            <h2>MUA SẮM TRỰC TUYẾN</h2>
             <p>
-                @Model.Location.Descrtiption
+                Hiện tại chúng tôi có những gian hàng mua sắm online với đầy đủ những sản phẩm tiện ích, đa dạng. Hy vọng sẽ đem đến cho quý khách hàng những trải nghiệm mua sắm mới mẻ nhất. Hãy đến với hệ thống mua sắm trực tuyến của chúng tôi để tìm cho mình những sản phẩm thiết thực nhất.
             </p>
         </div>
         <div class="list-service">
-            @foreach (MenuLink link in Model.Links.Where(l => l.LocationId == Model.Location.Id))
-            {
-                <a href="@link.Link">
-                    <img src="@link.Value" />
-                    <h3>@link.Key</h3>
-                </a>
-            }
+            <a href="#">
+                <img src="/image/other/ImageCaching.ashx.jpeg">
+                <h3>SÀN THƯƠNG MẠI ĐIỆN TỬ POSTMART</h3>
+            </a>
+            <a href="#">
+                <img src="/image/other/ImageCaching.ashx.png">
+                <h3>LỊCH TẾT</h3>
+            </a>
+            <a href="#">
+                <img src="/image/other/ImageCaching.ashx-2.jpeg">
+                <h3>DỊCH VỤ DATAPOST</h3>
+            </a>
         </div>
     </div>
 </section>

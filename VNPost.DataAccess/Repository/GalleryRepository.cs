@@ -7,11 +7,8 @@ namespace VNPost.DataAccess.Repository
 {
     public class GalleryRepository : Repository<Gallery>, IGalleryRepository
     {
-        private readonly ApplicationDbContext _db;
-
         public GalleryRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
     }
 }

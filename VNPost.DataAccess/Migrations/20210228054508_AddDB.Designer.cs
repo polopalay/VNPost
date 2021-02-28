@@ -9,7 +9,7 @@ using VNPost.DataAccess.Data;
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210227151045_AddDB")]
+    [Migration("20210228054508_AddDB")]
     partial class AddDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "20e6071b-fbd8-4c55-806a-a79b3b1c4a8b",
+                            ConcurrencyStamp = "d6d8567b-fad8-4fea-b08b-da7970e895e2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -144,7 +144,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ecff460b-adfc-411e-9f35-5c3bcec94910",
+                            ConcurrencyStamp = "0f9793d3-c181-4653-b28d-40da85eec311",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -152,7 +152,7 @@ namespace VNPost.DataAccess.Migrations
                             NormalizedUserName = "ADMIN@GMAIL.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6ffaeab3-f7bb-4889-8127-35ed8b0f2b53",
+                            SecurityStamp = "63141cc0-df01-4896-94ee-66659f8f4366",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -296,34 +296,53 @@ namespace VNPost.DataAccess.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("VNPost.Models.Entity.CURD", b =>
+            modelBuilder.Entity("VNPost.Models.Entity.Banner", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Link")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CURDs");
+                    b.ToTable("Banners");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Name = "Create"
+                            Description = "",
+                            Image = "/image/slider/banner1.jpg",
+                            Link = "#"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Update"
+                            Description = "",
+                            Image = "/image/slider/banner2.jpg",
+                            Link = "#"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Delete"
+                            Description = "",
+                            Image = "/image/slider/banner3.jpg",
+                            Link = "#"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "",
+                            Image = "/image/slider/banner4.jpg",
+                            Link = "#"
                         });
                 });
 
@@ -555,64 +574,6 @@ namespace VNPost.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Galleries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Bưu điện Việt Nam vì một cuộc sống xanh",
-                            ImgDescription = "/image/gallery/Recycle.png",
-                            Title = "Nói không với rác thải nhựa"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Tổng hợp báo chí ngành bưu điện",
-                            ImgDescription = "/image/gallery/newspaper.png",
-                            Title = "Tổng hợp báo chí"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Văn bản quản lý chất lượng dịch vụ",
-                            ImgDescription = "/image/gallery/quan-ly-chat-luong.png",
-                            Title = "Quản lý chất lượng"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Văn bản quản lý tem bưu chính",
-                            ImgDescription = "/image/gallery/stamp.png",
-                            Title = "Tem bưu chính"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Tổng hợp thông tin thi đua khen thưởng",
-                            ImgDescription = "/image/gallery/thi-dua-khen-thuong.png",
-                            Title = "Thi đua - khen thưởng"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Description = "Văn bản pháp lý và các thông tin liên quan",
-                            ImgDescription = "/image/gallery/folder.png",
-                            Title = "Văn bản pháp lý"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Description = "Hướng tới Đại hội Đại biểu Đảng bộ TCT lần II",
-                            ImgDescription = "/image/gallery/Icon-Dang.png",
-                            Title = "Đại hội Đảng"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Description = "Chuyên trang thông tin doanh nghiệp",
-                            ImgDescription = "/image/gallery/list-top.png",
-                            Title = "Thông tin Doanh nghiệp"
-                        });
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.Location", b =>
@@ -639,50 +600,7 @@ namespace VNPost.DataAccess.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("VNPost.Models.Entity.MenuItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Key")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MenuItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 9,
-                            Key = "Company",
-                            Value = "TỔNG CÔNG TY BƯU ĐIỆN VIỆT NAM - VIETNAM POST"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Key = "Location",
-                            Value = "Địa chỉ: Số 05 đường Phạm Hùng - Mỹ Đình 2 - Nam Từ Liêm - Hà Nội - Việt Nam"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Key = "Policy",
-                            Value = "Ghi rõ nguồn \"www.vnpost.vn\" khi phát hành lại thông tin từ website này"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Key = "Ra mắt nền tảng mã địa chỉ bưu chính - Vpostcode",
-                            Value = "https://www.youtube.com/embed/iPEvFyikq-g"
-                        });
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.MenuLink", b =>
+            modelBuilder.Entity("VNPost.Models.Entity.Menu", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -694,17 +612,12 @@ namespace VNPost.DataAccess.Migrations
                     b.Property<string>("Link")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("LocationId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Value")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("MenuLinks");
+                    b.ToTable("Menus");
 
                     b.HasData(
                         new
@@ -712,7 +625,6 @@ namespace VNPost.DataAccess.Migrations
                             Id = 8,
                             Key = "",
                             Link = "/Posts/Service/List/1",
-                            LocationId = 4,
                             Value = "Bưu chính chuyển phát"
                         },
                         new
@@ -720,7 +632,6 @@ namespace VNPost.DataAccess.Migrations
                             Id = 9,
                             Key = "",
                             Link = "/Posts/Service/List/2",
-                            LocationId = 4,
                             Value = "Tài chính bưu chính"
                         },
                         new
@@ -728,7 +639,6 @@ namespace VNPost.DataAccess.Migrations
                             Id = 10,
                             Key = "",
                             Link = "/Posts/Service/List/3",
-                            LocationId = 4,
                             Value = "Phân phối -Truyền thông"
                         },
                         new
@@ -736,136 +646,7 @@ namespace VNPost.DataAccess.Migrations
                             Id = 11,
                             Key = "",
                             Link = "/Posts/Article/List",
-                            LocationId = 4,
                             Value = "Tin tức"
-                        },
-                        new
-                        {
-                            Id = 31,
-                            Key = "",
-                            Link = "https://www.facebook.com/vnpost.vn",
-                            LocationId = 8,
-                            Value = "fab fa-facebook-f"
-                        },
-                        new
-                        {
-                            Id = 32,
-                            Key = "",
-                            Link = "https://twitter.com/buudienvietnam",
-                            LocationId = 8,
-                            Value = "fab fa-twitter"
-                        },
-                        new
-                        {
-                            Id = 33,
-                            Key = "",
-                            Link = "https://www.linkedin.com/authwall?trk=gf&trkInfo=AQEcHBePbUPbnwAAAXKW4SzYfqas88PMwWIydrQUKt7vRdlRm_Thesf7HIcEsfHSkUXiZuX_nMjyj4IfViiABffUTA0XRALzYNn5xU6ph_mz0P_XK4651j2JANKqojtkFw3fRAk=&originalReferer=http://www.vnpost.vn/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Ftt-dvkh-529b25197%2F",
-                            LocationId = 8,
-                            Value = "fab fa-linkedin"
-                        },
-                        new
-                        {
-                            Id = 34,
-                            Key = "",
-                            Link = "http://www.vnpost.vn/desktopmodules/vnp_webapi/rssfeed.aspx",
-                            LocationId = 8,
-                            Value = "fab fa-instagram"
-                        },
-                        new
-                        {
-                            Id = 35,
-                            Key = "",
-                            Link = "#",
-                            LocationId = 9,
-                            Value = "/image/slider/banner1.jpg"
-                        },
-                        new
-                        {
-                            Id = 36,
-                            Key = "",
-                            Link = "#",
-                            LocationId = 9,
-                            Value = "/image/slider/banner2.jpg"
-                        },
-                        new
-                        {
-                            Id = 37,
-                            Key = "",
-                            Link = "#",
-                            LocationId = 9,
-                            Value = "/image/slider/banner3.jpg"
-                        },
-                        new
-                        {
-                            Id = 38,
-                            Key = "",
-                            Link = "#",
-                            LocationId = 9,
-                            Value = "/image/slider/banner4.jpg"
-                        },
-                        new
-                        {
-                            Id = 39,
-                            Key = "SÀN THƯƠNG MẠI ĐIỆN TỬ POSTMART",
-                            Link = "#",
-                            LocationId = 10,
-                            Value = "/image/other/ImageCaching.ashx.jpeg"
-                        },
-                        new
-                        {
-                            Id = 40,
-                            Key = "LỊCH TẾT",
-                            Link = "#",
-                            LocationId = 10,
-                            Value = "/image/other/ImageCaching.ashx.png"
-                        },
-                        new
-                        {
-                            Id = 41,
-                            Key = "DỊCH VỤ DATAPOST",
-                            Link = "#",
-                            LocationId = 10,
-                            Value = "/image/other/ImageCaching.ashx-2.jpeg"
-                        });
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.MenuLocation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Descrtiption")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MenuLocations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 4,
-                            Name = "Bottom-menu"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Mạng xã hội"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Slider"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Descrtiption = "Hiện tại chúng tôi có những gian hàng mua sắm online với đầy đủ những sản phẩm tiện ích, đa dạng. Hy vọng sẽ đem đến cho quý khách hàng những trải nghiệm mua sắm mới mẻ nhất. Hãy đến với hệ thống mua sắm trực tuyến của chúng tôi để tìm cho mình những sản phẩm thiết thực nhất.",
-                            Name = "Mua sắm trực tuyến"
                         });
                 });
 
@@ -904,10 +685,44 @@ namespace VNPost.DataAccess.Migrations
                     b.ToTable("Parcels");
                 });
 
+            modelBuilder.Entity("VNPost.Models.Entity.Permission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Permissions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Create"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Update"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Delete"
+                        });
+                });
+
             modelBuilder.Entity("VNPost.Models.Entity.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
@@ -916,15 +731,12 @@ namespace VNPost.DataAccess.Migrations
                     b.Property<string>("DescriptionImg")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("GalleryId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GalleryId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Posts");
 
@@ -932,49 +744,49 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            CategoryId = 1,
                             Description = "Là dịch vụ chuyển phát nhanh thư, tài liệu, vật phẩm, hàng hóa từ người gửi đến người nhận giữa Việt Nam trong nước và các nước trên thế giới trong khuôn khổ Liên minh Bưu chính Thế giới (UPU) và Hiệp hội EMS theo chỉ tiêu thời gian được Công ty Cổ phần Chuyển Phát Nhanh Bưu điện công bố trước. Chi tiết xin tham khảo tại website: www.ems.com.vn",
                             DescriptionImg = "/image/post/ImageCaching.ashx.jpeg",
-                            GalleryId = 1,
                             Title = "Chuyển phát nhanh EMS"
                         },
                         new
                         {
                             Id = 2,
+                            CategoryId = 1,
                             Description = "Bưu phẩm bảo đảm là dịch vụ chấp nhận, vận chuyển và phát bưu phẩm đến địa chỉ nhận trong nước và quốc tế; bưu phẩm được gắn số hiệu để theo dõi, định vị trong quá trình chuyển phát.",
                             DescriptionImg = "/image/post/ImageCaching.ashx-2.jpeg",
-                            GalleryId = 1,
                             Title = "Bưu phẩm đảm bảo"
                         },
                         new
                         {
                             Id = 3,
+                            CategoryId = 2,
                             Description = "Là dịch vụ giới thiệu, chào bán bảo hiểm, thu xếp việc giao kết hợp đồng bảo hiểm thông qua mạng lưới bưu cục, điểm cung cấp dịch vụ của Tổng Công ty Bưu điện Việt Nam.",
                             DescriptionImg = "/image/post/ImageCaching-3.ashx.jpeg",
-                            GalleryId = 2,
                             Title = "Bảo hiểm phi nhân thọ PTI"
                         },
                         new
                         {
                             Id = 4,
+                            CategoryId = 2,
                             Description = "Là dịch vụ cho phép khách hàng nộp tiền phí bảo hiểm, vay trả góp, tiền điện, nước, cước điện thoại, tiền đặt chỗ, mua hàng qua mạng, tiền phí phạt vi phạm giao thông, tiền thuế, tiền lệ phí hồ sơ xét tuyển ĐH,CĐ, tiền cấp đổi CMND, Hộ chiếu, tiền đặt vé máy bay…tại bưu cục",
                             DescriptionImg = "/image/post/ImageCaching-4.ashx.jpeg",
-                            GalleryId = 2,
                             Title = "Thu hộ - Chi hộ"
                         },
                         new
                         {
                             Id = 5,
+                            CategoryId = 3,
                             Description = "POSTMART là sàn giao dịch thương mại điện tử được sáng lập bởi Tổng Công ty Bưu Điện Việt Nam (VNPost) và vận hành bởi Công ty Phát hành báo chí TW.",
                             DescriptionImg = "/image/post/ImageCaching-5.ashx.jpeg",
-                            GalleryId = 3,
                             Title = "Sàn thương mại điện tử POSTMART"
                         },
                         new
                         {
                             Id = 6,
+                            CategoryId = 3,
                             Description = "Truyền thông quảng cáo qua các xuất bản phẩm, hệ thống truyền thông quảng cáo ngoài trời, tại các bưu cục, trên các phương tiện vận tải, phong bì...",
                             DescriptionImg = "/image/post/ImageCaching-6.ashx.jpeg",
-                            GalleryId = 3,
                             Title = "Truyền thông, quảng cáo"
                         });
                 });
@@ -1267,15 +1079,6 @@ namespace VNPost.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VNPost.Models.Entity.MenuLink", b =>
-                {
-                    b.HasOne("VNPost.Models.Entity.MenuLocation", "MenuLocation")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("VNPost.Models.Entity.Parcel", b =>
                 {
                     b.HasOne("VNPost.Models.Entity.Status", "Status")
@@ -1287,9 +1090,9 @@ namespace VNPost.DataAccess.Migrations
 
             modelBuilder.Entity("VNPost.Models.Entity.Post", b =>
                 {
-                    b.HasOne("VNPost.Models.Entity.Gallery", "Gallery")
+                    b.HasOne("VNPost.Models.Entity.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("GalleryId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

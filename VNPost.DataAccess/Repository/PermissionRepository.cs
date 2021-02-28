@@ -5,9 +5,9 @@ using VNPost.Models.Entity;
 
 namespace VNPost.DataAccess.Repository
 {
-    public class RolePermissionRepository : Repository<RolePermission>, IRolePermissionRepository
+    public class PermissionRepository : Repository<Permission>, IPermissionRepository
     {
-        public RolePermissionRepository(ApplicationDbContext db) : base(db)
+        public PermissionRepository(ApplicationDbContext db) : base(db)
         {
         }
     }

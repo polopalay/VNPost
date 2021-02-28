@@ -7,13 +7,10 @@ using VNPost.Models.Entity;
 
 namespace VNPost.DataAccess.Repository
 {
-    class MenuLocationRepository : Repository<MenuLocation>, IMenuLocationRepository
+    class MenuRepository:Repository<Menu>,IMenuRepository
     {
-        private readonly ApplicationDbContext _db;
-
-        public MenuLocationRepository(ApplicationDbContext db) : base(db)
+        public MenuRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
     }
 }

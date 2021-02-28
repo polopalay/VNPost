@@ -5,13 +5,10 @@ using VNPost.Models.Entity;
 
 namespace VNPost.DataAccess.Repository
 {
-    public class ServiceRepository:Repository<Service>,IServiceRepository
+    public class ServiceRepository : Repository<Service>, IServiceRepository
     {
-        private readonly ApplicationDbContext _db;
-
-        public ServiceRepository(ApplicationDbContext db):base(db)
+        public ServiceRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
     }
 }
