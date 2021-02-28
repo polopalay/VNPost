@@ -1,5 +1,4 @@
 ﻿const index = GetURLParameter("index") == null ? 1 : GetURLParameter("index");
-const numberPostInPage = 100;
 let table;
 
 function loadTbl() {
@@ -10,20 +9,20 @@ function loadTbl() {
         "lengthMenu": [10, 5, 1],
         "ajax": {
             type: "GET",
-            url: "/api/articles?getByUSer=true&fillToDataTable=true&numberPostInPage=" + numberPostInPage + "&index=" + index,
+            url: "/api/articles",
         },
         "columns": [
-            { "data": "Title", "width": "30%" },
-            { "data": "IdentityUser.UserName", "width": "20%" },
+            { "data": "title", "width": "30%" },
+            { "data": "identityUser.userName", "width": "20%" },
             {
-                "data": "DateCreate",
+                "data": "dateCreate",
                 "render": function (data) {
                     return dateDMY(data);
                 }, "width": "20%"
             },
-            { "data": "ColumnistItem.Name", "width": "20%" },
+            { "data": "columnist.name", "width": "20%" },
             {
-                "data": "Id",
+                "data": "id",
                 "render": function (data) {
                     return `
                                     <div class="text-center">
@@ -38,29 +37,6 @@ function loadTbl() {
                 }, "width": "10%"
             }
         ]
-    });
-}
-
-function loadPaging() {
-    $.ajax({
-        type: "GET",
-        "url": "/api/articles?getByUSer=true&fillToDataTable=true&numberPostInPage=" + numberPostInPage + "&getPagination=true&index=" + index,
-    }).done(function (data) {
-        $("#pagination").empty();
-        for (let i = data.begin; i <= data.end; i++) {
-            const list = $("<li></li>", {
-                class: i == index ? "page-item disabled" : "page-item",
-            });
-            const link = $("<a></a>", {
-                class: "page-link",
-                href: "/Posts/Write/Index?index=" + i,
-                text: i,
-            });
-            list.append(link);
-            $("#pagination").append(list);
-        }
-    }).fail(function () {
-        toastr.error("Error to send request to server");
     });
 }
 
@@ -83,7 +59,6 @@ function Delete(url) {
 
 function load() {
     loadTbl();
-    loadPaging();
 }
 
 load();

@@ -9,13 +9,11 @@ namespace VNPost.DataAccess.Repository.IRepository
     {
         IBannerRepository Banner { get; }
         IMenuRepository Menu { get; }
-        IGalleryRepository Gallery { get; }
         IArticleRepository Article { get; }
         ICategoryRepository Category { get; }
         IPostRepository Post { get; }
         IServiceRepository Service { get; }
         IColumnistRepository Columnist { get; }
-        IColumnistItemRepository ColumnistItem { get; }
         IRolePermissionRepository RolePermission { get; }
         IPermissionRepository Permissions { get; }
         IIdentityUserRepository IdentityUser { get; }

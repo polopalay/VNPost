@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using VNPost.DataAccess.Repository.IRepository;
 using VNPost.Models.Entity;
+using VNPost.Models.ViewModels;
 
 namespace VNPost.Areas.API
 {

@@ -13,7 +13,7 @@ namespace VNPost.Models.Entity
 
         public RolePermission(int columnistItemId, bool create, bool update, bool delete)
         {
-            ColumnistItemId = columnistItemId;
+            ColumnistId = columnistItemId;
             Create = create;
             Update = update;
             Delete = delete;
@@ -24,9 +24,9 @@ namespace VNPost.Models.Entity
         [ForeignKey("RoleId")]
         public IdentityRole Role { get; set; }
         [Required]
-        public int ColumnistItemId { get; set; }
-        [ForeignKey("ColumnistItemId")]
-        public ColumnistItem ColumnistItem { get; set; }
+        public int ColumnistId { get; set; }
+        [ForeignKey("ColumnistId")]
+        public Columnist Columnist { get; set; }
         [Required]
         public bool Create { get; set; }
         [Required]

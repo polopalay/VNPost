@@ -38,7 +38,6 @@
   <ItemGroup>
     <Folder Include="Views\Shared\Components\Header\" />
     <Folder Include="wwwroot\css\main\" />
-    <Folder Include="wwwroot\js\main\" />
     <Folder Include="Areas\Posts\" />
     <Folder Include="Areas\Posts\Controllers\" />
     <Folder Include="Areas\Posts\Views\" />
@@ -49,10 +48,8 @@
     <Folder Include="Views\Shared\Components\Left\" />
     <Folder Include="Areas\Admin\Views\Article\" />
     <Folder Include="wwwroot\css\admin\article\" />
-    <Folder Include="wwwroot\js\posts\" />
     <Folder Include="wwwroot\js\admin\article\" />
     <Folder Include="Areas\API\" />
-    <Folder Include="wwwroot\js\posts\article\" />
     <Folder Include="Areas\Admin\" />
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Views\" />

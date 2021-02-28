@@ -19,25 +19,25 @@ namespace VNPost.Models.Entity
             Content = content;
         }
 
-        public Article(int id, string title, string description, string author, int columnistItemId, string descriptionImg, string content)
+        public Article(int id, string title, string description, string author, int columnistId, string descriptionImg, string content)
         {
             Id = id;
             Title = title;
             Description = description;
             Author = author;
-            ColumnistItemId = columnistItemId;
+            ColumnistId = columnistId;
             DescriptionImg = descriptionImg;
             Content = content;
         }
 
-        Article(int id, string title, string description, string descriptionImg, ColumnistItem columnistItem, int columnistItemId, DateTime dateCreate)
+        Article(int id, string title, string description, string descriptionImg, Columnist columnist, int columnistId, DateTime dateCreate)
         {
             Id = id;
             Title = title;
             Description = description;
             DescriptionImg = descriptionImg;
-            ColumnistItem = columnistItem;
-            ColumnistItemId = columnistItemId;
+            Columnist = columnist;
+            ColumnistId = columnistId;
             DateCreate = dateCreate;
         }
 
@@ -56,9 +56,9 @@ namespace VNPost.Models.Entity
         public string Author { get; set; }
         public string Content { get; set; }
         public int View { get; set; }
-        public int ColumnistItemId { get; set; }
-        [ForeignKey("ColumnistItemId")]
-        public ColumnistItem ColumnistItem { get; set; }
+        public int ColumnistId { get; set; }
+        [ForeignKey("ColumnistId")]
+        public Columnist Columnist { get; set; }
         public string IdentityUserId { get; set; }
         [ForeignKey("IdentityUserId")]
         private IdentityUser identityUser;
@@ -86,7 +86,7 @@ namespace VNPost.Models.Entity
 
         public Article SoftArticle()
         {
-            return new Article(Id, Title, Description, DescriptionImg, ColumnistItem, ColumnistItemId, DateCreate);
+            return new Article(Id, Title, Description, DescriptionImg, Columnist, ColumnistId, DateCreate);
         }
         public Article LiteArticle()
         {

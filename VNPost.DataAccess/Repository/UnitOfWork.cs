@@ -14,13 +14,11 @@ namespace VNPost.DataAccess.Repository
         private readonly ApplicationDbContext _db;
         public IBannerRepository Banner { get; }
         public IMenuRepository Menu { get; }
-        public IGalleryRepository Gallery { get; }
         public IArticleRepository Article { get; }
         public ICategoryRepository Category { get; }
         public IPostRepository Post { get; }
         public IServiceRepository Service { get; }
         public IColumnistRepository Columnist { get; }
-        public IColumnistItemRepository ColumnistItem { get; }
         public IRolePermissionRepository RolePermission { get; }
         public IPermissionRepository Permissions { get; }
         public IIdentityUserRepository IdentityUser { get; }
@@ -36,13 +34,11 @@ namespace VNPost.DataAccess.Repository
             _db = db;
             Banner = new BannerRepository(_db);
             Menu = new MenuRepository(_db);
-            Gallery = new GalleryRepository(_db);
             Article = new ArticleRepository(_db);
             Category = new CategoryRepository(_db);
             Post = new PostRepository(_db);
             Service = new ServiceRepository(_db);
             Columnist = new ColumnistRepository(_db);
-            ColumnistItem = new ColumnistItemRepository(_db);
             RolePermission = new RolePermissionRepository(_db);
             Permissions = new PermissionRepository(_db);
             IdentityUser = new IdentityUserRepository(_db);

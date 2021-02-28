@@ -6,7 +6,7 @@ namespace VNPost.Models.ViewModels
 {
     public class ListArticleVM
     {
-        public ListArticleVM(List<Columnist> columnist, List<ColumnistItem> columnistItem, List<Article> articles)
+        public ListArticleVM(List<Columnist> columnist, List<Columnist> columnistItem, List<Article> articles)
         {
             Columnist = columnist;
             Articles = articles;
@@ -14,7 +14,7 @@ namespace VNPost.Models.ViewModels
         }
 
         public List<Columnist> Columnist { get; set; }
-        public List<ColumnistItem> ColumnistItem { get; set; }
+        public List<Columnist> ColumnistItem { get; set; }
         public List<Article> Articles { get; set; }
         public List<Article> MostNewArticles { get; set; }
         public int ColumnistId { get; set; }

@@ -27,30 +27,26 @@ namespace VNPost.Utility
 
         public static void AddSeedToColumnist(ModelBuilder builder)
         {
-            builder.Entity<Columnist>().HasData(new Columnist { Id = 1, Name = "Tin Vietnam Post" });
-            builder.Entity<Columnist>().HasData(new Columnist { Id = 2, Name = "Bưu điện - Văn hóa xã" });
-            builder.Entity<Columnist>().HasData(new Columnist { Id = 3, Name = "Người bưu điện" });
-            builder.Entity<Columnist>().HasData(new Columnist { Id = 4, Name = "Hoạt động Đảng - Đoàn thể" });
-        }
-
-        public static void AddSeedToColumnistItem(ModelBuilder builder)
-        {
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 1, Name = "Hoạt động ngành", ColumnistId = 1 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 2, Name = "Thương mại điện tử", ColumnistId = 1 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 3, Name = "Hành chính công", ColumnistId = 1 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 4, Name = "Lương hưu - bảo trợ xã hội", ColumnistId = 1 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 5, Name = "Điểm chi trả chế độ BHXH", ColumnistId = 1 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 6, Name = "Bưu chính thế giới", ColumnistId = 1 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 7, Name = "Gương điển hình", ColumnistId = 3 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 8, Name = "Hoạt động cộng đồng", ColumnistId = 3 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 9, Name = "Viết thư UPU", ColumnistId = 3 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 10, Name = "Cuộc thi ảnh bưu điện trong tôi", ColumnistId = 3 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 11, Name = "Tìm hiểu Tem Bưu chính", ColumnistId = 3 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 12, Name = "Công tác Đảng", ColumnistId = 4 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 13, Name = "Công đoàn", ColumnistId = 4 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 14, Name = "Đoàn thanh niên", ColumnistId = 4 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 15, Name = "Góp ý xây dựng cơ chế - chính sách", ColumnistId = 4 });
-            builder.Entity<ColumnistItem>().HasData(new ColumnistItem { Id = 16, Name = "Bưu điện - Văn hóa xã", ColumnistId = 2 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 1, Name = "Tin Vietnam Post", FatherId = 0 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 2, Name = "Bưu điện - Văn hóa xã", FatherId = 0 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 3, Name = "Người bưu điện", FatherId = 0 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 4, Name = "Hoạt động Đảng - Đoàn thể", FatherId = 0 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 5, Name = "Hoạt động ngành", FatherId = 1 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 6, Name = "Thương mại điện tử", FatherId = 1 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 7, Name = "Hành chính công", FatherId = 1 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 8, Name = "Lương hưu - bảo trợ xã hội", FatherId = 1 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 9, Name = "Điểm chi trả chế độ BHXH", FatherId = 1 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 10, Name = "Bưu chính thế giới", FatherId = 1 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 11, Name = "Gương điển hình", FatherId = 3 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 12, Name = "Hoạt động cộng đồng", FatherId = 3 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 13, Name = "Viết thư UPU", FatherId = 3 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 14, Name = "Cuộc thi ảnh bưu điện trong tôi", FatherId = 3 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 15, Name = "Tìm hiểu Tem Bưu chính", FatherId = 3 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 16, Name = "Công tác Đảng", FatherId = 4 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 17, Name = "Công đoàn", FatherId = 4 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 18, Name = "Đoàn thanh niên", FatherId = 4 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 19, Name = "Góp ý xây dựng cơ chế - chính sách", FatherId = 4 });
+            builder.Entity<Columnist>().HasData(new Columnist { Id = 20, Name = "Bưu điện - Văn hóa xã", FatherId = 2 });
         }
 
         public static void AddSeedToCategory(ModelBuilder builder)

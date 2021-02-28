@@ -26,7 +26,7 @@ namespace VNPost.DataAccess.Repository
                 objFromDb.Author = article.Author;
                 objFromDb.Content = article.Content;
                 objFromDb.View = article.View;
-                objFromDb.ColumnistItemId = article.ColumnistItemId;
+                objFromDb.ColumnistId = article.ColumnistId;
             }
         }
     }

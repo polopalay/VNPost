@@ -14,9 +14,9 @@ namespace VNPost.Areas.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PermisionController : BaseApiController
+    public class RoleController : BaseApiController
     {
-        public PermisionController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
+        public RoleController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
         }
         [HttpGet]
@@ -47,7 +47,6 @@ namespace VNPost.Areas.API
                 return Ok(new { success = false, message = "Don't have permision" });
             }
             _unitOfWork.Columnist.GetAll();
-            _unitOfWork.ColumnistItem.GetAll();
             _unitOfWork.IdentityRole.GetAll();
             if (getName)
             {

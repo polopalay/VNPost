@@ -35,7 +35,6 @@ namespace VNPost.Areas.API
         public IActionResult GetColumnisByUser(string id)
         {
             _unitOfWork.Columnist.GetAll();
-            _unitOfWork.ColumnistItem.GetAll();
             string roleId = "";
             if (_unitOfWork.IdentityUserRole.GetAll(filter: ur => ur.UserId == id).Count() > 0)
             {
@@ -44,9 +43,10 @@ namespace VNPost.Areas.API
             List<Columnist> columnistItems = new List<Columnist>();
             foreach (RolePermission rolePermission in _unitOfWork.RolePermission.GetAll(filter: rp => rp.RoleId == roleId))
             {
-                if(columnistItems.Where(c=>c.Id==rolePermission.ColumnistItem.ColumnistId).Count()==0)
+                columnistItems.Add(rolePermission.Columnist);
+                if (columnistItems.Where(cl => cl.Id == rolePermission.Columnist.FatherId).Count() == 0)
                 {
-                    columnistItems.Add(rolePermission.ColumnistItem.Columnist);
+                    columnistItems.Add(_unitOfWork.Columnist.Get(rolePermission.Columnist.FatherId));
                 }
             }
             return Ok(columnistItems);

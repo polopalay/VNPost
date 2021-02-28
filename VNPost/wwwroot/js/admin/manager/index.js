@@ -9,7 +9,7 @@ function loadTbl() {
         "lengthMenu": [10, 5],
         "ajax": {
             type: "GET",
-            url: "/api/permision?numberPostInPage=" + numberPostInPage + "&index=" + index,
+            url: "/api/role?numberPostInPage=" + numberPostInPage + "&index=" + index,
         },
         "columns": [
             { "data": "Name", "width": "50%" },
@@ -21,7 +21,7 @@ function loadTbl() {
                                         <a href="/Admin/Manager/Upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <button onclick=Delete("/api/permision/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                        <button onclick=Delete("/api/role/${data}") class="btn btn-danger text-white" style="cursor:pointer">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
@@ -35,7 +35,7 @@ function loadTbl() {
 function loadPaging() {
     $.ajax({
         type: "GET",
-        "url": "/api/permision?getPagination=true&numberPostInPage=" + numberPostInPage + "&index=" + index,
+        "url": "/api/role?getPagination=true&numberPostInPage=" + numberPostInPage + "&index=" + index,
     }).done(function (data) {
         $("#pagination").empty();
         for (let i = data.begin; i <= data.end; i++) {

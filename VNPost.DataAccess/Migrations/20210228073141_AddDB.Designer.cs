@@ -9,7 +9,7 @@ using VNPost.DataAccess.Data;
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210228054508_AddDB")]
+    [Migration("20210228073141_AddDB")]
     partial class AddDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "d6d8567b-fad8-4fea-b08b-da7970e895e2",
+                            ConcurrencyStamp = "e9812968-f132-423e-9e7f-18853de8de53",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -144,7 +144,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0f9793d3-c181-4653-b28d-40da85eec311",
+                            ConcurrencyStamp = "de002930-1ba1-48c2-8ac4-fb555285619f",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -152,7 +152,7 @@ namespace VNPost.DataAccess.Migrations
                             NormalizedUserName = "ADMIN@GMAIL.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "63141cc0-df01-4896-94ee-66659f8f4366",
+                            SecurityStamp = "a7800704-eb36-4a68-a129-3dd379999d99",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -257,7 +257,7 @@ namespace VNPost.DataAccess.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ColumnistItemId")
+                    b.Property<int>("ColumnistId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Content")
@@ -283,7 +283,7 @@ namespace VNPost.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ColumnistItemId");
+                    b.HasIndex("ColumnistId");
 
                     b.HasIndex("DateCreate")
                         .HasName("Index_Article_Date");
@@ -389,6 +389,9 @@ namespace VNPost.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("FatherId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -400,138 +403,121 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            FatherId = 0,
                             Name = "Tin Vietnam Post"
                         },
                         new
                         {
                             Id = 2,
+                            FatherId = 0,
                             Name = "Bưu điện - Văn hóa xã"
                         },
                         new
                         {
                             Id = 3,
+                            FatherId = 0,
                             Name = "Người bưu điện"
                         },
                         new
                         {
                             Id = 4,
+                            FatherId = 0,
                             Name = "Hoạt động Đảng - Đoàn thể"
-                        });
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.ColumnistItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ColumnistId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ColumnistId");
-
-                    b.ToTable("ColumnistItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ColumnistId = 1,
-                            Name = "Hoạt động ngành"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ColumnistId = 1,
-                            Name = "Thương mại điện tử"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ColumnistId = 1,
-                            Name = "Hành chính công"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ColumnistId = 1,
-                            Name = "Lương hưu - bảo trợ xã hội"
                         },
                         new
                         {
                             Id = 5,
-                            ColumnistId = 1,
-                            Name = "Điểm chi trả chế độ BHXH"
+                            FatherId = 1,
+                            Name = "Hoạt động ngành"
                         },
                         new
                         {
                             Id = 6,
-                            ColumnistId = 1,
-                            Name = "Bưu chính thế giới"
+                            FatherId = 1,
+                            Name = "Thương mại điện tử"
                         },
                         new
                         {
                             Id = 7,
-                            ColumnistId = 3,
-                            Name = "Gương điển hình"
+                            FatherId = 1,
+                            Name = "Hành chính công"
                         },
                         new
                         {
                             Id = 8,
-                            ColumnistId = 3,
-                            Name = "Hoạt động cộng đồng"
+                            FatherId = 1,
+                            Name = "Lương hưu - bảo trợ xã hội"
                         },
                         new
                         {
                             Id = 9,
-                            ColumnistId = 3,
-                            Name = "Viết thư UPU"
+                            FatherId = 1,
+                            Name = "Điểm chi trả chế độ BHXH"
                         },
                         new
                         {
                             Id = 10,
-                            ColumnistId = 3,
-                            Name = "Cuộc thi ảnh bưu điện trong tôi"
+                            FatherId = 1,
+                            Name = "Bưu chính thế giới"
                         },
                         new
                         {
                             Id = 11,
-                            ColumnistId = 3,
-                            Name = "Tìm hiểu Tem Bưu chính"
+                            FatherId = 3,
+                            Name = "Gương điển hình"
                         },
                         new
                         {
                             Id = 12,
-                            ColumnistId = 4,
-                            Name = "Công tác Đảng"
+                            FatherId = 3,
+                            Name = "Hoạt động cộng đồng"
                         },
                         new
                         {
                             Id = 13,
-                            ColumnistId = 4,
-                            Name = "Công đoàn"
+                            FatherId = 3,
+                            Name = "Viết thư UPU"
                         },
                         new
                         {
                             Id = 14,
-                            ColumnistId = 4,
-                            Name = "Đoàn thanh niên"
+                            FatherId = 3,
+                            Name = "Cuộc thi ảnh bưu điện trong tôi"
                         },
                         new
                         {
                             Id = 15,
-                            ColumnistId = 4,
-                            Name = "Góp ý xây dựng cơ chế - chính sách"
+                            FatherId = 3,
+                            Name = "Tìm hiểu Tem Bưu chính"
                         },
                         new
                         {
                             Id = 16,
-                            ColumnistId = 2,
+                            FatherId = 4,
+                            Name = "Công tác Đảng"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            FatherId = 4,
+                            Name = "Công đoàn"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            FatherId = 4,
+                            Name = "Đoàn thanh niên"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            FatherId = 4,
+                            Name = "Góp ý xây dựng cơ chế - chính sách"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            FatherId = 2,
                             Name = "Bưu điện - Văn hóa xã"
                         });
                 });
@@ -554,26 +540,6 @@ namespace VNPost.DataAccess.Migrations
                     b.HasIndex("ProvinceId");
 
                     b.ToTable("Districts");
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.Gallery", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ImgDescription")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Galleries");
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.Location", b =>
@@ -812,7 +778,7 @@ namespace VNPost.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ColumnistItemId")
+                    b.Property<int>("ColumnistId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("Create")
@@ -829,7 +795,7 @@ namespace VNPost.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ColumnistItemId");
+                    b.HasIndex("ColumnistId");
 
                     b.HasIndex("RoleId");
 
@@ -1035,24 +1001,15 @@ namespace VNPost.DataAccess.Migrations
 
             modelBuilder.Entity("VNPost.Models.Entity.Article", b =>
                 {
-                    b.HasOne("VNPost.Models.Entity.ColumnistItem", "ColumnistItem")
+                    b.HasOne("VNPost.Models.Entity.Columnist", "Columnist")
                         .WithMany()
-                        .HasForeignKey("ColumnistItemId")
+                        .HasForeignKey("ColumnistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
-                });
-
-            modelBuilder.Entity("VNPost.Models.Entity.ColumnistItem", b =>
-                {
-                    b.HasOne("VNPost.Models.Entity.Columnist", "Columnist")
-                        .WithMany()
-                        .HasForeignKey("ColumnistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("VNPost.Models.Entity.District", b =>
@@ -1099,9 +1056,9 @@ namespace VNPost.DataAccess.Migrations
 
             modelBuilder.Entity("VNPost.Models.Entity.RolePermission", b =>
                 {
-                    b.HasOne("VNPost.Models.Entity.ColumnistItem", "ColumnistItem")
+                    b.HasOne("VNPost.Models.Entity.Columnist", "Columnist")
                         .WithMany()
-                        .HasForeignKey("ColumnistItemId")
+                        .HasForeignKey("ColumnistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -68,9 +68,9 @@ namespace VNPost.Areas.API
 
         protected RolePermission GetDetailRolePermission(int columnistItemId)
         {
-            if (_rolePermissions.Where(rp => rp.ColumnistItemId == columnistItemId).ToList().Count() > 0)
+            if (_rolePermissions.Where(rp => rp.ColumnistId == columnistItemId).ToList().Count() > 0)
             {
-                return _rolePermissions.Where(rp => rp.ColumnistItemId == columnistItemId).ToList()[0];
+                return _rolePermissions.Where(rp => rp.ColumnistId == columnistItemId).ToList()[0];
             }
             else
             {

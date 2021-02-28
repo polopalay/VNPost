@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace VNPost.Models.Entity
+namespace VNPost.Models.ViewModels
 {
     public class UserRole
     {

@@ -58,7 +58,7 @@ namespace VNPost.Areas.Admin.Controllers
                 }
                 else
                 {
-                    RolePermission rolePermission = GetDetailRolePermission(article.ColumnistItemId);
+                    RolePermission rolePermission = GetDetailRolePermission(article.ColumnistId);
                     if (rolePermission == null)
                     {
                         return Forbid();

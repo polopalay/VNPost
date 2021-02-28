@@ -9,15 +9,15 @@ namespace VNPost.Models.ViewModels
         public WriteArticleVM()
         {
         }
-        public WriteArticleVM(Article article, List<Columnist> columnists, List<ColumnistItem> columnistItems)
+        public WriteArticleVM(Article article, List<Columnist> father, List<Columnist> son)
         {
             Article = article;
-            Columnists = columnists;
-            ColumnistItems = columnistItems;
+            Father = father;
+            Son = son;
         }
 
         public Article Article { get; set; }
-        public List<Columnist> Columnists { get; set; }
-        public List<ColumnistItem> ColumnistItems { get; set; }
+        public List<Columnist> Father { get; set; }
+        public List<Columnist> Son { get; set; }
     }
 }

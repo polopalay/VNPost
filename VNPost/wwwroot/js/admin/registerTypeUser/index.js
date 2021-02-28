@@ -2,7 +2,7 @@
 function loadData() {
     $.ajax({
         type: "GET",
-        url: "/api/permision?dontPaging=true",
+        url: "/api/role?dontPaging=true",
     }).done(function (result) {
         loadTbl(result);
     }).fail(function () {

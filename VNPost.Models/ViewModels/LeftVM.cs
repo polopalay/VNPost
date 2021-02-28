@@ -6,18 +6,15 @@ namespace VNPost.Models.ViewModels
 {
     public class LeftVM
     {
-        public LeftVM(List<Columnist> columnist, List<ColumnistItem> columnistItem,
-           int columnistId, int columnistItemId)
+        public LeftVM(List<Columnist> columnists, int fatherId, int sonId)
         {
-            Columnist = columnist;
-            ColumnistItem = columnistItem;
-            ColumnistId = columnistId;
-            ColumnistItemId = columnistItemId;
+            Columnists = columnists;
+            FatherId = fatherId;
+            SonId = sonId;
         }
 
-        public List<Columnist> Columnist { get; set; }
-        public List<ColumnistItem> ColumnistItem { get; set; }
-        public int ColumnistId { get; set; }
-        public int ColumnistItemId { get; set; }
+        public List<Columnist> Columnists { get; set; }
+        public int FatherId { get; set; }
+        public int SonId { get; set; }
     }
 }

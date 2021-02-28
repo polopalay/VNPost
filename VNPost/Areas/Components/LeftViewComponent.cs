@@ -18,8 +18,7 @@ namespace VNPost.Areas.Components
         public IViewComponentResult Invoke([FromQuery] int columnistId, [FromQuery] int columnistItemId)
         {
             List<Columnist> columnist = _unitOfWork.Columnist.GetAll().ToList();
-            List<ColumnistItem> columnistItems = _unitOfWork.ColumnistItem.GetAll().ToList();
-            LeftVM articleVM = new LeftVM(columnist, columnistItems, columnistId, columnistItemId);
+            LeftVM articleVM = new LeftVM(columnist, columnistId, columnistItemId);
             return View(articleVM);
         }
     }

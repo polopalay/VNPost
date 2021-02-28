@@ -26,7 +26,6 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedToPost(builder);
             SeedData.AddSeedToService(builder);
             SeedData.AddSeedToColumnist(builder);
-            SeedData.AddSeedToColumnistItem(builder);
             SeedData.AddSeedToRole(builder);
             SeedData.AddSeedToUser(builder);
             SeedData.AddSeedToRoleUser(builder);
@@ -36,12 +35,10 @@ namespace VNPost.DataAccess.Data
 
         public DbSet<Banner> Banners { get; set; }
         public DbSet<Menu> Menus { get; set; }
-        public DbSet<Gallery> Galleries { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Columnist> Columnists { get; set; }
-        public DbSet<ColumnistItem> ColumnistItems { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<Permission> Permissions { get; set; }

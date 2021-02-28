@@ -26,14 +26,13 @@ namespace VNPost.Controllers
         public IActionResult Index()
         {
             List<Banner> banners = _unitOfWork.Banner.GetAll().ToList();
-            List<Gallery> galleries = _unitOfWork.Gallery.GetAll().ToList();
             List<Category> categories = _unitOfWork.Category.GetAll().ToList();
             List<Post> posts = _unitOfWork.Post.GetAll().ToList();
             List<Article> articles = _unitOfWork.Article
                 .GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate))
                 .Select(a => a.SoftArticle())
                 .Take(5).ToList();
-            HomeVM homeVM = new HomeVM(banners, galleries, categories, posts, articles);
+            HomeVM homeVM = new HomeVM(banners, categories, posts, articles);
             return View(homeVM);
         }
     }

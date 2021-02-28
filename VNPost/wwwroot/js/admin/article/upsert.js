@@ -15,8 +15,8 @@ function getData() {
                 $("#author").val(response.author);
                 columnistItemId = response.columnistItemId;
                 editor.setData(response.content)
-                fetch("/api/columnistItems/" + userId).then(rs => rs.json()).then((columnists) => {
-                    columnistItem = columnists;
+                fetch("/api/columnists/" + userId).then(rs => rs.json()).then((rs) => {
+                    columnist = rs;
                     columnistItem.forEach(citem => {
                         if (citem.id == columnistItemId) {
                             loadColumnists(citem);
@@ -24,13 +24,13 @@ function getData() {
                     });
                 })
             })
-        }).catch(rs => console.log(rs))
+        })
     }
     else {
         fetch("/api/User?getId=true").then(rs => rs.text()).then(result => {
             userId = result;
-            fetch("/api/columnistItems/" + userId).then(rs => rs.json()).then((columnists) => {
-                columnistItem = columnists;
+            fetch("/api/columnists/" + userId).then(rs => rs.json()).then((rs) => {
+                columnist = rs;
                 loadColumnists(0);
             })
         })
@@ -38,24 +38,24 @@ function getData() {
 }
 
 function loadColumnists(citem) {
-    fetch("/api/columnists/").then(rs => rs.json()).then(response => {
-        columnist = response;
-        response.forEach(c => {
+    if (columnist != null) {
+        $("#comlumnist").empty();
+        columnist.filter(cl => cl.fatherId == 0).forEach(c => {
             const link = $("<option></option>", {
                 value: c.id,
                 text: c.name,
-                selected: citem.columnistId == c.id ? true : false,
+                selected: citem.fatherId == c.id ? true : false,
             });
             $("#comlumnist").append(link);
         });
         loadColumnistItem();
-    })
+    }
 }
 
 function loadColumnistItem() {
-    $("#comlumnistItem").empty();
-    if (columnistItem != null) {
-        columnistItem.filter(c => c.columnistId == $("#comlumnist").val()).forEach(item => {
+    if (columnist != null) {
+        $("#comlumnistItem").empty();
+        columnist.filter(cl => cl.fatherId == $("#comlumnist").val()).forEach(item => {
             const link = $("<option></option>", {
                 value: item.id,
                 text: item.name,
