@@ -25,6 +25,7 @@
                     <th> Destination </th>
                     <th> Status </th>
                     <th> Customer Info </th>
+                    <th> Code </th>
                     <th> Other Info </th>
                     <th> Action </th>
                 </tr>
@@ -46,13 +47,14 @@
                     url: "/api/parcel",
                 },
                 "columns": [
-                    { "data": "id", "width": "12%" },
-                    { "data": "items", "width": "12%" },
-                    { "data": "pointAway", "width": "12%" },
-                    { "data": "destination", "width": "12%" },
-                    { "data": "status.name", "width": "12%" },
-                    { "data": "customerInfo", "width": "12%" },
-                    { "data": "otherInfo", "width": "12%" },
+                    { "data": "id", "width": "11%" },
+                    { "data": "items", "width": "11%" },
+                    { "data": "pointAway", "width": "11%" },
+                    { "data": "destination", "width": "11%" },
+                    { "data": "status.name", "width": "11%" },
+                    { "data": "customerInfo", "width": "11%" },
+                    { "data": "code", "width": "11%" },
+                    { "data": "otherInfo", "width": "11%" },
                     {
                         "data": "id",
                         "render": function (data) {
@@ -69,7 +71,7 @@
                                                                             </button>
                                                                         </div>
                                                                        `;
-                        }, "width": "16%"
+                        }, "width": "12%"
                     }
                 ]
             });

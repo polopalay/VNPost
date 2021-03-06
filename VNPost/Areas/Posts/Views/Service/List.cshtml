@@ -5,8 +5,9 @@
 @using VNPost.Models.ViewModels;
 @using VNPost.Models.Entity;
 @model ListSerivceVM;
-
-<link rel="stylesheet" href="~/css/post/service/list.css" />
+@section Styles{
+    <link rel="stylesheet" href="~/css/post/service/list.css" />
+}
 
 <section id="list-service" class="container py-5">
     <h1>@Model.Category.Name.ToUpper()</h1>

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VNPost.Models.Entity;
-using VNPost.Utility;
 
 namespace VNPost.DataAccess.Data
 {
@@ -19,7 +15,6 @@ namespace VNPost.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            AddIndex.AddIndexToArticle(builder);
             SeedData.AddSeedDataToMenu(builder);
             SeedData.AddSeedDataBanner(builder);
             SeedData.AddSeedToCategory(builder);
@@ -31,6 +26,7 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedToRoleUser(builder);
             SeedData.AddSeedToPermission(builder);
             SeedData.AddSeedToStatuses(builder);
+            builder.Entity<Parcel>(entity => entity.HasIndex(e => e.Code).IsUnique());
         }
 
         public DbSet<Banner> Banners { get; set; }

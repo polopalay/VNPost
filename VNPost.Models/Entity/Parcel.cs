@@ -9,6 +9,8 @@ namespace VNPost.Models.Entity
     {
         public int Id { get; set; }
         [Required]
+        public string Code { get; set; }
+        [Required]
         public string Items { get; set; }
         [Required]
         public string PointAway { get; set; }

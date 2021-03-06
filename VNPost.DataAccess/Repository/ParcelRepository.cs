@@ -19,6 +19,7 @@ namespace VNPost.DataAccess.Repository
             Parcel objFromDb = _db.Parcels.FirstOrDefault(s => s.Id == article.Id);
             if (objFromDb != null)
             {
+                objFromDb.Code = article.Code;
                 objFromDb.Items = article.Items;
                 objFromDb.PointAway = article.PointAway;
                 objFromDb.Destination = article.Destination;

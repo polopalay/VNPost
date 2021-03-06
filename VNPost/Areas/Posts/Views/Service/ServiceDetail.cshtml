@@ -4,8 +4,9 @@
 @using VNPost.Models.ViewModels;
 @using VNPost.Models.Entity;
 @model ServiceDetailVM;
-
-<link rel="stylesheet" href="~/css/post/service/detail.css" />
+@section Styles{
+    <link rel="stylesheet" href="~/css/post/service/detail.css" />
+}
 
 <section id="article" class="container">
     <h1>@Model.Service.Title</h1>

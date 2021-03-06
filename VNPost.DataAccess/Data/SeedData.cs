@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using VNPost.Models.Entity;
 
-namespace VNPost.Utility
+namespace VNPost.DataAccess.Data
 {
     public class SeedData
     {

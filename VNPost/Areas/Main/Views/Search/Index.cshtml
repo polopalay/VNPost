@@ -1,16 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-@model int
+@model VNPost.Models.ViewModels.ParcelViewModel
 <div class="container">
-
 
     <div class="d-flex justify-content-center row m-5">
         <div class=" col-4">
-            <form class="row" id="form">
+            <form action="/Main/Search" class="row" id="form">
                 <div class="col-10">
                     <label for="input" class="visually-hidden">Password</label>
-                    <input type="number" class="form-control" id="input" placeholder="Enter Id" required>
+                    <input type="text" name="id" class="form-control" placeholder="Enter Id" required>
                 </div>
                 <div class="col-2">
                     <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-search"></i></button>
@@ -18,65 +17,34 @@
             </form>
         </div>
     </div>
-
-    <div class="justify-content-center row m-5" id="result">
-        <div class=" col-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Thông tin gói hàng</h5>
-                    <h6 class="card-subtitle mb-2 text-muted" id="customerInfo">Customer</h6>
-                    <p class="card-subtitle mb-2 text-muted" id="otherInfo">Thông tin khác</p>
-                    <p class="card-subtitle mb-2 text-muted" id="location">Current</p>
+    @if (Model.Id != 0)
+    {
+        <div class="justify-content-center row m-5" id="result">
+            <div class=" col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Thông tin gói hàng</h5>
+                        <h6 class="card-subtitle mb-2 text-muted" id="customerInfo">@Model.CustomerInfo</h6>
+                        <p class="card-subtitle mb-2 text-muted" id="otherInfo">@Model.OtherInfo</p>
+                        <p class="card-subtitle mb-2 text-muted" id="location">@Model.Location</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="items">@Model.Items</li>
+                        <li class="list-group-item" id="pointAway">Điểm đi: @Model.PointAway</li>
+                        <li class="list-group-item" id="destination">Điểm đến: @Model.Destination</li>
+                        <li class="list-group-item" id="status">Trạng thái: @Model.Status</li>
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" id="items">Vat pham</li>
-                    <li class="list-group-item" id="pointAway">Diem di</li>
-                    <li class="list-group-item" id="destination">Điểm đến:</li>
-                    <li class="list-group-item" id="status">Trang thai</li>
-                </ul>
             </div>
         </div>
-    </div>
+    }
 
 </div>
-
 @section Scripts{
-    <script>$("#form").submit((event) => {
-            event.preventDefault()
-            fetch(`/api/location/location/${$("#input").val()}`).then(rs => rs.json()).then(rs => {
-                if (rs.id == 0) {
-                    $("#result").css({ "display": "none" })
-                    swal("Not Found")
-                } else {
-                    $("#result").css({ "display": "flex" })
-                    $("#customerInfo").text("Người gửi: " + rs.customerInfo)
-                    $("#otherInfo").text("Thông tin: " + rs.otherInfo)
-                    $("#pointAway").text("Điểm đi: " + rs.pointAway)
-                    $("#destination").text("Điểm đến: " + rs.destination)
-                    $("#status").text("Trạng thái: " + rs.status.name)
-                    $("#items").text("Các vật phẩm: " + rs.items)
-                    $("#location").text("Địa điểm hiện tại: " + (rs.location == null ? "Chưa có" : (rs.location.district.province.name + ", " + rs.location.district.name + ", " + rs.location.description)))
-                }
-            })
-})
-        if (@Model!= 0) {
-            fetch(`/api/location/location/${@Model}`).then(rs => rs.json()).then(rs => {
-                if (rs.id == 0) {
-                    $("#result").css({ "display": "none" })
-                    swal("Not Found")
-                } else {
-                    $("#result").css({ "display": "flex" })
-                    $("#customerInfo").text("Người gửi: " + rs.customerInfo)
-                    $("#otherInfo").text("Thông tin: " + rs.otherInfo)
-                    $("#pointAway").text("Điểm đi: " + rs.pointAway)
-                    $("#destination").text("Điểm đến: " + rs.destination)
-                    $("#status").text("Trạng thái: " + rs.status.name)
-                    $("#items").text("Các vật phẩm: " + rs.items)
-                    $("#location").text("Địa điểm hiện tại: " + (rs.location == null ? "Chưa có" : (rs.location.district.province.name + ", " + rs.location.district.name + ", " + rs.location.description)))
-                }
-            })
-        } else {
-            $("#result").css({ "display": "none" })
-        }</script>
+    <script>
+    if (@Model.Id == 0) {
+        swal('Không tìm thấy')
+    }
+    </script>
 }
 
