@@ -10,7 +10,7 @@ using VNPost.DataAccess.Data;
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210309161919_AddDB")]
+    [Migration("20210311024842_AddDB")]
     partial class AddDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "1b4ef820-08e8-4b3a-b615-c4db8ee72afc",
+                            ConcurrencyStamp = "1a6b8f5c-113d-41cc-b1fd-9c33390c6ce3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -150,7 +150,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5783597c-8f77-485e-a6ac-3290d61ad1ca",
+                            ConcurrencyStamp = "df3dffc6-e1ea-480f-b866-3c6ac6680278",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -158,7 +158,7 @@ namespace VNPost.DataAccess.Migrations
                             NormalizedUserName = "ADMIN@GMAIL.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9e316e13-09e9-42b3-9a4d-3bf85c3b9172",
+                            SecurityStamp = "fe65f211-95f1-416b-9382-44148e7b80ad",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });

@@ -429,12 +429,12 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "13d23c51-re38-4831-wqa2-2e3f21c23ewd", "1b4ef820-08e8-4b3a-b615-c4db8ee72afc", "Admin", "ADMIN" });
+                values: new object[] { "13d23c51-re38-4831-wqa2-2e3f21c23ewd", "1a6b8f5c-113d-41cc-b1fd-9c33390c6ce3", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "01b96c14-de28-4831-afa9-3d1f84b93aed", 0, "5783597c-8f77-485e-a6ac-3290d61ad1ca", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	", null, false, "9e316e13-09e9-42b3-9a4d-3bf85c3b9172", false, "admin@gmail.com" });
+                values: new object[] { "01b96c14-de28-4831-afa9-3d1f84b93aed", 0, "df3dffc6-e1ea-480f-b866-3c6ac6680278", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	", null, false, "fe65f211-95f1-416b-9382-44148e7b80ad", false, "admin@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Banners",
