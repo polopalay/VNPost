@@ -30,7 +30,29 @@ namespace VNPost.Areas.API
             Parcel parcel = parcels[0];
             List<Location> locations = _unitOfWork.Location.GetAll(filter: l => l.ParcelId == parcel.Id, orderBy: ls => ls.OrderByDescending(l => l.Id)).ToList();
             Location location = locations.Count == 0 ? null : new Location() { Id = locations[0].Id, Description = locations[0].Description, District = _unitOfWork.District.Get(locations[0].DistricId) };
-            ParcelViewModel parcelView = new ParcelViewModel()
+            ParcelViewModel parcelView = new()
+            {
+                Id = parcel.Id,
+                Items = parcel.Items,
+                Destination = parcel.Destination,
+                CustomerInfo = parcel.CustomerInfo,
+                OtherInfo = parcel.OtherInfo,
+                PointAway = parcel.PointAway,
+                Status = parcel.Status,
+                Location = location
+            };
+            return Ok(parcelView);
+        }
+
+        [HttpGet("locationById/{id}")]
+        public IActionResult GetCurrentLocationById(int id)
+        {
+            _unitOfWork.Status.GetAll();
+            _unitOfWork.Province.GetAll();
+            Parcel parcel = _unitOfWork.Parcel.Get(id);
+            List<Location> locations = _unitOfWork.Location.GetAll(filter: l => l.ParcelId == parcel.Id, orderBy: ls => ls.OrderByDescending(l => l.Id)).ToList();
+            Location location = locations.Count == 0 ? null : new Location() { Id = locations[0].Id, Description = locations[0].Description, District = _unitOfWork.District.Get(locations[0].DistricId) };
+            ParcelViewModel parcelView = new()
             {
                 Id = parcel.Id,
                 Items = parcel.Items,
