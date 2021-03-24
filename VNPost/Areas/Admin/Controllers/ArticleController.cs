@@ -42,6 +42,7 @@ namespace VNPost.Areas.Admin.Controllers
             {
                 if (Article.Id == 0)
                 {
+                    Article.DateCreate = DateTime.Now;
                     _unitOfWork.Article.Add(Article);
                 }
                 else

@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
+﻿@{ ViewData["Title"] = "Privacy Policy"; }
 @model VNPost.Models.ViewModels.ParcelViewModel
 <div class="container">
 
@@ -19,25 +17,24 @@
     </div>
     @if (Model.Id != 0)
     {
-        <div class="justify-content-center row m-5" id="result">
-            <div class=" col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Thông tin gói hàng</h5>
-                        <h6 class="card-subtitle mb-2 text-muted" id="customerInfo">@Model.CustomerInfo</h6>
-                        <p class="card-subtitle mb-2 text-muted" id="otherInfo">@Model.OtherInfo</p>
-                        <p class="card-subtitle mb-2 text-muted" id="location">@Model.Location</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" id="items">@Model.Items</li>
-                        <li class="list-group-item" id="pointAway">Điểm đi: @Model.PointAway</li>
-                        <li class="list-group-item" id="destination">Điểm đến: @Model.Destination</li>
-						<li class="list-group-item" id="status">Trạng thái: @Model.Status.Name</li>
-                    </ul>
-                </div>
+<div class="justify-content-center row m-5" id="result">
+    <div class=" col-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Thông tin gói hàng</h5>
+                <h6 class="card-subtitle mb-2 text-muted" id="customerInfo">@Model.CustomerInfo</h6>
+                <p class="card-subtitle mb-2 text-muted" id="otherInfo">@Model.OtherInfo</p>
+                <p class="card-subtitle mb-2 text-muted" id="location">@Model.Location.District.Province.Name, @Model.Location.District.Name, @(Model.Location.Description==null?"": Model.Location.Description)</p>
             </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="items">@Model.Items</li>
+                <li class="list-group-item" id="pointAway">Điểm đi: @Model.PointAway</li>
+                <li class="list-group-item" id="destination">Điểm đến: @Model.Destination</li>
+                <li class="list-group-item" id="status">Trạng thái: @Model.Status.Name</li>
+            </ul>
         </div>
-    }
+    </div>
+</div>}
 
 </div>
 @section Scripts{

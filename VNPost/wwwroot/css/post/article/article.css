@@ -5,7 +5,9 @@
 }
 
     #article .right {
-        width: 78%;
+        width:70%;
+
+/*        width: 78%;*/
     }
 
 @media (max-width: 1202px) {

@@ -16,7 +16,7 @@
         <h2>@Model.Article.Title</h2>
         <p>@Model.Article.DateCreate.ToString("MM/dd/yyyy")</p>
         <div class="content">
-            @Html.Raw(Model.Article.Content.ToString())
+            @Html.Raw(Model.Article.Content)
         </div>
         <div class="info">
             <i class="fas fa-eye">Lượt xem: @Model.Article.View</i>

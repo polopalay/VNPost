@@ -17,6 +17,7 @@ function loadTbl() {
             {
                 "data": "dateCreate",
                 "render": function (data) {
+                    console.log(data)
                     return dateDMY(data);
                 }, "width": "20%"
             },
