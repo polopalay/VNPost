@@ -8,12 +8,12 @@
 <div class="container my-4">
     <div class="container my-4">
         <div class="row">
-            <div class="col-2">
+            <div class="col-1">
                 <h2 class="text-dark">Home</h2>
             </div>
-            <div id="user" class="col-10 row text-end d-flex justify-content-between pb-2">
-                <a class="btn btn-success col" href="/Admin/Article/Index"><i class="fas fa-edit"></i> Quản lý bài đăng </a>
-                <a class="btn btn-danger col" href="/Admin/Home/List"><i class="fas fa-truck"></i> Chỉnh sửa mặt hàng </a>
+            <div id="user" class="col-11 row text-end d-flex justify-content-between pb-2">
+                <a class="btn btn-success col" href="/Admin/Article/Index"><i class="fas fa-edit"></i> Bài đăng </a>
+                <a class="btn btn-danger col" href="/Admin/Home/List"><i class="fas fa-truck"></i> Mặt hàng </a>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
                         class: "fas fa-map-marked-alt",
                     });
                     link.append(i);
-                    link.append(" Quản lý địa chỉ ");
+                    link.append(" Địa chỉ ");
                     $("#user").append(link);
 
                     link = $("<a></a>", {
@@ -48,7 +48,7 @@
                         class: "fas fa-shipping-fast",
                     });
                     link.append(i);
-                    link.append(" Quản lý hàng ");
+                    link.append(" Bưu phẩm ");
                     $("#user").append(link);
 
                     link = $("<a></a>", {
@@ -59,7 +59,7 @@
                         class: "fas fa-tasks",
                     });
                     link.append(i);
-                    link.append(" Quản lý loại người dùng");
+                    link.append(" Phân quyền ");
                     $("#user").append(link);
 
                     link = $("<a></a>", {
@@ -70,59 +70,31 @@
                         class: "fas fa-user-plus",
                     });
                     link.append(i);
-                    link.append(" Quản lý người dùng");
+                    link.append(" Người dùng");
+                    $("#user").append(link);
+
+                    link = $("<a></a>", {
+                        href: "/Admin/Distance",
+                        class: "btn btn-secondary col",
+                    })
+                    i = $("<i></i>", {
+                        class: "fas fa-road",
+                    });
+                    link.append(i);
+                    link.append(" Quãng đường");
+                    $("#user").append(link);
+
+                    link = $("<a></a>", {
+                        href: "/Admin/Price",
+                        class: "btn btn-info col",
+                    })
+                    i = $("<i></i>", {
+                        class: "fas fa-money-bill-wave",
+                    });
+                    link.append(i);
+                    link.append(" Giá ");
                     $("#user").append(link);
                 }
-                loadType();
-            }).fail(function () {
-                toastr.error("Error to send request to server");
-            });
-        }
-
-        function loadType() {
-            $.ajax({
-                type: "GET",
-                url: "/api/user?getType=true",
-            }).done(function (data) {
-                let link = $("<a></a>", {
-                    class: "btn btn-secondary col",
-                });
-                let i;
-                if (data == "Admin") {
-                    i = $("<i></i>", {
-                        class: "fas fa-user-cog",
-                    });
-                }
-                else {
-                    i = $("<i></i>", {
-                        class: "fas fa-user",
-                    });
-                }
-                link.append(i);
-                data = (data == null ? "Không có quyền hạn" : data);
-                link.append(" " + data);
-                $("#user").append(link);
-                loadName();
-            }).fail(function () {
-                toastr.error("Error to send request to server");
-            });
-        }
-
-        function loadName() {
-            $.ajax({
-                type: "GET",
-                url: "/api/user?getName=true",
-            }).done(function (data) {
-                let link = $("<a></a>", {
-                    class: "btn btn-info col",
-                });
-                let i = $("<i></i>", {
-                    class: "fas fa-signature",
-                });
-                link.append(i);
-                data = (data == null ? "Vô danh" : data);
-                link.append(" " + data);
-                $("#user").append(link);
             }).fail(function () {
                 toastr.error("Error to send request to server");
             });

@@ -13,37 +13,27 @@ using VNPost.Utility;
 namespace VNPost.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class DistanceController : BaseController
+    public class PriceController : BaseController
     {
         [BindProperty]
-        public Distance Distance { get; set; }
+        public Price Price { get; set; }
 
-        public DistanceController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
+        public PriceController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
         }
 
         public IActionResult Index([FromQuery] int id)
         {
-            return View();
+            Price = _unitOfWork.Price.Get(1);
+            return View(Price);
         }
 
         [HttpPost]
         public IActionResult Index()
         {
-            List<Distance> distances = _unitOfWork.Distance.GetAll(filter: d =>
-            (d.StartID == Distance.StartID && d.EndID == Distance.EndID)
-            || (d.StartID == Distance.EndID && d.EndID == Distance.StartID)).ToList();
-            if (distances.Count > 0)
-            {
-                Distance.Range = distances[0].Range;
-                _unitOfWork.Distance.Update(Distance);
-            }
-            else
-            {
-                _unitOfWork.Distance.Add(Distance);
-            }
+            _unitOfWork.Price.Update(Price);
             _unitOfWork.Save();
-            return View(Distance);
+            return View(Price);
         }
     }
 }

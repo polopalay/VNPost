@@ -1,5 +1,71 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+@model VNPost.Models.Entity.Price;
+@section Styles{
+    <link rel="stylesheet" href="~/css/admin/article/writerArticle.css" />
+}
+<section id="form" style="padding-bottom:1rem;">
+    <div class="container row">
+        <form method="post" enctype="multipart/form-data" class="" name="price">
+            <div class="contain-input">
+                <div class="div-input">
+                    <label class="control-label">Giá (vnd)</label>
+                    <input class="form-control" type=number step=any value="0" disabled name="result" />
+                </div>
+                <div class="div-input">
+                    <label class="control-label">Cân nặng (kg)</label>
+                    <input class="form-control" type=number step=any value="0" name="weight" />
+                </div>
+                <div class="div-input">
+                    <label class="control-label">Rộng (cm)</label>
+                    <input class="form-control" type=number step=any value="0" name="wide" />
+                </div>
+                <div class="div-input">
+                    <label class="control-label">Dài (cm)</label>
+                    <input class="form-control" type=number step=any value="0" name="long" />
+                </div>
+                <div class="div-input">
+                    <label class="control-label">Cao (cm)</label>
+                    <input class="form-control" type=number step=any value="0" name="height" />
+                </div>
+                <div class="div-input">
+                    <label class="control-label">Điểm đi</label>
+                    <select class="form-control" name="start"></select>
+                </div>
+                <div class="div-input">
+                    <label class="control-label">Điểm đến</label>
+                    <select class="form-control" name="end"></select>
+                </div>
+                <div class="">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+@section Scripts{
+    <script>let rangle = 0
+        fetch('/api/location/province').then(rs => rs.json()).then(rs => {
+            document.querySelectorAll('select').forEach(select => {
+                rs.data.forEach(province => {
+                    let option = document.createElement("option");
+                    option.text = province.name
+                    option.value = province.id
+                    select.add(option)
+                    select.onchange = (event) => {
+                        fetch(`/api/distance?start=${price.start.value}&end=${price.end.value}`).then(result => result.json()).then(result => {
+                            rangle = result.range
+                        })
+                    }
+                })
+            })
+        })
+        price.onsubmit = (event) => {
+            event.preventDefault()
+            let size = price.wide.value * price.long.value * price.height.value
+            price.result.value=size*@Model.Size+price.weight.value *@Model.Weight+rangle *@Model.Distance
+        }</script>
 }

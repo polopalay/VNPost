@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VNPost.DataAccess.Repository.IRepository;
+using VNPost.Models.Entity;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace VNPost.Areas.Main.Controllers
+namespace VNPost.Controllers
 {
+    [Area("Main")]
     public class PriceController : Controller
     {
-        // GET: /<controller>/
+        private readonly IUnitOfWork _unitOfWork;
+        public PriceController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
         public IActionResult Index()
         {
-            return View();
+            return View(_unitOfWork.Price.Get(1));
         }
     }
 }

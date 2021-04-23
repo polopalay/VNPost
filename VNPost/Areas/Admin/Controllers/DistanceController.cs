@@ -13,46 +13,37 @@ using VNPost.Utility;
 namespace VNPost.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ArticleController : BaseController
+    public class DistanceController : BaseController
     {
         [BindProperty]
-        public Article Article { get; set; }
-        [BindProperty]
-        public string UserId { get; set; }
+        public Distance Distance { get; set; }
 
-        public ArticleController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
+        public DistanceController(IUnitOfWork unitOfWork, SignInManager<IdentityUser> signInManager) : base(unitOfWork, signInManager)
         {
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromQuery] int id)
         {
             return View();
         }
 
-        public IActionResult Upsert([FromQuery] int id)
-        {
-            Article = _unitOfWork.Article.Get(id);
-            return View(Article ?? new Article());
-        }
-
         [HttpPost]
-        public IActionResult Upsert()
+        public IActionResult Index()
         {
-            if (ModelState.IsValid)
+            List<Distance> distances = _unitOfWork.Distance.GetAll(filter: d =>
+            (d.StartID == Distance.StartID && d.EndID == Distance.EndID)
+            || (d.StartID == Distance.EndID && d.EndID == Distance.StartID)).ToList();
+            if (distances.Count > 0)
             {
-                if (Article.Id == 0)
-                {
-                    Article.DateCreate = DateTime.Now;
-                    _unitOfWork.Article.Add(Article);
-                }
-                else
-                {
-                    _unitOfWork.Article.Update(Article);
-                }
-                _unitOfWork.Save();
-                return Redirect("/Admin/Article/Index");
+                Distance.Range = distances[0].Range;
+                _unitOfWork.Distance.Update(Distance);
             }
-            return View(Article);
+            else
+            {
+                _unitOfWork.Distance.Add(Distance);
+            }
+            _unitOfWork.Save();
+            return View(Distance);
         }
     }
 }
