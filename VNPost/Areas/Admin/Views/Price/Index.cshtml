@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+@model VNPost.Models.Entity.Distance;
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/admin/article/writerArticle.css" />
+}
+
+<section id="form" class="pb-3">
+    <form method="post" enctype="multipart/form-data" name="distance">
+        <div class="contain-input">
+            <div class="div-input">
+                <label asp-for="Range" class="control-label">Khoảng cách</label>
+                <input asp-for="Range" class="form-control" value="0" />
+            </div>
+            <div class="div-input">
+                <label asp-for="StartID" class="control-label">Điểm đi</label>
+                <select asp-for="StartID" class="form-control">
+                </select>
+            </div>
+            <div class="div-input">
+                <label asp-for="EndID" class="control-label">Điểm đến</label>
+                <select asp-for="EndID" class="form-control">
+                </select>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Lưu</button>
+        </div>
+    </form>
+</section>
+
+@section Scripts{
+    <script>fetch('/api/location/province').then(rs => rs.json()).then(rs => {
+            document.querySelectorAll('select').forEach(select => {
+                rs.data.forEach(province => {
+                    let option = document.createElement("option");
+                    option.text = province.name
+                    option.value = province.id
+                    select.add(option)
+                    select.onchange = (event) => {
+                        fetch(`/api/distance?start=${distance.StartID.value}&end=${distance.EndID.value}`).then(result => result.json()).then(result => {
+                            distance.Range.value = result.range
+                        })
+                    }
+                })
+            })
+        })
+        form.onsubmit = (event) => {
+            if (distance.StartID.value === distance.EndID.value) {
+                event.preventDefault()
+                swal("Không để đặt khoảng cách khi điểm đến và đi cùng 1 vị trí")
+            }
+        }</script>
+}

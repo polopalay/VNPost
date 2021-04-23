@@ -109,6 +109,11 @@ namespace VNPost.DataAccess.Data
             builder.Entity<Status>().HasData(new Status { Id = 2, Name = "Pending" });
             builder.Entity<Status>().HasData(new Status { Id = 3, Name = "Done" });
         }
+
+        public static void AddSeedToPrice(ModelBuilder builder)
+        {
+            builder.Entity<Price>().HasData(new Price { Id = 1, Distance = 1, Size = 1, Weight = 1 });
+        }
     }
 }
 

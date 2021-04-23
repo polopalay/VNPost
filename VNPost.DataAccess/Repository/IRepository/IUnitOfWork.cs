@@ -24,6 +24,8 @@ namespace VNPost.DataAccess.Repository.IRepository
         IParcelRepository Parcel { get; }
         IProvinceRepository Province { get; }
         IStatusRepository Status { get; }
+        IDistanceRepository Distance { get; }
+        IPriceRepository Price { get; }
         void Save();
     }
 }

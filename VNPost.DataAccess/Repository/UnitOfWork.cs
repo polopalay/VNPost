@@ -29,6 +29,8 @@ namespace VNPost.DataAccess.Repository
         public IParcelRepository Parcel { get; }
         public IProvinceRepository Province { get; }
         public IStatusRepository Status { get; }
+        public IDistanceRepository Distance { get; }
+        public IPriceRepository Price { get; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -49,6 +51,8 @@ namespace VNPost.DataAccess.Repository
             Parcel = new ParcelRepository(_db);
             Province = new ProvinceRepository(_db);
             Status = new StatusRepository(_db);
+            Distance = new DistanceRepository(_db);
+            Price = new PriceRepository(_db);
         }
 
         public void Dispose()

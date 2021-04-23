@@ -26,6 +26,7 @@ namespace VNPost.DataAccess.Data
             SeedData.AddSeedToRoleUser(builder);
             SeedData.AddSeedToPermission(builder);
             SeedData.AddSeedToStatuses(builder);
+            SeedData.AddSeedToPrice(builder);
             builder.Entity<Parcel>(entity => entity.HasIndex(e => e.Code).IsUnique());
         }
 
@@ -45,5 +46,7 @@ namespace VNPost.DataAccess.Data
         public DbSet<Parcel> Parcels { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Status> Statuses { get; set; }
+        public DbSet<Distance> Distances { get; set; }
+        public DbSet<Price> Prices { get; set; }
     }
 }
