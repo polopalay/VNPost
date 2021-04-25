@@ -24,24 +24,23 @@ namespace VNPost.Areas.Posts.Controllers
         {
             List<Columnist> columnist = _unitOfWork.Columnist.GetAll(filter: cl => cl.FatherId == 0).ToList();
             List<Columnist> columnistItems = _unitOfWork.Columnist.GetAll(filter: cl => cl.FatherId != 0).ToList();
-            List<Article> articles = new List<Article>();
-            List<Article> mostNewArticles = new List<Article>();
+            List<Article> articles = new();
+            List<Article> mostNewArticles = new();
             foreach (Columnist c in _unitOfWork.Columnist.GetAll())
             {
                 articles.AddRange(_unitOfWork.Article.GetAll(
                     orderBy: x => x.OrderByDescending(y => y.DateCreate),
-                    filter: a => a.Columnist.FatherId == c.Id)
-                    .Select(a => a.SoftArticle())
+                    filter: a => a.Columnist.FatherId == c.Id && a.Accepted)
                     .Take(5));
                 List<Article> listNew = _unitOfWork.Article.GetAll(
                     orderBy: x => x.OrderByDescending(y => y.View),
-                    filter: a => a.Columnist.FatherId == c.Id).ToList();
+                    filter: a => a.Columnist.FatherId == c.Id && a.Accepted).ToList();
                 if (listNew.Count > 0)
                 {
                     mostNewArticles.Add(listNew[0]);
                 }
             }
-            ListArticleVM articleVM = new ListArticleVM(columnist, columnistItems, articles)
+            ListArticleVM articleVM = new(columnist, columnistItems, articles)
             {
                 MostNewArticles = mostNewArticles
             };
@@ -61,16 +60,14 @@ namespace VNPost.Areas.Posts.Controllers
             {
                 articles = _unitOfWork.Article.GetAll(
                     orderBy: x => x.OrderByDescending(y => y.DateCreate),
-                    filter: a => a.Columnist.FatherId == columnistId)
-                    .Select(a => a.SoftArticle())
+                    filter: a => a.Columnist.FatherId == columnistId && a.Accepted)
                     .ToList();
             }
             else if (columnistItemId != 0)
             {
                 articles = _unitOfWork.Article.GetAll(
                     orderBy: x => x.OrderByDescending(y => y.DateCreate),
-                    filter: a => a.ColumnistId == columnistItemId)
-                    .Select(a => a.SoftArticle())
+                    filter: a => a.ColumnistId == columnistItemId && a.Accepted)
                     .ToList();
             }
             else
@@ -78,8 +75,8 @@ namespace VNPost.Areas.Posts.Controllers
                 articles = new List<Article>();
             }
             int numberPostInPage = 6;
-            Pagination<Article> pagination = new Pagination<Article>(articles, index, numberPostInPage);
-            ListSearchArticleVM articleVM = new ListSearchArticleVM(pagination.ListT)
+            Pagination<Article> pagination = new(articles, index, numberPostInPage);
+            ListSearchArticleVM articleVM = new(pagination.ListT)
             {
                 ColumnistId = columnistId,
                 ColumnistItemId = columnistItemId,
@@ -102,7 +99,6 @@ namespace VNPost.Areas.Posts.Controllers
             List<Article> articles = _unitOfWork.Article.GetAll(
                 orderBy: x => x.OrderByDescending(y => y.DateCreate),
                 filter: a => a.Columnist.FatherId == article.Columnist.FatherId)
-                .Select(a => a.LiteArticle())
                 .Take(5)
                 .ToList();
             article.View++;

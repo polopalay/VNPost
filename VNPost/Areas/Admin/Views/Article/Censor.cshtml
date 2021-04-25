@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+@using VNPost.Models.Entity;
+@model List<Article>;
+@section Styles{
+}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-4">
+            <h2 class="text-dark">Danh sách các bài viết</h2>
+        </div>
+        <div id="user" class="col-8 text-end">
+            <a class="btn btn-success" href="/Admin/Article/Index"><i class="fas fa-home"></i> Về danh sách các bài viết </a>
+        </div>
+    </div>
+    <table class="table" width="100%" id="tblData">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Article article in Model)
+            {
+                <tr role="row">
+                    <td>@article.Title</td>
+                    <td>@article.Author</td>
+                    <td>@article.DateCreate.ToString()</td>
+                    <td>@article.Columnist.Name</td>
+                    <td>
+                        <div class="d-flex">
+                            <form method="post" enctype="multipart/form-data">
+                                <input style="display: none;" id="Id" name="Id" value="@article.Id">
+                                <input style="display: none;" id="Accepted" name="Accepted" value="true">
+                                <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
+                            </form>
+                            <form method="post" enctype="multipart/form-data">
+                                <input style="display: none;" id="Id" name="Id" value="@article.Id">
+                                <input style="display: none;" id="Accepted" name="Accepted" value="false">
+                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script></script>
+}
+

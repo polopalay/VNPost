@@ -30,7 +30,6 @@ namespace VNPost.Controllers
             List<Service> posts = _unitOfWork.Service.GetAll().ToList();
             List<Article> articles = _unitOfWork.Article
                 .GetAll(orderBy: x => x.OrderByDescending(y => y.DateCreate))
-                .Select(a => a.SoftArticle())
                 .Take(5).ToList();
             HomeVM homeVM = new HomeVM(banners, categories, posts, articles);
             return View(homeVM);

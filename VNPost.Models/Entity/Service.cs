@@ -12,9 +12,5 @@ namespace VNPost.Models.Entity
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
-        public string SoftDescription()
-        {
-            return Description.Length > 150 ? (Description.Substring(0, 150) + "...") : Description;
-        }
     }
 }

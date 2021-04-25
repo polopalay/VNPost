@@ -25,7 +25,7 @@ namespace VNPost.Areas.API
         {
             _unitOfWork.Columnist.GetAll();
             _unitOfWork.IdentityUser.GetAll();
-            List<Article> articles = new List<Article>();
+            List<Article> articles = new();
 
             if (_identityRole != null)
             {
@@ -35,7 +35,7 @@ namespace VNPost.Areas.API
                 {
                     columnistRp.Add(rolePermission.ColumnistId);
                 }
-                articles = _unitOfWork.Article.GetAll(filter: a => columnistRp.Contains(a.ColumnistId)).ToList();
+                articles = _unitOfWork.Article.GetAll(filter: a => columnistRp.Contains(a.ColumnistId) && a.Accepted).ToList();
             }
             return Ok(new { data = articles });
         }

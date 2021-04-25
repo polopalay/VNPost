@@ -22,5 +22,11 @@ namespace VNPost.Models.Entity
         [Required]
         public string CustomerInfo { get; set; }
         public string OtherInfo { get; set; }
+        public DateTime? DateStart { get; set; }
+        public DateTime? DateEnd { get; set; }
+        public double Weight { get; set; }
+        public double Wide { get; set; }
+        public double Long { get; set; }
+        public double Height { get; set; }
     }
 }

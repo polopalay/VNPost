@@ -13,9 +13,5 @@ namespace VNPost.Models.Entity
         public string Key { get; set; }
         public string Value { get; set; }
         public string Link { get; set; }
-        //[Required]
-        //public int LocationId { get; set; }
-        //[ForeignKey("LocationId")]
-        //public MenuLocation MenuLocation { get; set; }
     }
 }

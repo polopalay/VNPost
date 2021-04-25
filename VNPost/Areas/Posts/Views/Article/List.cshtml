@@ -47,7 +47,7 @@
                             </a>
                         </h5>
                         <img src="@Model.Articles.Where(a => a.Columnist.FatherId  == columnist.Id).ToList()[0].DescriptionImg" />
-                        <p>@Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id).ToList()[0].SoftDescription()</p>
+                        <p>@Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id).ToList()[0].Description</p>
                     }
                 </div>
                 <div class="article-soft-list">

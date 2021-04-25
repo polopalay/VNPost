@@ -24,7 +24,7 @@ namespace VNPost.Areas.Components
         {
             List<Category> categories = _unitOfWork.Category.GetAll().ToList();
 
-            HeaderVM headerVM = new HeaderVM(_unitOfWork.Menu.GetAll().ToList(), categories)
+            HeaderVM headerVM = new(_unitOfWork.Menu.GetAll().ToList(), categories)
             {
                 IsLogedIn = _signInManager.IsSignedIn((ClaimsPrincipal)User),
                 Name = User.Identity.Name
