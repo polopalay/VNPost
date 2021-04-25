@@ -74,5 +74,6 @@
     <Folder Include="Areas\Main\Views\Price\" />
     <Folder Include="Areas\Admin\Views\Distance\" />
     <Folder Include="Areas\Admin\Views\Price\" />
+    <Folder Include="Areas\Main\Views\Policy\" />
   </ItemGroup>
 </Project>

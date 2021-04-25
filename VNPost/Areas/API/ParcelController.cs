@@ -36,6 +36,15 @@ namespace VNPost.Areas.API
             {
                 return Ok("Không tìm thấy trạng thái");
             }
+            if (statusId == 2)
+            {
+                parcelUpdate.DateStart = DateTime.Now;
+            }
+            else if (statusId == 3)
+            {
+                parcelUpdate.DateEnd = DateTime.Now;
+
+            }
             parcelUpdate.StatusId = statusId;
             _unitOfWork.Parcel.Update(parcelUpdate);
             _unitOfWork.Save();

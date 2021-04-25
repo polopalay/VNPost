@@ -14,6 +14,10 @@
                     <input class="form-control" type=number step=any value="0" disabled name="result" />
                 </div>
                 <div class="div-input">
+                    <label class="control-label">Ngày</label>
+                    <input class="form-control" type=number step=any value="2" disabled name="date" />
+                </div>
+                <div class="div-input">
                     <label class="control-label">Cân nặng (kg)</label>
                     <input class="form-control" type=number step=any value="0" name="weight" />
                 </div>
@@ -66,6 +70,9 @@
         price.onsubmit = (event) => {
             event.preventDefault()
             let size = price.wide.value * price.long.value * price.height.value
-            price.result.value=size*@Model.Size+price.weight.value *@Model.Weight+rangle *@Model.Distance
-        }</script>
+            console.log(rangle);
+            price.result.value=(size * @Model.Size + price.weight.value * @Model.Weight) * (2 + rangle/@Model.Distance)
+            price.date.value = 2 + rangle / 200
+        }
+    </script>
 }

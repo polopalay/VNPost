@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
+﻿@{ ViewData["Title"] = "Privacy Policy"; }
 @model VNPost.Models.Entity.Location
 <div class="container">
 
@@ -24,7 +22,7 @@
     </div>
 
     <div class="d-flex justify-content-center row m-5">
-        <form class="border p-4 col-8" id="form">
+        <form class="border p-4 col-8" id="form" name="form">
             <h2 class="text-secondary">Chỉnh sửa trạng thái đơn hàng</h2>
 
             <div class="form-group row mb-3">
@@ -32,10 +30,11 @@
                     <label>Status</label>
                 </div>
                 <div class="col-8">
-                    <select class="form-select" id="statusId">
+                    <select class="form-select" id="statusId" name="status">
                         <option value="1">Prepare</option>
                         <option value="2">Pending</option>
                         <option value="3">Done</option>
+                        <option value="4">Cancel</option>
                     </select>
                 </div>
                 <spa class="text-danger"></spa>
@@ -100,7 +99,8 @@
 </div>
 
 @section Scripts{
-    <script>$("#province").empty()
+    <script>
+$("#province").empty()
         $("#district").empty()
         fetch("/api/location/province").then(rs => rs.json()).then(rs => {
             rs.data.forEach(item => {
@@ -127,7 +127,7 @@
             })
         }
         )
-        fetch(`/api/location/location/@Model.ParcelId`).then(rs => rs.json()).then(rs => {
+        fetch(`/api/location/locationById/@Model.ParcelId`).then(rs => rs.json()).then(rs => {
             $("#customerInfo").text("Người gửi: "+rs.customerInfo)
             $("#otherInfo").text("Thông tin: "+rs.otherInfo)
             $("#pointAway").text("Điểm đi: "+rs.pointAway)
@@ -135,6 +135,7 @@
             $("#status").text("Trạng thái: "+rs.status.name)
             $("#items").text("Các vật phẩm: " + rs.items)
             $("#location").text("Địa điểm hiện tại: " + (rs.location == null ? "Chưa có" : (rs.location.district.province.name + ", " + rs.location.district.name + ", " + rs.location.description)))
+            form.status.value = rs.status.id
         })
         $("#form").submit((event)=> {
             event.preventDefault();
