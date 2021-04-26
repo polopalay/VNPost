@@ -28,5 +28,6 @@ namespace VNPost.Models.Entity
         public double Wide { get; set; }
         public double Long { get; set; }
         public double Height { get; set; }
+        public double Price { get; set; }
     }
 }

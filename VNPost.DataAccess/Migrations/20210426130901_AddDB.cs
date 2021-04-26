@@ -402,7 +402,8 @@ namespace VNPost.DataAccess.Migrations
                     Weight = table.Column<double>(type: "REAL", nullable: false),
                     Wide = table.Column<double>(type: "REAL", nullable: false),
                     Long = table.Column<double>(type: "REAL", nullable: false),
-                    Height = table.Column<double>(type: "REAL", nullable: false)
+                    Height = table.Column<double>(type: "REAL", nullable: false),
+                    Price = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -466,12 +467,12 @@ namespace VNPost.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "13d23c51-re38-4831-wqa2-2e3f21c23ewd", "40ad5272-0229-478d-a0db-c91cbb6cdcff", "Admin", "ADMIN" });
+                values: new object[] { "13d23c51-re38-4831-wqa2-2e3f21c23ewd", "39473027-5fc2-4fc0-ba79-b9abefbb7abd", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "01b96c14-de28-4831-afa9-3d1f84b93aed", 0, "ef39cd9e-5046-47da-9d13-81615cd17480", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	", null, false, "41e11586-d707-47e6-b76d-805f5ba24fc1", false, "admin@gmail.com" });
+                values: new object[] { "01b96c14-de28-4831-afa9-3d1f84b93aed", 0, "8d4067ee-195c-4c39-920b-a06291121c3c", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	", null, false, "640a9578-afa9-4372-9792-d324bbc9f5d5", false, "admin@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Banners",

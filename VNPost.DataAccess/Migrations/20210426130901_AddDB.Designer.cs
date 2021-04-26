@@ -9,7 +9,7 @@ using VNPost.DataAccess.Data;
 namespace VNPost.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210425145528_AddDB")]
+    [Migration("20210426130901_AddDB")]
     partial class AddDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,7 @@ namespace VNPost.DataAccess.Migrations
                         new
                         {
                             Id = "13d23c51-re38-4831-wqa2-2e3f21c23ewd",
-                            ConcurrencyStamp = "40ad5272-0229-478d-a0db-c91cbb6cdcff",
+                            ConcurrencyStamp = "39473027-5fc2-4fc0-ba79-b9abefbb7abd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -144,7 +144,7 @@ namespace VNPost.DataAccess.Migrations
                         {
                             Id = "01b96c14-de28-4831-afa9-3d1f84b93aed",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ef39cd9e-5046-47da-9d13-81615cd17480",
+                            ConcurrencyStamp = "8d4067ee-195c-4c39-920b-a06291121c3c",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -152,7 +152,7 @@ namespace VNPost.DataAccess.Migrations
                             NormalizedUserName = "ADMIN@GMAIL.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAENVfYO/ByyafuleVAgUNZiUlG+Vyi645v0VP2+KuzBuUxIrzqh2Hy0RwzJf21yFrAQ==	",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "41e11586-d707-47e6-b76d-805f5ba24fc1",
+                            SecurityStamp = "640a9578-afa9-4372-9792-d324bbc9f5d5",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -673,6 +673,9 @@ namespace VNPost.DataAccess.Migrations
                     b.Property<string>("PointAway")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("StatusId")
                         .HasColumnType("INTEGER");
