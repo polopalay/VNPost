@@ -24,7 +24,7 @@
                 <h5 class="card-title">Thông tin gói hàng</h5>
                 <h6 class="card-subtitle mb-2 text-muted" id="customerInfo">@Model.CustomerInfo</h6>
                 <p class="card-subtitle mb-2 text-muted" id="otherInfo">@Model.OtherInfo</p>
-                <p class="card-subtitle mb-2 text-muted" id="location">@Model.Location.District.Province.Name, @Model.Location.District.Name, @(Model.Location.Description==null?"": Model.Location.Description)</p>
+                <p class="card-subtitle mb-2 text-muted" id="location">@(Model.Location==null?"":(Model.Location.District.Province.Name+"," +Model.Location.District.Name+","+ Model.Location.Description))</p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item" id="items">@Model.Items</li>

@@ -20,6 +20,8 @@ namespace VNPost.Controllers
         {
             _unitOfWork.Status.GetAll();
             _unitOfWork.Province.GetAll();
+            _unitOfWork.Location.GetAll();
+            _unitOfWork.District.GetAll();
             List<Parcel> parcels = _unitOfWork.Parcel.GetAll(filter: p => p.Code == id).ToList();
             if (parcels.Count == 0)
             {
@@ -27,8 +29,8 @@ namespace VNPost.Controllers
             }
             Parcel parcel = parcels[0];
             List<Location> locations = _unitOfWork.Location.GetAll(filter: l => l.ParcelId == parcel.Id, orderBy: ls => ls.OrderByDescending(l => l.Id)).ToList();
-            Location location = locations.Count == 0 ? null : new Location() { Id = locations[0].Id, Description = locations[0].Description, District = _unitOfWork.District.Get(locations[0].DistricId) };
-            ParcelViewModel parcelView = new ParcelViewModel()
+            Location location = locations.Count == 0 ? null : new() { Id = locations[0].Id, Description = locations[0].Description, District = _unitOfWork.District.Get(locations[0].DistricId) };
+            ParcelViewModel parcelView = new()
             {
                 Id = parcel.Id,
                 Items = parcel.Items,
