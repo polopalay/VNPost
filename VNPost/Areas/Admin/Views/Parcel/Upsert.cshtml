@@ -1,16 +1,12 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
+﻿@{ ViewData["Title"] = "Privacy Policy"; }
 @model VNPost.Models.Entity.Parcel
 <div class="container">
     <h2 class="text-secondary">@(Model.Id!=0?"Edit":"Create")</h2>
 
     <div class="border container" style="padding:30px;">
-        <form method="post">
+        <form method="post" name="submitForm">
             @if (Model.Id != 0)
-            {
-                <input type="hidden" asp-for="Id" />
-            }
+            {<input type="hidden" asp-for="Id" />}
             <div class="text-danger" asp-validation-summary="ModelOnly"></div>
 
             <div class="form-group row mb-3">
@@ -140,6 +136,26 @@
 
             <div class="form-group row mb-3">
                 <div class="col-4">
+                    <label asp-for="Distance"></label>
+                </div>
+                <div class="col-8">
+                    <input type=number step=any asp-for="Distance" class="form-control" />
+                </div>
+                <span asp-validation-for="Distance" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row mb-3">
+                <div class="col-4">
+                    <button class="btn btn-success" type="button" onclick="checkPrice()">Expect Price</button>
+                </div>
+                <div class="col-8">
+                    <input type=number step=any id="ExpectPrice" class="form-control" />
+                </div>
+                <span class="text-danger"></span>
+            </div>
+
+            <div class="form-group row mb-3">
+                <div class="col-4">
                     <label asp-for="Price"></label>
                 </div>
                 <div class="col-8">
@@ -164,5 +180,14 @@
 </div>
 
 @section Scripts{
-<script></script>
+    <script>checkPrice = () => {
+            fetch("/api/price").then(rs => rs.json()).then(rs => {
+                let wide = submitForm.Wide.value
+                let long = submitForm.Long.value
+                let height = submitForm.Height.value
+                let weight = submitForm.Weight.value
+                let distance = submitForm.Distance.value
+                document.getElementById("ExpectPrice").value = (wide * long * height * rs.size + weight * rs.weight) * (1 + distance / rs.distance)
+            })
+        }</script>
 }

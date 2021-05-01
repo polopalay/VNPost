@@ -25,7 +25,7 @@ function loadTbl(permision) {
             {
                 "data": "IdentityRole",
                 "render": function (data) {
-                    return data == null ? "Không có quyền hạn" : data.Name;
+                    return data == null ? "User" : data.Name;
                 }
                 , "width": "20%"
             },
@@ -34,7 +34,7 @@ function loadTbl(permision) {
                 "render": function (data) {
                     if (data.IdentityRole == null) {
                         let select = `<select id="select${data.IdentityUser.Id}" onchange=change("${data.IdentityUser.Id}") class="form-control w-75">`;
-                        select += `<option value="">Không có quyền hạn</option>`;
+                        select += `<option value="">User</option>`;
                         permision.forEach(item => {
                             select += `<option value="${item.id}">${item.name}</option>`;
                         });
@@ -46,7 +46,7 @@ function loadTbl(permision) {
                     }
                     else {
                         let select = `<select id="select${data.IdentityUser.Id}" onchange=change("${data.IdentityUser.Id}") class="form-control w-75">`;
-                        select += `<option value="">Không có quyền hạn</option>`;
+                        select += `<option value="">User</option>`;
                         permision.forEach(item => {
                             let selected = item.id == data.IdentityRole.Id ? "selected" : "";
                             select += `<option value="${item.id}" ${selected}>${item.name}</option>`;

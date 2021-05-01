@@ -26,7 +26,7 @@ namespace VNPost.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(IsAdmin());
         }
 
         public IActionResult Upsert([FromQuery] int id)

@@ -43,7 +43,8 @@ namespace VNPost.Areas.API
             else if (statusId == 3)
             {
                 parcelUpdate.DateEnd = DateTime.Now;
-
+                Price price = _unitOfWork.Price.Get(1);
+                parcelUpdate.Price = (parcelUpdate.Long * parcelUpdate.Wide * parcelUpdate.Height * price.Size + parcelUpdate.Weight * price.Weight) * (1 + parcelUpdate.Distance / price.Distance);
             }
             parcelUpdate.StatusId = statusId;
             _unitOfWork.Parcel.Update(parcelUpdate);

@@ -26,6 +26,12 @@ namespace VNPost.DataAccess.Repository
                 objFromDb.StatusId = article.StatusId;
                 objFromDb.CustomerInfo = article.CustomerInfo;
                 objFromDb.OtherInfo = article.OtherInfo;
+                objFromDb.Distance = article.Distance;
+                objFromDb.Height = article.Height;
+                objFromDb.Wide = article.Wide;
+                objFromDb.Long = article.Long;
+                objFromDb.Weight = article.Weight;
+                objFromDb.Price = article.Price;
             }
         }
     }

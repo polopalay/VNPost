@@ -24,6 +24,7 @@ namespace VNPost.Models.Entity
         public string OtherInfo { get; set; }
         public DateTime? DateStart { get; set; }
         public DateTime? DateEnd { get; set; }
+        public double Distance { get; set; }
         public double Weight { get; set; }
         public double Wide { get; set; }
         public double Long { get; set; }
