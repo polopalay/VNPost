@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VNPost.DataAccess.Repository.IRepository;
 using VNPost.Models.Entity;
+using VNPost.Models.ViewModels;
 
 namespace VNPost.Areas.API
 {
@@ -21,6 +22,12 @@ namespace VNPost.Areas.API
         {
             _unitOfWork.Status.GetAll();
             return Ok(new { data = _unitOfWork.Parcel.GetAll() });
+        }
+
+        [HttpGet("statistic")]
+        public IActionResult GetStatistics()
+        {
+            return Ok(new { data = _unitOfWork.Parcel.GetAll(filter: p => p.StatusId == 3, orderBy: ps => ps.OrderBy(p => p.DateEnd)).GroupBy(p => new { p.DateEnd.Value.Month, p.DateEnd.Value.Year }).Select(p => new ParcelVM() { Price = p.Sum(s => s.Price), Month = p.ToList()[0].DateEnd.Value.Month, Year = p.ToList()[0].DateEnd.Value.Year }) });
         }
 
         [HttpPost]

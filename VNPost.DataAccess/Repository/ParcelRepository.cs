@@ -32,6 +32,8 @@ namespace VNPost.DataAccess.Repository
                 objFromDb.Long = article.Long;
                 objFromDb.Weight = article.Weight;
                 objFromDb.Price = article.Price;
+                objFromDb.DateStart = article.DateStart;
+                objFromDb.DateEnd = article.DateEnd;
             }
         }
     }

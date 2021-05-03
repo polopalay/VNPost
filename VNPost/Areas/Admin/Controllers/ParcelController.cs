@@ -64,5 +64,10 @@ namespace VNPost.Areas.Admin.Controllers
             _unitOfWork.Save();
             return Redirect("/Admin/Parcel/Location/" + Marker.ParcelId);
         }
+
+        public IActionResult Statistic()
+        {
+            return View();
+        }
     }
 }
