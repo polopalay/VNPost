@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Dịch vụ";
-}
+﻿@{ ViewData["Title"] = "MLPost"; }
 @using VNPost.Models.ViewModels;
 @using VNPost.Models.Entity;
 @model ListSearchArticleVM;
@@ -17,26 +15,24 @@
         <div id="listArticle">
             @foreach (Article article in Model.Articles)
             {
-                <div>
-                    <a href="/Posts/Article/ArticleDetail/@(article.Id)">@article.Title</a>
-                    <div>
-                        <div class="img-container">
-                            <img src="@article.DescriptionImg" />
-                        </div>
-                        <div class="des-container">
-                            <span>@article.DateCreate</span>
-                            <p>@article.Description</p>
-                        </div>
-                    </div>
-                </div>
-            }
+<div>
+    <a href="/Posts/Article/ArticleDetail/@(article.Id)">@article.Title</a>
+    <div>
+        <div class="img-container">
+            <img src="@article.DescriptionImg" />
+        </div>
+        <div class="des-container">
+            <span>@article.DateCreate</span>
+            <p>@article.Description</p>
+        </div>
+    </div>
+</div>            }
         </div>
         <div class="pagination" id="pagination">
             @for (int i = Model.Begin; i <= Model.End; i++)
             {
-                <a href="/Posts/Article/ListColumnist?index=@(i)&columnistId=@(Model.ColumnistId)&columnistItemId=@(Model.ColumnistItemId)"
-                   class="@(i==Model.Index?"current-page":"")">@i</a>
-            }
+<a href="/Posts/Article/ListColumnist?index=@(i)&columnistId=@(Model.ColumnistId)&columnistItemId=@(Model.ColumnistItemId)"
+   class="@(i==Model.Index?"current-page":"")">@i</a>            }
         </div>
     </div>
 </section>

@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Dịch vụ";
-}
+﻿@{ ViewData["Title"] = "MLPost"; }
 @using VNPost.Models.ViewModels;
 @using VNPost.Models.Entity;
 @model ArticleDetailVM;
@@ -27,15 +25,13 @@
             <ul>
                 @for (int i = 0; i < Model.Articles.Count; i++)
                 {
-                    <li class="fas fa-angle-right">
-                        <a href="/Posts/Article/ArticleDetail/@(Model.Articles[i].Id)">@Model.Articles[i].Title</a>
-                        <span>@Model.Articles[i].DateCreate.ToString("MM/dd/yyyy")</span>
-                        @if (i == 0)
-                        {
-                            <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/new-icon.png" />
-                        }
-                    </li>
-                }
+    <li class="fas fa-angle-right">
+        <a href="/Posts/Article/ArticleDetail/@(Model.Articles[i].Id)">@Model.Articles[i].Title</a>
+        <span>@Model.Articles[i].DateCreate.ToString("MM/dd/yyyy")</span>
+        @if (i == 0)
+        {
+<img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/new-icon.png" />}
+    </li>}
             </ul>
         </div>
     </div>

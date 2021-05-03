@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "VNPost";
-}
+﻿@{ ViewData["Title"] = "MLPost"; }
 @using VNPost.Models.ViewModels;
 @using VNPost.Models.Entity;
 @model HomeVM
@@ -15,10 +13,9 @@
         <div class="carousel-inner">
             @for (int i = 0; i < Model.Banners.Count; i++)
             {
-                <div class="carousel-item contain-img @(i == 0? "active" : "")">
-                    <img tyle="width:100%;" class="d-block" src="@Model.Banners[i].Image" alt="">
-                </div>
-            }
+<div class="carousel-item contain-img @(i == 0? "active" : "")">
+    <img tyle="width:100%;" class="d-block" src="@Model.Banners[i].Image" alt="">
+</div>            }
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -99,28 +96,26 @@
             <div class="description-article">
                 @if (Model.Articles.Count > 0)
                 {
-                    <img src="@Model.Articles[0].DescriptionImg" id="img" />
+    <img src="@Model.Articles[0].DescriptionImg" id="img" />
                     <h4 id="title">@Model.Articles[0].Title</h4>
-                    <p id="date">@Model.Articles[0].DateCreate.ToString("MM/dd/yyyy")</p>
-                    <span id="des">@Model.Articles[0].Description</span>
-                }
+                                    <p id="date">@Model.Articles[0].DateCreate.ToString("MM/dd/yyyy")</p>
+                                                    <span id="des">@Model.Articles[0].Description</span>}
             </div>
             <div class="link-to-articles">
                 @for (int i = 0; i < Model.Articles.Count; i++)
                 {
-                    <div id=@("div"+i) class="link-article @(i == 0 ? "current" : "")">
-                        <div>
-                            <img id=@("img"+i) src="@Model.Articles[i].DescriptionImg" />
-                        </div>
-                        <div>
-                            <a href="/Posts/Article/ArticleDetail?id=@(Model.Articles[i].Id)">
-                                <h4 id=@("title"+i)>@Model.Articles[i].Title</h4>
-                            </a>
-                            <p id=@("date"+i)>@Model.Articles[i].DateCreate.ToString("MM/dd/yyyy")</p>
-                            <input type="hidden" id=@("des"+i) value="@Model.Articles[i].Description" />
-                        </div>
-                    </div>
-                }
+    <div id=@("div"+i) class="link-article @(i == 0 ? "current" : "")">
+        <div>
+            <img id=@("img"+i) src="@Model.Articles[i].DescriptionImg" />
+        </div>
+        <div>
+            <a href="/Posts/Article/ArticleDetail?id=@(Model.Articles[i].Id)">
+                <h4 id=@("title"+i)>@Model.Articles[i].Title</h4>
+            </a>
+            <p id=@("date"+i)>@Model.Articles[i].DateCreate.ToString("MM/dd/yyyy")</p>
+            <input type="hidden" id=@("des"+i) value="@Model.Articles[i].Description" />
+        </div>
+    </div>}
             </div>
         </div>
     </div>
@@ -131,18 +126,16 @@
     <div id="category" class="container">
         @foreach (Category category in Model.Categories)
         {
-            <div>
-                <a href="@("/Posts/Service/List/"+category.Id)" class="category-contain"><img src="@category.Img" /></a>
-                <h2>@category.Name</h2>
-                <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/line-service.png" />
-                <div>
-                    @foreach (Service post in Model.Services.Where(p => p.CategoryId == category.Id))
-                    {
-                        <a href="/Posts/Service/ServiceDetail/@(post.Id)" class="fas fa-caret-right">@post.Title</a>
-                    }
-                </div>
-            </div>
-        }
+<div>
+    <a href="@("/Posts/Service/List/"+category.Id)" class="category-contain"><img src="@category.Img" /></a>
+    <h2>@category.Name</h2>
+    <img src="http://www.vnpost.vn/Portals/_default/Skins/VNPost.Skins.FrontEnd/img/line-service.png" />
+    <div>
+        @foreach (Service post in Model.Services.Where(p => p.CategoryId == category.Id))
+        {
+<a href="/Posts/Service/ServiceDetail/@(post.Id)" class="fas fa-caret-right">@post.Title</a>}
+    </div>
+</div>}
     </div>
 </section>
 <section id="service" class="container my-5">
@@ -177,7 +170,8 @@
     </div>
 </section>
 
-@section Scripts{<script>
+@section Scripts{
+    <script>
     let i = 1;
     setInterval(function () {
         $("#img").attr("src", $("#img" + i).attr("src"));

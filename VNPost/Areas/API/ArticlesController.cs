@@ -49,6 +49,7 @@ namespace VNPost.Areas.API
             return Ok(article);
         }
 
+        //Update a article
         [HttpPut("{id}")]
         public IActionResult PutArticle(int id, [FromQuery] int comlumnistItemId, [FromBody] Article article)
         {
@@ -74,6 +75,7 @@ namespace VNPost.Areas.API
             return Ok(new { success = true, message = "Update Successful" });
         }
 
+        //Add article
         [HttpPost]
         public IActionResult PostArticle([FromQuery] int comlumnistItemId, [FromBody] Article article)
         {

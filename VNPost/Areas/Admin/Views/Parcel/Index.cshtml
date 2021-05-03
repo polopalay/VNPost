@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
+﻿@{ ViewData["Title"] = "MLPost"; }
 @section Styles{
 }
 @model int
@@ -60,18 +58,18 @@
                         "data": "id",
                         "render": function (data) {
                             return `
-                                                                        <div class="text-center">
-                                                                            <a href='/Admin/Parcel/Location/${data}' class="btn btn-info">
-                                                                                <i class="fas fa-map-marked"></i>
-                                                                            </a>
-                                                                            <a href='/Admin/Parcel/Upsert/${data}' class="btn btn-warning">
-                                                                                <i class="fas fa-pencil-alt"></i>
-                                                                            </a>
-                                                                            <button onclick=deleteProvince("/api/parcel/${data}") class="btn btn-danger" style="cursor:pointer">
-                                                                                <i class="fas fa-trash"></i>
-                                                                            </button>
-                                                                        </div>
-                                                                       `;
+                                                                            <div class="text-center">
+                                                                                <a href='/Admin/Parcel/Location/${data}' class="btn btn-info">
+                                                                                    <i class="fas fa-map-marked"></i>
+                                                                                </a>
+                                                                                <a href='/Admin/Parcel/Upsert/${data}' class="btn btn-warning">
+                                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                                </a>
+                                                                                <button onclick=deleteProvince("/api/parcel/${data}") class="btn btn-danger" style="cursor:pointer">
+                                                                                    <i class="fas fa-trash"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                           `;
                         }, "width": "12%"
                     }
                 ]

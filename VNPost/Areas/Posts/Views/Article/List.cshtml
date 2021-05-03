@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Dịch vụ";
-}
+﻿@{ ViewData["Title"] = "MLPost"; }
 @using VNPost.Models.ViewModels;
 @using VNPost.Models.Entity;
 @model ListArticleVM;
@@ -15,59 +13,52 @@
     <div class="right" id="right">
         @foreach (Columnist columnist in Model.Columnist)
         {
-            <div class="article-columnist">
-                <ul>
-                    @if (Model.ColumnistItem.Where(cli => cli.FatherId == columnist.Id).ToList().Count > 1)
+<div class="article-columnist">
+    <ul>
+        @if (Model.ColumnistItem.Where(cli => cli.FatherId == columnist.Id).ToList().Count > 1)
+        {
+<li>
+    <a class="link-columnist" href="/Posts/Article/ListColumnist?columnistId=@(columnist.Id)">@columnist.Name</a>
+</li>
+                    @foreach (Columnist columnistItem in Model.ColumnistItem.Where(cli => cli.FatherId == columnist.Id))
                     {
-                        <li>
-                            <a class="link-columnist" href="/Posts/Article/ListColumnist?columnistId=@(columnist.Id)">@columnist.Name</a>
-                        </li>
-                        @foreach (Columnist columnistItem in Model.ColumnistItem.Where(cli => cli.FatherId == columnist.Id))
+<li><a class="link-columnistItem" href="/Posts/Article/ListColumnist?columnistItemId=@(columnistItem.Id)">@columnistItem.Name</a></li>} }
+                                    else
+                                    {
+                    <li>
+                        <a class="link-columnist" href="/Posts/Article/ListColumnist?columnistItemId=@(Model.ColumnistItem.Where(cli => cli.FatherId == columnist.Id).ToList()[0].Id)">
+                            @columnist.Name
+                        </a>
+                    </li>}
+    </ul>
+</div>
+                <div class="article-list">
+                    <div class="article-description">
+                        @if (Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id).ToList().Count > 0)
                         {
-                            <li><a class="link-columnistItem" href="/Posts/Article/ListColumnist?columnistItemId=@(columnistItem.Id)">@columnistItem.Name</a></li>
-                        }
-                    }
-                    else
-                    {
-                        <li>
-                            <a class="link-columnist" href="/Posts/Article/ListColumnist?columnistItemId=@(Model.ColumnistItem.Where(cli => cli.FatherId == columnist.Id).ToList()[0].Id)">
-                                @columnist.Name
-                            </a>
-                        </li>
-                    }
-                </ul>
-            </div>
-            <div class="article-list">
-                <div class="article-description">
-                    @if (Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id).ToList().Count > 0)
-                    {
-                        <h5>
-                            <a href="/Posts/Article/ArticleDetail/@(Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id).ToList()[0].Id)">
-                                @Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id).ToList()[0].Title
-                            </a>
-                        </h5>
-                        <img src="@Model.Articles.Where(a => a.Columnist.FatherId  == columnist.Id).ToList()[0].DescriptionImg" />
-                        <p>@Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id).ToList()[0].Description</p>
-                    }
-                </div>
-                <div class="article-soft-list">
-                    @foreach (Article article in Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id))
-                    {
-                        <a href="/Posts/Article/ArticleDetail/@(article.Id)">@article.Title</a>
-                    }
-                </div>
-                <div class="article-right">
-                    @if (Model.MostNewArticles.Where(a => a.Columnist.FatherId == columnist.Id).ToList().Count > 0)
-                    {
-                        <img src="@Model.MostNewArticles.Where(a => a.Columnist.FatherId  == columnist.Id).ToList()[0].DescriptionImg" />
-                        <h5>
-                            <a href="/Posts/Article/ArticleDetail/@(Model.MostNewArticles.Where(a => a.Columnist.FatherId  == columnist.Id).ToList()[0].Id)">
-                                @Model.MostNewArticles.Where(a => a.Columnist.FatherId == columnist.Id).ToList()[0].Title
-                            </a>
-                        </h5>
-                    }
-                </div>
-            </div>
-        }
+        <h5>
+            <a href="/Posts/Article/ArticleDetail/@(Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id).ToList()[0].Id)">
+                @Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id).ToList()[0].Title
+            </a>
+        </h5>
+                            <img src="@Model.Articles.Where(a => a.Columnist.FatherId  == columnist.Id).ToList()[0].DescriptionImg" />
+                                                <p>@Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id).ToList()[0].Description</p>}
+                    </div>
+                    <div class="article-soft-list">
+                        @foreach (Article article in Model.Articles.Where(a => a.Columnist.FatherId == columnist.Id))
+                        {
+        <a href="/Posts/Article/ArticleDetail/@(article.Id)">@article.Title</a>}
+                    </div>
+                    <div class="article-right">
+                        @if (Model.MostNewArticles.Where(a => a.Columnist.FatherId == columnist.Id).ToList().Count > 0)
+                        {
+        <img src="@Model.MostNewArticles.Where(a => a.Columnist.FatherId  == columnist.Id).ToList()[0].DescriptionImg" />
+                            <h5>
+                                <a href="/Posts/Article/ArticleDetail/@(Model.MostNewArticles.Where(a => a.Columnist.FatherId  == columnist.Id).ToList()[0].Id)">
+                                    @Model.MostNewArticles.Where(a => a.Columnist.FatherId == columnist.Id).ToList()[0].Title
+                                </a>
+                            </h5>}
+                    </div>
+                </div>}
     </div>
 </section>

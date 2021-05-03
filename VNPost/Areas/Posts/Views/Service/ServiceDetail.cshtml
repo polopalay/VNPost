@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Dịch vụ";
-}
+﻿@{ ViewData["Title"] = "MLPost"; }
 @using VNPost.Models.ViewModels;
 @using VNPost.Models.Entity;
 @model ServiceDetailVM;
@@ -14,15 +12,13 @@
     <div>
         @foreach (ServiceDetail service in Model.ServiceDetails)
         {
-            <a href="@("#"+service.Id)">@service.Name</a>
-        }
+<a href="@("#"+service.Id)">@service.Name</a>}
     </div>
     <p>@Model.Service.Description</p>
     @foreach (ServiceDetail service in Model.ServiceDetails)
     {
-        <article id="@service.Id">
-            <h3>@service.Name</h3>
-            @Html.Raw(service.Content.ToString())
-        </article>
-    }
+<article id="@service.Id">
+    <h3>@service.Name</h3>
+    @Html.Raw(service.Content.ToString())
+</article>}
 </section>

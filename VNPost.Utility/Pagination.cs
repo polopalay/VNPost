@@ -7,12 +7,15 @@ namespace VNPost.Utility
     {
         public Pagination() { }
 
+        //Easy Pagination
         Pagination(int begin, int end, int index)
         {
             Begin = begin;
             End = end;
             Index = index;
         }
+
+        //Complex Pagination
         public Pagination(List<T> list, int index, int numberTInPage)
         {
             ListT = new List<T>();

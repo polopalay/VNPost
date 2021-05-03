@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
+﻿@{ ViewData["Title"] = "MLPost"; }
 @section Styles{
 }
 @model int
@@ -56,12 +54,12 @@
                         "data": "id",
                         "render": function (data) {
                             return `
-                                                                                    <div class="text-center">
-                                                                                        <a href='/Admin/Home/Edit/${data}' class="btn btn-warning">
-                                                                                            <i class="fas fa-pencil-alt"></i>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                   `;
+                                                                                        <div class="text-center">
+                                                                                            <a href='/Admin/Home/Edit/${data}' class="btn btn-warning">
+                                                                                                <i class="fas fa-pencil-alt"></i>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                       `;
                         }, "width": "16%"
                     }
                 ]
